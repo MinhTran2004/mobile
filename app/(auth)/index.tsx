@@ -1,28 +1,43 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import LogoApp from "@/assets/images/logo-app.svg";
 
-interface Props{
-    icon: 'thanhcong' | 'thatbai',
-    title: string,
-}
+const Start = ({navigation}:any) => {
 
-const Welcome = (props:any) => {
-    
-    const SelectIconRight = () => {
-        switch(props.iconRight){
-            case 'thanhcong': return <IconRight />
-            case 'thatbai': return 
-        }
-    }
-    
-    
-    return(
-        <View>
-            <SelectIconRight />
-            <Text>{props.title}</Text>
-        </View>
+    setTimeout(() => {
+        navigation.navigate('welcome')
+    }, 3000)
 
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <LogoApp />
+                <Text style={styles.text}>From MD-28</Text>
+            </View>
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        paddingHorizontal: 16,
+        paddingTop: 100,
+        paddingBottom: 20,
+        gap: 50
+    },
+    text: {
+        fontSize: 23,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+    },
+})
+
+export default Start;
 
 
 

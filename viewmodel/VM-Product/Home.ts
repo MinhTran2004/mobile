@@ -1,16 +1,16 @@
 
-import { Product } from "@model/Model_Product";
-import ProductService from "@service/Product_Sevice";
+import { Product } from "@/model/ModelProduct";
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux";
+import ProductService from "@/service/ProductSevice";
+// import { useSelector } from "react-redux";
 
-export const ViewModelHome = (navigation: any) => {
+export const ViewModelHome = () => {
     const [search, setSearch] = useState('');
     const [dataProductHorizontal, setPassetDataProductHorizontal] = useState<Product[]>([]);
     const [dataProductVertical, setDataProductVertical] = useState<Product[]>([]);
     
     //Chua id nguoi dung
-    const selector = useSelector((state:any) => state.account.data[0]);
+    // const selector = useSelector((state:any) => state.account.data[0]);
 
     const getAllProductByLimit = async () => {
         const reponse = await ProductService.getAllProductByLimit();

@@ -1,6 +1,6 @@
-import { Cart } from "@model/Model_Cart";
-import { Product } from "@model/Model_Product";
-import { CartService } from "@service/Cart_Service";
+import { Cart } from "@/model/ModelCart";
+import { Product } from "@/model/ModelProduct";
+import { CartService } from "@/service/CartService";
 import { useEffect, useState } from "react";
 
 interface TypeCart {
