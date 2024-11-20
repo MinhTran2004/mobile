@@ -21,7 +21,7 @@ const Cart = ({ navigation }: any) => {
                     <Text style={styles.text_total}>$ {viewmodel.total}</Text>
                 </View>
 
-                <Pressable style={styles.btn_payment} onPress={() => navigation.navigate('Payment')}>
+                <Pressable style={styles.btn_payment} onPress={() => navigation.navigate('edit-address')}>
                     <Text style={styles.text_payment}>Thanh toán</Text>
                 </Pressable>
             </View>
