@@ -1,9 +1,10 @@
 import InputEditText from "@/components/InputEditText";
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
+import { ViewModelRegister } from "@/viewmodel/auth/Register";
 
-const Register = () => {
-
+const Register = ({ navigation }: any) => {
+    const viewmodel = ViewModelRegister(navigation);
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
@@ -13,12 +14,12 @@ const Register = () => {
                 </View>
 
                 <View style={{ gap: 10 }}>
-                    <InputEditText hint={"Nhập tên dùng"} />
-                    <InputEditText hint={"Nhập tài khoản"} />
-                    <InputEditText hint={"Nhập mật khẩu"} />
+                    <InputEditText hint={"Nhập tên dùng"} input={viewmodel.username} event={(text) => viewmodel.setUsername(text)} textError={viewmodel.errorUsername} />
+                    <InputEditText hint={"Nhập tài khoản"} input={viewmodel.account} event={(text) => viewmodel.setAccount(text)} textError={viewmodel.errorAccount} />
+                    <InputEditText hint={"Nhập mật khẩu"} input={viewmodel.password} event={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />
                 </View>
 
-                <Pressable style={styles.button}>
+                <Pressable style={styles.button} onPress={() => viewmodel.createAccount()}>
                     <Text style={styles.text}>Đăng ký</Text>
                 </Pressable>
 

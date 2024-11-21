@@ -5,7 +5,7 @@ const Start = ({navigation}:any) => {
 
     setTimeout(() => {
         navigation.navigate('welcome')
-    }, 3000)
+    }, 500)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

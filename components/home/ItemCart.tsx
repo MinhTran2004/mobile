@@ -2,35 +2,29 @@ import { Cart } from "@/model/ModelCart";
 import { Product } from "@/model/ModelProduct";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
     cart: Cart,
     product: Product,
-    event?: (id:string, quantity:number, status:boolean) => void;
+    event?: (id: string, quantity: number, status: boolean) => void;
 }
-
 const ItemCart: React.FC<Props> = React.memo((props) => {
-    
     return (
-        <View style={styles.container_product_vertical}>
-            <Image src={props.product.image} style={styles.image_product_vertical} />
-            <View style={{ width: '77%', marginLeft: 10, justifyContent: 'space-between' }}>
-                <View style={{ width: '80%' }}>
-                    <Text style={styles.name_product_vertical}>{props.product.name}</Text>
+        <View style={styles.container}>
+            <Image src={props.product.image} style={styles.image} />
+            <View style={{ justifyContent: 'space-between' ,flex: 1 }}>
+                <View>
+                    <Text style={styles.name}>{props.product.name}</Text>
                     <Text>{props.product.idCategory}</Text>
                 </View>
-                <View style={{ width: '100%', flexDirection: 'row' }}>
-                    <Text style={styles.price_product_vertical}>${props.product.price}</Text>
 
-                    <View style={styles.container_operation}>
-                        {/* <Pressable onPress={() => {props.event(props.cart._id, props.cart.quantity, false)}}> */}
-                            <MaterialIcons name="remove" style={styles.btn_operation}/>
-                        {/* </Pressable> */}
-                        <Text style={styles.text_quantity}>{props.cart.quantity}</Text>
-                        {/* <Pressable onPress={() => {props.event(props.cart._id, props.cart.quantity, true)}}> */}
-                            <MaterialIcons name="add" style={styles.btn_operation}/>
-                        {/* </Pressable> */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={styles.price}>${props.product.price}</Text>
+                    <View style={styles.containerOperation}>
+                        <MaterialIcons name="remove" style={styles.btnOperation} />
+                        <Text style={styles.quantity}>{props.cart.quantity}</Text>
+                        <MaterialIcons name="add" style={styles.btnOperation} />
                     </View>
                 </View>
             </View>
@@ -39,49 +33,53 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
 })
 
 const styles = StyleSheet.create({
-    // CartVertical
-    container_product_vertical: {
-        width: '100%',
-        backgroundColor: 'white',
+    container: {
         flexDirection: 'row',
+        alignItems: 'center',
         borderRadius: 10,
-        marginRight: 10,
-        marginTop: 10,
-        padding: 15,
+        marginBottom: 10,
+        paddingHorizontal: 13,
+        paddingVertical: 15,
+        borderWidth: 1,
+        borderColor: '#d3cdcd',
+        backgroundColor: '#F9F9F9',
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 6,
+        gap: 10,
     },
-    image_product_vertical: {
-        width: '23%',
-        height: 90,
+    image: {
+        width: 80,
+        height: 80,
         borderRadius: 10
     },
-    name_product_vertical: {
+    name: {
         fontWeight: 'bold',
         fontSize: 17,
         color: 'black'
     },
-    price_product_vertical: {
+    price: {
         width: 150,
         fontSize: 18,
         color: '#42bb6a',
         fontWeight: 'bold',
         marginTop: 5
     },
-    container_operation: {
+    containerOperation: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    btn_operation: {
-        fontSize: 18,
-        color: 'black',
+    btnOperation: {
+        fontSize: 15,
         textAlign: 'center',
-        backgroundColor: '#f1f1f1',
-        borderRadius: 20,
         padding: 5
     },
-    text_quantity: {
-        fontSize: 20,
+    quantity: {
+        fontSize: 18,
         color: 'black',
-        marginHorizontal: 8,
+        marginHorizontal: 5,
     }
 })
 

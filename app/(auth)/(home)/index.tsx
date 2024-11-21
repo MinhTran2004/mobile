@@ -1,102 +1,107 @@
-import { Button, FlatList, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Button, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import IconUser from "@/assets/images/home/user-icon.svg";
 import IconCart from "@/assets/images/home/cart-icon.svg";
-import InputEditText from "@/components/InputEditText";
 import ItemProductCategory from "@/components/home/ItemProductCategory";
 import IconProduct from "@/assets/images/home/product-icon.svg";
 import PagerView from "react-native-pager-view";
-import { ViewModelHome } from "@/viewmodel/VM-Product/Home";
+import { ViewModelHome } from "@/viewmodel/home/home";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
+import IconSearch from "@/assets/images/home/sreach-icon.svg";
 
-const Home = ({navigation}:any) => {
+const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
     return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View style={styles.container}>
-                    {/* header */}
-                    <View style={styles.containerHeader}>
-                        <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
-                            <IconUser width={40} height={40} />
-                            <View>
-                                <Text>Hi, Trần Công Minh</Text>
-                                <Text>Hôm nay bạn sẽ mua gì</Text>
-                            </View>
+        <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+            <View style={styles.container}>
+                {/* header */}
+                <View style={styles.containerHeader}>
+                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
+                        <IconUser width={40} height={40} />
+                        <View>
+                            <Text>Hi, Trần Công Minh</Text>
+                            <Text>Hôm nay bạn sẽ mua gì</Text>
                         </View>
-                        <Pressable 
-                        style={{ borderWidth: 1, borderColor: '#E2E4E8', borderRadius: 999, width: 48, height: 48, alignItems: 'center', justifyContent: 'center' }}
-                        onPress = {() => navigation.navigate('cart')}>
+                    </View>
+                    <View style={{ flexDirection: 'row', gap: 5 }}>
+                        <Pressable
+                            style={{ borderWidth: 1, borderColor: '#E2E4E8', borderRadius: 999, width: 45, height: 45, alignItems: 'center', justifyContent: 'center' }}
+                            onPress={() => navigation.navigate('search')}>
+                            <IconSearch width={20} height={20} />
+                        </Pressable>
+                        <Pressable
+                            style={{ borderWidth: 1, borderColor: '#E2E4E8', borderRadius: 999, width: 45, height: 45, alignItems: 'center', justifyContent: 'center' }}
+                            onPress={() => navigation.navigate('cart')}>
                             <IconCart width={30} height={30} />
                         </Pressable>
                     </View>
+                </View>
 
-                    {/* body  */}
-                    <View style={styles.containerBody}>
-                        <InputEditText iconLeft={"search"} hint="Bạn muốn ăn gì ?" />
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
-                            <Text style={styles.title}>Ưu đãi đặc biệt</Text>
-                            <Text>Xem tất cả</Text>
-                        </View>
-
-                        <PagerView style={{ width: '100%', height: 100 }} initialPage={0}>
-                            <View key={'1'}>
-                                <View style={{ backgroundColor: 'blue', height: 100, width: '100%' }} />
-                            </View>
-                            <View key={'2'}>
-                                <View style={{ backgroundColor: 'green', height: 100, width: '100%' }} />
-                            </View>
-                            <View key={'3'}>
-                                <View style={{ backgroundColor: 'red', height: 100, width: '100%' }} />
-                            </View>
-                        </PagerView>
-
-                        <View style={{ flexDirection: 'row' }}>
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        </View>
-
-                        <View style={{ flexDirection: 'row' }}>
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                            <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        </View>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
-                            <Text style={styles.title}>Đồ giảm giá</Text>
-                            <Text>Xem tất cả</Text>
-                        </View>
-
-                        <FlatList
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                            data={viewmodel.dataProductHorizontal}
-                            renderItem={({ item }) => <ProductHozirontalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
-                            <Text style={styles.title}>Dành cho bạn</Text>
-                            <Text>Xem tất cả</Text>
-                        </View>
-
-                        <FlatList
-                            scrollEnabled={false}
-                            showsHorizontalScrollIndicator={false}
-                            data={viewmodel.dataProductHorizontal}
-                            renderItem={({ item }) => <ProductVerticalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+                {/* body  */}
+                <View style={styles.containerBody}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
+                        <Text style={styles.title}>Ưu đãi đặc biệt</Text>
+                        <Text>Xem tất cả</Text>
                     </View>
 
+                    <PagerView style={{ height: 180, width: '100%' }} initialPage={0}>
+                        <View key={'1'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-1.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
+                        </View>
+                        <View key={'2'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-2.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
+                        </View>
+                        <View key={'3'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-3.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
+                        </View>
+                    </PagerView>
+
+                    <View style={{ flexDirection: 'row' }}>
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                    </View>
+
+                    <View style={{ flexDirection: 'row' }}>
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                    </View>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
+                        <Text style={styles.title}>Đồ giảm giá</Text>
+                        <Text>Xem tất cả</Text>
+                    </View>
+
+                    <FlatList
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={viewmodel.dataProductHorizontal}
+                        renderItem={({ item }) => <ProductHozirontalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
+                        <Text style={styles.title}>Dành cho bạn</Text>
+                        <Text>Xem tất cả</Text>
+                    </View>
+
+                    <FlatList
+                        scrollEnabled={false}
+                        showsHorizontalScrollIndicator={false}
+                        data={viewmodel.dataProductHorizontal}
+                        renderItem={({ item }) => <ProductVerticalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
                 </View>
-            </ScrollView>
+
+            </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     },
     containerHeader: {
         paddingVertical: 16,

@@ -1,9 +1,11 @@
 import InputEditText from "@/components/InputEditText";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
-import { router } from "expo-router";
+import { ViewModelLogin } from "@/viewmodel/auth/Login";
 
-const Login = ({navigation}:any) => {
+const Login = ({ navigation }: any) => {
+    const viewmodel = ViewModelLogin(navigation);
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
@@ -12,14 +14,22 @@ const Login = ({navigation}:any) => {
                     <LogoApp style={{ width: 165, height: 170 }} />
                 </View>
 
-                <View style={{ gap: 10 }}>
-                    <InputEditText hint={"Nhập tài khoản"} />
-                    <InputEditText hint={"Nhập mật khẩu"} />
+                <View style={{gap: 10}}>
+                    <InputEditText
+                        hint={"Nhập tài khoản"}
+                        input={viewmodel.account}
+                        event={(text) => viewmodel.setAccount(text)}
+                        textError={viewmodel.errorAccount} />
+                    <InputEditText
+                        hint={"Nhập mật khẩu"}
+                        input={viewmodel.password}
+                        event={(text) => viewmodel.setPassword(text)}
+                        textError={viewmodel.errorPassword} />
                 </View>
 
-                <Pressable style={styles.button} onPress={() => navigation.navigate('layoutHome')}>
+                <TouchableOpacity style={styles.button} onPress={() => viewmodel.checkLogin()}>
                     <Text style={styles.text}>Đăng nhập</Text>
-                </Pressable>
+                </TouchableOpacity>
 
             </View>
         </SafeAreaView>

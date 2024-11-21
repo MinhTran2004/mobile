@@ -1,6 +1,5 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
-import { router } from "expo-router";
 
 const Welcome = ({navigation}:any) => {
 

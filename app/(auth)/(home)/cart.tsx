@@ -1,29 +1,35 @@
 import AppHeader from "@/components/AppHeader";
 import ItemCart from "@/components/home/ItemCart";
-import { ViewModelCart } from "@/viewmodel/VM-Cart/Cart";
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from "react-native"
+import { ViewModelCart } from "@/viewmodel/home/cart";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native"
 
 const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
     return (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <AppHeader iconLeft="left" title="Giỏ hàng" iconRight="none" />
+        <View style={{ flex: 1 }}>
+            <AppHeader 
+            onPressIconLeft={() => navigation.goBack()}
+            iconLeft="left" 
+            title="Giỏ hàng" 
+            iconRight="none" />
 
-            <FlatList
-                scrollEnabled={false}
-                data={viewmodel.data}
-                renderItem={({ item }) => <ItemCart cart={item.cart} product={item.product} />} />
+            <View style={styles.main}>
+                <FlatList
+                    scrollEnabled={false}
+                    data={viewmodel.data}
+                    renderItem={({ item }) => <ItemCart cart={item.cart} product={item.product} />} />
 
-            {/* footer */}
-            <View style={styles.container_footer}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.text_total}>Tổng tiền</Text>
-                    <Text style={styles.text_total}>$ {viewmodel.total}</Text>
+                {/* footer */}
+                <View style={styles.container_footer}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.text_total}>Tổng tiền</Text>
+                        <Text style={styles.text_total}>$ {viewmodel.total}</Text>
+                    </View>
+
+                    <Pressable style={styles.btn_payment} onPress={() => navigation.navigate('edit-address')}>
+                        <Text style={styles.text_payment}>Thanh toán</Text>
+                    </Pressable>
                 </View>
-
-                <Pressable style={styles.btn_payment} onPress={() => navigation.navigate('edit-address')}>
-                    <Text style={styles.text_payment}>Thanh toán</Text>
-                </Pressable>
             </View>
 
         </View>
@@ -33,7 +39,10 @@ const Cart = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        paddingHorizontal: 16,
         justifyContent: 'space-between',
+        backgroundColor: 'white',
+        paddingTop: 10,
     },
     // header
     container_header: {

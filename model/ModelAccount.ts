@@ -1,5 +1,3 @@
-import { Alert } from "react-native";
-
 export interface Account {
     _id: string;
     username: string;
@@ -13,7 +11,7 @@ export interface Account {
     status: string;
 }
 
-export default class Model_Account {
+export default class ModelAccount {
     username: string;
     account: string;
     password: string;
@@ -29,35 +27,54 @@ export default class Model_Account {
     }
 
     // check data
-    static validateInputs = (username?: string, account?: string, password?: string) => {
-        const specialCharPattern = /[^a-zA-Z0-9]/;
-        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        let check = true;
-        if (!username) {
-            Alert.alert("Lỗi", "Không để trống username");
-            check = false;
-        } else if (specialCharPattern.test(username)) {
-            Alert.alert("Lỗi", "Không nhập kí tự đặc biệt");
-            check = false;
-        }
-        if (check) {
-            if (!account) {
-                Alert.alert("Lỗi", "Tài khoản không được để trống.");
-                check = false;
-            } else if (!regex.test(account)) {
-                Alert.alert("Lỗi", "Tài khoản chưa đúng định dạng mail");
-                check = false;
+    static validateInputs = (status: string, username?: string, account?: string, password?: string, setErrorUsername?: (error: string) => void, setErrorAccount?: (error: string) => void, setErrorPassword?: (error: string) => void) => {
+        const regexMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //mail
+        const regexSpecialOrSpace = /[!@#$%^&*(),.?":{}|<>]|\s/g;
+
+        // username
+        if (status === "register") {
+            if (username) {
+                if (regexSpecialOrSpace.test(username)) {
+                    setErrorUsername && setErrorUsername("Username không được chứa kí tự đặc biệt");
+                    return false
+                } else if (username.length > 12 && username.length < 8) {
+                    setErrorUsername && setErrorUsername("Độ dài kí tự từ 8 - 12");
+                    return false
+                } else {
+                    setErrorUsername && setErrorUsername("");
+                }
+            } else {
+                setErrorUsername && setErrorUsername("không được để trống ô nhập");
+                return false
             }
         }
-        if (check) {
-            if (!password) {
-                Alert.alert("Lỗi", "Mật khẩu không được để trống.");
-                check = false;
-            } else if (password.length < 6 && password.length > 20) {
-                Alert.alert("Lỗi", "Độ dài mật khẩu từ 6 - 20.");
-                check = false;
+
+        // accout
+        if (account) {
+            if (!regexMail.test(account)) {
+                setErrorAccount && setErrorAccount("không đúng định dạng Mail");
+                return false
+            } else {
+                setErrorAccount && setErrorAccount("");
             }
+        } else {
+            setErrorAccount && setErrorAccount("không được để trông ô nhập");
+            return false
         }
-        return check;
+
+        // password
+        if (password) {
+            if (password.length < 5 && password.length > 16) {
+                setErrorPassword && setErrorPassword("Độ dài kí tự trong khoảng 6 - 15");
+                return false
+            } else {
+                setErrorPassword && setErrorPassword("");
+            }
+        } else {
+            setErrorPassword && setErrorPassword("không được để trông ô nhập");
+            return false
+        }
+
+        return true;
     };
 }

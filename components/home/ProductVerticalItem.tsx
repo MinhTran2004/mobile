@@ -1,36 +1,30 @@
-import { NavigationProp } from "@react-navigation/native";
-import { useState } from "react";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { IconHeart } from "tabler-icons-react-native";
 
-interface Props{
-    // navigation: NavigationProp<any>,
-    _id:string,
+interface Props {
+    _id: string,
     image: string,
-    name:string,
+    name: string,
     idCategory: string,
-    price:string,
+    price: string,
 }
 
-const ProductVerticalItem:React.FC<Props> = (props) => {
-    const [favourite, setFavourite] = useState(false);
-    // onPress={() => props.navigation.navigate("DetailProduct", props)}
+const ProductVerticalItem: React.FC<Props> = (props) => {
+    const navigation = useNavigation()
+
     return (
-        <TouchableOpacity style={styles.container_product_vertical}>
-            <Image src={props.image} style={styles.image_product_vertical} />
-            <View style={{ width: '100%', marginLeft: 10, justifyContent: 'space-between' }}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
+            <Image src={props.image} style={styles.image} />
+            <View style={{ flex: 1, gap: 20 }}>
                 <View>
-                    <Text style={styles.name_product_vertical}>{props.name}</Text>
-                    <Text>{props.idCategory}</Text>
+                    <Text style={styles.name}>{props.name}</Text>
+                    <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
                 </View>
-                <View style={{ width: '72%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price_product_vertical}>${props.price}</Text>
-                    <TouchableOpacity onPress={() => setFavourite(!favourite)}>
-                        {/* {favourite ?
-                            (<Image source={require('@images/icon_showFavourite.png')} style={{ width: 20, height: 20 }} />)
-                            :
-                            (<Image source={require('@images/icon_unFavourite.png')} style={{ width: 20, height: 20 }} />)
-                        } */}
-                    </TouchableOpacity>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={styles.price}>${props.price}</Text>
+                    <IconHeart />
                 </View>
             </View>
         </TouchableOpacity>
@@ -38,30 +32,53 @@ const ProductVerticalItem:React.FC<Props> = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container_product_vertical: {
-        width: '100%',
-        backgroundColor: 'white',
+    container: {
         flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 20,
+        marginBottom: 15,
+        paddingHorizontal: 13,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#EBEBEE',
+        backgroundColor: '#F9F9F9',
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 6,
+        gap: 10,
+    },
+    image: {
+        width: 100,
+        height: 100,
         borderRadius: 10,
-        marginRight: 10,
-        marginBottom: 10,
-        padding: 15,
+        objectFit: 'contain',
     },
-    image_product_vertical: {
-        width: 90,
-        height: 90,
-        borderRadius: 10
-    },
-    name_product_vertical: {
+    name: {
         fontWeight: 'bold',
         fontSize: 17,
         color: 'black'
     },
-    price_product_vertical: {
-        fontSize: 18,
+    price: {
+        fontSize: 16,
         color: '#42bb6a',
         fontWeight: 'bold',
         marginTop: 5
+    },
+    containerOperation: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    btnOperation: {
+        fontSize: 15,
+        textAlign: 'center',
+        padding: 5
+    },
+    quantity: {
+        fontSize: 18,
+        color: 'black',
+        marginHorizontal: 5,
     }
 })
 
