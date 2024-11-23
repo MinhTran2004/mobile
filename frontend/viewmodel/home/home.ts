@@ -13,8 +13,6 @@ export const ViewModelHome = () => {
         const reponse = await ProductService.getAllProductByLimit();
         setDataProductVertical(reponse);
         setPassetDataProductHorizontal(reponse);
-        console.log(reponse);
-        
     }
 
     useEffect(() => {

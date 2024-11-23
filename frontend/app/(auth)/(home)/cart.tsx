@@ -17,10 +17,10 @@ const Cart = ({ navigation }: any) => {
                 <FlatList
                     scrollEnabled={false}
                     data={viewmodel.data}
-                    renderItem={({ item }) => <ItemCart cart={item.cart} product={item.product} />} />
+                    renderItem={({ item }) => <ItemCart key={item.cart._id} cart={item.cart} product={item.product} event={viewmodel.updateQuantityById} />} />
 
                 {/* footer */}
-                <View style={styles.container_footer}>
+                <View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={styles.text_total}>Tổng tiền</Text>
                         <Text style={styles.text_total}>$ {viewmodel.total}</Text>

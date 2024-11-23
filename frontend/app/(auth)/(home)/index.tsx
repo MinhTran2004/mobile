@@ -8,7 +8,6 @@ import { ViewModelHome } from "@/viewmodel/home/home";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
-import StatusModal from "@/components/StatusModal";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
@@ -17,7 +16,7 @@ const Home = ({ navigation }: any) => {
             <View style={styles.container}>
                 {/* header */}
                 <View style={styles.containerHeader}>
-                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center'}}>
                         <IconUser width={40} height={40} />
                         <View>
                             <Text>Hi, Trần Công Minh</Text>
@@ -104,7 +103,7 @@ const Home = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
     },
     containerHeader: {
         paddingVertical: 16,

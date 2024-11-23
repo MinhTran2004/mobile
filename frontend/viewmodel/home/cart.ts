@@ -10,25 +10,24 @@ interface TypeCart {
 
 export const ViewModelCart = () => {
     const [data, setData] = useState<TypeCart[]>([])
-    const [total, setToTal] = useState(0);
+    const [total, setToTal] = useState('');
 
     const getAllProductInCart = async () => {
         const reponse = await CartService.getAllProductInCart();
-
         calculate(reponse);
         setData(reponse);
     }
 
-    const updateQuantityById = async (_id: string, quantity: number, status: boolean) => {
+    const updateQuantityById = async (_idCart: string, quantity: number, status: boolean) => {
         if (status) {
-            const reponse = await CartService.updateQuantityById(_id, quantity + 1);
+            const reponse = await CartService.updateQuantityById(_idCart, quantity + 1);
             if (reponse) {
                 calculate(reponse);
             }
             setData(reponse || []);
         } else {
             if (quantity > 1) {
-                const reponse = await CartService.updateQuantityById(_id, quantity - 1);
+                const reponse = await CartService.updateQuantityById(_idCart, quantity - 1);
                 if (reponse) {
                     calculate(reponse);
                 }
@@ -43,6 +42,7 @@ export const ViewModelCart = () => {
         const sum = reponse.reduce((sum:any, item:any) => {
             return sum + (item.cart.quantity * item.product.price);
         }, 0)
+        // const formattedAmount = sum.toLocaleString('vi-VN');
         setToTal(sum);
     }
 

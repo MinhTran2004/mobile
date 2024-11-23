@@ -11,7 +11,6 @@ interface Props {
     onPressIconRight?: () => void,
 }
 
-
 const AppHeader: React.FC<Props> = (props) => {
     const SelectIconLeft = () => {
         switch (props.iconLeft) {

@@ -30,7 +30,6 @@ const Login = ({ navigation }: any) => {
                 <TouchableOpacity style={styles.button} onPress={() => viewmodel.checkLogin()}>
                     <Text style={styles.text}>Đăng nhập</Text>
                 </TouchableOpacity>
-
             </View>
         </SafeAreaView>
 

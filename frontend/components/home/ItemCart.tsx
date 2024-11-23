@@ -1,19 +1,22 @@
 import { Cart } from "@/model/ModelCart";
 import { Product } from "@/model/ModelProduct";
+import { ViewModelCart } from "@/viewmodel/home/cart";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { IconMinus, IconPlus } from "tabler-icons-react-native";
 
 interface Props {
     cart: Cart,
     product: Product,
-    event?: (id: string, quantity: number, status: boolean) => void;
+    event: (id: string, quantity: number, status: boolean) => {};
 }
 const ItemCart: React.FC<Props> = React.memo((props) => {
+
     return (
         <View style={styles.container}>
             <Image src={props.product.image} style={styles.image} />
-            <View style={{ justifyContent: 'space-between' ,flex: 1 }}>
+            <View style={{ justifyContent: 'space-between', flex: 1, height: 90 }}>
                 <View>
                     <Text style={styles.name}>{props.product.name}</Text>
                     <Text>{props.product.idCategory}</Text>
@@ -22,9 +25,13 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>${props.product.price}</Text>
                     <View style={styles.containerOperation}>
-                        <MaterialIcons name="remove" style={styles.btnOperation} />
+                        <TouchableOpacity onPress={() => { props.event(props.cart._id, props.cart.quantity, false) }}>
+                            <IconMinus size={20} />
+                        </TouchableOpacity>
                         <Text style={styles.quantity}>{props.cart.quantity}</Text>
-                        <MaterialIcons name="add" style={styles.btnOperation} />
+                        <TouchableOpacity onPress={() => { props.event(props.cart._id, props.cart.quantity, true) }}>
+                            <IconPlus size={20} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -51,9 +58,9 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     image: {
-        width: 80,
-        height: 80,
-        borderRadius: 10
+        width: 100,
+        height: 90,
+        borderRadius: 10,
     },
     name: {
         fontWeight: 'bold',
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     },
     price: {
         width: 150,
-        fontSize: 18,
+        fontSize: 15,
         color: '#42bb6a',
         fontWeight: 'bold',
         marginTop: 5
@@ -70,11 +77,6 @@ const styles = StyleSheet.create({
     containerOperation: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    btnOperation: {
-        fontSize: 15,
-        textAlign: 'center',
-        padding: 5
     },
     quantity: {
         fontSize: 18,

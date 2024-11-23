@@ -5,7 +5,7 @@ class ProductService {
 
     static getAllProductByLimit = async () => {
         try {
-            const reponse = (await axios(`${this.url}/getAllProductByLimit?limit=${20}`)).data;
+            const reponse = (await axios(`${this.url}/getAllProductByLimit?limit=${50}`)).data;
             return reponse;
         } catch (err) {
             console.log(err);

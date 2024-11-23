@@ -26,7 +26,6 @@ const ProductHozirontalItem: React.FC<Props> = (props) => {
     )
 }
 
-export default ProductHozirontalItem;
 
 const styles = StyleSheet.create({
     container: {
@@ -61,3 +60,5 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
 })
+
+export default ProductHozirontalItem;

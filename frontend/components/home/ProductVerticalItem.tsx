@@ -16,7 +16,7 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
             <Image src={props.image} style={styles.image} />
-            <View style={{ flex: 1, gap: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'space-between', height: 90}}>
                 <View>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
                     <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#EBEBEE',
         backgroundColor: '#F9F9F9',
-        // backgroundColor: 'red',
         shadowColor: '#000000',
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 0.2,

@@ -22,7 +22,7 @@ export const ViewModelLogin = (navigation: any) => {
             if (reponse) {
                 console.log(reponse);
                 dispatch(Login(reponse))
-                navigation.navigate('layoutHome');
+                navigation.navigate('layoutTabs');
             } else {
                 setErrorPassword("Mật khẩu hoặc tài khoản không chính xác");
             }
