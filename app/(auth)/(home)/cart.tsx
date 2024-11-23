@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: 'white',
         paddingTop: 10,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
     },
     // header
     container_header: {
@@ -59,17 +61,13 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
 
-    // footer
-    container_footer: {
-        padding: 10
-    },
     text_total: {
         color: 'black',
         fontWeight: '500',
         fontSize: 23
     },
     btn_payment: {
-        backgroundColor: '#33c262',
+        backgroundColor: '#4C1B1B',
         marginTop: 10,
         padding: 10,
         borderRadius: 20

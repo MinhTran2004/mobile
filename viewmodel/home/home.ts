@@ -2,20 +2,19 @@
 import { Product } from "@/model/ModelProduct";
 import { useEffect, useState } from "react"
 import ProductService from "@/service/ProductSevice";
-// import { useSelector } from "react-redux";
 
 export const ViewModelHome = () => {
+    const [modal, setModal] = useState(false);
     const [search, setSearch] = useState('');
     const [dataProductHorizontal, setPassetDataProductHorizontal] = useState<Product[]>([]);
     const [dataProductVertical, setDataProductVertical] = useState<Product[]>([]);
     
-    //Chua id nguoi dung
-    // const selector = useSelector((state:any) => state.account.data[0]);
-
     const getAllProductByLimit = async () => {
         const reponse = await ProductService.getAllProductByLimit();
         setDataProductVertical(reponse);
         setPassetDataProductHorizontal(reponse);
+        console.log(reponse);
+        
     }
 
     useEffect(() => {
@@ -23,7 +22,7 @@ export const ViewModelHome = () => {
     }, [])
 
     return {
-        search, dataProductHorizontal, dataProductVertical,
-        setSearch,
+        modal, search, dataProductHorizontal, dataProductVertical,
+        setSearch, setModal,
     }
 }

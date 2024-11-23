@@ -21,7 +21,7 @@ interface Props {
 
 const DetailProduct = (route: Props) => {
     const navigation = useNavigation();
-    const viewModel = ViewModelDetailProduct(navigation);
+    const viewModel = ViewModelDetailProduct();
     const product = route.route.params;
 
     return (
@@ -57,6 +57,7 @@ const DetailProduct = (route: Props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btn_cart} onPress={() => viewModel.addProductToCart(product._id)}>
                     {/* <Image source={require("@images//cart.png")} style={{ width: 35, height: 35 }} /> */}
+                    <Text>hihihi</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btn_sell}>
                     <Text style={{ fontSize: 20, color: 'white' }}>Mua ngay</Text>

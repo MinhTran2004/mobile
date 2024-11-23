@@ -31,11 +31,17 @@ export default ProductHozirontalItem;
 const styles = StyleSheet.create({
     container: {
         width: 160,
-        borderWidth: 1,
         borderColor: '#EBEBEE',
         borderRadius: 10,
-        marginRight: 5,
+        margin: 5,
+        marginRight: 10,
         padding: 10,
+        backgroundColor: '#F9F9F9',
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 6,
     },
     image: {
         width: 140,

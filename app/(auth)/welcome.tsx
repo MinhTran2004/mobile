@@ -1,19 +1,20 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 
-const Welcome = ({navigation}:any) => {
-
+const Welcome = ({ navigation }: any) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <LogoApp />
-                <View style={{flexDirection: 'row', gap: 10}}>
-                    <Pressable style={styles.button} onPress={() =>navigation.navigate('register')}>
-                        <Text style={styles.text}>Đăng ký</Text>
-                    </Pressable>
-                    <Pressable style={styles.button} onPress={() =>navigation.navigate('login')}>
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <LogoApp />
+                </View>
+                <View style={{ gap: 10 }}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('login')}>
                         <Text style={styles.text}>Đăng nhập</Text>
-                    </Pressable>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('register')}>
+                        <Text style={styles.text}>Đăng ký</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
@@ -23,7 +24,6 @@ const Welcome = ({navigation}:any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         borderTopLeftRadius: 24,
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
         gap: 50
     },
     button: {
-        flex: 1,
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
         paddingHorizontal: 32,
-        borderRadius: 4,
+        borderRadius: 20,
         elevation: 3,
         backgroundColor: 'black',
     },

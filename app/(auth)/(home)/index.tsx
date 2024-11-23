@@ -8,6 +8,7 @@ import { ViewModelHome } from "@/viewmodel/home/home";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
+import StatusModal from "@/components/StatusModal";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
@@ -36,6 +37,8 @@ const Home = ({ navigation }: any) => {
                         </Pressable>
                     </View>
                 </View>
+
+
 
                 {/* body  */}
                 <View style={styles.containerBody}>

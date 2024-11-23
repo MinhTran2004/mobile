@@ -1,5 +1,5 @@
 import InputEditText from "@/components/InputEditText";
-import { Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 import { ViewModelLogin } from "@/viewmodel/auth/Login";
 

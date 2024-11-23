@@ -6,3 +6,9 @@ export const Login = (account:Account) => {
         payload: account,
     }
 }
+
+export const Logout = () => {
+    return {
+      type: 'LOGOUT',
+    };
+  };

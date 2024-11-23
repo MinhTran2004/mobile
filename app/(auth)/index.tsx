@@ -1,11 +1,27 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-const Start = ({navigation}:any) => {
+const Start = ({ navigation }: any) => {
 
-    setTimeout(() => {
-        navigation.navigate('welcome')
-    }, 500)
+    const selector = useSelector((state: any) => state.auth.isAuthenticated);
+
+    useEffect(() => {
+        if (selector) {
+            setTimeout(() => {
+                navigation.navigate('layoutHome')
+            }, 500)
+        } else {
+            setTimeout(() => {
+                navigation.navigate('welcome')
+            }, 500)
+        }
+    }, [selector])
+
+    // setTimeout(() => {
+    //     navigation.navigate('welcome')
+    // }, 500)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

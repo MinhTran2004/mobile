@@ -4,10 +4,13 @@ import Register from "./register";
 import Login from "./login";
 import LayoutHome from "./(home)/_layout";
 import Start from ".";
+import { useSelector } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 
 export default function LayoutAuth() {
+  const select = useSelector((state:any) => state.loading);
+
   return (
     <Stack.Navigator initialRouteName="index" screenOptions={{ headerShown: false }} >
       <Stack.Screen name="index" component={Start} />
@@ -16,6 +19,5 @@ export default function LayoutAuth() {
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="layoutHome" component={LayoutHome} />
     </Stack.Navigator>
-
   )
 }
