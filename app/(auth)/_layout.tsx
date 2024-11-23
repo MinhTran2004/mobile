@@ -4,6 +4,7 @@ import Register from "./register";
 import Login from "./login";
 import LayoutHome from "./(home)/_layout";
 import Start from ".";
+import Profile from "./(profile)/layout";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function LayoutAuth() {
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="layoutHome" component={LayoutHome} />
+      <Stack.Screen name="Profile" component={Profile}/>
     </Stack.Navigator>
 
   )

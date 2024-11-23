@@ -1,16 +1,19 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
+import Login from "./login";
 
 const Start = ({navigation}:any) => {
 
-    setTimeout(() => {
-        navigation.navigate('welcome')
-    }, 500)
-
+    // setTimeout(() => {
+    //     navigation.navigate('welcome')
+    // }, 500)
+        
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <LogoApp />
+          <TouchableOpacity onPress={()=> navigation.navigate("Profile")}>
+               <LogoApp />
+          </TouchableOpacity>
                 <Text style={styles.text}>From MD-28</Text>
             </View>
         </SafeAreaView>
