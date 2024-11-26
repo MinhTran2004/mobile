@@ -20,6 +20,7 @@ export default function LayoutAuth() {
       <Stack.Screen name="layoutHome" component={LayoutHome} />
       {/* <Stack.Screen name="layoutOrder" component={LayoutOrder} /> */}
       {/* <Stack.Screen name="layoutProfile" component={LayoutProfile} /> */}
+      {/* <Stack.Screen name="layoutBottomTabs" component={LayoutBottomTabs} /> */}
     </Stack.Navigator>
   )
 }
