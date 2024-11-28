@@ -1,6 +1,5 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconHeart } from "tabler-icons-react-native";
 
 interface Props {
     _id: string,
@@ -10,7 +9,7 @@ interface Props {
     price: string,
 }
 
-const ProductVerticalItem: React.FC<Props> = (props) => {
+const ItemProductPayment: React.FC<Props> = (props) => {
     const navigation = useNavigation()
 
     return (
@@ -24,7 +23,7 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.price}</Text>
-                    <IconHeart />
+                    <Text>x3</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -36,22 +35,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 20,
-        marginBottom: 15,
+        marginBottom: 10,
         paddingHorizontal: 13,
-        paddingVertical: 10,
-        borderWidth: 1,
-        borderColor: '#EBEBEE',
-        backgroundColor: '#F9F9F9',
-        shadowColor: '#000000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
-        elevation: 2,
+        borderBottomWidth: 1,
+        paddingBottom: 8,
+        borderColor: '#D7D4D4',
         gap: 10,
     },
     image: {
-        width: 110,
-        height: 95,
+        width: 100,
+        height: 90,
         borderRadius: 10,
         objectFit: 'contain',
     },
@@ -63,7 +56,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 16,
-        color: '#42bb6a',
+        color: '#DB920B',
         fontWeight: 'bold',
         marginTop: 5
     },
@@ -83,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProductVerticalItem;
+export default ItemProductPayment;

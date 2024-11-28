@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { IconChevronLeft, IconX } from "tabler-icons-react-native";
+import { IconX } from "tabler-icons-react-native";
+import AppHeader from "@/components/AppHeader";
 
 const EditAddress = () => {
     const navigation = useNavigation();
@@ -34,15 +35,9 @@ const EditAddress = () => {
     };
 
     return (
-        <View style={styles.container}>
-            {/* Header */}
-            <View style={styles.headerContainer}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <IconChevronLeft name="arrow-back" size={24} color="#000" />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>Thêm địa chỉ</Text>
-            </View>
-
+        <SafeAreaView style={{flex: 1}}>
+            <AppHeader iconLeft="left" title="Thêm địa chỉ" iconRight="none" onPressIconLeft={()=> navigation.goBack()}/>
+            <View style={styles.container}>
             {/* Input fields */}
             <Text style={styles.label}>Thông tin liên hệ</Text>
             <TextInput
@@ -145,6 +140,7 @@ const EditAddress = () => {
                 <Text style={styles.saveButtonText}>Lưu</Text>
             </TouchableOpacity>
         </View>
+        </SafeAreaView>
     );
 };
 
@@ -152,12 +148,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-    },
-    headerContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 20,
-        paddingHorizontal: 20,
     },
     backButton: {
         position: "absolute",

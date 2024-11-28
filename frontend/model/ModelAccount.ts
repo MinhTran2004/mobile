@@ -64,7 +64,8 @@ export default class ModelAccount {
 
         // password
         if (password) {
-            if (password.length < 5 && password.length > 16) {
+
+            if (password.length < 5 || password.length > 16) {
                 setErrorPassword && setErrorPassword("Độ dài kí tự trong khoảng 6 - 15");
                 return false
             } else {

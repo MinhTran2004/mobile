@@ -6,14 +6,7 @@ class SeviceAccount {
     static createAccount = async (data:Model_Account) => {
         try{
             const reponse = (await axios.post(`${this.url}/createAccount`, data)).data;
-            console.log(reponse);
-            
-            if(reponse.status === "success"){
-                return true;
-            }else{
-                return false;
-            }
-
+            return reponse;
         }catch(err){
             console.log(err);
         }
@@ -26,6 +19,5 @@ class SeviceAccount {
             console.log(err);
         }
     }
-    
 }
 export default SeviceAccount;

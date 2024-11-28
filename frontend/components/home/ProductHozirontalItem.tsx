@@ -19,7 +19,7 @@ const ProductHozirontalItem: React.FC<Props> = (props) => {
             <Text numberOfLines={1} style={styles.name}>{props.name}</Text>
             <Text>{props.idCategory}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Text style={styles.price}>${props.price}</Text>
+                <Text style={styles.price}>{props.price}</Text>
                 <IconHeart />
             </View>
         </TouchableOpacity>

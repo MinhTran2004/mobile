@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { Login } from "@/redux/action/login";
 
 export const ViewModelLogin = (navigation: any) => {
-    const [account, setAccount] = useState('a@gmail.com');
-    const [password, setPassword] = useState('12345678');
+    const [account, setAccount] = useState('admin@gmail.com');
+    const [password, setPassword] = useState('123456');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
 
@@ -20,9 +20,8 @@ export const ViewModelLogin = (navigation: any) => {
             const reponse = await SeviceAccount.getAccountByAccountAndPassword(account, password);
 
             if (reponse) {
-                console.log(reponse);
                 dispatch(Login(reponse))
-                navigation.navigate('layoutTabs');
+                navigation.navigate('layoutHome');
             } else {
                 setErrorPassword("Mật khẩu hoặc tài khoản không chính xác");
             }

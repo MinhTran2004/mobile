@@ -8,6 +8,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { IconHome, IconShoppingCart, IconUser } from "tabler-icons-react-native";
 import Profile from "../(profile)";
 import TopTabs from "../(order)/_layout";
+import Payment from "./payment";
+import Address from "./address";
+import Coupon from "./coupon";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +22,9 @@ const LayoutHome = () => {
             <Stack.Screen name="search" component={Search} />
             <Stack.Screen name="detail-product" component={DetailProduct} />
             <Stack.Screen name="edit-address" component={EditAddress} />
+            <Stack.Screen name="payment" component={Payment} />
+            <Stack.Screen name="address" component={Address} />
+            <Stack.Screen name="coupon" component={Coupon} />
         </Stack.Navigator>
     )
 }

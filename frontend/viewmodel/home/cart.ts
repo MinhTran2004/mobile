@@ -2,6 +2,7 @@ import { Cart } from "@/model/ModelCart";
 import { Product } from "@/model/ModelProduct";
 import { CartService } from "@/service/CartService";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 interface TypeCart {
     cart: Cart,
@@ -11,23 +12,24 @@ interface TypeCart {
 export const ViewModelCart = () => {
     const [data, setData] = useState<TypeCart[]>([])
     const [total, setToTal] = useState('');
+    const selector = useSelector((state) => state.auth.account._id);
 
     const getAllProductInCart = async () => {
-        const reponse = await CartService.getAllProductInCart();
+        const reponse = await CartService.getAllProductInCart(selector);
         calculate(reponse);
         setData(reponse);
     }
 
     const updateQuantityById = async (_idCart: string, quantity: number, status: boolean) => {
         if (status) {
-            const reponse = await CartService.updateQuantityById(_idCart, quantity + 1);
+            const reponse = await CartService.updateQuantityById(_idCart, selector, quantity + 1);
             if (reponse) {
                 calculate(reponse);
             }
             setData(reponse || []);
         } else {
             if (quantity > 1) {
-                const reponse = await CartService.updateQuantityById(_idCart, quantity - 1);
+                const reponse = await CartService.updateQuantityById(_idCart, selector, quantity - 1);
                 if (reponse) {
                     calculate(reponse);
                 }
@@ -46,12 +48,22 @@ export const ViewModelCart = () => {
         setToTal(sum);
     }
 
+    const deleteCartById = async (idCart:string) => {
+        const reponse = await CartService.deleteCartById(idCart);
+        if(reponse){
+            await getAllProductInCart();
+        }else{
+            console.log('Xóa thất bại');
+        }
+        return ;
+    }
+
     useEffect(() => {
         getAllProductInCart();
     }, []);
 
     return {
         data, total,
-        updateQuantityById,
+        updateQuantityById,deleteCartById,
     }
 }

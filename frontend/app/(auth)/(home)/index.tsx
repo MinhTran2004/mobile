@@ -11,12 +11,13 @@ import IconSearch from "@/assets/images/home/sreach-icon.svg";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
             <View style={styles.container}>
                 {/* header */}
                 <View style={styles.containerHeader}>
-                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
                         <IconUser width={40} height={40} />
                         <View>
                             <Text>Hi, Trần Công Minh</Text>
@@ -46,7 +47,10 @@ const Home = ({ navigation }: any) => {
                         <Text>Xem tất cả</Text>
                     </View>
 
-                    <PagerView style={{ height: 180, width: '100%' }} initialPage={0}>
+                    <PagerView
+                        style={{ height: 180, width: '100%' }}
+                        ref={viewmodel.pageView}
+                        initialPage={viewmodel.initialPage}>
                         <View key={'1'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
                             <Image source={require('@/assets/images/home/banner-1.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
                         </View>

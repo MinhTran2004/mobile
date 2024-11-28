@@ -33,8 +33,7 @@ const Profile = () => {
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
-      <ItemProfile iconLeft={<IconHeart />} title='Đăng xuất' iconRight={<IconChevronRight/>} onPress={() => {console.log('hihihi');
-      }} />
+      <ItemProfile iconLeft={<IconHeart />} title='Đăng xuất' iconRight={<IconChevronRight/>} onPress={() => {logout()}} />
     </View>
 
   );

@@ -1,7 +1,8 @@
 
 import { Product } from "@/model/ModelProduct";
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ProductService from "@/service/ProductSevice";
+import PagerView from "react-native-pager-view";
 
 export const ViewModelHome = () => {
     const [modal, setModal] = useState(false);
@@ -19,8 +20,24 @@ export const ViewModelHome = () => {
         getAllProductByLimit();
     }, [])
 
+    // chuyen anh slide
+    const pageView = useRef<PagerView>(null);
+    const [initialPage, setInitialPage] = useState(0);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (initialPage === 2) {
+                setInitialPage(0)
+                pageView.current?.setPage(initialPage)
+            }else{
+                setInitialPage(initialPage + 1)
+                pageView.current?.setPage(initialPage)
+            }
+        }, 3000)
+    }, [initialPage])
+
     return {
-        modal, search, dataProductHorizontal, dataProductVertical,
+        modal, search, dataProductHorizontal, dataProductVertical, pageView, initialPage,
         setSearch, setModal,
     }
 }

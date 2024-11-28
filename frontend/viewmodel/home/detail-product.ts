@@ -3,7 +3,7 @@ import { CartService } from "@/service/CartService";
 import { useSelector } from "react-redux";
 
 export const ViewModelDetailProduct = () => {
-    const selector = useSelector((state: any) => state.auth.account);
+    const selector = useSelector((state: any) => state.auth.account._id);
     
     const addProductToCart = async (idproduct: string) => {
         const cart = new CartModel(selector._id, idproduct, 1, "Đang sử dụng");

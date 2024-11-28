@@ -1,9 +1,8 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Feather from "react-native-vector-icons/Feather"
 import React, { useState } from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product";
-import { IconChevronLeft } from "tabler-icons-react-native";
+import { IconChevronLeft, IconHeart, IconMessage, IconShoppingCart } from "tabler-icons-react-native";
 
 interface Product {
     _id: string,
@@ -36,34 +35,27 @@ const DetailProduct = (route: Props) => {
                 <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
                         <Text style={styles.name_product}>{product.name}</Text>
-                        <Text style={styles.price_product}>$ {product.price}</Text>
+                        <Text style={styles.price_product}>{product.price}</Text>
                     </View>
-                    {/* <TouchableOpacity onPress={() => setFavourite(!favourite)}>
-                        {favourite ?
-                            (<Image source={require('@images/icon_showFavourite.png')} style={{ width: 25, height: 25 }} />)
-                            :
-                            (<Image source={require('@images//icon_unFavourite.png')} style={{ width: 25, height: 25 }} />)
-                        }
-                    </TouchableOpacity> */}
+                    <IconHeart style={{ width: 25, height: 25 }} />
                 </View>
                 <Text style={styles.des_product}>Giới thiệu sản phẩm</Text>
                 <Text style={{ fontSize: 17 }}>Pizza là một món ăn truyền thống nổi tiếng của Ý, thường được làm từ bột mì, nước, muối, và men, rồi được nướng với các loại topping đa dạng như sốt cà chua, phô mai, thịt, rau củ và gia vị. Với hương vị đậm đà và sự kết hợp phong phú</Text>
-
             </View>
 
-            <View style={styles.container_add_product}>
-                <TouchableOpacity style={styles.btn_messenger}>
-                    {/* <Image source={require("@images//icon_messenger.png")} style={{ width: 30, height: 30 }} /> */}
+            <View style={styles.containerButton}>
+                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }}>
+                    <IconMessage />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn_cart} onPress={() => viewModel.addProductToCart(product._id)}>
-                    {/* <Image source={require("@images//cart.png")} style={{ width: 35, height: 35 }} /> */}
-                    <Text>hihihi</Text>
+                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id) }}>
+                    <IconShoppingCart />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn_sell}>
-                    <Text style={{ fontSize: 20, color: 'white' }}>Mua ngay</Text>
+                <TouchableOpacity style={{ flex: 6, padding: 15, backgroundColor: '#4C1B1B', borderRadius: 20 }}>
+                    <Text style={{ color: 'white', textAlign: 'center' }}>Mua ngay</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+
+        </View >
     )
 }
 
@@ -111,32 +103,22 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 20,
     },
-
-
-    // container add product
-    container_add_product: {
-        width: '100%',
+    containerButton: {
         flexDirection: 'row',
-        position: "absolute",
-        bottom: 0
-    },
-    btn_messenger: {
-        flex: 1,
-        backgroundColor: '#2fcc64',
+        width: '100%',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 10,
-        borderRightWidth: 1
-    },
-    btn_cart: {
-        flex: 1,
-        backgroundColor: '#2fcc64',
-        alignItems: 'center',
-        padding: 8,
-    },
-    btn_sell: {
-        flex: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red',
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        position: 'absolute',
+        bottom: 0,
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 3,
     }
+
 })
