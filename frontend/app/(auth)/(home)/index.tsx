@@ -1,4 +1,4 @@
-import { Button, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Button, FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import IconUser from "@/assets/images/home/user-icon.svg";
 import IconCart from "@/assets/images/home/cart-icon.svg";
 import ItemProductCategory from "@/components/home/ItemProductCategory";
@@ -11,12 +11,17 @@ import IconSearch from "@/assets/images/home/sreach-icon.svg";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
+
+    const handleNavigateToCategory = (idCategory: string) => {
+        navigation.navigate('category', {  idCategory });
+    };
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
             <View style={styles.container}>
-                {/* header */}
+                {/* Header */}
                 <View style={styles.containerHeader}>
-                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
                         <IconUser width={40} height={40} />
                         <View>
                             <Text>Hi, Trần Công Minh</Text>
@@ -37,9 +42,7 @@ const Home = ({ navigation }: any) => {
                     </View>
                 </View>
 
-
-
-                {/* body  */}
+                {/* Body */}
                 <View style={styles.containerBody}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
                         <Text style={styles.title}>Ưu đãi đặc biệt</Text>
@@ -59,17 +62,48 @@ const Home = ({ navigation }: any) => {
                     </PagerView>
 
                     <View style={{ flexDirection: 'row' }}>
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Gà Rán"
+                            onPress={() => handleNavigateToCategory('Gà Rán')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Burger "
+                            onPress={() => handleNavigateToCategory('Burger')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Mì"
+                            onPress={() => handleNavigateToCategory('Mì')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Cơm"
+                            onPress={() => handleNavigateToCategory('Cơm')}
+                        />
                     </View>
-
                     <View style={{ flexDirection: 'row' }}>
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
-                        <ItemProductCategory icon={<IconProduct />} name="Pizaa" />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Gà Rán"
+                            onPress={() => handleNavigateToCategory('Gà Rán')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Burger "
+                            onPress={() => handleNavigateToCategory('Burger')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Mì"
+                            onPress={() => handleNavigateToCategory('Mì')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Drinks"
+                            onPress={() => handleNavigateToCategory('Cơm')}
+                        />
                     </View>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
@@ -94,11 +128,10 @@ const Home = ({ navigation }: any) => {
                         data={viewmodel.dataProductHorizontal}
                         renderItem={({ item }) => <ProductVerticalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
                 </View>
-
             </View>
         </ScrollView>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -109,21 +142,21 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     containerBody: {
         width: '100%',
-        gap: 20
+        gap: 20,
     },
     title: {
         fontSize: 15,
-        fontWeight: 600,
-        color: '#2C2C2C'
+        fontWeight: "600",
+        color: '#2C2C2C',
     },
     page: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-})
+});
 
 export default Home;

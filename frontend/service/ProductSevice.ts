@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class ProductService {
-    static url = "http://192.168.5.26:5000/product";
+    static url = "http://192.168.1.10:5000/product";
 
     static getAllProductByLimit = async () => {
         try {
@@ -32,6 +32,18 @@ class ProductService {
                 return [];
             }
         }catch(err){
+            console.log(err);
+        }
+    }
+    static getProductByCategory = async (idCategory:string) => {
+        try {
+            const response = (await axios.get(`${this.url}/getProductByCategory?idCategory=${idCategory}`)).data;
+            if (response) {
+                return response.products;
+            } else {
+                return [];
+            }
+        } catch (err) {
             console.log(err);
         }
     }
