@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import ButtonModel from "../ButtonModel";
 import ItemOrderProduct from "@/components/order/ItemOrderProduct";
-import { Product } from "@/model/ModelProduct";
+import { Product } from "@/model/product.model";
 
 interface Props {
     data: Product[],

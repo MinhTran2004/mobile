@@ -1,7 +1,7 @@
 import AppHeader from "@/components/AppHeader";
 import ItemCart from "@/components/home/ItemCart";
 import PrimaryButton from "@/components/PrimaryButton";
-import { ViewModelCart } from "@/viewmodel/home/cart";
+import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native"
 
 const Cart = ({ navigation }: any) => {

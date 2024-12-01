@@ -1,4 +1,4 @@
-import { Account } from "@/model/ModelAccount"
+import { Account } from "@/model/account.model"
 
 export const Login = (account:Account) => {
     return{

@@ -1,5 +1,5 @@
-import { Product } from "@/model/ModelProduct";
-import ProductService from "@/service/ProductSevice";
+import { Product } from "@/model/product.model";
+import ProductService from "@/service/product.service";
 import { useEffect, useState } from "react"
 
 export const ViewModelSearch = () => {

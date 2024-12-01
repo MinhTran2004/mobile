@@ -1,8 +1,9 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product";
+import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product.viewmodel";
 import { IconChevronLeft, IconHeart, IconMessage, IconShoppingCart } from "tabler-icons-react-native";
+import StatusModal from "@/components/StatusModal";
 
 interface Product {
     _id: string,
@@ -22,6 +23,8 @@ const DetailProduct = (route: Props) => {
     const navigation = useNavigation();
     const viewModel = ViewModelDetailProduct();
     const product = route.route.params;
+
+    const [dialog, setDialog] = useState(false);
 
     return (
         <View style={{ flex: 1 }}>
@@ -50,10 +53,22 @@ const DetailProduct = (route: Props) => {
                 <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id) }}>
                     <IconShoppingCart />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 6, padding: 15, backgroundColor: '#4C1B1B', borderRadius: 20 }}>
+                <TouchableOpacity style={{ flex: 6, padding: 15, backgroundColor: '#4C1B1B', borderRadius: 20 }} onPress={() => setDialog(true)}>
                     <Text style={{ color: 'white', textAlign: 'center' }}>Mua ngay</Text>
                 </TouchableOpacity>
             </View>
+
+            <StatusModal
+                isActive = {dialog}
+                title="Thông báo"
+                label="Nội dung thông báo"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{label: 'Đồng ý' , onPress() {
+                    setDialog(false)
+                },}}
+                onClose={() => setDialog(false)}
+            />
 
         </View >
     )

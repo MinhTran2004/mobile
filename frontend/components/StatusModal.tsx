@@ -12,7 +12,7 @@ interface Props {
     statusLayoutButton?: 'row' | 'col' | 'single',
     primaryButton?: {
         label: string,
-        onPress: () => void
+        onPress: () => void,
     },
     secondaryButton?: {
         label: string,

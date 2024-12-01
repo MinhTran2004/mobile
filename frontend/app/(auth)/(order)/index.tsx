@@ -1,5 +1,5 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
-import { ViewModelHome } from "@/viewmodel/home/home";
+import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView, View } from "react-native"
 

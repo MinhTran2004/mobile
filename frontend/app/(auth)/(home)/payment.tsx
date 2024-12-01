@@ -1,6 +1,6 @@
 import AppHeader from "@/components/AppHeader"
 import ItemProductPayment from "@/components/home/ItemProductPayment"
-import { ViewModelHome } from "@/viewmodel/home/home"
+import { ViewModelHome } from "@/viewmodel/home/home.viewmodel"
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { IconAddressBook, IconChevronRight, IconDiscount, IconWallet } from "tabler-icons-react-native"
 import { Checkbox, List } from 'react-native-paper';

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/getAllProductByLimit', async (req, res) => {
     const limit = req.query.limit;
-    const product = await Product.find().skip(0).limit(20);
+    const product = await Product.find().skip(0).limit(3);
     res.send(product);
 })
 
@@ -14,6 +14,7 @@ router.get('/getProductById', async (req, res) => {
     const product = await Product.findById(id);
     res.send(product);
 })
+
 router.get('/getProductByName', async (req, res) => {
     const { name } = req.query; 
 

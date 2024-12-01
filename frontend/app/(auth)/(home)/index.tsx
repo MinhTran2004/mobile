@@ -4,7 +4,7 @@ import IconCart from "@/assets/images/home/cart-icon.svg";
 import ItemProductCategory from "@/components/home/ItemProductCategory";
 import IconProduct from "@/assets/images/home/product-icon.svg";
 import PagerView from "react-native-pager-view";
-import { ViewModelHome } from "@/viewmodel/home/home";
+import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
@@ -107,7 +107,7 @@ const Home = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
     },
     containerHeader: {
         paddingVertical: 16,

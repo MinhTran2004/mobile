@@ -1,6 +1,6 @@
 import ProductVerticalItem from '@/components/home/ProductVerticalItem';
 import InputEditText from '@/components/InputEditText';
-import { ViewModelSearch } from '@/viewmodel/home/sreach';
+import { ViewModelSearch } from '@/viewmodel/home/sreach.viewmodel';
 import React from 'react';
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { IconChevronLeft } from 'tabler-icons-react-native';

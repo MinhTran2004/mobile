@@ -1,6 +1,6 @@
-import { Cart } from "@/model/ModelCart";
-import { Product } from "@/model/ModelProduct";
-import { CartService } from "@/service/CartService";
+import { Cart } from "@/model/cart.model";
+import { Product } from "@/model/product.model";
+import { CartService } from "@/service/cart.service";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 

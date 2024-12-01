@@ -11,12 +11,13 @@ import TopTabs from "../(order)/_layout";
 import Payment from "./payment";
 import Address from "./address";
 import Coupon from "./coupon";
+import DetailCoupon from "./detail-coupon";
 
 const Stack = createNativeStackNavigator();
 
 const LayoutHome = () => {
     return (
-        <Stack.Navigator initialRouteName="index" screenOptions={{headerShown: false}} >
+        <Stack.Navigator initialRouteName="edit-address" screenOptions={{headerShown: false}} >
             <Stack.Screen name="index" component={LayoutBottomTabs} />
             <Stack.Screen name="cart" component={Cart} />
             <Stack.Screen name="search" component={Search} />
@@ -25,6 +26,7 @@ const LayoutHome = () => {
             <Stack.Screen name="payment" component={Payment} />
             <Stack.Screen name="address" component={Address} />
             <Stack.Screen name="coupon" component={Coupon} />
+            <Stack.Screen name="detail-coupon" component={DetailCoupon} />
         </Stack.Navigator>
     )
 }

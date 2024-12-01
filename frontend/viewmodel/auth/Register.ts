@@ -1,6 +1,6 @@
 
-import Model_Account from "@/model/ModelAccount";
-import SeviceAccount from "@/service/AccountService";
+import Model_Account from "@/model/account.model";
+import SeviceAccount from "@/service/account.service";
 import { useState } from "react"
 
 export const ViewModelRegister = (navigation: any) => {

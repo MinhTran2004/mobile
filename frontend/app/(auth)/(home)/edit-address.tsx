@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { IconX } from "tabler-icons-react-native";
 import AppHeader from "@/components/AppHeader";
+import ViewModelEditAddress from "@/viewmodel/home/address.viewmodel";
+import ItemModalAddress from "@/components/home/ItemModelAdress";
 
 const EditAddress = () => {
     const navigation = useNavigation();
-    const [modalVisible, setModalVisible] = useState(false);
-    const [selectedDistrict, setSelectedDistrict] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [addressDetails, setAddressDetails] = useState("");
-    const [additionalDetails, setAdditionalDetails] = useState("");
+    const viewmodel = ViewModelEditAddress();
 
     const districts = [
         "Hoài Đức",
@@ -24,122 +20,100 @@ const EditAddress = () => {
 
     const handleSave = () => {
         // Logic to save information
-        console.log({
-            fullName,
-            phone,
-            selectedDistrict,
-            addressDetails,
-            additionalDetails,
-        });
+        // console.log({
+        //     fullName,
+        //     phone,
+        //     selectedDistrict,
+        //     addressDetails,
+        //     additionalDetails,
+        // });
         navigation.goBack(); // Go back to the previous screen
     };
 
     return (
-        <SafeAreaView style={{flex: 1}}>
-            <AppHeader iconLeft="left" title="Thêm địa chỉ" iconRight="none" onPressIconLeft={()=> navigation.goBack()}/>
+        <SafeAreaView style={{ flex: 1 }}>
+            <AppHeader iconLeft="left" title="Thêm địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
             <View style={styles.container}>
-            {/* Input fields */}
-            <Text style={styles.label}>Thông tin liên hệ</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Họ và tên"
-                value={fullName}
-                onChangeText={setFullName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Số điện thoại"
-                keyboardType="phone-pad"
-                value={phone}
-                onChangeText={setPhone}
-            />
+                {/* Input fields */}
+                <Text style={styles.label}>Thông tin liên hệ</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Họ và tên"
+                    value={viewmodel.name}
+                    onChangeText={viewmodel.setName}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Số điện thoại"
+                    keyboardType="phone-pad"
+                    value={viewmodel.phone}
+                    onChangeText={viewmodel.setPhone}
+                />
 
-            <Text style={styles.label}>Thông tin địa chỉ</Text>
+                <Text style={styles.label}>Thông tin địa chỉ</Text>
 
-            {/* Dropdown for Districts */}
+                <TouchableOpacity
+                    style={styles.dropdown}
+                    onPress={() => viewmodel.setModalProvince(true)}
+                >
+                    <Text style={styles.dropdownText}>
+                        {viewmodel.province || "Chọn Thành Phố "}
+                    </Text>
 
-            <TouchableOpacity
-                style={styles.dropdown}
-                onPress={() => setModalVisible(true)}
-            >
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.dropdown}
+                    onPress={() => viewmodel.setModalDistrict(true)}
+                >
+                    <Text style={styles.dropdownText}>
+                        {viewmodel.district || "Chọn Quận / Huyện"}
+                    </Text>
 
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.dropdown}
+                    onPress={() => viewmodel.setModalCommune(true)}
+                >
+                    <Text style={styles.dropdownText}>
+                        {viewmodel.commune || "Chọn Xã"}
+                    </Text>
 
-                <Text style={styles.dropdownText}>
-                    {selectedDistrict || "Chọn Thành Phố "}
-                </Text>
+                </TouchableOpacity>
+                
+                <TextInput
+                    style={styles.input}
+                    placeholder="Địa chỉ cụ thể"
+                    value={viewmodel.detail}
+                    onChangeText={viewmodel.setDetail}
+                />
 
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.dropdown}
-                onPress={() => setModalVisible(true)}
-            >
+                {/* modal */}
+                <ItemModalAddress
+                    title={'Thành Phố / Tỉnh'}
+                    dataAddress={viewmodel.dataProvince}
+                    setAddress={viewmodel.setProvince}
+                    statusDialog={viewmodel.modalProvince}
+                    setDialog={viewmodel.setModalProvince} />
 
+                <ItemModalAddress
+                    title={'Quận / Huyện'}
+                    dataAddress={viewmodel.dataDistrict}
+                    setAddress={viewmodel.setDistrict}
+                    statusDialog={viewmodel.modalDistrict}
+                    setDialog={viewmodel.setModalDistrict} />
 
-                <Text style={styles.dropdownText}>
-                    {selectedDistrict || "Chọn Quận / Huyện"}
-                </Text>
+                <ItemModalAddress
+                    title={'Phường / Xã'}
+                    dataAddress={viewmodel.dataCommune}
+                    setAddress={viewmodel.setCommune}
+                    statusDialog={viewmodel.modalCommune}
+                    setDialog={viewmodel.setModalCommune} />
 
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.dropdown}
-                onPress={() => setModalVisible(true)}
-            >
-
-
-                <Text style={styles.dropdownText}>
-                    {selectedDistrict || "Chọn Xã"}
-                </Text>
-
-            </TouchableOpacity>
-            {/* Address details */}
-            <TextInput
-                style={styles.input}
-                placeholder="Địa chỉ cụ thể"
-                value={addressDetails}
-                onChangeText={setAddressDetails}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Nhập các chi tiết khác (không bắt buộc)"
-                value={additionalDetails}
-                onChangeText={setAdditionalDetails}
-            />
-
-            {/* Modal for District Selection */}
-            <Modal visible={modalVisible} transparent={true} animationType="slide">
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalHeader}>Quận / Huyện</Text>
-                        <FlatList
-                            data={districts}
-                            keyExtractor={(item, index) => index.toString()}
-                            renderItem={({ item }) => (
-                                <TouchableOpacity
-                                    style={styles.modalItem}
-                                    onPress={() => {
-                                        setSelectedDistrict(item);
-                                        setModalVisible(false);
-                                    }}
-                                >
-                                    <Text style={styles.modalItemText}>{item}</Text>
-                                </TouchableOpacity>
-                            )}
-                        />
-                        <TouchableOpacity
-                            style={styles.closeButton}
-                            onPress={() => setModalVisible(false)}
-                        >
-                            <IconX name="close" size={24} color="#000" />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
-
-            {/* Save Button */}
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                <Text style={styles.saveButtonText}>Lưu</Text>
-            </TouchableOpacity>
-        </View>
+                {/* Save Button */}
+                <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                    <Text style={styles.saveButtonText}>Lưu</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 };
@@ -199,6 +173,7 @@ const styles = StyleSheet.create({
         maxHeight: "60%",
     },
     modalHeader: {
+        textAlign: 'center',
         fontSize: 16,
         fontWeight: "bold",
         marginBottom: 10,

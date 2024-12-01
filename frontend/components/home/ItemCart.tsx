@@ -1,6 +1,6 @@
-import { Cart } from "@/model/ModelCart";
-import { Product } from "@/model/ModelProduct";
-import { ViewModelCart } from "@/viewmodel/home/cart";
+import { Cart } from "@/model/cart.model";
+import { Product } from "@/model/product.model";
+import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";

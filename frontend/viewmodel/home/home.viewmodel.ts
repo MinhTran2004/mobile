@@ -1,7 +1,7 @@
 
-import { Product } from "@/model/ModelProduct";
+import { Product } from "@/model/product.model";
+import ProductService from "@/service/product.service";
 import { useEffect, useRef, useState } from "react"
-import ProductService from "@/service/ProductSevice";
 import PagerView from "react-native-pager-view";
 
 export const ViewModelHome = () => {

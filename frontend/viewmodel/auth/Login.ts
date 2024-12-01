@@ -1,6 +1,6 @@
 import { useState } from "react"
-import ModelAccount from "@/model/ModelAccount";
-import SeviceAccount from "@/service/AccountService";
+import ModelAccount from "@/model/account.model";
+import SeviceAccount from "@/service/account.service";
 import { useDispatch } from "react-redux";
 import { Login } from "@/redux/action/login";
 
