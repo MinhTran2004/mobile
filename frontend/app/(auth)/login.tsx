@@ -20,14 +20,14 @@ const Login = ({ navigation }: any) => {
 
                     <View style={{ gap: 10 }}>
                         <InputEditText
-                            hint={"Nhập tài khoản"}
-                            input={viewmodel.account}
-                            event={(text) => viewmodel.setAccount(text)}
+                            placeholder={"Nhập tài khoản"}
+                            value={viewmodel.account}
+                            onChangeText={(text) => viewmodel.setAccount(text)}
                             textError={viewmodel.errorAccount} />
                         <InputEditText
-                            hint={"Nhập mật khẩu"}
-                            input={viewmodel.password}
-                            event={(text) => viewmodel.setPassword(text)}
+                            placeholder={"Nhập mật khẩu"}
+                            value={viewmodel.password}
+                            onChangeText={(text) => viewmodel.setPassword(text)}
                             textError={viewmodel.errorPassword} />
                     </View>
 

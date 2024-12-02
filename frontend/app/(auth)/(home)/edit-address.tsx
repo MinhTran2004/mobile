@@ -1,34 +1,14 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppHeader from "@/components/AppHeader";
-import ViewModelEditAddress from "@/viewmodel/home/address.viewmodel";
 import ItemModalAddress from "@/components/home/ItemModelAdress";
+import InputEditText from "@/components/InputEditText";
+import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
+import PrimaryButton from "@/components/PrimaryButton";
 
 const EditAddress = () => {
     const navigation = useNavigation();
     const viewmodel = ViewModelEditAddress();
-
-    const districts = [
-        "Hoài Đức",
-        "Nam Từ Liêm",
-        "Hoàng Mai",
-        "Cầu Giấy",
-        "Hai Bà Trưng",
-        "Thanh Xuân",
-    ];
-
-    const handleSave = () => {
-        // Logic to save information
-        // console.log({
-        //     fullName,
-        //     phone,
-        //     selectedDistrict,
-        //     addressDetails,
-        //     additionalDetails,
-        // });
-        navigation.goBack(); // Go back to the previous screen
-    };
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -36,55 +16,69 @@ const EditAddress = () => {
             <View style={styles.container}>
                 {/* Input fields */}
                 <Text style={styles.label}>Thông tin liên hệ</Text>
-                <TextInput
-                    style={styles.input}
+                <InputEditText
                     placeholder="Họ và tên"
                     value={viewmodel.name}
+                    textError={viewmodel.errorName}
                     onChangeText={viewmodel.setName}
                 />
-                <TextInput
-                    style={styles.input}
+                <InputEditText
                     placeholder="Số điện thoại"
                     keyboardType="phone-pad"
                     value={viewmodel.phone}
+                    textError={viewmodel.errorPhone}
                     onChangeText={viewmodel.setPhone}
                 />
 
                 <Text style={styles.label}>Thông tin địa chỉ</Text>
 
                 <TouchableOpacity
-                    style={styles.dropdown}
                     onPress={() => viewmodel.setModalProvince(true)}
+                    style={{ backgroundColor: '#F9F9F9' }}
                 >
-                    <Text style={styles.dropdownText}>
-                        {viewmodel.province || "Chọn Thành Phố "}
-                    </Text>
-
+                    <InputEditText
+                        editable={false}
+                        placeholder={viewmodel.province === "" ? 'Chọn Thành Phố / Tỉnh' : ""}
+                        textError={viewmodel.errorProvince}
+                        value={viewmodel.province}
+                        onChangeText={() => { viewmodel.setProvince }}
+                        style={{ backgroundColor: '#F9F9F9' }}
+                    />
                 </TouchableOpacity>
+
                 <TouchableOpacity
-                    style={styles.dropdown}
+                    disabled={viewmodel.province ? false : true}
                     onPress={() => viewmodel.setModalDistrict(true)}
                 >
-                    <Text style={styles.dropdownText}>
-                        {viewmodel.district || "Chọn Quận / Huyện"}
-                    </Text>
-
+                    <InputEditText
+                        editable={false}
+                        placeholder={viewmodel.district === "" ? 'Chọn Quận / Huyện' : ""}
+                        textError={viewmodel.errorDistrict}
+                        value={viewmodel.district}
+                        onChangeText={() => { viewmodel.setDistrict }}
+                        style={{ backgroundColor: '#F9F9F9' }}
+                    />
                 </TouchableOpacity>
+
                 <TouchableOpacity
-                    style={styles.dropdown}
+                    disabled={viewmodel.district ? false : true}
                     onPress={() => viewmodel.setModalCommune(true)}
                 >
-                    <Text style={styles.dropdownText}>
-                        {viewmodel.commune || "Chọn Xã"}
-                    </Text>
-
+                    <InputEditText
+                        editable={false}
+                        placeholder={viewmodel.commune === "" ? 'Chọn Phường / Xã' : ""}
+                        textError={viewmodel.errorCommune}
+                        value={viewmodel.commune}
+                        onChangeText={() => { viewmodel.setCommune }}
+                        style={{ backgroundColor: '#F9F9F9' }}
+                    />
                 </TouchableOpacity>
-                
-                <TextInput
-                    style={styles.input}
+
+                <InputEditText
                     placeholder="Địa chỉ cụ thể"
-                    value={viewmodel.detail}
-                    onChangeText={viewmodel.setDetail}
+                    textError={viewmodel.errorDetailAddress}
+                    value={viewmodel.detailAddress}
+                    onChangeText={viewmodel.setDetailAddress}
                 />
 
                 {/* modal */}
@@ -109,10 +103,9 @@ const EditAddress = () => {
                     statusDialog={viewmodel.modalCommune}
                     setDialog={viewmodel.setModalCommune} />
 
-                {/* Save Button */}
-                <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                    <Text style={styles.saveButtonText}>Lưu</Text>
-                </TouchableOpacity>
+                <PrimaryButton
+                    label="Tạo mới"
+                    onPress={() => viewmodel.createAddress()} />
             </View>
         </SafeAreaView>
     );
@@ -139,23 +132,6 @@ const styles = StyleSheet.create({
         color: "#888",
         marginTop: 15,
         paddingHorizontal: 20,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: "#ccc",
-        borderRadius: 8,
-        padding: 10,
-        marginTop: 10,
-        marginHorizontal: 20,
-    },
-    dropdown: {
-        borderWidth: 1,
-        borderColor: "#ccc",
-        borderRadius: 8,
-        padding: 10,
-        marginTop: 10,
-        marginHorizontal: 20,
-        backgroundColor: "#f9f9f9",
     },
     dropdownText: {
         color: "#555",
@@ -194,18 +170,24 @@ const styles = StyleSheet.create({
     },
     saveButton: {
         position: "absolute",
-        bottom: 20,
-        left: 20,
-        right: 20,
-        backgroundColor: "#4C1B1B", // Save button color
-        paddingVertical: 15,
-        borderRadius: 30, // Rounded corners
+        bottom: 0,
+        left: 0,
+        right: 0,
         alignItems: "center",
+        padding: 20,
+        elevation: 2,
+        borderTopLeftRadius: 35,
+        borderTopRightRadius: 35,
     },
     saveButtonText: {
         color: "#fff",
+        width: '100%',
         fontSize: 16,
+        padding: 15,
+        textAlign: 'center',
         fontWeight: "bold",
+        backgroundColor: "#4C1B1B",
+        borderRadius: 30,
     },
 });
 

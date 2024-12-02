@@ -19,9 +19,9 @@ const Register = ({ navigation }: any) => {
                     </View>
 
                     <View style={{ gap: 10 }}>
-                        <InputEditText hint={"Nhập tên dùng"} input={viewmodel.username} event={(text) => viewmodel.setUsername(text)} textError={viewmodel.errorUsername} />
-                        <InputEditText hint={"Nhập tài khoản"} input={viewmodel.account} event={(text) => viewmodel.setAccount(text)} textError={viewmodel.errorAccount} />
-                        <InputEditText hint={"Nhập mật khẩu"} input={viewmodel.password} event={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />
+                        <InputEditText placeholder={"Nhập tên dùng"} value={viewmodel.username} onChangeText={(text) => viewmodel.setUsername(text)} textError={viewmodel.errorUsername} />
+                        <InputEditText placeholder={"Nhập tài khoản"} value={viewmodel.account} onChangeText={(text) => viewmodel.setAccount(text)} textError={viewmodel.errorAccount} />
+                        <InputEditText placeholder={"Nhập mật khẩu"} value={viewmodel.password} onChangeText={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />
                     </View>
 
                     <Pressable style={styles.button} onPress={() => viewmodel.createAccount()}>

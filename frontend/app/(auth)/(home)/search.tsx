@@ -23,7 +23,7 @@ const Search = ({ navigation }: any) => {
                     <IconChevronLeft size={25} />
                 </TouchableOpacity>
                 <View style={{ flex: 1 }}>
-                    <InputEditText iconLeft='search' hint='Bạn muốn ăn gì ?' input={viewmodel.name} event={(text) => viewmodel.setName(text)} />
+                    <InputEditText iconLeft='search' placeholder='Bạn muốn ăn gì ?' value={viewmodel.name} onChangeText={(text) => viewmodel.setName(text)} />
                 </View>
             </View>
 

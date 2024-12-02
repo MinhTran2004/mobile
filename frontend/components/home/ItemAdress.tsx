@@ -1,34 +1,44 @@
+import { Address } from "@/model/address.model";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconEdit } from "tabler-icons-react-native";
 
-const ItemAddress = ({ status, navigation }: any) => {
+const ItemAddress: React.FC<Address> = (props) => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
-            <Text style={styles.name}>Trần Công Minh</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ marginTop: 5, width: '93%' }}>
-                    <Text style={styles.phone}>(+84)0976577025</Text>
-                    <Text style={styles.describe}>Số nhà 20a, ngõ 34/23 Đường Phương Canh</Text>
-                    <Text style={styles.describe}>Phương Canh, Nam Từ Liêm, Hà Nội, Việt Nam</Text>
-                </View>
-                <TouchableOpacity onPress={() => navigation.navigate('edit-address')}>
-                    <IconEdit style={{ width: 20, height: 20 }} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={{ alignItems: 'flex-start' }}>
-                {status ? (
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={styles.name}>{props.name}</Text>
+                {props.status ? (
                     <Text style={styles.default}>Mặc định</Text>
                 ) : (
-                    <View />
+                    <View style={{ width: 20, height: 2 }} />
                 )}
             </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ marginTop: 5, width: '93%' }}>
+                    <Text style={styles.phone}>{props.phone}</Text>
+                    <Text style={styles.describe}>{props.province}, {props.district}, {props.commune}</Text>
+                    <Text style={styles.describe}>{props.detailAddress}</Text>
+                </View>
+
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
+                <Text style={{ color: 'red' }}>Xóa</Text>
+                <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
+                    <Text>Sửa</Text>
+                </TouchableOpacity>
+            </View>
+            
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        width: '100%',
         backgroundColor: 'white',
         borderRadius: 15,
         marginBottom: 10,

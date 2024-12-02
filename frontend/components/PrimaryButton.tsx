@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native";
 
 interface Props {
     disabled?: boolean,
@@ -9,26 +9,39 @@ interface Props {
 
 const PrimaryButton: React.FC<Props> = (props) => {
     return (
-        <TouchableOpacity
-            disabled={props.disabled}
-            style={[styles.container, props.styleButton, { backgroundColor: props.disabled ? '#D9D9D9' : '#4C1B1B' }]}
-            onPress={props.onPress}>
-            <Text style={[styles.text_payment, { color: props.disabled ? 'black' : 'white' }]}>{props.label}</Text>
-        </TouchableOpacity>
+        <View style={styles.saveButton}>
+            <TouchableOpacity
+                disabled={props.disabled}
+                style={{ width: '100%' }}
+                onPress={props.onPress}>
+                <Text style={[styles.saveButtonText, { backgroundColor: props.disabled ? '#D9D9D9' : '#4C1B1B' }]}>{props.label}</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        borderRadius: 999,
-        marginVertical: 10,
-        padding: 10,
+    saveButton: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        alignItems: "center",
+        padding: 20,
+        elevation: 2,
+        borderTopLeftRadius: 35,
+        borderTopRightRadius: 35,
     },
-    text_payment: {
-        fontSize: 20,
+    saveButtonText: {
+        color: "#fff",
+        width: '100%',
+        fontSize: 16,
+        padding: 15,
         textAlign: 'center',
-        fontWeight: 500,
-    }
+        fontWeight: "bold",
+        backgroundColor: "#4C1B1B",
+        borderRadius: 30,
+    },
 })
 
 export default PrimaryButton;
