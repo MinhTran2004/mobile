@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 const LayoutHome = () => {
     return (
-        <Stack.Navigator initialRouteName="address" screenOptions={{headerShown: false}} >
+        <Stack.Navigator initialRouteName="index" screenOptions={{headerShown: false}} >
             <Stack.Screen name="index" component={LayoutBottomTabs} />
             <Stack.Screen name="cart" component={Cart} />
             <Stack.Screen name="search" component={Search} />

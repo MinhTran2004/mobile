@@ -1,10 +1,12 @@
 import { Address } from "@/model/address.model";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import StatusModal from "../StatusModal";
 
 const ItemAddress: React.FC<Address> = (props) => {
     const navigation = useNavigation();
+    const [dialog, setDialog] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -19,16 +21,37 @@ const ItemAddress: React.FC<Address> = (props) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ marginTop: 5, width: '93%' }}>
                     <Text style={styles.phone}>{props.phone}</Text>
-                    <Text style={styles.describe}>{props.province}, {props.district}, {props.commune}</Text>
-                    <Text style={styles.describe}>{props.detailAddress}</Text>
+                    <Text numberOfLines={1} style={styles.describe}>{props.province}, {props.district}, {props.commune}, {props.detailAddress}</Text>
+                    {/* <Text style={styles.describe}>{props.detailAddress}</Text> */}
                 </View>
 
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
-                <Text style={{ color: 'red' }}>Xóa</Text>
+                <TouchableOpacity onPress={() => setDialog(true)}>
+                    <Text style={{ color: 'red' }}>Xóa</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
+
+                <StatusModal
+                    isActive={dialog}
+                    title="Thông báo"
+                    label="Xác nhận xóa địa chỉ"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            setDialog(false)
+                        }, }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            setDialog(false)
+                        }, }}
+                    onClose={() => setDialog(false)}
+                />
+
+
             </View>
             
         </View>

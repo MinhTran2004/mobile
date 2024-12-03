@@ -28,12 +28,12 @@ const Cart = ({ navigation }: any) => {
 
                 {/* footer */}
                 <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, flex: 1 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 5 }}>
+                    {/* <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 5 }}>
                         <Text style={styles.text_total}>Tổng tiền:</Text>
                         <Text style={[styles.text_total, { color: '#D17842' }]}> {viewmodel.total}</Text>
-                    </View>
+                    </View> */}
                     <PrimaryButton
-                        label="Thanh toán"
+                        label= {"Thanh toán: " + viewmodel.total}
                         onPress={() => navigation.navigate('payment')}
                         disabled={viewmodel.data.length != 0 ? false : true} />
                 </View>

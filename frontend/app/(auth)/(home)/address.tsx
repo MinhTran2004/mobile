@@ -21,7 +21,7 @@ const Address = () => {
 
                 <PrimaryButton
                     label="Thêm địa chỉ mới"
-                    onPress={() => { }}
+                    onPress={() => {navigation.navigate("edit-address")}}
                 />
             </View>
         </View>

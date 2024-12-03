@@ -5,10 +5,13 @@ import ItemModalAddress from "@/components/home/ItemModelAdress";
 import InputEditText from "@/components/InputEditText";
 import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
 import PrimaryButton from "@/components/PrimaryButton";
+import { useState } from "react";
+import StatusModal from "@/components/StatusModal";
 
 const EditAddress = () => {
     const navigation = useNavigation();
     const viewmodel = ViewModelEditAddress();
+    const [dialog, setDialog] = useState(false);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -105,7 +108,26 @@ const EditAddress = () => {
 
                 <PrimaryButton
                     label="Tạo mới"
-                    onPress={() => viewmodel.createAddress()} />
+                    onPress={() => setDialog(true)} />
+
+
+                <StatusModal
+                    isActive={dialog}
+                    title="Thông báo"
+                    label="Xác nhận thanh toán"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            viewmodel.createAddress()
+                            setDialog(false)
+                        }, }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            setDialog(false)
+                        }, }}
+                    onClose={() => setDialog(false)}
+                />
             </View>
         </SafeAreaView>
     );

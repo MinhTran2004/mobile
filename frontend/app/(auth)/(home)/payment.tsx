@@ -6,16 +6,18 @@ import { IconAddressBook, IconChevronRight, IconDiscount, IconWallet } from "tab
 import { Checkbox, List } from 'react-native-paper';
 import { useState } from "react"
 import { useNavigation } from "@react-navigation/native"
+import StatusModal from "@/components/StatusModal"
 
 const Payment = () => {
     const viewmodel = ViewModelHome();
     const navigation = useNavigation();
 
     const [checkBox, setCheckBox] = useState(true);
+    const [dialog, setDialog] = useState(false);
 
     return (
         <ScrollView style={{ flex: 1 }}>
-            <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack}/>
+            <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
             <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 30, paddingHorizontal: 10, gap: 10 }}>
                 {/* banner1 */}
                 <View style={styles.conatiner}>
@@ -33,7 +35,7 @@ const Payment = () => {
                     </View> */}
 
                     {/* option 2 */}
-                    <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', padding: 5 }} onPress={() => {navigation.navigate('address')}}>
+                    <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', padding: 5 }} onPress={() => { navigation.navigate('address') }}>
                         <Text style={styles.textButton}>Thêm địa chỉ</Text>
                     </TouchableOpacity>
 
@@ -52,13 +54,13 @@ const Payment = () => {
                 {/* banner3 */}
                 <View style={styles.conatiner}>
                     <TouchableOpacity
-                    onPress={() => navigation.navigate('coupon')} 
-                    style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, paddingRight: 23 }}>
+                        onPress={() => navigation.navigate('coupon')}
+                        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, paddingRight: 23 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                             <IconDiscount />
                             <Text style={{ fontSize: 16 }}>Mã giảm giá</Text>
                         </View>
-                        <IconChevronRight size={23}/>
+                        <IconChevronRight size={23} />
                     </TouchableOpacity>
 
                     <List.Accordion
@@ -102,9 +104,27 @@ const Payment = () => {
                     </View>
                 </View>
 
-                <TouchableOpacity style={{ backgroundColor: '#4C1B1B', marginTop: 10, padding: 15, borderRadius: 25 }}>
+                <TouchableOpacity style={{ backgroundColor: '#4C1B1B', marginTop: 10, padding: 15, borderRadius: 25 }} onPress={() => setDialog(true)}>
                     <Text style={{ color: 'white', textAlign: 'center', fontWeight: 500, fontSize: 17 }}>Thanh toán</Text>
                 </TouchableOpacity>
+
+                <StatusModal
+                    isActive={dialog}
+                    title="Thông báo"
+                    label="Xác nhận thanh toán"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            setDialog(false)
+                        }, }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            setDialog(false)
+                        }, }}
+                    onClose={() => setDialog(false)}
+                />
+
 
 
             </View>
