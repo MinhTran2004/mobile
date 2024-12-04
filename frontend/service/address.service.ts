@@ -2,7 +2,7 @@ import { Address, AddressModel } from "@/model/address.model";
 import axios from "axios";
 
 export default class AddressService {
-    static url = "http://192.168.12.243:5000/address";
+    static url = "http://192.168.110.137:5000/address";
 
     static createAddress = async (data: AddressModel) => {
         try {
@@ -13,19 +13,19 @@ export default class AddressService {
         }
     }
 
-    static updateAddressById = async (data:Address) => {
-        try{
+    static updateAddressById = async (data: Address) => {
+        try {
             const reponse = (await axios.put(`${this.url}/updateAddressById`, data)).data;
             return reponse.status;
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     }
 
-    static getAllAdressById = async (idAccount: string) => {
+    static getAllAdress = async (idAccount: string) => {
         try {
-            const reponse = (await axios.get(`${this.url}/getAllAddressById`,{
-                params:{
+            const reponse = (await axios.get(`${this.url}/getAllAddress`, {
+                params: {
                     idAccount: idAccount,
                 }
             })).data;
@@ -38,6 +38,21 @@ export default class AddressService {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    static getAddressByIdAccount = async (idAccount:string) => {
+        const reponse = await axios.get(`${this.url}/getAddressByIdAccount`, {
+            params: {
+                idAccount: idAccount,
+            }
+        })
+
+        if (reponse.data.status) {
+            return reponse.data.address[0];
+        }else{
+            return [];
+        }
+
     }
 
     static getAllAPIAdress = async (name: string) => {

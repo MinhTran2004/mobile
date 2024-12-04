@@ -9,7 +9,7 @@ interface Props {
 
 const PrimaryButton: React.FC<Props> = (props) => {
     return (
-        <View style={styles.saveButton}>
+        <View style={[styles.saveButton, props.styleButton]}>
             <TouchableOpacity
                 disabled={props.disabled}
                 style={{ width: '100%', backgroundColor: 'white', paddingBottom: 20 }}
@@ -26,12 +26,14 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
+        zIndex: 100,
         alignItems: "center",
         padding: 20,
         paddingBottom: 0,
         elevation: 2,
         borderTopLeftRadius: 35,
         borderTopRightRadius: 35,
+        backgroundColor: 'white'
     },
     saveButtonText: {
         color: "#fff",

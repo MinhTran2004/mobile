@@ -1,20 +1,27 @@
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
+import ButtonModel from "@/components/ButtonModel";
 
 const Welcome = ({ navigation }: any) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <View style={{flex: 1, alignItems: 'center'}}>
+                <View style={{ flex: 1, alignItems: 'center' }}>
                     <LogoApp />
                 </View>
                 <View style={{ gap: 10 }}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('login')}>
-                        <Text style={styles.text}>Đăng nhập</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('register')}>
-                        <Text style={styles.text}>Đăng ký</Text>
-                    </TouchableOpacity>
+                    <ButtonModel
+                        label="Đăng nhập"
+                        onPress={() => navigation.navigate('login')}
+                        buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                        textStyle={{ color: 'white', fontWeight: 600  }}
+                        status="single" />
+                    <ButtonModel
+                        label="Đăng ký"
+                        onPress={() => navigation.navigate('register')}
+                        buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                        textStyle={{ color: 'white', fontWeight: 600 }}
+                        status="single" />
                 </View>
             </View>
         </SafeAreaView>

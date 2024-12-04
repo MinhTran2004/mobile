@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-na
 import LogoApp from "@/assets/images/logo-app.svg";
 import { ViewModelLogin } from "@/viewmodel/auth/Login";
 import AppHeader from "@/components/AppHeader";
+import ButtonModel from "@/components/ButtonModel";
 
 const Login = ({ navigation }: any) => {
     const viewmodel = ViewModelLogin(navigation);
@@ -31,9 +32,12 @@ const Login = ({ navigation }: any) => {
                             textError={viewmodel.errorPassword} />
                     </View>
 
-                    <TouchableOpacity style={styles.button} onPress={() => viewmodel.checkLogin()}>
-                        <Text style={styles.text}>Đăng nhập</Text>
-                    </TouchableOpacity>
+                    <ButtonModel
+                        label="Đăng nhập"
+                        onPress={() => viewmodel.checkLogin()}
+                        buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                        textStyle={{ color: 'white' }}
+                        status="single" />
                 </View>
             </View>
         </SafeAreaView>
@@ -47,8 +51,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
-        paddingHorizontal: 16,
         paddingTop: 20,
+        paddingHorizontal: 20,
         gap: 50,
     },
     button: {

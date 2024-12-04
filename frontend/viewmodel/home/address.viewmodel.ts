@@ -7,14 +7,14 @@ const ViewModelAddress = () => {
     const [dataAddress, setDataAddress] = useState<Address[]>([]);
     const selector = useSelector((state:any) => state.auth.account._id);
     
-    const getAllAddressById = async() => {
-        const reponse = await AddressService.getAllAdressById(selector);
+    const getAllAddress= async() => {
+        const reponse = await AddressService.getAllAdress(selector);
         setDataAddress(reponse);
     }
 
 
     useEffect(() => {
-        getAllAddressById();
+        getAllAddress();
     }, [])
     return {
         dataAddress,

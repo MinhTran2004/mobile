@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        paddingHorizontal: 20,
     },
     containerToogle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
         borderWidth: 1,
         paddingHorizontal: 5,
         borderColor: "#ccc",
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
         color: "#888",
         marginTop: 15,
         marginBottom: 5,
-        paddingHorizontal: 20,
     },
     dropdownText: {
         color: "#555",

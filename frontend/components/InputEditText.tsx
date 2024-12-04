@@ -24,7 +24,7 @@ const InputEditText: React.FC<Props> = (props) => {
     }
 
     return (
-        <View style={{ width: '100%', paddingHorizontal: 20 }}>
+        <View style={{ width: '100%' }}>
             <View style={[styles.container, props.style, {borderColor: props.textError ? "red" : "#ccc"}]}>
                 <SelectIconLeft />
                 <TextInput

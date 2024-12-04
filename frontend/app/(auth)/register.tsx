@@ -3,6 +3,7 @@ import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 import { ViewModelRegister } from "@/viewmodel/auth/Register";
 import AppHeader from "@/components/AppHeader";
+import ButtonModel from "@/components/ButtonModel";
 
 const Register = ({ navigation }: any) => {
     const viewmodel = ViewModelRegister(navigation);
@@ -24,10 +25,12 @@ const Register = ({ navigation }: any) => {
                         <InputEditText placeholder={"Nhập mật khẩu"} value={viewmodel.password} onChangeText={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />
                     </View>
 
-                    <Pressable style={styles.button} onPress={() => viewmodel.createAccount()}>
-                        <Text style={styles.text}>Đăng ký</Text>
-                    </Pressable>
-
+                    <ButtonModel
+                        label="Đăng ký"
+                        onPress={() => viewmodel.createAccount()}
+                        buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                        textStyle={{ color: 'white' }}
+                        status="single" />
                 </View>
             </View>
         </SafeAreaView>

@@ -1,11 +1,15 @@
 import AppHeader from "@/components/AppHeader";
 import ItemCart from "@/components/home/ItemCart";
 import PrimaryButton from "@/components/PrimaryButton";
+import { ConvertMoney } from "@/constants/convert-monney";
 import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native"
+import { FlatList, Image, StyleSheet, View } from "react-native"
 
 const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
+
+    // console.log(viewmodel.data);
+
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
@@ -27,16 +31,10 @@ const Cart = ({ navigation }: any) => {
                 }
 
                 {/* footer */}
-                <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, flex: 1 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 5 }}>
-                        <Text style={styles.text_total}>Tổng tiền:</Text>
-                        <Text style={[styles.text_total, { color: '#D17842' }]}> {viewmodel.total}</Text>
-                    </View>
-                    <PrimaryButton
-                        label={"Thanh toán" + viewmodel.total}
-                        onPress={() => navigation.navigate('payment')}
-                        disabled={viewmodel.data.length != 0 ? false : true} />
-                </View>
+                <PrimaryButton
+                    label={"Thanh toán   " + ConvertMoney(viewmodel.total) +" VND"}
+                    onPress={() => navigation.navigate('payment', viewmodel.data)}
+                    disabled={viewmodel.data.length != 0 ? false : true} />
             </View>
 
         </View>

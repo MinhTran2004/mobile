@@ -1,29 +1,28 @@
+import { Cart } from "@/model/cart.model";
+import { Product } from "@/model/product.model";
 import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
-    _id: string,
-    image: string,
-    name: string,
-    idCategory: string,
-    price: string,
+    cart: Cart,
+    product: Product,
 }
 
 const ItemProductPayment: React.FC<Props> = (props) => {
     const navigation = useNavigation()
-
+    
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
-            <Image src={props.image} style={styles.image} />
+            <Image src={props.product.image} style={styles.image} />
             <View style={{ flex: 1, justifyContent: 'space-between', height: 90}}>
                 <View>
-                    <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
-                    <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
+                    <Text style={styles.name} numberOfLines={1}>{props.product.name}</Text>
+                    <Text style={{ color: '#909090' }}>{props.product.idCategory}</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price}>{props.price}</Text>
-                    <Text>x3</Text>
+                    <Text style={styles.price}>{props.product.price}</Text>
+                    <Text>x{props.cart.quantity}</Text>
                 </View>
             </View>
         </TouchableOpacity>

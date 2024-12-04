@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        paddingHorizontal: 20,
     },
     backButton: {
         position: "absolute",
@@ -139,13 +140,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#888",
         marginTop: 15,
-        paddingHorizontal: 20,
     },
     containerToogle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
         borderWidth: 1,
         paddingHorizontal: 5,
         borderColor: "#ccc",

@@ -23,13 +23,25 @@ router.post('/createAddress', async (req, res) => {
     }
 })
 
-router.get('/getAllAddressById', async (req, res) => {
+router.get('/getAllAddress', async (req, res) => {
     const { idAccount } = req.query;
     const data = await Address.find({ idAccount: idAccount }).limit(10).sort({ status: -1 });
     if (data.length == 0) {
         res.send({ status: false })
     } else {
         res.send({ status: true, data: data });
+    }
+})
+
+router.get(`/getAddressByIdAccount`, async (req, res) => {
+    const { idAccount } = req.query;
+
+    const reponse = await Address.find({ idAccount: idAccount, status: true });
+
+    if (reponse.length != 0) {
+        res.send({ status: true, address: reponse });
+    } else {
+        res.send({ status: false });
     }
 })
 
