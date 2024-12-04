@@ -12,7 +12,7 @@ const PrimaryButton: React.FC<Props> = (props) => {
         <View style={styles.saveButton}>
             <TouchableOpacity
                 disabled={props.disabled}
-                style={{ width: '100%' }}
+                style={{ width: '100%', backgroundColor: 'white', paddingBottom: 20 }}
                 onPress={props.onPress}>
                 <Text style={[styles.saveButtonText, { backgroundColor: props.disabled ? '#D9D9D9' : '#4C1B1B' }]}>{props.label}</Text>
             </TouchableOpacity>
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         right: 0,
         alignItems: "center",
         padding: 20,
+        paddingBottom: 0,
         elevation: 2,
         borderTopLeftRadius: 35,
         borderTopRightRadius: 35,

@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const ItemAddress: React.FC<Address> = (props) => {
     const navigation = useNavigation();
-
+    const address = props.province + ", " + props.district + ", " + props.commune + ", " + props.detailAddress
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -17,20 +17,19 @@ const ItemAddress: React.FC<Address> = (props) => {
                 )}
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ marginTop: 5, width: '93%' }}>
+                <View style={{ marginTop: 5 }}>
                     <Text style={styles.phone}>{props.phone}</Text>
-                    <Text style={styles.describe}>{props.province}, {props.district}, {props.commune}</Text>
-                    <Text style={styles.describe}>{props.detailAddress}</Text>
+                    <Text style={styles.describe}>{address}</Text>
                 </View>
 
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
                 <Text style={{ color: 'red' }}>Xóa</Text>
-                <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
+                <TouchableOpacity onPress={() => { navigation.navigate('edit-address', props) }}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
             </View>
-            
+
         </View>
     );
 };

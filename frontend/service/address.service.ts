@@ -1,8 +1,8 @@
-import { AddressModel } from "@/model/address.model";
+import { Address, AddressModel } from "@/model/address.model";
 import axios from "axios";
 
 export default class AddressService {
-    static url = "http://192.168.5.26:5000/address";
+    static url = "http://192.168.12.243:5000/address";
 
     static createAddress = async (data: AddressModel) => {
         try {
@@ -13,9 +13,22 @@ export default class AddressService {
         }
     }
 
+    static updateAddressById = async (data:Address) => {
+        try{
+            const reponse = (await axios.put(`${this.url}/updateAddressById`, data)).data;
+            return reponse.status;
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     static getAllAdressById = async (idAccount: string) => {
         try {
-            const reponse = (await axios.get(`${this.url}/getAllAddressById/${idAccount}`)).data;
+            const reponse = (await axios.get(`${this.url}/getAllAddressById`,{
+                params:{
+                    idAccount: idAccount,
+                }
+            })).data;
 
             if (reponse.status) {
                 return reponse.data;

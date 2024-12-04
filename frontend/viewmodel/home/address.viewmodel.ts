@@ -12,6 +12,7 @@ const ViewModelAddress = () => {
         setDataAddress(reponse);
     }
 
+
     useEffect(() => {
         getAllAddressById();
     }, [])

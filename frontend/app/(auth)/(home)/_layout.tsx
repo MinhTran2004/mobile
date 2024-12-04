@@ -12,6 +12,7 @@ import Payment from "./payment";
 import Address from "./address";
 import Coupon from "./coupon";
 import DetailCoupon from "./detail-coupon";
+import CreateAddress from "./create-address";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,9 +23,10 @@ const LayoutHome = () => {
             <Stack.Screen name="cart" component={Cart} />
             <Stack.Screen name="search" component={Search} />
             <Stack.Screen name="detail-product" component={DetailProduct} />
-            <Stack.Screen name="edit-address" component={EditAddress} />
             <Stack.Screen name="payment" component={Payment} />
             <Stack.Screen name="address" component={Address} />
+            <Stack.Screen name="create-address" component={CreateAddress} />
+            <Stack.Screen name="edit-address" component={EditAddress} />
             <Stack.Screen name="coupon" component={Coupon} />
             <Stack.Screen name="detail-coupon" component={DetailCoupon} />
         </Stack.Navigator>

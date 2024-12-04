@@ -1,18 +1,20 @@
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Switch } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppHeader from "@/components/AppHeader";
 import ItemModalAddress from "@/components/home/ItemModelAdress";
 import InputEditText from "@/components/InputEditText";
 import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
 import PrimaryButton from "@/components/PrimaryButton";
+import { Address } from "@/model/address.model";
 
-const EditAddress = () => {
+const EditAddress = ({ route }: any) => {
     const navigation = useNavigation();
-    const viewmodel = ViewModelEditAddress();
+    const props: Address = route.params;
+    const viewmodel = ViewModelEditAddress(props);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <AppHeader iconLeft="left" title="Thêm địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
+            <AppHeader iconLeft="left" title="Thay đổi địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
             <View style={styles.container}>
                 {/* Input fields */}
                 <Text style={styles.label}>Thông tin liên hệ</Text>
@@ -66,7 +68,7 @@ const EditAddress = () => {
                 >
                     <InputEditText
                         editable={false}
-                        placeholder={viewmodel.commune === "" ? 'Chọn Phường / Xã' : ""}
+                        placeholder={viewmodel.commune === "" ? "Chọn Phường / Xã" : ""}
                         textError={viewmodel.errorCommune}
                         value={viewmodel.commune}
                         onChangeText={() => { viewmodel.setCommune }}
@@ -103,9 +105,17 @@ const EditAddress = () => {
                     statusDialog={viewmodel.modalCommune}
                     setDialog={viewmodel.setModalCommune} />
 
+                <Text style={styles.label}>Thông tin liên hệ</Text>
+                <View style={styles.containerToogle}>
+                    <Text style={{ color: '#888' }}>Mặc định</Text>
+                    <Switch
+                        onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
+                        value={viewmodel.toogle} />
+                </View>
+
                 <PrimaryButton
-                    label="Tạo mới"
-                    onPress={() => viewmodel.createAddress()} />
+                    label="Thay đổi"
+                    onPress={() => viewmodel.updateAddressById()} />
             </View>
         </SafeAreaView>
     );
@@ -115,6 +125,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+    },
+    containerToogle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        borderWidth: 1,
+        paddingHorizontal: 5,
+        borderColor: "#ccc",
+        borderRadius: 8,
     },
     backButton: {
         position: "absolute",
@@ -131,6 +151,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#888",
         marginTop: 15,
+        marginBottom: 5,
         paddingHorizontal: 20,
     },
     dropdownText: {

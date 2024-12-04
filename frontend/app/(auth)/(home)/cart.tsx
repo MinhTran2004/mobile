@@ -33,7 +33,7 @@ const Cart = ({ navigation }: any) => {
                         <Text style={[styles.text_total, { color: '#D17842' }]}> {viewmodel.total}</Text>
                     </View>
                     <PrimaryButton
-                        label="Thanh toán"
+                        label={"Thanh toán" + viewmodel.total}
                         onPress={() => navigation.navigate('payment')}
                         disabled={viewmodel.data.length != 0 ? false : true} />
                 </View>

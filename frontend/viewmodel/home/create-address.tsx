@@ -4,25 +4,26 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 
-const ViewModelEditAddress = (props: Address) => {
+const ViewModelCreateAddress = () => {
     const naviagtion = useNavigation();
-
-    const [name, setName] = useState(props.name);
-    const [phone, setPhone] = useState(props.phone);
-    const [province, setProvince] = useState(props.province);
+    
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [province, setProvince] = useState('');
     const [district, setDistrict] = useState('');
     const [commune, setCommune] = useState('');
-    const [detailAddress, setDetailAddress] = useState(props.detailAddress);
-    const [toogle, setToogle] = useState(props.status);
+    const [detailAddress, setDetailAddress] = useState('');
+    const [toogle, setToogle] = useState(true);
     const [errorName, setErrorName] = useState('');
     const [errorPhone, setErrorPhone] = useState('');
     const [errorProvince, setErrorProvince] = useState('');
     const [errorDistrict, setErrorDistrict] = useState('');
     const [errorCommune, setErrorCommune] = useState('');
     const [errorDetailAddress, setErrorDetailAddress] = useState('');
-
+    
 
     const [dialog, setDialog] = useState(false);
+    const selector = useSelector((state: any) => state.auth.account._id);
 
     // modal
     const [modalProvince, setModalProvince] = useState(false);
@@ -34,20 +35,21 @@ const ViewModelEditAddress = (props: Address) => {
     const [dataDistrict, setDataDistrict] = useState();
     const [dataCommune, setDataCommune] = useState();
 
-    const updateAddressById = async () => {
-        const data: Address = { _id: props._id, idAccount: props.idAccount, name: name, phone: phone, province: province, district: district, commune: commune, detailAddress: detailAddress, status: toogle }
+    const createAddress = async () => {
+        const address = new AddressModel(selector, name.trim(), phone.trim(), province.trim(), district.trim(), commune.trim(), detailAddress.trim(), toogle);
         const check = AddressModel.checkNullData(name, phone, province, district, commune, detailAddress, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress);
-
-        if (check) {
-            const reponse = await AddressService.updateAddressById(data);
-            if (reponse) {
+        
+         if (check) {
+            const reponse = await AddressService.createAddress(address);
+            if(reponse){
                 naviagtion.navigate('address');
+            }else{
+                console.log('Dư liệu lỗi');
             }
+        } else {
+            setDialog(true);
         }
     }
-
-
-
 
     // api address
     const getAPIAddressByProvince = async () => {
@@ -86,11 +88,11 @@ const ViewModelEditAddress = (props: Address) => {
         modalProvince, modalDistrict, modalCommune, dialog,
         // data Address
         dataProvince, dataDistrict, dataCommune,
-        setName, setPhone, setProvince, setDistrict, setCommune, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
+        setName, setPhone, setProvince, setDistrict, setCommune, setErrorName,setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
         // modal
         setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog,
-        updateAddressById,
+        createAddress,
     }
 }
 
-export default ViewModelEditAddress;
+export default ViewModelCreateAddress;

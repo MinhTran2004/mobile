@@ -8,8 +8,6 @@ import { FlatList, View } from "react-native";
 const Address = () => {
     const navigation = useNavigation();
     const viewModel = ViewModelAddress();
-    console.log(viewModel.dataAddress);
-    
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
@@ -21,7 +19,7 @@ const Address = () => {
 
                 <PrimaryButton
                     label="Thêm địa chỉ mới"
-                    onPress={() => { }}
+                    onPress={() => {navigation.navigate('create-address')}}
                 />
             </View>
         </View>
