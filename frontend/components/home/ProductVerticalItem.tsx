@@ -8,6 +8,7 @@ interface Props {
     name: string,
     idCategory: string,
     price: string,
+    iconLeft?: boolean;
 }
 
 const ProductVerticalItem: React.FC<Props> = (props) => {
@@ -16,7 +17,7 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
             <Image src={props.image} style={styles.image} />
-            <View style={{ flex: 1, justifyContent: 'space-between', height: 90}}>
+            <View style={{ flex: 1, justifyContent: 'space-between', height: 90 }}>
                 <View>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
                     <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
@@ -24,7 +25,10 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.price}</Text>
-                    <IconHeart />
+                    {!props.iconLeft ?
+                        <IconHeart />
+                        :
+                        <View/>}
                 </View>
             </View>
         </TouchableOpacity>

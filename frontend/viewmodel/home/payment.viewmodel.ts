@@ -7,19 +7,21 @@ const ViewModelPayment = () => {
     const [address, setAddress] = useState<Address>();
     const [detailAddress, setDetailAddress] = useState("")
     const selector = useSelector((state: any) => state.auth.account._id)
+    const [checkBox, setCheckBox] = useState(true);
 
     const getAddressByIdAccount = async () => {
         const reponse = await AddressService.getAddressByIdAccount(selector);
         setAddress(reponse);
-        setDetailAddress(address?.province + ", " + address?.district + ", " + address?.commune);
+        setDetailAddress(address?.province + ", " + address?.district + ", " + address?.commune + "," + address?.detailAddress);
     }
 
     useEffect(() => {
         getAddressByIdAccount();
-    },[])
+    }, [detailAddress])
 
     return {
-        address, detailAddress
+        address, detailAddress, checkBox,
+        setCheckBox
     }
 }
 

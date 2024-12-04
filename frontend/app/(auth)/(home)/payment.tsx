@@ -13,27 +13,25 @@ const Payment = (route: any) => {
     const navigation = useNavigation();
     const router = route.route.params;
 
-    const [checkBox, setCheckBox] = useState(true);
-
     return (
         <View style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1 }}>
-                <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack} />
+                <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 120, paddingHorizontal: 10, gap: 10 }}>
                     {/* banner1 */}
                     <View style={styles.conatiner}>
                         <Text style={styles.title}>Địa chỉ nhận hàng</Text>
-                        {viewmodel.address ?
+                        {viewmodel.detailAddress ?
                             // option 1 
                             < TouchableOpacity style={styles.banner1} onPress={() => { navigation.navigate('address') }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                                     <IconAddressBook />
-                                    <View>
-                                        <Text>{viewmodel.address.name}</Text>
+                                    <View style={{ flex: 1 }}>
+                                        <Text>{viewmodel.address?.name}</Text>
                                         <Text numberOfLines={2}>{viewmodel.detailAddress}</Text>
                                     </View>
                                 </View>
-                                <IconChevronRight />
+                                <IconChevronRight style={{ flex: 1 }} />
                             </TouchableOpacity>
                             :
                             // option 2 
@@ -73,14 +71,14 @@ const Payment = (route: any) => {
                                 <List.Item
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán trực tiếp"
-                                    right={props => <TouchableOpacity onPress={() => setCheckBox(!checkBox)}>
-                                        <Checkbox status={checkBox ? 'checked' : 'unchecked'} />
+                                    right={props => <TouchableOpacity onPress={() => viewmodel.setCheckBox(!viewmodel.checkBox)}>
+                                        <Checkbox status={viewmodel.checkBox ? 'checked' : 'unchecked'} />
                                     </TouchableOpacity>} />
                                 <List.Item
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán bằng VNPAY"
-                                    right={props => <TouchableOpacity onPress={() => setCheckBox(!checkBox)}>
-                                        <Checkbox status={checkBox ? 'unchecked' : 'checked'} />
+                                    right={props => <TouchableOpacity onPress={() => viewmodel.setCheckBox(!viewmodel.checkBox)}>
+                                        <Checkbox status={viewmodel.checkBox ? 'unchecked' : 'checked'} />
                                     </TouchableOpacity>} />
                             </List.Section>
                         </List.Accordion>
@@ -129,6 +127,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     banner1: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

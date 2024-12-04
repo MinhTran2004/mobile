@@ -6,15 +6,23 @@ export const ViewModelSearch = () => {
     const [name, setName] = useState("");
     const [dataProduct, setDataProduct] = useState<Product[]>([]);
 
+    const getAllProduct = async () => {
+        const reponse = await ProductService.getAllProduct();
+        setDataProduct(reponse);
+    }
+
     const getProductByName = async () => {
         const reponse = await ProductService.getProductByName(name);
         setDataProduct(reponse);
-        console.log(reponse);
     }
 
     useEffect(() => {
         getProductByName();
-    },[name])
+    }, [name])
+
+    useEffect(() => {
+        getAllProduct();
+    }, [])
 
     return {
         name, dataProduct,

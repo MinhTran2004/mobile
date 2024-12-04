@@ -3,38 +3,29 @@ import InputEditText from '@/components/InputEditText';
 import { ViewModelSearch } from '@/viewmodel/home/sreach.viewmodel';
 import React from 'react';
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
-import { IconChevronLeft } from 'tabler-icons-react-native';
-
-//Dữ liệu test
-const products = [
-    { id: '1', name: 'Pizza thập cẩm', price: '$55.000', image: require('@/assets/images/react-logo.png') },
-    { id: '2', name: 'Pizza bò', price: '$50.000', image: require('@/assets/images/react-logo.png') },
-    { id: '3', name: 'Vegetarian Noodles', price: '$23.000', image: require('@/assets/images/react-logo.png') },
-    { id: '4', name: 'Mixed Salad BonBum', price: '$32.000', image: require('@/assets/images/react-logo.png') },
-];
 
 const Search = ({ navigation }: any) => {
     const viewmodel = ViewModelSearch();
 
     return (
-        <View style={{ flex: 1, gap: 10, backgroundColor: 'white', paddingBottom: 20 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingLeft: 10, paddingRight: 20, backgroundColor: 'white' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <IconChevronLeft size={25} />
-                </TouchableOpacity>
-                <View style={{ flex: 1 }}>
-                    <InputEditText iconLeft='search' placeholder='Bạn muốn ăn gì ?' value={viewmodel.name} onChangeText={(text) => viewmodel.setName(text)} />
-                </View>
+        <View style={{ flex: 1, gap: 10, backgroundColor: 'white', paddingTop: 10, paddingBottom: 20 }}>
+            <View>
+                <InputEditText
+                    iconLeft='search'
+                    placeholder='Bạn muốn ăn gì ?'
+                    value={viewmodel.name}
+                    onChangeText={(text) => viewmodel.setName(text)}
+                    style={{ flexDirection: 'row', alignItems: 'center' }} />
             </View>
 
             <View style={styles.container}>
-                {products.length != 0 ?
+                {viewmodel.dataProduct.length != 0 ?
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={viewmodel.dataProduct}
-                        renderItem={({ item }) => <ProductVerticalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+                        renderItem={({ item }) => <ProductVerticalItem key={item._id} {...item} iconLeft={true} />} />
                     :
-                    <Text style={{ backgroundColor: 'red', width: 100, height: 300 }}>Không có sản phẩm</Text>
+                    <Text style={{paddingLeft: 15}}>Không có sản phẩm</Text>
                 }
             </View>
         </View>
