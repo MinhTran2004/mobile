@@ -1,5 +1,5 @@
 import InputEditText from "@/components/InputEditText";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 import { ViewModelRegister } from "@/viewmodel/auth/Register";
 import AppHeader from "@/components/AppHeader";
@@ -9,17 +9,22 @@ const Register = ({ navigation }: any) => {
     const viewmodel = ViewModelRegister(navigation);
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
+            {/* <View style={{ flex: 1 }}> */}
 
-                <AppHeader iconLeft="left" title="Đăng ký" iconRight="none" onPressIconLeft={()=>navigation.goBack()}/>
+                <AppHeader iconLeft="left" title="Đăng ký" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
 
                 <View style={styles.container}>
 
-                    <View style={{ alignItems: 'center' }}>
-                        <LogoApp style={{ width: 165, height: 170 }} />
+                    <View style={{ alignItems: 'center', marginTop: 20}}>
+                        {/* <LogoApp style={{ width: 100, height: 100 }} /> */}
+                        <View style={{alignItems: 'center', gap: 15}}>
+                            <Image source={require('../../assets/images/logo-app.png')} style={{ width: 100, maxHeight: 125, top: 0 }} />
+                            <Text style={{fontWeight: 900, color: '#000', fontSize: 20}}>Welcome to OderFood !!</Text>
+                            <Text style={{fontWeight: 'bold', color: '#909090', fontSize: 16}}>Đăng nhập để tiếp tục</Text>
+                        </View>
                     </View>
 
-                    <View style={{ gap: 10 }}>
+                    <View style={{gap: 15}}>
                         <InputEditText placeholder={"Nhập tên dùng"} value={viewmodel.username} onChangeText={(text) => viewmodel.setUsername(text)} textError={viewmodel.errorUsername} />
                         <InputEditText placeholder={"Nhập tài khoản"} value={viewmodel.account} onChangeText={(text) => viewmodel.setAccount(text)} textError={viewmodel.errorAccount} />
                         <InputEditText placeholder={"Nhập mật khẩu"} value={viewmodel.password} onChangeText={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />
@@ -29,10 +34,10 @@ const Register = ({ navigation }: any) => {
                         label="Đăng ký"
                         onPress={() => viewmodel.createAccount()}
                         buttonStyle={{ backgroundColor: '#4C1B1B' }}
-                        textStyle={{ color: 'white' }}
+                        textStyle={{ color: 'white', fontWeight: 'bold', padding: 2 }}
                         status="single" />
                 </View>
-            </View>
+            {/* </View> */}
         </SafeAreaView>
 
     )
@@ -44,9 +49,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         // borderTopLeftRadius: 24,
         // borderTopRightRadius: 24,
-        paddingHorizontal: 16,
-        paddingVertical: 50,
-        gap: 40,
+        paddingHorizontal: 20,
+        // paddingVertical: 50,
+        gap: 30,
     },
     button: {
         alignItems: 'center',

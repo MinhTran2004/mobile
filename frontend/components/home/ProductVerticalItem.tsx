@@ -16,15 +16,16 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
             <Image src={props.image} style={styles.image} />
-            <View style={{ flex: 1, justifyContent: 'space-between', height: 90}}>
-                <View>
+            <View style={{ flex: 1, justifyContent: 'space-between', height: 90 }}>
+                <View style={{ gap: 2 }}>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
-                    <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
+                    <Text style={{ fontWeight: 500, color: '#909090', fontSize: 16 }}>{props.idCategory}</Text>
+                    {/* <Text style={{fontSize: 16}} numberOfLines={1}>Gà rán là món ăn được làm từ thịt gà, thường là phần cánh, đùi, hoặc ức, được ướp gia vị, phủ bột và chiên trong dầu nóng.</Text> */}
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={styles.price}>{props.price}</Text>
-                    <IconHeart />
+                    <IconHeart size={20} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -51,21 +52,20 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 110,
-        height: 95,
+        height: 110,
         borderRadius: 10,
         objectFit: 'contain',
     },
     name: {
         fontWeight: 'bold',
-        fontSize: 17,
-        color: 'black',
+        fontSize: 16,
+        color: '#000',
         overflow: 'hidden',
     },
     price: {
         fontSize: 16,
-        color: '#42bb6a',
+        color: '#DB920B',
         fontWeight: 'bold',
-        marginTop: 5
     },
     containerOperation: {
         flexDirection: 'row',
