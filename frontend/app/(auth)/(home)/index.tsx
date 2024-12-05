@@ -18,8 +18,8 @@ const Home = ({ navigation }: any) => {
             <View style={styles.containerHeader}>
                 <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
                     {/* <IconUser width={40} height={40} /> */}
-                    <Image source={require('../../../assets/images/home/avt_user.png')} style={{ width: 50, height: 50, borderRadius: 90 }} />
-                    <View>
+                    {/* <Image source={require('../../../assets/images/home/avt_user.png')} style={{ width: 50, height: 50, borderRadius: 90 }} /> */}
+                    <View style={{paddingLeft: 5}}>
                         <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Hi, Trần Công Minh</Text>
                         <Text style={{ fontSize: 16 }}>Hôm nay bạn sẽ mua gì?</Text>
                     </View>
@@ -67,18 +67,18 @@ const Home = ({ navigation }: any) => {
                             </PagerView>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5 }}>
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_pizza.png')} style={styles.ic_category} />} name="Pizaa" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_hamburger.png')} style={styles.ic_category} />} name="Hamburger" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_drink.png')} style={styles.ic_category} />} name="Drink" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_chicken.png')} style={styles.ic_category} />} name="Chicken" />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5}}>
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_pizza.png')} style={styles.ic_category} />} name="Pizaa"/>
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_hamburger.png')} style={styles.ic_category} />} name="Hamburger" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_drink.png')} style={styles.ic_category} />} name="Drink" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_chicken.png')} style={styles.ic_category} />} name="Chicken" />
                         </View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5, marginTop: 15 }}>
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_noodles.png')} style={styles.ic_category} />} name="Noodles" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_rice.png')} style={styles.ic_category} />} name="Rice" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_cream.png')} style={styles.ic_category} />} name="Ice cream" />
-                            <ItemProductCategory icon={<Image source={require('../../../assets/images/home/ic_more.png')} style={styles.ic_category} />} name="More" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_noodles.png')} style={styles.ic_category} />} name="Noodles" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_rice.png')} style={styles.ic_category} />} name="Rice" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_cream.png')} style={styles.ic_category} />} name="Ice cream" />
+                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_more.png')} style={styles.ic_category} />} name="More" />
                         </View>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", marginTop: 10}}>
