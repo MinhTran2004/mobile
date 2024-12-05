@@ -11,11 +11,16 @@ const ViewModelPayment = () => {
     const [dialog, setDialog] = useState(false);
 
     const idAccount = useSelector((state: any) => state.auth.account._id)
-    
+
     const getAddressByIdAccount = async () => {
         const reponse = await AddressService.getAddressByIdAccount(idAccount);
-        setAddress(reponse);
-        setDetailAddress(address[0].province + ", " + address[0].district + ", " + address[0].commune + "," + address[0].detailAddress);
+        if (reponse.length != 0) {
+            setDetailAddress(reponse[0].province + ", " + reponse[0].district + ", " + reponse[0].commune + "," + reponse[0].detailAddress);
+            setAddress(reponse);
+        }else{
+            setAddress(reponse);
+        }
+
     }
 
     useEffect(() => {
