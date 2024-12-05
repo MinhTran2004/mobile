@@ -8,13 +8,17 @@ import ItemProductPayment from "@/components/home/ItemProductPayment";
 import PrimaryButton from "@/components/PrimaryButton";
 import StatusModal from "@/components/StatusModal"
 
-const Payment = (route: any) => {
+const Payment = ({ route }: any) => {
     const viewmodel = ViewModelPayment();
     const navigation = useNavigation();
-    const router = route.route.params;
+
+    const { dataCart, total, coupon } = route.params;
+    console.log(total);
+    console.log(dataCart);
+    console.log(coupon);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <ScrollView style={{ flex: 1 }}>
                 <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 120, paddingHorizontal: 10, gap: 10 }}>
@@ -46,22 +50,25 @@ const Payment = (route: any) => {
                         <FlatList
                             scrollEnabled={false}
                             showsHorizontalScrollIndicator={false}
-                            data={router}
+                            data={dataCart}
                             renderItem={({ item }) => <ItemProductPayment key={item._id} {...item} />} />
                     </View>
 
                     {/* banner3 */}
                     <View style={styles.conatiner}>
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('coupon')}
+                            onPress={() => navigation.navigate('coupon', {
+                                dataCart: dataCart,
+                                total: total,
+                            })}
                             style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, paddingRight: 23 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                                 <IconDiscount />
                                 <Text style={{ fontSize: 16 }}>Mã giảm giá</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                                {route.coupon ?
-                                    <Text style={{ fontSize: 16 }}></Text>
+                                {coupon ?
+                                    <Text style={{ fontSize: 16 }}>{coupon.discountValue}%</Text>
                                     :
                                     <View />}
                                 <IconChevronRight size={23} />

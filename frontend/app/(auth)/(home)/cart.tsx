@@ -31,7 +31,10 @@ const Cart = ({ navigation }: any) => {
                 {/* footer */}
                 <PrimaryButton
                     label={"Thanh toán   " + ConvertMoney(viewmodel.total) + " VND"}
-                    onPress={() => navigation.navigate('payment', viewmodel.data)}
+                    onPress={() => navigation.navigate('payment', {
+                        dataCart: viewmodel.data,
+                        total: viewmodel.total,
+                    })}
                     disabled={viewmodel.data.length != 0 ? false : true} />
             </View>
         </View>

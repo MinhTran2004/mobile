@@ -1,6 +1,5 @@
 import { Address } from "@/model/address.model"
 import AddressService from "@/service/address.service";
-import SeviceBill from "@/service/bill.service";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -20,7 +19,6 @@ const ViewModelPayment = () => {
         }else{
             setAddress(reponse);
         }
-
     }
 
     useEffect(() => {
