@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from '@react-native-async-storage/async-storage'; // Storage backend
 import authReducer from './reducer/login';
 import loadingReducer from './reducer/loading';
+import couponReducer from './reducer/payment';
 
 // Cấu hình redux-persist
 const persistConfig = {
@@ -13,7 +14,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  loading : loadingReducer
+  loading : loadingReducer,
+  coupon : couponReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

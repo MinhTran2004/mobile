@@ -1,11 +1,14 @@
 import { Address } from "@/model/address.model";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import StatusModal from "../StatusModal";
 
 const ItemAddress: React.FC<Address> = (props) => {
     const navigation = useNavigation();
     const address = props.province + ", " + props.district + ", " + props.commune + ", " + props.detailAddress
+    const [dialog, setDialog] = useState(false);
+
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -24,10 +27,31 @@ const ItemAddress: React.FC<Address> = (props) => {
 
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
-                <Text style={{ color: 'red' }}>Xóa</Text>
-                <TouchableOpacity onPress={() => { navigation.navigate('edit-address', props) }}>
+                <TouchableOpacity onPress={() => setDialog(true)}>
+                    <Text style={{ color: 'red' }}>Xóa</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
+
+                <StatusModal
+                    isActive={dialog}
+                    title="Thông báo"
+                    label="Xác nhận xóa địa chỉ"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            setDialog(false)
+                        }, }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            setDialog(false)
+                        }, }}
+                    onClose={() => setDialog(false)}
+                />
+
+
             </View>
 
         </View>

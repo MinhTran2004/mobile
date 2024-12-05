@@ -6,11 +6,14 @@ import InputEditText from "@/components/InputEditText";
 import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
 import PrimaryButton from "@/components/PrimaryButton";
 import { Address } from "@/model/address.model";
+import { useState } from "react";
+import StatusModal from "@/components/StatusModal";
 
 const EditAddress = ({ route }: any) => {
     const navigation = useNavigation();
     const props: Address = route.params;
     const viewmodel = ViewModelEditAddress(props);
+    const [dialog, setDialog] = useState(false);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -115,7 +118,26 @@ const EditAddress = ({ route }: any) => {
 
                 <PrimaryButton
                     label="Thay đổi"
-                    onPress={() => viewmodel.updateAddressById()} />
+                    onPress={() => setDialog(true)} />
+
+
+                <StatusModal
+                    isActive={dialog}
+                    title="Thông báo"
+                    label="Xác nhận thanh toán"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            viewmodel.updateAddressById()
+                            setDialog(false)
+                        }, }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            setDialog(false)
+                        }, }}
+                    onClose={() => setDialog(false)}
+                />
             </View>
         </SafeAreaView>
     );

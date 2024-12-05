@@ -1,7 +1,8 @@
 import ItemProfile from '@/components/profile/ItemProfile';
+import StatusModal from '@/components/StatusModal';
 import { Logout } from '@/redux/action/login';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Switch, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconChevronRight, IconHeart } from 'tabler-icons-react-native';
@@ -9,6 +10,7 @@ import { IconChevronRight, IconHeart } from 'tabler-icons-react-native';
 const Profile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [dialog, setDialog] = useState(false);
 
   const logout = () => {
     dispatch(Logout());
@@ -33,7 +35,25 @@ const Profile = () => {
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
       <ItemProfile iconLeft={<IconHeart />} title='Thông tin cá nhân' iconRight={<IconChevronRight/>}/>
-      <ItemProfile iconLeft={<IconHeart />} title='Đăng xuất' iconRight={<IconChevronRight/>} onPress={() => {logout()}} />
+      <ItemProfile iconLeft={<IconHeart />} title='Đăng xuất' iconRight={<IconChevronRight/>} onPress={() => setDialog(true)} />
+
+      <StatusModal
+        isActive={dialog}
+        title="Thông báo"
+        label="Bạn có muốn đăng xuất không?"
+        icon="none"
+        statusLayoutButton="row"
+        secondaryButton={{
+          label: 'Có', onPress() {
+            {logout()}
+            setDialog(false)
+          }, }}
+        primaryButton={{
+          label: 'Không', onPress() {
+            setDialog(false)
+          }, }}
+        onClose={() => setDialog(false)}
+      />
     </View>
 
   );

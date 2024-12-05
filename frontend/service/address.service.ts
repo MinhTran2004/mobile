@@ -48,7 +48,7 @@ export default class AddressService {
         })
 
         if (reponse.data.status) {
-            return reponse.data.address[0];
+            return reponse.data.address;
         }else{
             return [];
         }

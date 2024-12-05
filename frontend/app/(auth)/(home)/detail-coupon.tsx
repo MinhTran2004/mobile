@@ -1,9 +1,11 @@
 import AppHeader from "@/components/AppHeader";
 import PrimaryButton from "@/components/PrimaryButton";
 import { Coupon } from "@/model/coupon.model"
+import { deleteCoupon } from "@/redux/action/payment";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useDispatch } from "react-redux";
 
 interface Props {
     route: {
@@ -14,7 +16,8 @@ interface Props {
 const DetailCoupon: React.FC<Props> = (props) => {
     const navigation = useNavigation();
     const coupon = props.route.params;
-
+    console.log(coupon);
+    
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Chi tiết mã giảm giá" iconRight="none" onPressIconLeft={() => { navigation.goBack() }} />
@@ -58,7 +61,9 @@ const DetailCoupon: React.FC<Props> = (props) => {
                 </View>
 
                 <View style={{ position: 'absolute', width: '100%', bottom: 0, backgroundColor: 'white', padding: 10, borderTopLeftRadius: 32, borderTopRightRadius: 32 }}>
-                    <PrimaryButton label="Sử dụng" />
+                    <PrimaryButton
+                        label="Sử dụng"
+                        onPress={() => { navigation.navigate('payment') }}/>
                 </View>
             </View>
         </View>

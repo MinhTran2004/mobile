@@ -36,14 +36,14 @@ const StatusModal: React.FC<Props> = (props) => {
             case 'row': return <View style={{ flexDirection: 'row', gap: 10 }}>
                 {props.primaryButton ?
                     <ButtonModel
-                        buttonStyle={{ backgroundColor: '#F7F8FA'}}
+                        buttonStyle={{ backgroundColor: '#fff', borderWidth: 0.5, borderColor: '#4C1B1B'}}
                         textStyle={{ color: 'black', fontWeight: 600 }}
                         label={props.primaryButton.label}
                         status={props.statusLayoutButton}
                         onPress={props.primaryButton.onPress} /> : <View />}
                 {props.secondaryButton ?
                     <ButtonModel
-                        buttonStyle={{ backgroundColor: '#6962F1' }}
+                        buttonStyle={{ backgroundColor: '#4C1B1B' }}
                         textStyle={{ color: 'white', fontWeight: 600 }}
                         label={props.secondaryButton.label}
                         status={props.statusLayoutButton}
@@ -52,6 +52,8 @@ const StatusModal: React.FC<Props> = (props) => {
 
             case 'single': return props.primaryButton ?
                 <ButtonModel
+                    buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                    textStyle={{ color: 'white', fontWeight: 600 }}
                     label={props.primaryButton.label}
                     status={props.statusLayoutButton}
                     onPress={props.primaryButton.onPress} />

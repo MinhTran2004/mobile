@@ -29,24 +29,26 @@ const InputEditText: React.FC<Props> = (props) => {
     return (
         <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
             {props.iconLeft === 'search' ?
-                <TouchableOpacity onPress={() => naviagtion.goBack()} style={{paddingHorizontal: 5}}>
+                <TouchableOpacity onPress={() => naviagtion.goBack()} style={{ paddingHorizontal: 5 }}>
                     <IconChevronLeft size={30} />
                 </TouchableOpacity>
                 :
                 <View />}
-            <View style={[styles.container, props.style, { borderColor: props.textError ? "red" : "#ccc" }]}>
-                <TouchableOpacity onPress={() => naviagtion.goBack()}>
-                    <SelectIconLeft />
-                </TouchableOpacity>
-                <TextInput
-                    editable={props.editable}
-                    placeholder={props.placeholder}
-                    value={props.value}
-                    keyboardType={props.keyboardType ? "phone-pad" : "default"}
-                    onChangeText={(text) => props.onChangeText(text)}
-                    style={{ width: '100%' }} />
+            <View style={{width: '100%'}}>
+                <View style={[styles.container, props.style, { borderColor: props.textError ? "red" : "#ccc" }]}>
+                    <TouchableOpacity onPress={() => naviagtion.goBack()}>
+                        <SelectIconLeft />
+                    </TouchableOpacity>
+                    <TextInput
+                        editable={props.editable}
+                        placeholder={props.placeholder}
+                        value={props.value}
+                        keyboardType={props.keyboardType ? "phone-pad" : "default"}
+                        onChangeText={(text) => props.onChangeText(text)}
+                        style={{ width: '100%' }} />
+                </View>
+                {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{ marginVertical: 5 }} />}
             </View>
-            {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{ marginVertical: 5 }} />}
         </View>
     )
 }
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingLeft: 5,
         gap: 5,
-        width: '85%'
     },
     textError: {
         color: 'red',

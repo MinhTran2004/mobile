@@ -15,11 +15,11 @@ const Search = ({ navigation }: any) => {
                     placeholder='Bạn muốn ăn gì ?'
                     value={viewmodel.name}
                     onChangeText={(text) => viewmodel.setName(text)}
-                    style={{ flexDirection: 'row', alignItems: 'center' }} />
+                    style={{ flexDirection: 'row', alignItems: 'center', width: '85%' }} />
             </View>
 
             <View style={styles.container}>
-                {viewmodel.dataProduct.length != 0 ?
+                {viewmodel.dataProduct?.length != 0 ?
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={viewmodel.dataProduct}

@@ -1,10 +1,11 @@
 import { Cart } from "@/model/cart.model";
 import { Product } from "@/model/product.model";
 import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import { IconMinus, IconPlus, IconX } from "tabler-icons-react-native";
+import StatusModal from "../StatusModal";
 
 interface Props {
     cart: Cart,
@@ -14,6 +15,7 @@ interface Props {
 }
 const ItemCart: React.FC<Props> = React.memo((props) => {
     const selector = useSelector((state) => state.auth.account._id);
+    const [dialogDelete, setDialogDelete] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -38,9 +40,29 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.containerIconX} onPress={() => {props.eventDelete(props.cart._id)}}>
+            <TouchableOpacity style={styles.containerIconX} onPress={() => setDialogDelete(true)}>
                 <IconX size={15} />
             </TouchableOpacity>
+  
+
+            {/* Dialog xóa sản phẩm */}
+            <StatusModal
+                isActive = {dialogDelete}
+                title="Thông báo"
+                label="Xóa sản phẩm khỏi giỏ hàng?"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{label: 'Có' , onPress() {
+                    props.eventDelete(props.cart._id)
+                    setDialogDelete(false)      
+                },}}
+                primaryButton={{label: 'Không' , onPress() {
+                    setDialogDelete(false)
+                },}}
+                onClose={() => setDialogDelete(false)}
+            />
+
+
         </View>
     )
 })

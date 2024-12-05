@@ -25,6 +25,8 @@ const DetailProduct = (route: Props) => {
     const product = route.route.params;
 
     const [dialog, setDialog] = useState(false);
+    const [dialog2, setDialog2] = useState(false);
+    
 
     return (
         <View style={{ flex: 1 }}>
@@ -50,7 +52,7 @@ const DetailProduct = (route: Props) => {
                 <TouchableOpacity style={{ flex: 2, alignItems: 'center' }}>
                     <IconMessage />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id) }}>
+                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id), setDialog2(true)}}>
                     <IconShoppingCart />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flex: 6, padding: 15, backgroundColor: '#4C1B1B', borderRadius: 20 }} onPress={() => setDialog(true)}>
@@ -58,16 +60,34 @@ const DetailProduct = (route: Props) => {
                 </TouchableOpacity>
             </View>
 
+            {/* Dialog mua hàng */}
             <StatusModal
                 isActive = {dialog}
                 title="Thông báo"
-                label="Nội dung thông báo"
+                label="Bạn có muốn tiếp tục mua hàng?"
                 icon="none"
                 statusLayoutButton="row"
-                secondaryButton={{label: 'Đồng ý' , onPress() {
+                secondaryButton={{label: 'Có' , onPress() {
+                    setDialog(false)                    
+                },}}
+                primaryButton={{label: 'Không' , onPress() {
                     setDialog(false)
                 },}}
                 onClose={() => setDialog(false)}
+            />
+
+            {/* Dialog thêm sản phẩm vào giỏ hàng */}
+            <StatusModal
+                isActive={dialog2}
+                title="Thông báo"
+                label="Đã thêm sản phẩm vào giỏ hàng !!!"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'Đóng', onPress() {
+                        setDialog2(false)
+                    },}}
+                onClose={() => setDialog2(false)}
             />
 
         </View >

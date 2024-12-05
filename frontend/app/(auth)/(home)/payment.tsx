@@ -2,11 +2,12 @@ import AppHeader from "@/components/AppHeader"
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { IconAddressBook, IconChevronRight, IconDiscount, IconWallet } from "tabler-icons-react-native"
 import { Checkbox, List } from 'react-native-paper';
-import { useState } from "react"
 import { useNavigation } from "@react-navigation/native"
 import ViewModelPayment from "@/viewmodel/home/payment.viewmodel"
 import ItemProductPayment from "@/components/home/ItemProductPayment";
 import PrimaryButton from "@/components/PrimaryButton";
+import StatusModal from "@/components/StatusModal"
+import { useSelector } from "react-redux";
 
 const Payment = (route: any) => {
     const viewmodel = ViewModelPayment();
@@ -24,7 +25,7 @@ const Payment = (route: any) => {
                         {viewmodel.detailAddress ?
                             // option 1 
                             < TouchableOpacity style={styles.banner1} onPress={() => { navigation.navigate('address') }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1 }}>
                                     <IconAddressBook />
                                     <View style={{ flex: 1 }}>
                                         <Text>{viewmodel.address?.name}</Text>
@@ -54,13 +55,19 @@ const Payment = (route: any) => {
                     {/* banner3 */}
                     <View style={styles.conatiner}>
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('coupon')}
+                            onPress={() => navigation.navigate('coupon', )}
                             style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, paddingRight: 23 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                                 <IconDiscount />
                                 <Text style={{ fontSize: 16 }}>Mã giảm giá</Text>
                             </View>
-                            <IconChevronRight size={23} />
+                            <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
+                                {route.coupon ?
+                                    <Text style={{ fontSize: 16 }}></Text>
+                                    :
+                                    <View />}
+                                <IconChevronRight size={23} />
+                            </View>
                         </TouchableOpacity>
 
                         <List.Accordion
@@ -103,12 +110,32 @@ const Payment = (route: any) => {
                             <Text>20.000</Text>
                         </View>
                     </View>
+
+                    <StatusModal
+                        isActive={viewmodel.dialog}
+                        title="Thông báo"
+                        label="Xác nhận thanh toán"
+                        icon="none"
+                        statusLayoutButton="row"
+                        secondaryButton={{
+                            label: 'Có', onPress() {
+                                viewmodel.setDialog(false)
+                            },
+                        }}
+                        primaryButton={{
+                            label: 'Không', onPress() {
+                                viewmodel.setDialog(false)
+                            },
+                        }}
+                        onClose={() => viewmodel.setDialog(false)}
+                    />
                 </View>
             </ScrollView>
             <PrimaryButton
-                label={"Thanh toán"}
-                onPress={() => { }} />
-        </View >
+                label="Thanh toán"
+                onPress={() => viewmodel.setDialog(true)} />
+        </View>
+
     )
 }
 
