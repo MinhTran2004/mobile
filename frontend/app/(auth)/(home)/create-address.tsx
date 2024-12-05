@@ -21,6 +21,7 @@ const CreateAddress = () => {
                     value={viewmodel.name}
                     textError={viewmodel.errorName}
                     onChangeText={viewmodel.setName}
+                    style={styles.input_txt}
                 />
                 <InputEditText
                     placeholder="Số điện thoại"
@@ -28,13 +29,13 @@ const CreateAddress = () => {
                     value={viewmodel.phone}
                     textError={viewmodel.errorPhone}
                     onChangeText={viewmodel.setPhone}
+                    style={styles.input_txt}
                 />
 
                 <Text style={styles.label}>Thông tin địa chỉ</Text>
 
                 <TouchableOpacity
                     onPress={() => viewmodel.setModalProvince(true)}
-                    style={{ backgroundColor: '#F9F9F9' }}
                 >
                     <InputEditText
                         editable={false}
@@ -79,6 +80,7 @@ const CreateAddress = () => {
                     textError={viewmodel.errorDetailAddress}
                     value={viewmodel.detailAddress}
                     onChangeText={viewmodel.setDetailAddress}
+                    style={styles.input_txt}
                 />
 
                 {/* modal */}
@@ -103,9 +105,8 @@ const CreateAddress = () => {
                     statusDialog={viewmodel.modalCommune}
                     setDialog={viewmodel.setModalCommune} />
 
-                <Text style={styles.label}>Thông tin liên hệ</Text>
                 <View style={styles.containerToogle}>
-                    <Text style={{ color: '#888' }}>Mặc định</Text>
+                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15}}>Mặc định</Text>
                     <Switch
                         onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
                         value={viewmodel.toogle} />
@@ -125,21 +126,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         paddingHorizontal: 20,
     },
-    backButton: {
-        position: "absolute",
-        left: 0,
-    },
-    headerTitle: {
-        flex: 1,
-        textAlign: "center",
-        fontSize: 18,
-        fontWeight: "bold",
-        color: "#000",
-    },
     label: {
-        fontSize: 14,
-        color: "#888",
-        marginTop: 15,
+        fontSize: 18,
+        color: "#000",
+        marginVertical: 15,
     },
     containerToogle: {
         flexDirection: 'row',
@@ -147,65 +137,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderWidth: 1,
         paddingHorizontal: 5,
-        borderColor: "#ccc",
-        borderRadius: 8,
+        borderColor: "#f9f9f9",
+        borderRadius: 10,
+        backgroundColor: '#f9f9f9'
     },
-    dropdownText: {
-        color: "#555",
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: "flex-end",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-    },
-    modalContent: {
-        backgroundColor: "#fff",
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        padding: 20,
-        maxHeight: "60%",
-    },
-    modalHeader: {
-        textAlign: 'center',
-        fontSize: 16,
-        fontWeight: "bold",
-        marginBottom: 10,
-    },
-    modalItem: {
-        padding: 15,
+    input_txt: {
+        backgroundColor: '#fff',
         borderBottomWidth: 1,
-        borderBottomColor: "#eee",
-    },
-    modalItemText: {
-        fontSize: 14,
-    },
-    closeButton: {
-        position: "absolute",
-        top: 20,
-        right: 20,
-        padding: 5,
-    },
-    saveButton: {
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        alignItems: "center",
-        padding: 20,
-        elevation: 2,
-        borderTopLeftRadius: 35,
-        borderTopRightRadius: 35,
-    },
-    saveButtonText: {
-        color: "#fff",
-        width: '100%',
-        fontSize: 16,
-        padding: 15,
-        textAlign: 'center',
-        fontWeight: "bold",
-        backgroundColor: "#4C1B1B",
-        borderRadius: 30,
-    },
+        borderColor: '#d9d9d9',
+        paddingLeft: -15,
+        borderRadius: 0
+    }
 });
 
 export default CreateAddress;

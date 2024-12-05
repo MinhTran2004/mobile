@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 16,
         backgroundColor: '#fff',
-        marginBottom: 8,
+        // marginBottom: 8,
     },
     title: {
-        color: '#2C2C2C',
-        fontWeight: 600,
+        color: '#000',
+        fontWeight: 'bold',
         fontSize: 20,
     }
 })

@@ -1,5 +1,5 @@
 import InputEditText from "@/components/InputEditText";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 import { ViewModelLogin } from "@/viewmodel/auth/Login";
 import AppHeader from "@/components/AppHeader";
@@ -15,11 +15,16 @@ const Login = ({ navigation }: any) => {
 
                 <View style={styles.container}>
 
-                    <View style={{ alignItems: 'center' }}>
-                        <LogoApp style={{ width: 165, height: 170 }} />
+                    <View style={{ alignItems: 'center', marginTop: 20}}>
+                        {/* <LogoApp style={{ width: 165, height: 170 }} /> */}
+                        <View style={{alignItems: 'center', gap: 15}}>
+                            <Image source={require('../../assets/images/logo-app.png')} style={{ width: 100, maxHeight: 125, top: 0 }} />
+                            <Text style={{fontWeight: 900, color: '#000', fontSize: 20}}>Welcome to OderFood !!</Text>
+                            <Text style={{fontWeight: 'bold', color: '#909090', fontSize: 16}}>Đăng ký để tiếp tục</Text>
+                        </View>
                     </View>
 
-                    <View style={{ gap: 10 }}>
+                    <View style={{ gap: 15 }}>
                         <InputEditText
                             placeholder={"Nhập tài khoản"}
                             value={viewmodel.account}
@@ -36,7 +41,7 @@ const Login = ({ navigation }: any) => {
                         label="Đăng nhập"
                         onPress={() => viewmodel.checkLogin()}
                         buttonStyle={{ backgroundColor: '#4C1B1B' }}
-                        textStyle={{ color: 'white' }}
+                        textStyle={{ color: 'white', fontWeight: 'bold', padding: 2  }}
                         status="single" />
                 </View>
             </View>
@@ -49,11 +54,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        paddingTop: 20,
+        // borderTopLeftRadius: 24,
+        // borderTopRightRadius: 24,
+        // paddingTop: 20,
         paddingHorizontal: 20,
-        gap: 50,
+        gap: 30,
     },
     button: {
         alignItems: 'center',

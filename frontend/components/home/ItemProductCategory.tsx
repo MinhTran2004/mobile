@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from "react-native"
 
 interface Props{
     icon: React.ReactElement,
@@ -8,22 +8,21 @@ interface Props{
 
 const ItemProductCategory:React.FC<Props> = (props) => {
     return(
-        <View style={{width: '25%', alignItems: 'center'}}>
+        <TouchableOpacity style={{  alignItems: 'center', gap: 5,  width: '25%' }}>
             {props.icon}
             <Text style={styles.name}>{props.name}</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 
 const styles = StyleSheet.create({
     Image: {
-
     },
     name: {
         fontSize: 16,
         fontWeight: 500,
-        color: '#2C2C2C',
+        color: '#000',
         textAlign: 'center',
     }
 })

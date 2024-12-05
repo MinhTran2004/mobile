@@ -9,13 +9,16 @@ interface Props {
 
 const ItemProfile: React.FC<Props> = (props) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={() => {props.onPress()}}>
-            <View style={{ flexDirection: 'row', gap: 10 }}>
-                {props.iconLeft}
-                <Text style={styles.title}>{props.title}</Text>
-            </View>
-            {props.iconRight}
-        </TouchableOpacity>
+        <View style={{gap: 15, }}>
+            <TouchableOpacity style={styles.container} onPress={() => { props.onPress() }}>
+                <View style={{ flexDirection: 'row', gap: 15 }}>
+                    {props.iconLeft}
+                    <Text style={styles.title}>{props.title}</Text>
+                </View>
+                {props.iconRight}
+            </TouchableOpacity>
+            <View style={{ height: 1, backgroundColor: '#d9d9d9', paddingHorizontal: 20 }} />
+        </View>
     )
 }
 
@@ -23,10 +26,12 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 20
+        // paddingHorizontal: 20,
+        alignItems: 'center'
     },
     title: {
-        fontSize: 20
+        fontSize: 18,
+        textAlignVertical: 'center'
     }
 })
 

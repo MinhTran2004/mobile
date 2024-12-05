@@ -20,6 +20,7 @@ router.post('/createAccount', async (req, res) => {
 
 router.get('/checkLogin', async (req, res) => {
     const data = req.query;
+    console.log(data);
     const account = await Account.findOne(data);
     res.send(account)
 })
