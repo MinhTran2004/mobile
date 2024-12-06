@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
-import ProductService from "@/service/ProductSevice";
+import ProductService from "@/service/product.service";
 import AppHeader from "@/components/AppHeader";
 
 // Define the Product interface
