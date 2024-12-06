@@ -14,7 +14,7 @@ import CreateAddress from "./create-address";
 import ScreenWebView from "./webview";
 import LayoutProfile from "../(profile)/_layout";
 import LayoutOrder from "../(order)/_layout";
-
+import Category from "./category";
 const Stack = createNativeStackNavigator();
 
 const LayoutHome = () => {
@@ -31,6 +31,7 @@ const LayoutHome = () => {
             <Stack.Screen name="coupon" component={Coupon} />
             <Stack.Screen name="detail-coupon" component={DetailCoupon} />
             <Stack.Screen name="ScreenWebView" component={ScreenWebView} />
+            <Stack.Screen name="category" component={Category}/>
         </Stack.Navigator>
     )
 }

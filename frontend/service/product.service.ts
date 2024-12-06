@@ -48,6 +48,18 @@ class ProductService {
             console.log(err);
         }
     }
+    static getProductByCategory = async (idCategory:string) => {
+        try {
+            const response = (await axios.get(`${this.url}/getProductByCategory?idCategory=${idCategory}`)).data;
+            if (response) {
+                return response.products;
+            } else {
+                return [];
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 export default ProductService;

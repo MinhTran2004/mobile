@@ -1,4 +1,4 @@
-import { Button, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Button, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import IconUser from "@/assets/images/home/user-icon.svg";
 import IconCart from "@/assets/images/home/cart-icon.svg";
 import ItemProductCategory from "@/components/home/ItemProductCategory";
@@ -12,6 +12,10 @@ import { LayoutBottomTabs } from "./_layout";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
+
+    const handleNavigateToCategory = (idCategory: string) => {
+        navigation.navigate('category', {  idCategory });
+    };
 
     return (
         <View style={{ flex: 1 }}>
@@ -50,35 +54,62 @@ const Home = ({ navigation }: any) => {
                                 </TouchableOpacity>
                             </View>
 
-                            <PagerView
-                                style={{ height: 180, width: '100%' }}
-                                ref={viewmodel.pageView}
-                                initialPage={viewmodel.initialPage}>
-                                <View key={'1'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
-                                    <Image source={require('@/assets/images/home/banner-1.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
-                                </View>
-                                <View key={'2'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
-                                    <Image source={require('@/assets/images/home/banner-2.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
-                                </View>
-                                <View key={'3'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
-                                    <Image source={require('@/assets/images/home/banner-3.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
-                                </View>
-                            </PagerView>
+                    <PagerView style={{ height: 180, width: '100%' }} initialPage={0}>
+                        <View key={'1'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-1.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
                         </View>
+                        <View key={'2'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-2.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
+                        </View>
+                        <View key={'3'} style={{ borderRadius: 10, overflow: 'hidden', width: '100%' }}>
+                            <Image source={require('@/assets/images/home/banner-3.png')} style={{ height: 180, width: '100%', objectFit: 'contain' }} />
+                        </View>
+                    </PagerView>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5}}>
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_pizza.png')} style={styles.ic_category} />} name="Pizaa"/>
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_hamburger.png')} style={styles.ic_category} />} name="Hamburger" />
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_drink.png')} style={styles.ic_category} />} name="Drink" />
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_chicken.png')} style={styles.ic_category} />} name="Chicken" />
-                        </View>
-
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5, marginTop: 15 }}>
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_noodles.png')} style={styles.ic_category} />} name="Noodles" />
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_rice.png')} style={styles.ic_category} />} name="Rice" />
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_cream.png')} style={styles.ic_category} />} name="Ice cream" />
-                            <ItemProductCategory icon={<Image source={require('@/assets/images/home/ic_more.png')} style={styles.ic_category} />} name="More" />
-                        </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Gà Rán"
+                            onPress={() => handleNavigateToCategory('Gà Rán')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Burger "
+                            onPress={() => handleNavigateToCategory('Burger')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Mì"
+                            onPress={() => handleNavigateToCategory('Mì')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Cơm"
+                            onPress={() => handleNavigateToCategory('Cơm')}
+                        />
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Gà Rán"
+                            onPress={() => handleNavigateToCategory('Gà Rán')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Burger "
+                            onPress={() => handleNavigateToCategory('Burger')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Mì"
+                            onPress={() => handleNavigateToCategory('Mì')}
+                        />
+                        <ItemProductCategory
+                            icon={<IconProduct />}
+                            name="Drinks"
+                            onPress={() => handleNavigateToCategory('Cơm')}
+                        />
+                    </View>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", marginTop: 10}}>
                             <Text style={styles.title}>Đồ giảm giá</Text>

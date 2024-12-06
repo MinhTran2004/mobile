@@ -41,7 +41,29 @@ router.get('/getProductByName', async (req, res) => {
         });
     }
 });
+router.get('/getProductByCategory', async (req, res) => {
+    const { idCategory } = req.query; // Lấy giá trị idCategory từ query string
 
+    try {
+        if (!idCategory) {
+            return res.status(400).send({
+                message: 'Please provide a category ID to search',
+            });
+        }
 
+        const products = await Product.find({ idCategory: { $regex: idCategory, $options: 'i' } });
+        
+        res.status(200).send({
+            message: 'success',
+            products: products,
+        });
+    } catch (error) {
+        console.error("Error fetching products by category:", error);
+        res.status(500).send({
+            message: 'Error fetching products by category',
+            error: error.message,
+        });
+    }
+});
 
 module.exports = router;
