@@ -66,45 +66,45 @@ const Home = ({ navigation }: any) => {
 
                             <View style={{ flexDirection: 'row' }}>
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Gà Rán"
+                                    icon={<Image source={require('@/assets/images/home/ic_pizza.png')} style={styles.ic_category} />}
+                                    name="Pizaa"
                                     onPress={() => handleNavigateToCategory('Gà Rán')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Burger "
+                                    icon={<Image source={require('@/assets/images/home/ic_hamburger.png')} style={styles.ic_category} />}
+                                    name="Hamburger"
                                     onPress={() => handleNavigateToCategory('Burger')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Mì"
+                                    icon={<Image source={require('@/assets/images/home/ic_drink.png')} style={styles.ic_category} />}
+                                    name="Drink"
                                     onPress={() => handleNavigateToCategory('Mì')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Cơm"
+                                    icon={<Image source={require('@/assets/images/home/ic_chicken.png')} style={styles.ic_category} />}
+                                    name="Chicken"
                                     onPress={() => handleNavigateToCategory('Cơm')}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row' }}>
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Gà Rán"
+                                    icon={<Image source={require('@/assets/images/home/ic_noodles.png')} style={styles.ic_category} />}
+                                    name="Noodles"
                                     onPress={() => handleNavigateToCategory('Gà Rán')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Burger "
+                                    icon={<Image source={require('@/assets/images/home/ic_rice.png')} style={styles.ic_category} />}
+                                    name="Rice"
                                     onPress={() => handleNavigateToCategory('Burger')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Mì"
+                                    icon={<Image source={require('@/assets/images/home/ic_cream.png')} style={styles.ic_category} />}
+                                    name="Ice cream"
                                     onPress={() => handleNavigateToCategory('Mì')}
                                 />
                                 <ItemProductCategory
-                                    icon={<IconProduct />}
-                                    name="Drinks"
+                                    icon={<Image source={require('@/assets/images/home/ic_more.png')} style={styles.ic_category} />}
+                                    name="More"
                                     onPress={() => handleNavigateToCategory('Cơm')}
                                 />
                             </View>

@@ -30,7 +30,7 @@ const Category = ({ route, navigation }: any) => {
     }, [idCategory]);
 
     return (
-        <View style={styles.container}>
+        <View style={{ flex: 1 }}>
             {/* App Header */}
             <AppHeader
                 iconLeft="left"
@@ -38,28 +38,32 @@ const Category = ({ route, navigation }: any) => {
                 iconRight="none"
                 onPressIconLeft={() => navigation.goBack()} // Go back on left icon press
             />
+            <View style={styles.container}>
 
-            {/* Danh sách sản phẩm */}
-            {isLoading ? (
-                <ActivityIndicator size="large" color="#42bb6a" />
-            ) : products.length > 0 ? (
-                <FlatList
-                    data={products}
-                    renderItem={({ item }) => (
-                        <ProductVerticalItem
-                            key={item._id}
-                            _id={item._id}
-                            image={item.image}
-                            name={item.name}
-                            idCategory={item.idCategory}
-                            price={item.price.toString()} // Convert the number to a string
-                        />
-                    )}
-                    keyExtractor={(item) => item._id}
-                />
-            ) : (
-                <Text style={styles.emptyText}>Không có sản phẩm nào</Text>
-            )}
+
+                {/* Danh sách sản phẩm */}
+                {isLoading ? (
+                    <ActivityIndicator size="large" color="#42bb6a" />
+                ) : products.length > 0 ? (
+                    <FlatList
+                    showsVerticalScrollIndicator={false}
+                        data={products}
+                        renderItem={({ item }) => (
+                            <ProductVerticalItem
+                                key={item._id}
+                                _id={item._id}
+                                image={item.image}
+                                name={item.name}
+                                idCategory={item.idCategory}
+                                price={item.price.toString()} // Convert the number to a string
+                            />
+                        )}
+                        keyExtractor={(item) => item._id}
+                    />
+                ) : (
+                    <Text style={styles.emptyText}>Không có sản phẩm nào</Text>
+                )}
+            </View>
         </View>
     );
 };
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        padding: 16,
+        paddingHorizontal: 16,
     },
     emptyText: {
         fontSize: 16,
