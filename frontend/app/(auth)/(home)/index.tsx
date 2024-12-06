@@ -8,6 +8,7 @@ import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
+import { LayoutBottomTabs } from "./_layout";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
@@ -17,14 +18,12 @@ const Home = ({ navigation }: any) => {
             {/* header */}
             <View style={styles.containerHeader}>
                 <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
-                    {/* <IconUser width={40} height={40} /> */}
-                    {/* <Image source={require('../../../assets/images/home/avt_user.png')} style={{ width: 50, height: 50, borderRadius: 90 }} /> */}
                     <View style={{paddingLeft: 5}}>
                         <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Hi, Trần Công Minh</Text>
                         <Text style={{ fontSize: 16 }}>Hôm nay bạn sẽ mua gì?</Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', gap: 15 }}>
+                <View style={{ flexDirection: 'row', gap: 5 }}>
                     <Pressable
                         style={{ borderWidth: 1, borderColor: '#E2E4E8', borderRadius: 999, width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}
                         onPress={() => navigation.navigate('search')}>
@@ -109,6 +108,7 @@ const Home = ({ navigation }: any) => {
                     </View>
                 </View>
             </ScrollView>
+            
         </View>
 
     )
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
     },
     containerHeader: {
         paddingHorizontal: 10,
-        paddingVertical: 16,
+        paddingTop: 16,
+        paddingBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

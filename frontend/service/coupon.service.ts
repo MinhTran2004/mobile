@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class CouponService {
-    static url = "http://192.168.5.26:5000/coupon";
+    static url = "http://192.168.5.16:5000/coupon";
 
     static getAllCoupon = async () => {
         try{

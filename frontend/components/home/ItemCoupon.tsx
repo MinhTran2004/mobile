@@ -16,8 +16,6 @@ interface Props {
     endDate?: string,
     describe?: string,
     status?: string,
-    dataCart: any,
-    total: any,
 }
 
 const ItemCoupon: React.FC<Props> = (props) => {
@@ -40,26 +38,7 @@ const ItemCoupon: React.FC<Props> = (props) => {
                 <View>
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', alignItems: 'center' }}>
                         <Text style={style.name} numberOfLines={1}>{props.name}</Text>
-                        <TouchableOpacity onPress={() => {
-                            navigation.navigate('payment', {
-                                dataCart: props.dataCart,
-                                total: props.total,
-                                coupon: {
-                                    _id: props._id,
-                                    name: props.name,
-                                    image: props.image,
-                                    discountType: props.discountType,
-                                    discountValue: props.discountValue,
-                                    maxDisCount: props.maxDisCount,
-                                    quantity: props.quantity,
-                                    condition: props.condition,
-                                    startDate: props.startDate,
-                                    endDate: props.endDate,
-                                    describe: props.describe,
-                                    status: props.status,
-                                }
-                            })
-                        }}>
+                        <TouchableOpacity onPress={() => {}}>
                             <Text style={style.use}>Sử dụng</Text>
                         </TouchableOpacity>
                     </View>

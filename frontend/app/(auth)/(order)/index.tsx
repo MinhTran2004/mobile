@@ -20,7 +20,7 @@ const OrderWaiting = () => {
                     statusLayout="single"
                     primaryButton={{
                         label: 'Hủy đơn', onPress() {
-                            // navigation.navigate('detail-order')
+                            navigation.navigate('detail-order')
                             setDialog(true)
                         }
                     }} />

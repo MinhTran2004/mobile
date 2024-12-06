@@ -10,7 +10,7 @@ interface Props {
 const ItemProfile: React.FC<Props> = (props) => {
     return (
         <View style={{gap: 15, }}>
-            <TouchableOpacity style={styles.container} onPress={() => { props.onPress() }}>
+            <TouchableOpacity style={styles.container} onPress={props.onPress}>
                 <View style={{ flexDirection: 'row', gap: 15 }}>
                     {props.iconLeft}
                     <Text style={styles.title}>{props.title}</Text>
