@@ -17,11 +17,12 @@ const Address = () => {
                     data={viewModel.dataAddress}
                     renderItem={({ item }) => <ItemAddress address={item} viewmodel={viewModel}/>} />
 
-                <PrimaryButton
+                
+            </View>
+            <PrimaryButton
                     label="Thêm địa chỉ mới"
                     onPress={() => {navigation.navigate('create-address')}}
                 />
-            </View>
         </View>
     );
 }

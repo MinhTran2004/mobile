@@ -12,7 +12,7 @@ const PrimaryButton: React.FC<Props> = (props) => {
         <View style={[styles.saveButton, props.styleButton]}>
             <TouchableOpacity
                 disabled={props.disabled}
-                style={{ width: '100%', backgroundColor: 'white', paddingBottom: 20 }}
+                style={{ width: '100%', backgroundColor: 'white', bottom: -5 }}
                 onPress={props.onPress}>
                 <Text style={[styles.saveButtonText, { backgroundColor: props.disabled ? '#D9D9D9' : '#4C1B1B' }]}>{props.label}</Text>
             </TouchableOpacity>
@@ -22,18 +22,15 @@ const PrimaryButton: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     saveButton: {
-        position: "absolute",
+        width: '100%',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        position: 'absolute',
         bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        alignItems: "center",
-        padding: 20,
-        paddingBottom: 0,
+        shadowColor: '#000',
         elevation: 2,
-        borderTopLeftRadius: 35,
-        borderTopRightRadius: 35,
-        backgroundColor: 'white'
     },
     saveButtonText: {
         color: "#fff",

@@ -1,8 +1,8 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product.viewmodel";
-import { IconChevronLeft, IconHeart, IconMessage, IconShoppingCart } from "tabler-icons-react-native";
+import { IconChevronLeft, IconHeart, IconMessage, IconShoppingCart, IconStar, IconStarFilled, IconStars } from "tabler-icons-react-native";
 import StatusModal from "@/components/StatusModal";
 
 interface Product {
@@ -26,7 +26,7 @@ const DetailProduct = (route: Props) => {
 
     const [dialog, setDialog] = useState(false);
     const [dialog2, setDialog2] = useState(false);
-    
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -37,42 +37,56 @@ const DetailProduct = (route: Props) => {
 
             <Image src={product.image} style={styles.image_product} />
             <View style={styles.container_infor}>
-                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View>
-                        <Text style={styles.name_product}>{product.name}</Text>
-                        <Text style={styles.price_product}>{product.price}</Text>
+
+                <View style={{gap: 5}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{product.name}</Text>
+                        <IconHeart size={24} color="red" />
                     </View>
-                    <IconHeart style={{ width: 25, height: 25 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                        <IconStarFilled color="#FEC50E" size={18} />
+                        <Text style={{ fontSize: 18, fontWeight: 500 }}>4.5</Text>
+                    </View>
+                    <Text style={{ fontSize: 20, fontWeight: 700, color: '#D17842' }}>{product.price} VNĐ</Text>
                 </View>
-                <Text style={styles.des_product}>Giới thiệu sản phẩm</Text>
-                <Text style={{ fontSize: 17 }}>Pizza là một món ăn truyền thống nổi tiếng của Ý, thường được làm từ bột mì, nước, muối, và men, rồi được nướng với các loại topping đa dạng như sốt cà chua, phô mai, thịt, rau củ và gia vị. Với hương vị đậm đà và sự kết hợp phong phú</Text>
+                <View style={{width: '100%', height: 1, backgroundColor: '#D9D9D9'}}></View>
+
+                <View style={{gap: 5}}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Giới thiệu sản phẩm</Text>
+                    <Text style={{ fontSize: 16 }}>Hamburger bò là một món ăn nhanh phổ biến, bao gồm một miếng thịt bò xay nướng chín được đặt giữa hai lát bánh mì tròn. Miếng thịt bò thườngđược ướp gia vị và nướng trên vỉ để tạo ra lớp vỏ bên ngoài thơm ngon, giòn rụm. Phần bên trong thịt vẫn giữ được độ mềm vàmọng nước. Kèm theo đó, món hamburger thường có thêm các thành phần như phô mai tan chảy, xà lách tươi, cà chua, dưa leo, hành tây và sốt đặc trưng như ketchup hoặc mù tạt. Tất cả những yếu tố này kết hợp tạo nên một hương vị hài hòa và hấp dẫn...</Text>
+                </View>
+
             </View>
 
             <View style={styles.containerButton}>
-                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }}>
+                <TouchableOpacity style={{ flex: 1, alignItems: 'center' }}>
                     <IconMessage />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id), setDialog2(true)}}>
+                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id), setDialog2(true) }}>
                     <IconShoppingCart />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 6, padding: 15, backgroundColor: '#4C1B1B', borderRadius: 20 }} onPress={() => setDialog(true)}>
-                    <Text style={{ color: 'white', textAlign: 'center' }}>Mua ngay</Text>
+                <TouchableOpacity style={{ flex: 5, padding: 14, backgroundColor: '#4C1B1B', borderRadius: 90 }} onPress={() => setDialog(true)}>
+                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}>Mua ngay</Text>
                 </TouchableOpacity>
             </View>
 
             {/* Dialog mua hàng */}
             <StatusModal
-                isActive = {dialog}
+                isActive={dialog}
                 title="Thông báo"
                 label="Bạn có muốn tiếp tục mua hàng?"
                 icon="none"
                 statusLayoutButton="row"
-                secondaryButton={{label: 'Có' , onPress() {
-                    setDialog(false)                    
-                },}}
-                primaryButton={{label: 'Không' , onPress() {
-                    setDialog(false)
-                },}}
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        setDialog(false)
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        setDialog(false)
+                    },
+                }}
                 onClose={() => setDialog(false)}
             />
 
@@ -86,7 +100,8 @@ const DetailProduct = (route: Props) => {
                 primaryButton={{
                     label: 'Đóng', onPress() {
                         setDialog2(false)
-                    },}}
+                    },
+                }}
                 onClose={() => setDialog2(false)}
             />
 
@@ -104,55 +119,39 @@ const styles = StyleSheet.create({
         zIndex: 100,
         width: 35,
         height: 35,
-        backgroundColor: '#F9FAFB',
-        // backgroundColor: 'red',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 999
     },
     image_product: {
-        width: '100%',
+        maxWidth: '100%',
         height: 350,
         objectFit: 'fill'
     },
     container_infor: {
         width: '100%',
         height: '100%',
-        backgroundColor: 'white',
-        padding: 15,
+        backgroundColor: '#fff',
+        paddingHorizontal: 20,
         borderTopStartRadius: 25,
         borderTopRightRadius: 25,
         position: 'absolute',
         bottom: -330,
-    },
-    name_product: {
-        fontWeight: 'bold',
-        fontSize: 23
-    },
-    price_product: {
-        fontSize: 19,
-        marginTop: 5
-    },
-    des_product: {
-        fontWeight: 'bold',
-        marginTop: 20,
-        fontSize: 20,
+        paddingTop: 10,
+        gap: 10
     },
     containerButton: {
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 20,
-        paddingHorizontal: 10,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        paddingHorizontal: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         position: 'absolute',
         bottom: 0,
-        shadowColor: '#000000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
+        shadowColor: '#000',
         elevation: 3,
     }
 

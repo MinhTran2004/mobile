@@ -1,5 +1,7 @@
 import { Address, AddressModel } from "@/model/address.model";
 import axios from "axios";
+import serviceUrl from "@/service/serviceUrl"
+
 
 export default class AddressService {
     static url = "http://192.168.5.16:5000/address";

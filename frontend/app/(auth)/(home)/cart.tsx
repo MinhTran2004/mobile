@@ -32,15 +32,15 @@ const Cart = ({ navigation }: any) => {
                     <Image source={require('@/assets/images/home/cart-empty.png')} />
                 }
 
-                {/* footer */}
-                <PrimaryButton
-                    label={"Thanh toán   " + ConvertMoney(viewmodel.total) + " VND"}
+            </View>
+            {/* footer */}
+            <PrimaryButton
+                    label={"Thanh toán | " + ConvertMoney(viewmodel.total) + " VND"}
                     onPress={() => navigation.navigate('payment', {
                         dataCart: viewmodel.data,
                         total: viewmodel.total,
                     })}
                     disabled={viewmodel.data.length != 0 ? false : true} />
-            </View>
         </View>
     )
 }
@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: 'white',
         paddingTop: 10,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
     },
     text_total: {
         fontWeight: '500',

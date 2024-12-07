@@ -111,35 +111,38 @@ const EditAddress = ({ route }: any) => {
                     setDialog={viewmodel.setModalCommune} />
 
                 <View style={styles.containerToogle}>
-                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15}}>Mặc định</Text>
+                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15 }}>Mặc định</Text>
                     <Switch
                         onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
                         value={viewmodel.toogle} />
                 </View>
 
-                <PrimaryButton
-                    label="Thay đổi"
-                    onPress={() => setDialog(true)} />
 
-
-                <StatusModal
-                    isActive={dialog}
-                    title="Thông báo"
-                    label="Xác nhận thanh toán"
-                    icon="none"
-                    statusLayoutButton="row"
-                    secondaryButton={{
-                        label: 'Có', onPress() {
-                            viewmodel.updateAddressById()
-                            setDialog(false)
-                        }, }}
-                    primaryButton={{
-                        label: 'Không', onPress() {
-                            setDialog(false)
-                        }, }}
-                    onClose={() => setDialog(false)}
-                />
             </View>
+            <PrimaryButton
+                label="Thay đổi"
+                onPress={() => setDialog(true)} />
+
+
+            <StatusModal
+                isActive={dialog}
+                title="Thông báo"
+                label="Xác nhận sửa địa chỉ"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        viewmodel.updateAddressById()
+                        setDialog(false)
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        setDialog(false)
+                    },
+                }}
+                onClose={() => setDialog(false)}
+            />
         </SafeAreaView>
     );
 };

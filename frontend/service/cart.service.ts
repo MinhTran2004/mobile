@@ -1,6 +1,8 @@
 import CartModel, { Cart } from "@/model/cart.model";
 import axios from "axios";
 import ProductService from "./product.service";
+import serviceUrl from "@/service/serviceUrl"
+
 
 export class CartService {
     static url = "http://192.168.5.16:5000/Cart";

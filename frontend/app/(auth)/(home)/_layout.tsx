@@ -15,6 +15,10 @@ import ScreenWebView from "./webview";
 import LayoutProfile from "../(profile)/_layout";
 import LayoutOrder from "../(order)/_layout";
 import Category from "./category";
+import OrderDetail from "../(order)/order-detail";
+import PrivacyPolicy from "../(profile)/privacy-policy";
+import ChangePassword from "../(profile)/change-password";
+
 const Stack = createNativeStackNavigator();
 
 const LayoutHome = () => {
@@ -32,6 +36,9 @@ const LayoutHome = () => {
             <Stack.Screen name="detail-coupon" component={DetailCoupon} />
             <Stack.Screen name="ScreenWebView" component={ScreenWebView} />
             <Stack.Screen name="category" component={Category}/>
+            <Stack.Screen name="detail-order" component={OrderDetail}/>
+            <Stack.Screen name="privacy-policy" component={PrivacyPolicy}/>
+            <Stack.Screen name="change-password" component={ChangePassword} />
         </Stack.Navigator>
     )
 }

@@ -5,10 +5,13 @@ import ItemModalAddress from "@/components/home/ItemModelAdress";
 import InputEditText from "@/components/InputEditText";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelCreateAddress from "@/viewmodel/home/create-address";
+import StatusModal from "@/components/StatusModal";
+import { useState } from "react";
 
 const CreateAddress = () => {
     const navigation = useNavigation();
     const viewmodel = ViewModelCreateAddress();
+    const [dialog, setDialog] = useState(false);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -106,16 +109,39 @@ const CreateAddress = () => {
                     setDialog={viewmodel.setModalCommune} />
 
                 <View style={styles.containerToogle}>
-                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15}}>Mặc định</Text>
+                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15 }}>Mặc định</Text>
                     <Switch
                         onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
                         value={viewmodel.toogle} />
                 </View>
 
-                <PrimaryButton
-                    label="Tạo mới"
-                    onPress={() => viewmodel.createAddress()} />
+
             </View>
+
+            <PrimaryButton
+                label="Tạo mới"
+                onPress={() => setDialog(true)} />
+
+            <StatusModal
+                isActive={dialog}
+                title="Thông báo"
+                label="Xác nhận sửa địa chỉ"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        viewmodel.createAddress()
+                        setDialog(false)
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        setDialog(false)
+                    },
+                }}
+                onClose={() => setDialog(false)}
+            />
+
         </SafeAreaView>
     );
 };
