@@ -33,7 +33,7 @@ export class AddressModel {
 
     static checkNullData(name: string, phone: string, province: string, district: string, commune: string, detailAddress: string, errorName: (text: string) => void, errorPhone: (text: string) => void, errorProvince: (text: string) => void, errorDistrict: (text: string) => void, errorCommune: (text: string) => void, errDetalAddress: (text: string) => void) {
         const phoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-        const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+        const nameRegex = /^[A-Za-zÀ-ÿ0-9\s,-]+$/;
 
         if (name) {
             if (!nameRegex.test(name)) {

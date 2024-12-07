@@ -13,10 +13,8 @@ const Payment = ({ route }: any) => {
     const navigation = useNavigation();
 
     const { dataCart, total, coupon } = route.params;
-    console.log(total);
     console.log(dataCart);
-    console.log(coupon);
-
+    
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <ScrollView style={{ flex: 1 }}>
@@ -83,13 +81,19 @@ const Payment = ({ route }: any) => {
                                 <List.Item
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán trực tiếp"
-                                    right={props => <TouchableOpacity onPress={() => viewmodel.setCheckBox(!viewmodel.checkBox)}>
+                                    right={props => <TouchableOpacity onPress={() => {
+                                        viewmodel.setPayment('Thanh toán trực tiếp'),
+                                            viewmodel.setCheckBox(!viewmodel.checkBox)
+                                    }}>
                                         <Checkbox status={viewmodel.checkBox ? 'checked' : 'unchecked'} />
                                     </TouchableOpacity>} />
                                 <List.Item
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán bằng VNPAY"
-                                    right={props => <TouchableOpacity onPress={() => viewmodel.setCheckBox(!viewmodel.checkBox)}>
+                                    right={props => <TouchableOpacity onPress={() => {
+                                        viewmodel.setPayment('Thanh toàn VNPAY'),
+                                            viewmodel.setCheckBox(!viewmodel.checkBox)
+                                    }}>
                                         <Checkbox status={viewmodel.checkBox ? 'unchecked' : 'checked'} />
                                     </TouchableOpacity>} />
                             </List.Section>

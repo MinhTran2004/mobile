@@ -5,19 +5,39 @@ import { useSelector } from "react-redux";
 
 const ViewModelAddress = () => {
     const [dataAddress, setDataAddress] = useState<Address[]>([]);
-    const selector = useSelector((state:any) => state.auth.account._id);
-    
-    const getAllAddress= async() => {
+    const [dialogsuccess, setDialogSuccess] = useState(false);
+    const [dialogDelete, setDialogDelete] = useState(false);
+    const [dialogError, setDialogError] = useState(false);
+
+    const selector = useSelector((state: any) => state.auth.account._id);
+
+    const getAllAddress = async () => {
         const reponse = await AddressService.getAllAdress(selector);
         setDataAddress(reponse);
     }
 
+    const deleteAddressById = async (idAddress: string) => {
+        const reponse = await AddressService.deleteAddressById(idAddress);
+            setDataAddress([])
+        if (reponse) {
+            getAllAddress();
+            setDialogDelete(false);
+            setDialogSuccess(true);
+        } else {
+            setDialogDelete(false);
+            setDialogError(true);
+        }
+
+    }
 
     useEffect(() => {
         getAllAddress();
     }, [])
+
     return {
-        dataAddress,
+        dialogDelete, dialogError, dialogsuccess,
+        setDialogDelete, setDialogError, setDialogSuccess,
+        dataAddress, deleteAddressById,
     }
 }
 

@@ -1,7 +1,6 @@
 import BillModel from "@/model/bill.model";
 import axios from "axios";
 
-
 class SeviceBill {
     static url = "http://192.168.5.16:5000/bill";
 

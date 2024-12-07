@@ -13,6 +13,20 @@ export default class AddressService {
         }
     }
 
+    static deleteAddressById = async (idAddress: string) => {
+        try {
+            const reponse = await axios.delete(`${this.url}/deleteAddressById`, {
+                params: {
+                    idAddress: idAddress
+                }
+            });
+            
+            return reponse.data.status;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     static updateAddressById = async (data: Address) => {
         try {
             const reponse = (await axios.put(`${this.url}/updateAddressById`, data)).data;
@@ -40,7 +54,7 @@ export default class AddressService {
         }
     }
 
-    static getAddressByIdAccount = async (idAccount:string) => {
+    static getAddressByIdAccount = async (idAccount: string) => {
         const reponse = await axios.get(`${this.url}/getAddressByIdAccount`, {
             params: {
                 idAccount: idAccount,
@@ -49,7 +63,7 @@ export default class AddressService {
 
         if (reponse.data.status) {
             return reponse.data.address;
-        }else{
+        } else {
             return [];
         }
 

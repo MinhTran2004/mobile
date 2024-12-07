@@ -1,6 +1,5 @@
 import { Cart } from "@/model/cart.model";
 import { Product } from "@/model/product.model";
-import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
@@ -11,11 +10,13 @@ interface Props {
     cart: Cart,
     product: Product,
     eventUpdateQuantity: (id: string, quantity: number, status: boolean) => {};
-    eventDelete: (idCart:string) => void,
+    eventDelete: (idCart: string) => void,
 }
 const ItemCart: React.FC<Props> = React.memo((props) => {
-    const selector = useSelector((state) => state.auth.account._id);
+    const selector = useSelector((state:any) => state.auth.account._id);
     const [dialogDelete, setDialogDelete] = useState(false);
+    const [dialog1, setDialog1] = useState(false);
+    const [dialog2, setDialog2] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -29,11 +30,24 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.product.price}</Text>
                     <View style={styles.containerOperation}>
-                        <TouchableOpacity onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, false) }}>
+                        <TouchableOpacity 
+                        onPress={() => { 
+                            props.cart.quantity > 1 ?
+                            props.eventUpdateQuantity(props.cart._id, props.cart.quantity, false)
+                            :
+                            setDialog1(true)
+                         }}>
                             <IconMinus size={20} />
                         </TouchableOpacity>
+
                         <Text style={styles.quantity}>{props.cart.quantity}</Text>
-                        <TouchableOpacity onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, true) }}>
+
+                        <TouchableOpacity 
+                        onPress={() => { 
+                            props.cart.quantity < 99 ?
+                            props.eventUpdateQuantity(props.cart._id, props.cart.quantity, true)
+                            :
+                            setDialog2(true)}}>
                             <IconPlus size={20} />
                         </TouchableOpacity>
                     </View>
@@ -43,22 +57,56 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
             <TouchableOpacity style={styles.containerIconX} onPress={() => setDialogDelete(true)}>
                 <IconX size={15} />
             </TouchableOpacity>
-  
+
+
+            {/* Dialog số lượng sản phẩm tối thiểu 1*/}
+            <StatusModal
+                isActive={dialog1}
+                title="Thông báo"
+                label="Số lượng tối thiểu là 1"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        setDialog1(false)
+                    },
+                }}
+                onClose={() => setDialog1(false)}
+            />
+
+            {/* Dialog số lượng sản phẩm tối đa 99*/}
+            <StatusModal
+                isActive={dialog2}
+                title="Thông báo"
+                label="Số lượng tối đa là 99"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        setDialog2(false)
+                    },
+                }}
+                onClose={() => setDialog2(false)}
+            />
 
             {/* Dialog xóa sản phẩm */}
             <StatusModal
-                isActive = {dialogDelete}
+                isActive={dialogDelete}
                 title="Thông báo"
                 label="Xóa sản phẩm khỏi giỏ hàng?"
                 icon="none"
                 statusLayoutButton="row"
-                secondaryButton={{label: 'Có' , onPress() {
-                    props.eventDelete(props.cart._id)
-                    setDialogDelete(false)      
-                },}}
-                primaryButton={{label: 'Không' , onPress() {
-                    setDialogDelete(false)
-                },}}
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        props.eventDelete(props.cart._id)
+                        setDialogDelete(false)
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        setDialogDelete(false)
+                    },
+                }}
                 onClose={() => setDialogDelete(false)}
             />
 

@@ -4,16 +4,20 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import StatusModal from "../StatusModal";
 
-const ItemAddress: React.FC<Address> = (props) => {
+interface Props{
+    address: Address,
+    viewmodel: any
+}
+
+const ItemAddress: React.FC<Props> = (props) => {
     const navigation = useNavigation();
-    const address = props.province + ", " + props.district + ", " + props.commune + ", " + props.detailAddress
-    const [dialog, setDialog] = useState(false);
+    const address = props.address.province + ", " + props.address.district + ", " + props.address.commune + ", " + props.address.detailAddress;
 
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={styles.name}>{props.name}</Text>
-                {props.status ? (
+                <Text style={styles.name}>{props.address.name}</Text>
+                {props.address.status ? (
                     <Text style={styles.default}>Mặc định</Text>
                 ) : (
                     <View style={{ width: 20, height: 2 }} />
@@ -21,34 +25,63 @@ const ItemAddress: React.FC<Address> = (props) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ marginTop: 5 }}>
-                    <Text style={styles.phone}>{props.phone}</Text>
+                    <Text style={styles.phone}>{props.address.phone}</Text>
                     <Text style={styles.describe}>{address}</Text>
                 </View>
 
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
-                <TouchableOpacity onPress={() => setDialog(true)}>
+                <TouchableOpacity onPress={() => props.viewmodel.setDialogDelete(true)}>
                     <Text style={{ color: 'red' }}>Xóa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
 
+                {/* dialog xoa */}
                 <StatusModal
-                    isActive={dialog}
+                    isActive={props.viewmodel.dialogDelete}
                     title="Thông báo"
                     label="Xác nhận xóa địa chỉ"
                     icon="none"
                     statusLayoutButton="row"
                     secondaryButton={{
                         label: 'Có', onPress() {
-                            setDialog(false)
+                            props.viewmodel.deleteAddressById(props.address._id);
                         }, }}
                     primaryButton={{
                         label: 'Không', onPress() {
-                            setDialog(false)
+                            props.viewmodel.setDialogDelete(false)
                         }, }}
-                    onClose={() => setDialog(false)}
+                    onClose={() => props.viewmodel.setDialogDelete(false)}
+                />
+
+                {/* dialog that bai */}
+                <StatusModal
+                    isActive={props.viewmodel.dialogError}
+                    title="Thông báo"
+                    label="Xóa địa chỉ thất bại"
+                    icon="none"
+                    statusLayoutButton="single"
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            props.viewmodel.setDialogError(false)
+                        }, }}
+                    onClose={() => props.viewmodel.setDialogError(false)}
+                />
+
+                {/* dialog thanh cong */}
+                <StatusModal
+                    isActive={props.viewmodel.dialogsuccess}
+                    title="Thông báo"
+                    label="Xóa địa chỉ thành công"
+                    icon="none"
+                    statusLayoutButton="single"
+                    primaryButton={{
+                        label: 'OK', onPress() {
+                            props.viewmodel.setDialogSuccess(false)
+                        }, }}
+                    onClose={() => props.viewmodel.setDialogSuccess(false)}
                 />
 
 

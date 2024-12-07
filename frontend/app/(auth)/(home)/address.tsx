@@ -15,7 +15,7 @@ const Address = () => {
 
                 <FlatList
                     data={viewModel.dataAddress}
-                    renderItem={({ item }) => <ItemAddress {...item}/>} />
+                    renderItem={({ item }) => <ItemAddress address={item} viewmodel={viewModel}/>} />
 
                 <PrimaryButton
                     label="Thêm địa chỉ mới"

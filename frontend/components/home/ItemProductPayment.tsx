@@ -4,8 +4,20 @@ import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
-    cart: Cart,
-    product: Product,
+    "__v": 0,
+    "_id": "6721822c741c0a7f0b1811dc",
+    "createdAt": "2024-10-30T00:47:40.046Z",
+    "describe": "3 Miếng Gà Giòn Cay/Gà Truyền Thống/Gà Giòn Không Cay",
+    "discount": "95000",
+    "idCategory": "Gà Rán",
+    "idUser": "",
+    "image": "https://static.kfcvietnam.com.vn/images/items/lg/3-Fried-Chicken.jpg?v=g21eZ4",
+    "name": "3 Miếng Gà Rán",
+    "price": "104000",
+    "quantity": "100",
+    "quantityCart": 3,
+    "rate": "5",
+    "sold": "0",
 }
 
 const ItemProductPayment: React.FC<Props> = (props) => {

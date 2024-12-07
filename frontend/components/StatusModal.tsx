@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Modal, StyleSheet, Text, View } from "react-native";
+import { Image, Modal, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import IconError from '@/assets/images/modal/icon-error.svg';
 import ButtonModel from "./ButtonModel";
 
@@ -36,7 +36,7 @@ const StatusModal: React.FC<Props> = (props) => {
             case 'row': return <View style={{ flexDirection: 'row', gap: 10 }}>
                 {props.primaryButton ?
                     <ButtonModel
-                        buttonStyle={{ backgroundColor: '#fff', borderWidth: 0.5, borderColor: '#4C1B1B'}}
+                        buttonStyle={{ backgroundColor: '#fff', borderWidth: 0.5, borderColor: '#4C1B1B' }}
                         textStyle={{ color: 'black', fontWeight: 600 }}
                         label={props.primaryButton.label}
                         status={props.statusLayoutButton}
@@ -66,12 +66,12 @@ const StatusModal: React.FC<Props> = (props) => {
             visible={props.isActive}
             transparent={true}
             onRequestClose={() => props.onClose()}
-            animationType="slide"
+            animationType="fade"
         >
             <View style={styles.modalBackground}>
                 <View style={styles.modalContainer}>
                     <SelectIcon />
-                    <View style={{ gap: 12 }}>
+                    <View style={{ gap: 5 }}>
                         <Text style={styles.title}>{props.title}</Text>
                         <Text style={styles.content}>{props.label}</Text>
                     </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         maxWidth: '90%',
         minWidth: '60%',
         alignItems: 'center',
-        gap: 20,
+        gap: 10,
     },
 
     title: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        fontSize: 14,
+        fontSize: 15,
         textAlign: 'center',
     },
 

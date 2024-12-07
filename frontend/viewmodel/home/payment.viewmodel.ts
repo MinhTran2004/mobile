@@ -8,6 +8,7 @@ const ViewModelPayment = () => {
     const [detailAddress, setDetailAddress] = useState("")
     const [checkBox, setCheckBox] = useState(true);
     const [dialog, setDialog] = useState(false);
+    const [payment, setPayment] = useState('Thanh toán trực tiếp');
 
     const idAccount = useSelector((state: any) => state.auth.account._id)
 
@@ -25,10 +26,15 @@ const ViewModelPayment = () => {
         getAddressByIdAccount();
     }, [detailAddress])
 
+    const createPaymentURL = async() => {
+        
+    }
+
+
 
     return {
-        address, detailAddress, checkBox, dialog,
-        setCheckBox, setDialog,
+        address, detailAddress, checkBox, dialog, payment,
+        setCheckBox, setDialog, setPayment,
     }
 }
 

@@ -8,6 +8,10 @@ import { FlatList, Image, StyleSheet, View } from "react-native"
 const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
 
+    // const data = viewmodel.data.map((item) => {
+    //     return { quantityCart: item.cart.quantity , ...item.product };
+    // })
+    
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
