@@ -45,6 +45,20 @@ router.get(`/getAddressByIdAccount`, async (req, res) => {
     }
 })
 
+router.delete('/deleteAddressById', async (req, res) => {
+    const { idAddress } = req.query;
+
+    const reponse = await Address.findByIdAndDelete(idAddress);
+    console.log(reponse);
+    
+    if (reponse) {
+        res.send({ status: true })
+    } else {
+        res.send({ status: false })
+    }
+
+})
+
 router.put('/updateAddressById', async (req, res) => {
     const data = req.body;
     if (data.status) {
