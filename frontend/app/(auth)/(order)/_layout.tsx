@@ -5,7 +5,6 @@ import OrderCompleted from './order-completed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OrderDetail from './order-detail';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../(home)';
 import { IconHome, IconShoppingCart, IconUser } from 'tabler-icons-react-native';
 import LayoutProfile from '../(profile)/_layout';
 import LayoutHome from '../(home)/_layout';

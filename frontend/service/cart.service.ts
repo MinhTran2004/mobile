@@ -1,7 +1,6 @@
 import CartModel, { Cart } from "@/model/cart.model";
 import axios from "axios";
 import ProductService from "./product.service";
-import serviceUrl from "@/service/serviceUrl"
 
 
 export class CartService {

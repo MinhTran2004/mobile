@@ -1,6 +1,5 @@
 import { Address, AddressModel } from "@/model/address.model";
 import axios from "axios";
-import serviceUrl from "@/service/serviceUrl"
 
 
 export default class AddressService {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import serviceUrl from "@/service/serviceUrl"
 
 
 class ProductService {
