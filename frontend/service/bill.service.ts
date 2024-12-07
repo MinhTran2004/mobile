@@ -1,9 +1,11 @@
 import BillModel from "@/model/bill.model";
 import axios from "axios";
+import serviceUrl from "@/service/serviceUrl"
+
 
 
 class SeviceBill {
-    static url = "http://192.168.5.26:5000/bill";
+    static url = `http:/${serviceUrl.ipv4}:5000/bill`;
 
     static createPaymentURL = async (data: BillModel) => {
         try {

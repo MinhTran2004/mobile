@@ -26,7 +26,7 @@ const ItemAddress: React.FC<Address> = (props) => {
                 </View>
 
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 20 }}>
                 <TouchableOpacity onPress={() => setDialog(true)}>
                     <Text style={{ color: 'red' }}>Xóa</Text>
                 </TouchableOpacity>

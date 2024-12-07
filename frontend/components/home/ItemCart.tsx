@@ -2,7 +2,7 @@ import { Cart } from "@/model/cart.model";
 import { Product } from "@/model/product.model";
 import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import { IconMinus, IconPlus, IconX } from "tabler-icons-react-native";
 import StatusModal from "../StatusModal";
@@ -29,19 +29,19 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.product.price}</Text>
                     <View style={styles.containerOperation}>
-                        <TouchableOpacity onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, false) }}>
-                            <IconMinus size={20} />
+                        <TouchableOpacity style={styles.ic_quality} onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, false) }}>
+                            <IconMinus size={16} color="#fff" />
                         </TouchableOpacity>
                         <Text style={styles.quantity}>{props.cart.quantity}</Text>
-                        <TouchableOpacity onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, true) }}>
-                            <IconPlus size={20} />
+                        <TouchableOpacity style={styles.ic_quality} onPress={() => { props.eventUpdateQuantity(props.cart._id, props.cart.quantity, true) }}>
+                            <IconPlus size={16} color="#fff"  />
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
 
             <TouchableOpacity style={styles.containerIconX} onPress={() => setDialogDelete(true)}>
-                <IconX size={15} />
+                <IconX size={16} color="#000" />
             </TouchableOpacity>
   
 
@@ -72,16 +72,16 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 15,
         marginBottom: 10,
         paddingHorizontal: 13,
         paddingVertical: 15,
-        borderWidth: 1,
+        // borderWidth: 0.3,
         borderColor: '#d3cdcd',
         backgroundColor: '#F9F9F9',
         shadowColor: '#000000',
         shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.2,
+        shadowOpacity: 0.3,
         shadowRadius: 8,
         elevation: 6,
         gap: 10,
@@ -99,30 +99,43 @@ const styles = StyleSheet.create({
     },
     price: {
         width: 150,
-        fontSize: 15,
-        color: '#42bb6a',
+        fontSize: 16,
+        color: '#D17842',
         fontWeight: 'bold',
         marginTop: 5
     },
     containerOperation: {
         flexDirection: 'row',
         alignItems: 'center',
+        gap: 10
     },
     quantity: {
-        fontSize: 18,
+        fontSize: 14,
+        width: 40,
+        textAlign: 'center',
+        fontWeight: 'bold',
         color: 'black',
-        marginHorizontal: 5,
+        borderWidth: 1,
+        borderColor: '#bbbbbb',
+        paddingHorizontal: 10,
+        borderRadius: 7
     },
     containerIconX: {
         backgroundColor: '#e7e7e7',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 25,
-        height: 25,
+        width: 22,
+        height: 22,
         position: 'absolute',
         right: 0,
         top: 0,
-        borderBottomLeftRadius: 10,
+        borderBottomLeftRadius: 5,
+        borderTopRightRadius: 15
+    },
+    ic_quality: {
+        backgroundColor: '#BBBBBB',
+        padding: 2.5,
+        borderRadius: 7
     }
 })
 

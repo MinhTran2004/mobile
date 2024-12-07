@@ -14,6 +14,9 @@ import Coupon from "./coupon";
 import DetailCoupon from "./detail-coupon";
 import CreateAddress from "./create-address";
 import ScreenWebView from "./webview";
+import OrderDetail from "../(order)/order-detail";
+import PrivacyPolicy from "../(profile)/privacy-policy";
+import ChangePassword from "../(profile)/change-password";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +34,9 @@ const LayoutHome = () => {
             <Stack.Screen name="coupon" component={Coupon} />
             <Stack.Screen name="detail-coupon" component={DetailCoupon} />
             <Stack.Screen name="ScreenWebView" component={ScreenWebView} />
+            <Stack.Screen name="detail-order" component={OrderDetail}/>
+            <Stack.Screen name="privacy-policy" component={PrivacyPolicy}/>
+            <Stack.Screen name="change-password" component={ChangePassword} />
         </Stack.Navigator>
     )
 }

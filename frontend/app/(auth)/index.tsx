@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import LogoApp from "@/assets/images/logo-app.svg";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,11 +11,11 @@ const Start = ({ navigation }: any) => {
         if (selector) {
             setTimeout(() => {
                 navigation.navigate('layoutHome')
-            }, 500)
+            }, 1000)
         } else {
             setTimeout(() => {
                 navigation.navigate('welcome')
-            }, 500)
+            }, 1000)
         }
     }, [selector])
 
@@ -26,7 +26,7 @@ const Start = ({ navigation }: any) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <LogoApp />
+                <Image source={require('../../assets/images/logo-app.png')} style={{ width: 200, maxHeight: 245, top: 150 }} />
                 <Text style={styles.text}>From MD-28</Text>
             </View>
         </SafeAreaView>

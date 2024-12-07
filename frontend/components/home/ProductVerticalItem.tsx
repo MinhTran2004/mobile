@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     image: {
-        width: 110,
-        height: 110,
+        width: 100,
+        height: 100,
         borderRadius: 10,
-        objectFit: 'contain',
+        // objectFit: 'contain',
     },
     name: {
         fontWeight: 'bold',

@@ -40,11 +40,11 @@ const Profile = () => {
       <View style={{ gap: 15, paddingHorizontal: 20, }}>
         <Text style={styles.title}>Tài khoản</Text>
         <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_location.png')} style={styles.ic_profile} />} title='Địa chỉ' iconRight={<IconChevronRight />} onPress={() => { navigation.navigate('address') }} />
-        <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_lock.png')} style={styles.ic_profile} />} title='Đổi mật khẩu' iconRight={<IconChevronRight />} onPress={() => { console.log('heloooo'); }} />
+        <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_lock.png')} style={styles.ic_profile} />} title='Đổi mật khẩu' iconRight={<IconChevronRight />} onPress={() => { navigation.navigate('change-password') }} />
         <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_discount.png')} style={styles.ic_profile} />} title='Phiếu giảm giá' iconRight={<IconChevronRight />} onPress={() => { navigation.navigate('coupon') }} />
         <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_heart.png')} style={styles.ic_profile} />} title='Sản phẩm yêu thích' iconRight={<IconChevronRight />} onPress={() => { console.log('heloooo'); }} />
         <Text style={styles.title}>Cài đặt</Text>
-        <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_book.png')} style={styles.ic_profile} />} title='Chính sách quyền riêng tư' iconRight={<IconChevronRight />} onPress={() => { console.log('heloooo'); }} />
+        <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_book.png')} style={styles.ic_profile} />} title='Chính sách quyền riêng tư' iconRight={<IconChevronRight />} onPress={() => { navigation.navigate('privacy-policy') }} />
         <ItemProfile iconLeft={<Image source={require('../../../assets/images/profile/ic_logout.png')} style={styles.ic_profile} />} title='Đăng xuất' iconRight={<IconChevronRight />} onPress={() => setDialog(true)} />
       </View>
 

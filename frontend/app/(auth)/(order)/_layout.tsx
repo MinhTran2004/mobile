@@ -14,7 +14,7 @@ const LayoutOrder = () => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name='topTabs' component={TopTabs}/>
-            <Stack.Screen name='detail-order' component={OrderDetail} />
+            {/* <Stack.Screen name='detail-order' component={OrderDetail} /> */}
         </Stack.Navigator>
     )
 }

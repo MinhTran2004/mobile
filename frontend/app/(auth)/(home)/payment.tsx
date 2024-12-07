@@ -1,6 +1,6 @@
 import AppHeader from "@/components/AppHeader"
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { IconAddressBook, IconChevronRight, IconDiscount, IconWallet } from "tabler-icons-react-native"
+import { IconAddressBook, IconChevronRight, IconDiscount, IconPlus, IconWallet } from "tabler-icons-react-native"
 import { Checkbox, List } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native"
 import ViewModelPayment from "@/viewmodel/home/payment.viewmodel"
@@ -38,8 +38,12 @@ const Payment = ({ route }: any) => {
                             </TouchableOpacity>
                             :
                             // option 2 
-                            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', padding: 5 }} onPress={() => { navigation.navigate('address') }}>
-                                <Text style={styles.textButton}>Thêm địa chỉ</Text>
+                            <TouchableOpacity style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row'}} onPress={() => { navigation.navigate('address') }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1}}>
+                                    <IconPlus size={22} />
+                                    <Text style={{fontSize: 16, fontWeight: 500}}>Thêm địa chỉ</Text>
+                                </View>
+                                <IconChevronRight />
                             </TouchableOpacity>
                         }
                     </View>
@@ -99,20 +103,20 @@ const Payment = ({ route }: any) => {
                     {/* banner 4 */}
                     <View style={styles.conatiner}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text>Tạm tính</Text>
-                            <Text>20.000</Text>
+                            <Text style={styles.txtPrice}>Tạm tính</Text>
+                            <Text style={styles.txtPrice}>20.000</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text>Chi phí vận chuyển</Text>
-                            <Text>20.000</Text>
+                            <Text style={styles.txtPrice}>Chi phí vận chuyển</Text>
+                            <Text style={styles.txtPrice}>20.000</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text>Giảm giá</Text>
-                            <Text>20.000</Text>
+                            <Text style={styles.txtPrice}>Giảm giá</Text>
+                            <Text style={styles.txtPrice}>20.000</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 10, marginTop: 10 }}>
-                            <Text>Tổng tiền</Text>
-                            <Text>20.000</Text>
+                            <Text style={styles.txtPrice}>Tổng tiền</Text>
+                            <Text style={styles.txtPrice}>20.000</Text>
                         </View>
                     </View>
 
@@ -137,6 +141,7 @@ const Payment = ({ route }: any) => {
                 </View>
             </ScrollView>
             <PrimaryButton
+            styleButton={{position: 'fixed'}}
                 label="Thanh toán"
                 onPress={() => viewmodel.setDialog(true)} />
         </View>
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F9F9F9',
         borderRadius: 20,
         padding: 10,
+        gap: 5
     },
     banner1: {
         flex: 1,
@@ -172,6 +178,9 @@ const styles = StyleSheet.create({
         fontSize: 12,
         borderRadius: 999,
         color: 'white'
+    },
+    txtPrice: {
+        fontSize: 16
     }
 
 

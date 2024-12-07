@@ -45,7 +45,7 @@ const InputEditText: React.FC<Props> = (props) => {
                         value={props.value}
                         keyboardType={props.keyboardType ? "phone-pad" : "default"}
                         onChangeText={(text) => props.onChangeText(text)}
-                        style={{ width: '100%', fontSize: 16 }} />
+                        style={{ width: '100%', fontSize: 16}} />
                 </View>
                 {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{ marginVertical: 5 }} />}
             </View>

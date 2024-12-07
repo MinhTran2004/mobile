@@ -17,8 +17,7 @@ const Home = ({ navigation }: any) => {
             {/* header */}
             <View style={styles.containerHeader}>
                 <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
-                    {/* <IconUser width={40} height={40} /> */}
-                    {/* <Image source={require('../../../assets/images/home/avt_user.png')} style={{ width: 50, height: 50, borderRadius: 90 }} /> */}
+                    {/* <Image source={require('@/assets/images/home/avt_user.png')} style={{ width: 50, height: 50, borderRadius: 90 }} /> */}
                     <View style={{paddingLeft: 5}}>
                         <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Hi, Trần Công Minh</Text>
                         <Text style={{ fontSize: 16 }}>Hôm nay bạn sẽ mua gì?</Text>
