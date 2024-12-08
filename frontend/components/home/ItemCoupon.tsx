@@ -25,18 +25,31 @@ const ItemCoupon: React.FC<Props> = (props) => {
 
     const SelectImageCoupon = () => {
         switch (props.discountType) {
-            case 'FreeShip': return <Image source={require('@/assets/images/home/coupon-delivery.png')} style={{ width: 90, height: 100 }} />
-            case 'Mã giảm giá': return <Image source={require('@/assets/images/home/coupon-sale.png')} style={{ width: 90, height: 100 }} />
+            case 'FreeShip': return <Image source={require('@/assets/images/home/coupon-delivery.png')} style={{ width: 90, height: 110 }} />
+            case 'Mã giảm giá': return <Image source={require('@/assets/images/home/coupon-sale.png')} style={{ width: 90, height: 110 }} />
         }
     }
 
     return (
         <TouchableOpacity
-            style={{ flexDirection: 'row', marginBottom: 10, padding: 10, gap: 8, backgroundColor: '#F9F9F9' }}
+            style={{ flexDirection: 'row', 
+                    marginBottom: 15, 
+                    gap: 8, 
+                    backgroundColor: '#F9F9F9', 
+                    bottom: 0, 
+                    shadowColor: '#000', 
+                    elevation: 3, 
+                    borderRadius: 5 }}
             onPress={() => navigation.navigate('detail-coupon', props)}
         >
             <SelectImageCoupon />
-            <View style={{ flex: 1, justifyContent: 'space-between', paddingRight: 10 }}>
+            <View style={{
+                flex: 1,
+                justifyContent: 'space-between',
+                paddingRight: 10,
+                paddingVertical: 5,
+            }}>
+
                 <View>
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', alignItems: 'center' }}>
                         <Text style={style.name} numberOfLines={1}>{props.name}</Text>
@@ -78,7 +91,7 @@ const style = StyleSheet.create({
     name: {
         flex: 1,
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
         textAlign: 'left',
     },
     use: {

@@ -17,7 +17,7 @@ const DetailCoupon: React.FC<Props> = (props) => {
     const navigation = useNavigation();
     const coupon = props.route.params;
     console.log(coupon);
-    
+
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Chi tiết mã giảm giá" iconRight="none" onPressIconLeft={() => { navigation.goBack() }} />
@@ -59,13 +59,10 @@ const DetailCoupon: React.FC<Props> = (props) => {
                         </View>
                     </View>
                 </View>
-
-                <View style={{ position: 'absolute', width: '100%', bottom: 0, backgroundColor: 'white', padding: 10, borderTopLeftRadius: 32, borderTopRightRadius: 32 }}>
-                    <PrimaryButton
-                        label="Sử dụng"
-                        onPress={() => { navigation.navigate('payment') }}/>
-                </View>
             </View>
+            <PrimaryButton
+                label="Sử dụng"
+                onPress={() => { navigation.navigate('payment') }} />
         </View>
     )
 }

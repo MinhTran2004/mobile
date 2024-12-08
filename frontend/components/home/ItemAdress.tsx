@@ -26,7 +26,7 @@ const ItemAddress: React.FC<Address> = (props) => {
                 </View>
 
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 20 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 15 }}>
                 <TouchableOpacity onPress={() => setDialog(true)}>
                     <Text style={{ color: 'red' }}>Xóa</Text>
                 </TouchableOpacity>
@@ -85,13 +85,14 @@ const styles = StyleSheet.create({
     default: {
         textAlign: 'left',
         marginTop: 5,
-        fontSize: 12,
-        paddingHorizontal: 10,
-        paddingVertical: 3,
-        borderWidth: 0.5,
-        borderColor: 'red',
+        fontSize: 10,
+        paddingHorizontal: 5,
+        paddingVertical: 2,
+        // borderWidth: 0.5,
+        // borderColor: 'red',
+        backgroundColor: '#bbb',
         borderRadius: 5,
-        color: 'red',
+        color: '#fff',
     },
 });
 

@@ -13,7 +13,7 @@ const Coupon = ({route}:any) => {
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Mã giảm giá" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 10}}>
 
                 <FlatList
                     showsVerticalScrollIndicator={false}
