@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AppHeader from '@/components/AppHeader';
+import PrimaryButton from '@/components/PrimaryButton';
 
 const ChangePassword = ({ navigation }: any) => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -38,7 +39,7 @@ const ChangePassword = ({ navigation }: any) => {
       <View style={styles.inputContainer}>
         {/* Ô nhập mật khẩu hiện tại */}
         <View style={styles.inputWrapper}>
-          <Icon name="lock" size={20} color="#ccc" style={styles.icon} />
+          {/* <Icon name="lock" size={20} color="#ccc" style={styles.icon} /> */}
           <TextInput
             style={styles.input}
             placeholder="Nhập mật khẩu hiện tại"
@@ -63,7 +64,7 @@ const ChangePassword = ({ navigation }: any) => {
 
         {/* Ô nhập mật khẩu mới */}
         <View style={styles.inputWrapper}>
-          <Icon name="lock" size={20} color="#ccc" style={styles.icon} />
+          {/* <Icon name="lock" size={20} color="#ccc" style={styles.icon} /> */}
           <TextInput
             style={styles.input}
             placeholder="Nhập mật khẩu mới"
@@ -88,7 +89,7 @@ const ChangePassword = ({ navigation }: any) => {
 
         {/* Ô nhập lại mật khẩu mới */}
         <View style={styles.inputWrapper}>
-          <Icon name="lock" size={20} color="#ccc" style={styles.icon} />
+          {/* <Icon name="lock" size={20} color="#ccc" style={styles.icon} /> */}
           <TextInput
             style={styles.input}
             placeholder="Nhập lại mật khẩu mới"
@@ -112,9 +113,15 @@ const ChangePassword = ({ navigation }: any) => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleSave}>
+      {/* <TouchableOpacity style={styles.button} onPress={handleSave}>
         <Text style={styles.buttonText}>Lưu</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+       <PrimaryButton
+            styleButton={{position: 'fixed', bottom: 0}}
+                label="Thanh toán"
+                onPress={handleSave} />
+
+
     </KeyboardAvoidingView>
   );
 };
@@ -125,18 +132,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   inputContainer: {
-    padding: 20,
+    flex: 1,
+    paddingHorizontal: 20,
     marginTop: 10,
+    gap: 20
   },
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 15,
-    height: 50,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 32,
+    paddingHorizontal: 15,
+    paddingVertical: 5
   },
   icon: {
     marginRight: 10,
@@ -148,7 +155,6 @@ const styles = StyleSheet.create({
   eyeButtonWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 5,
   },
   eyeButtonText: {
     fontSize: 14,

@@ -24,7 +24,7 @@ const Register = ({ navigation }: any) => {
                         </View>
                     </View>
 
-                    <View style={{gap: 15}}>
+                    <View style={{gap: 20}}>
                         <InputEditText placeholder={"Nhập tên dùng"} value={viewmodel.username} onChangeText={(text) => viewmodel.setUsername(text)} textError={viewmodel.errorUsername} />
                         <InputEditText placeholder={"Nhập tài khoản"} value={viewmodel.account} onChangeText={(text) => viewmodel.setAccount(text)} textError={viewmodel.errorAccount} />
                         <InputEditText placeholder={"Nhập mật khẩu"} value={viewmodel.password} onChangeText={(text) => viewmodel.setPassword(text)} textError={viewmodel.errorPassword} />

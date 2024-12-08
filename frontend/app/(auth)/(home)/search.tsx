@@ -21,11 +21,12 @@ const Search = ({ navigation }: any) => {
             <View style={styles.container}>
                 {viewmodel.dataProduct?.length != 0 ?
                     <FlatList
+                        style={{top: 5}}
                         showsVerticalScrollIndicator={false}
                         data={viewmodel.dataProduct}
                         renderItem={({ item }) => <ProductVerticalItem key={item._id} {...item} iconLeft={true} />} />
                     :
-                    <Text style={{paddingLeft: 15}}>Không có sản phẩm</Text>
+                    <Text style={{textAlign: 'center', fontSize: 16, color: '#909090', top: 10}}>Không có sản phẩm cần tìm</Text>
                 }
             </View>
         </View>

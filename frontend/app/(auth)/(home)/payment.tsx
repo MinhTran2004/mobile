@@ -16,7 +16,7 @@ const Payment = ({ route }: any) => {
     console.log(dataCart);
     
     return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>
                 <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 120, paddingHorizontal: 10, gap: 10 }}>
@@ -118,7 +118,7 @@ const Payment = ({ route }: any) => {
                             <Text style={styles.txtPrice}>Giảm giá</Text>
                             <Text style={styles.txtPrice}>20.000</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 10, marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 10, marginTop: 10, borderColor: '#bbb' }}>
                             <Text style={styles.txtPrice}>Tổng tiền</Text>
                             <Text style={styles.txtPrice}>20.000</Text>
                         </View>

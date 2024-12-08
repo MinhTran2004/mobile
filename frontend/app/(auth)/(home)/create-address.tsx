@@ -24,7 +24,6 @@ const CreateAddress = () => {
                     value={viewmodel.name}
                     textError={viewmodel.errorName}
                     onChangeText={viewmodel.setName}
-                    style={styles.input_txt}
                 />
                 <InputEditText
                     placeholder="Số điện thoại"
@@ -32,7 +31,6 @@ const CreateAddress = () => {
                     value={viewmodel.phone}
                     textError={viewmodel.errorPhone}
                     onChangeText={viewmodel.setPhone}
-                    style={styles.input_txt}
                 />
 
                 <Text style={styles.label}>Thông tin địa chỉ</Text>
@@ -83,7 +81,6 @@ const CreateAddress = () => {
                     textError={viewmodel.errorDetailAddress}
                     value={viewmodel.detailAddress}
                     onChangeText={viewmodel.setDetailAddress}
-                    style={styles.input_txt}
                 />
 
                 {/* modal */}
@@ -109,7 +106,7 @@ const CreateAddress = () => {
                     setDialog={viewmodel.setModalCommune} />
 
                 <View style={styles.containerToogle}>
-                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold', paddingLeft: 15 }}>Mặc định</Text>
+                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold'}}>Mặc định</Text>
                     <Switch
                         onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
                         value={viewmodel.toogle} />
@@ -119,7 +116,7 @@ const CreateAddress = () => {
             </View>
 
             <PrimaryButton
-                label="Tạo mới"
+                label="Thêm địa chỉ"
                 onPress={() => setDialog(true)} />
 
             <StatusModal
@@ -151,28 +148,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         paddingHorizontal: 20,
+        gap: 20
     },
     label: {
         fontSize: 18,
         color: "#000",
-        marginVertical: 15,
     },
     containerToogle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         borderWidth: 1,
-        paddingHorizontal: 5,
+        paddingHorizontal: 20,
         borderColor: "#f9f9f9",
-        borderRadius: 10,
+        borderRadius: 32,
         backgroundColor: '#f9f9f9'
-    },
-    input_txt: {
-        backgroundColor: '#fff',
-        borderBottomWidth: 1,
-        borderColor: '#d9d9d9',
-        paddingLeft: -15,
-        borderRadius: 0
     }
 });
 

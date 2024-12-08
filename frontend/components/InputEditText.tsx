@@ -27,10 +27,10 @@ const InputEditText: React.FC<Props> = (props) => {
     }
 
     return (
-        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center',}}>
             {props.iconLeft === 'search' ?
                 <TouchableOpacity onPress={() => naviagtion.goBack()} style={{ paddingHorizontal: 5 }}>
-                    <IconChevronLeft size={30} />
+                    <IconChevronLeft size={26} />
                 </TouchableOpacity>
                 :
                 <View />}
@@ -47,7 +47,7 @@ const InputEditText: React.FC<Props> = (props) => {
                         onChangeText={(text) => props.onChangeText(text)}
                         style={{ width: '100%', fontSize: 16}} />
                 </View>
-                {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{ marginVertical: 5 }} />}
+                {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{}} />}
             </View>
         </View>
     )

@@ -11,7 +11,7 @@ const Address = () => {
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
-            <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
+            <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 10, paddingBottom: 90 }}>
 
                 <FlatList
                     data={viewModel.dataAddress}

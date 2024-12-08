@@ -55,7 +55,7 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
             </View>
 
             <TouchableOpacity style={styles.containerIconX} onPress={() => setDialogDelete(true)}>
-                <IconX size={16} color="#000" />
+                <IconX size={14} color="#fff" />
             </TouchableOpacity>
 
 
@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 13,
         paddingVertical: 15,
-        // borderWidth: 0.3,
+        borderWidth: 0.3,
         borderColor: '#d3cdcd',
         backgroundColor: '#F9F9F9',
-        shadowColor: '#000000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
+        shadowColor: '#000',
+        // shadowOffset: { width: 0, height: 10 },
+        // shadowOpacity: 0.3,
+        // shadowRadius: 8,
+        elevation: 4,
         gap: 10,
     },
     image: {
@@ -169,16 +169,14 @@ const styles = StyleSheet.create({
         borderRadius: 7
     },
     containerIconX: {
-        backgroundColor: '#e7e7e7',
+        backgroundColor: '#BBBBBB',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 22,
-        height: 22,
+        padding: 2.5,
         position: 'absolute',
-        right: 0,
-        top: 0,
-        borderBottomLeftRadius: 5,
-        borderTopRightRadius: 15
+        right: 10,
+        top: 10,
+        borderRadius: 90,
     },
     ic_quality: {
         backgroundColor: '#BBBBBB',
