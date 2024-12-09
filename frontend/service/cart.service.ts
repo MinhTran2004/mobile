@@ -17,26 +17,34 @@ export class CartService {
 
     static getAllProductInCart = async (idAccount: string) => {
         try {
-            const reponse = (await axios.get(`${this.url}/getAllProductInCart?limit=${10}`, {
+            const response = await axios.get(`${this.url}/getAllProductInCart?limit=10`, {
                 params: {
                     idAccount: idAccount,
                 }
-            })).data;
+            });
+            
+            // Chắc chắn rằng response.data là mảng
+            const reponse = response.data;
+    
             if (reponse) {
-                const promises = await reponse.map(async (item: Cart) => {
+                // Xử lý tất cả các sản phẩm trong giỏ hàng
+                const promises = reponse.map(async (item: Cart) => {
                     const product = await ProductService.getProductById(item.idProduct);
                     return { cart: item, product };
                 });
-                const promise = await Promise.all(promises);
-                return promise;
+    
+                // Đợi tất cả các Promise hoàn thành và trả về mảng đã được xử lý
+                const result = await Promise.all(promises);
+                return result;  // Trả về mảng kết quả đã có đầy đủ thông tin giỏ hàng và sản phẩm
             } else {
-                return [];
+                return [];  // Trả về mảng rỗng nếu không có sản phẩm
             }
         } catch (err) {
             console.log(err);
-            return [];
+            return [];  // Trả về mảng rỗng nếu có lỗi
         }
     }
+    
 
     static updateQuantityById = async (id: string, idAccount:string, quantity: number) => {
         try {

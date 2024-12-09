@@ -41,29 +41,31 @@ export const ViewModelCart = () => {
     }
 
     const calculate = (reponse: any) => {
-        const sum = reponse.reduce((sum:any, item:any) => {
+        const sum = reponse.reduce((sum: any, item: any) => {
             return sum + (item.cart.quantity * item.product.price);
         }, 0)
         // const formattedAmount = sum.toLocaleString('vi-VN');
         setToTal(sum);
     }
 
-    const deleteCartById = async (idCart:string) => {
+    const deleteCartById = async (idCart: string) => {
         const reponse = await CartService.deleteCartById(idCart);
-        if(reponse){
+        if (reponse) {
             await getAllProductInCart();
-        }else{
+        } else {
             console.log('Xóa thất bại');
         }
-        return ;
+        return;
     }
 
+
     useEffect(() => {
-        getAllProductInCart();
+        getAllProductInCart()
+
     }, []);
 
     return {
         data, total,
-        updateQuantityById,deleteCartById,
+        updateQuantityById, deleteCartById,
     }
 }

@@ -1,39 +1,47 @@
+interface dataCoupon {
+    _id: string,
+    disscount: string,
+}
+
+interface dataAddress {
+    name: string,
+    phone: string,
+    detailAddress: string,
+};
+
 export interface Bill {
     _id: string;
-    idUser: string;
-    idCart: string[];
-    idDelivery: string;
-    idAdress: string;
-    idCoupon: string
+    account: string;
+    dataProduct: string[];
     paymentMethod: string;
-    totalCost: number;
+    transport: string;
+    address: dataAddress;
+    coupon: dataCoupon;
+    totalCost: string;
+    createAt:string;
+    status: string;
 }
 
 export default class BillModel {
+    account: string;
+    dataProduct: string[];
+    paymentMethod: string;
+    transport: string;
+    address: dataAddress;
+    coupon: dataCoupon;
+    totalCost: string;
+    createAt:string;
+    status: string;
 
-    idUser?: string; // co
-    idCart?: string[]; // co
-    paymentMethod?: string;//co
-    idDelivery?: string;//co
-    idAddress?: string;// co 
-    idCoupon?: string;// co 
-    totalCost?: number; // co
-    status?: string; // co
-    constructor(idUser: string,
-        totalCost: number,
-        idCart: string[],
-        status: string,
-        idDelivery: string,
-        idAddress: string,
-        paymentMethod: string,
-        idCoupon?: string) {
-        this.idUser = idUser;
-        this.idCart = idCart;
-        this.idDelivery = idDelivery;
-        this.idAddress = idAddress;
+    constructor(account: string, dataProduct: string[], paymentMethod: string, transport: string, address: dataAddress, coupon: dataCoupon, totalCost: string, createAt: string,status: string) {
+        this.account = account;
+        this.dataProduct = dataProduct;
         this.paymentMethod = paymentMethod;
-        this.idCoupon  = idCoupon;
-        this.totalCost = totalCost
+        this.transport = transport;
+        this.address = address;
+        this.coupon = coupon;
+        this.totalCost = totalCost;
+        this.createAt = createAt;
         this.status = status;
     }
 }

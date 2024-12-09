@@ -20,6 +20,12 @@ router.get('/getAllProductInCart', async (req, res) => {
     res.send(reponse);
 })
 
+router.get('/getCartById', async (req, res) => {
+    const id = req.query;
+    const reponse = await Cart.findById(id);
+    res.send(reponse);
+})
+
 router.patch('/updateQuantityById', async (req, res) => {
     const { id, quantity } = req.body;
     const cart = await Cart.findByIdAndUpdate(id, { quantity: quantity });

@@ -13,7 +13,6 @@ interface Props {
     eventDelete: (idCart: string) => void,
 }
 const ItemCart: React.FC<Props> = React.memo((props) => {
-    const selector = useSelector((state:any) => state.auth.account._id);
     const [dialogDelete, setDialogDelete] = useState(false);
     const [dialog1, setDialog1] = useState(false);
     const [dialog2, setDialog2] = useState(false);

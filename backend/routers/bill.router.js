@@ -1,18 +1,13 @@
 const express = require('express');
-const Address = require('../Model/address');
-const Product = require('../Model/product');
-const Cart = require('../Model/cart');
-const Bill = require('../Model/bill');
-const Account = require('../Model/account');
-const Coupon = require('../Model/coupon');
-
+const Address = require('../model/address');
+const Cart = require('../model/cart');
+const Bill = require('../model/bill');
+const Account = require('../model/account');
 
 let moment = require('moment')
 let dateFormat = require('date-format')
 var config = require('../vnPay/default.json');
 const router = express.Router();
-
-
 
 // console.log("Configuring", config);
 
@@ -32,14 +27,10 @@ function sortObject(obj) {
     return sorted;
 }
 let globalDataBill = {};
-router.post('/create_payment_url', async (req, res) => {
 
+router.post('/create_payment_url', async (req, res) => {
     globalDataBill = req.body;
 
-    if (!globalDataBill.idUser || !globalDataBill.idCart || !globalDataBill.idAddress || !globalDataBill.totalCost || !globalDataBill.paymentMethod || !globalDataBill.status) {
-
-        return res.status(400).json({ message: 'Vui lòng cung cấp đầy đủ thông tin!' });
-    }
     var ipAddr =
         req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
@@ -101,6 +92,7 @@ router.post('/create_payment_url', async (req, res) => {
         vnpUrl: vnpUrl,
     });
 })
+
 router.post('/', async (req, res) => {
     try {
         const {
@@ -330,21 +322,21 @@ router.get("/getbill/:idUser", async (req, res) => {
         }
 
         const bills = await Bill.find({ idUser: idUser, status })
-        .populate({
-            path: "idCart",
-            populate: {
-                path: "idProduct",
-                // select: "name price description", 
-            },
-        })
-        .populate("idAddress")
-        .populate("idCoupon")
+            .populate({
+                path: "idCart",
+                populate: {
+                    path: "idProduct",
+                    // select: "name price description", 
+                },
+            })
+            .populate("idAddress")
+            .populate("idCoupon")
 
 
         if (!bills.length) {
             return res.status(404).json({ message: "Không có đơn hàng nào " });
         }
- 
+
 
         return res.status(200).json({ bills: bills });
 
@@ -355,21 +347,21 @@ router.get("/getbill/:idUser", async (req, res) => {
 });
 
 router.put('/editStatusBill/:id', async (req, res) => {
-    const billId = req.params.id; 
-    const { status } = req.body; 
+    const billId = req.params.id;
+    const { status } = req.body;
     console.log("Bill Id: " + billId);
     console.log("status " + status);
-    
+
     if (!status) {
         return res.status(400).json({ message: 'Status is required.' });
     }
 
     try {
-        
+
         const updatedBill = await Bill.findByIdAndUpdate(
             billId,
             { status },
-            { new: true } 
+            { new: true }
         );
 
         if (!updatedBill) {

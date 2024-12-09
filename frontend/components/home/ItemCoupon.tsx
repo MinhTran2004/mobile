@@ -30,14 +30,16 @@ const ItemCoupon: React.FC<Props> = (props) => {
 
     return (
         <TouchableOpacity
-            style={{ flexDirection: 'row', 
-                    marginBottom: 15, 
-                    gap: 8, 
-                    backgroundColor: '#F9F9F9', 
-                    bottom: 0, 
-                    shadowColor: '#000', 
-                    elevation: 3, 
-                    borderRadius: 5 }}
+            style={{
+                flexDirection: 'row',
+                marginBottom: 15,
+                gap: 8,
+                backgroundColor: '#F9F9F9',
+                bottom: 0,
+                shadowColor: '#000',
+                elevation: 3,
+                borderRadius: 5
+            }}
             onPress={() => navigation.navigate('detail-coupon', props)}
         >
             <SelectImageCoupon />
@@ -51,7 +53,26 @@ const ItemCoupon: React.FC<Props> = (props) => {
                 <View>
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', alignItems: 'center' }}>
                         <Text style={style.name} numberOfLines={1}>{props.name}</Text>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate('payment', {
+                                dataCart: props.dataCart,
+                                total: props.total,
+                                coupon: {
+                                    _id: props._id,
+                                    name: props.name,
+                                    image: props.image,
+                                    discountType: props.discountType,
+                                    discountValue: props.discountValue,
+                                    maxDisCount: props.maxDisCount,
+                                    quantity: props.quantity,
+                                    condition: props.condition,
+                                    startDate: props.startDate,
+                                    endDate: props.endDate,
+                                    describe: props.describe,
+                                    status: props.status,
+                                }
+                            })
+                        }}>
                             <Text style={style.use}>Sử dụng</Text>
                         </TouchableOpacity>
                     </View>

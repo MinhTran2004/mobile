@@ -13,8 +13,7 @@ const Payment = ({ route }: any) => {
     const navigation = useNavigation();
 
     const { dataCart, total, coupon } = route.params;
-    console.log(dataCart);
-    
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>
@@ -36,10 +35,10 @@ const Payment = ({ route }: any) => {
                             </TouchableOpacity>
                             :
                             // option 2 
-                            <TouchableOpacity style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row'}} onPress={() => { navigation.navigate('address') }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1}}>
+                            <TouchableOpacity style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row' }} onPress={() => { navigation.navigate('address') }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1 }}>
                                     <IconPlus size={22} />
-                                    <Text style={{fontSize: 16, fontWeight: 500}}>Thêm địa chỉ</Text>
+                                    <Text style={{ fontSize: 16, fontWeight: 500 }}>Thêm địa chỉ</Text>
                                 </View>
                                 <IconChevronRight />
                             </TouchableOpacity>
@@ -145,9 +144,10 @@ const Payment = ({ route }: any) => {
                 </View>
             </ScrollView>
             <PrimaryButton
-            styleButton={{position: 'fixed'}}
+                styleButton={{ position: 'fixed' }}
                 label="Thanh toán"
-                onPress={() => viewmodel.setDialog(true)} />
+                onPress={() => { viewmodel.createPaymentURL(dataCart, total, coupon) }} />
+            {/* setDialog(true) */}
         </View>
 
     )
