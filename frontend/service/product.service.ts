@@ -4,9 +4,9 @@ import axios from "axios";
 class ProductService {
     static url = "http://192.168.5.16:5000/product";
 
-    static getAllProductByLimit = async (page:number) => {
+    static getAllProductByLimit = async () => {
         try {
-            const reponse = (await axios(`${this.url}/getAllProductByLimit?limit=${page}`)).data;
+            const reponse = (await axios(`${this.url}/getAllProductByLimit?limit=${10}`)).data;
             return reponse;
         } catch (err) {
             console.log(err);

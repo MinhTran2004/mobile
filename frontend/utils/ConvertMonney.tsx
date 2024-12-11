@@ -1,4 +1,4 @@
-export const formatNumber = (input) => {
+export const formatNumber = (input:any) => {
     // Chuyển đổi input thành số nếu nó là chuỗi
     const number = typeof input === 'string' ? parseFloat(input) : input;
   

@@ -1,13 +1,11 @@
-import { Button, FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import IconCart from "@/assets/images/home/cart-icon.svg";
 import ItemProductCategory from "@/components/home/ItemProductCategory";
-import IconProduct from "@/assets/images/home/product-icon.svg";
 import PagerView from "react-native-pager-view";
 import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
-import { ActivityIndicator } from "react-native-paper";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
@@ -41,7 +39,7 @@ const Home = ({ navigation }: any) => {
             </View>
 
             {/* body  */}
-            {/* <ScrollView style={{ flex: 1}} > */}
+            <ScrollView style={{ flex: 1, backgroundColor: 'white' }} >
                 <View style={styles.container}>
 
                     <View style={styles.containerBody}>
@@ -131,17 +129,15 @@ const Home = ({ navigation }: any) => {
                             </View>
 
                             <FlatList
+                                scrollEnabled={false}
                                 showsHorizontalScrollIndicator={false}
                                 data={viewmodel.dataProductVertical}
-                                onEndReached={viewmodel.handleEndReached}
-                                onEndReachedThreshold={0.5}
-                                ListFooterComponent={viewmodel.loading ? <ActivityIndicator size={"large"} /> : <View/>}
-                                renderItem={({ item }) => <ProductVerticalItem key={item._id} {...item}/>} 
-                                keyExtractor={item => item._id.toString()}/>
+                                renderItem={({ item }) => <ProductVerticalItem key={item._id} {...item} />}
+                                keyExtractor={item => item._id.toString()} />
                         </View>
                     </View>
                 </View>
-            {/* </ScrollView> */}
+            </ScrollView>
         </View>
     )
 }

@@ -1,5 +1,6 @@
+import { ConvertMoney } from "@/constants/convert-monney";
 import { Product } from "@/model/product.model";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {  useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const ProductVerticalItem: React.FC<Product> = (props) => {
@@ -15,7 +16,7 @@ const ProductVerticalItem: React.FC<Product> = (props) => {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                    <Text style={styles.price}>{props.price}</Text>
+                    <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
                     <Text>Đã bán {props.rate}</Text>
 
                 </View>
