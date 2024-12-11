@@ -61,10 +61,22 @@ router.delete('/deleteAddressById', async (req, res) => {
 
 router.put('/updateAddressById', async (req, res) => {
     const data = req.body;
+    console.log(data);
+
     if (data.status) {
         await Address.updateMany({ status: true }, { $set: { status: false } });
         const reponse = await Address.findByIdAndUpdate(data._id, data);
-
+        console.log(reponse);
+        
+        if (reponse.lenght != 0) {
+            res.send({ status: true });
+        } else {
+            res.send({ status: false });
+        }
+    }else{
+        const reponse = await Address.findByIdAndUpdate(data._id, data);
+        console.log(reponse);
+        
         if (reponse.lenght != 0) {
             res.send({ status: true });
         } else {

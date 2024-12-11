@@ -5,7 +5,11 @@ const router = express.Router();
 
 router.get('/getAllProductByLimit', async (req, res) => {
     const limit = req.query.limit;
-    const product = await Product.find().skip(0).limit(3);
+    
+    const offset = (limit - 1) * 10; 
+    console.log(offset);
+    
+    const product = await Product.find().skip(offset).limit(10);
     res.send(product);
 })
 

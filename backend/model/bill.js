@@ -1,16 +1,29 @@
 const mongoose = require('mongoose');
 
 const BillSchema = new mongoose.Schema({
-    idUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // có 
-    idCart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }], // có 
-    idDelivery :{ type: String, required: false}, // có 
-    idAddress: { type: mongoose.Schema.Types.ObjectId, ref: "Address" }, // có 
-    idCoupon: { type: mongoose.Schema.Types.ObjectId, ref: "Coupon" , required: false }, // có 
-    totalCost: { type: Number, required: true },// có 
-    paymentMethod: { type: String, required: true }, // có 
-    status: { type: String, required: true }, // có 
-}, {
-    timestamps: true
+    account: { type: String, required: true },
+    address: {
+        name: { type: String, required: true },
+        phone: { type: String, required: true },
+        detailAddress: { type: String, required: true },
+    },
+    dataProduct: [{
+        idProduct: { type: String, required: true },
+        name: { type: String, required: true },
+        category: { type: String, required: true },
+        image: { type: String, required: true },
+        price: { type: String, required: true },
+        quantityCart: { type: String, required: true },
+    }],
+    coupon: {
+        _id: { type: String},
+        disscount: { type: String }
+    },
+    paymentMethod: { type: String, required: true },
+    transport: { type: String, required: true },
+    totalCost: { type: String, required: true },
+    createAt: { type: String, required: true },
+    status: { type: String, required: true },
 })
 
 const Bill = mongoose.model('Bill', BillSchema);

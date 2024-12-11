@@ -9,8 +9,33 @@ let dateFormat = require('date-format')
 var config = require('../vnPay/default.json');
 const router = express.Router();
 
-// console.log("Configuring", config);
 
+router.get('/getAllBillByStatus', async (req, res) => {
+    const { status } = req.query;
+
+    const reponse = await Bill.find({ status: status }).limit(10);
+    if (reponse) {
+        res.send({ status: true, data: reponse });
+    } else {
+        res.send({ status: false });
+    }
+
+})
+
+router.delete('/deleteBillById/:id', async (req, res) => {
+    const { id } = req.params;
+    
+    const reponse = await Bill.findByIdAndDelete(id);
+    if (reponse) {
+        res.send({ status: true });
+    } else {
+        res.send({ status: false })
+    }
+})
+
+
+
+// set up VNPAY
 function sortObject(obj) {
     let sorted = {};
     let str = [];
@@ -95,70 +120,61 @@ router.post('/create_payment_url', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const {
-            idUser,
-            idCart,
-            idDelivery,
-            idAddress,
-            idCoupon,
-            totalCost,
-            paymentMethod,
-            status,
-        } = req.body;
+        const data = req.body;
+        console.log(data);
 
-
-        if (!idUser || !idCart || !idAddress || !totalCost || !paymentMethod || !status) {
-            return res.status(400).json({ message: 'Vui lòng cung cấp đầy đủ thông tin!' });
-        }
 
         //check cart 
-        for (const cart in idCart) {
-            try {
-                const chheckCart = await Cart.findById(idCart[cart]);
-                if (!chheckCart) {
-                    return res.status(404).json({
-                        message: `cart với id  ${idCart[cart]} không tồn tại `,
-                    });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Đã xảy ra lỗi kiểm tra cart', error });
-            }
-        }
+        // for (const cart in idCart) {
+        //     try {
+        //         const chheckCart = await Cart.findById(idCart[cart]);
+        //         if (!chheckCart) {
+        //             return res.status(404).json({
+        //                 message: `cart với id  ${idCart[cart]} không tồn tại `,
+        //             });
+        //         }
+        //     } catch (error) {
+        //         return res.status(500).json({ message: 'Đã xảy ra lỗi kiểm tra cart', error });
+        //     }
+        // }
         //check tai khoan 
-        const account = await Account.findById(idUser);
-        if (!account) {
-            return res.status(404).json({ message: "Không tìm thấy người dùng" });
-        }
+        // const account = await Account.findById(idUser);
+        // if (!account) {
+        //     return res.status(404).json({ message: "Không tìm thấy người dùng" });
+        // }
         // check dia chi 
-        const addresses = await Address.find({ idUser });
-        if (addresses.length === 0) {
-            return res.status(404).json({ message: "Không tìm thấy địa chỉ nào cho người dùng này." });
-        }
+        // const addresses = await Address.find({ idUser });
+        // if (addresses.length === 0) {
+        //     return res.status(404).json({ message: "Không tìm thấy địa chỉ nào cho người dùng này." });
+        // }
 
         // Tạo một hóa đơn mới
         const newBill = new Bill({
-            idUser,
-            idCart,
-            idDelivery,
-            idAddress,
-            idCoupon: idCoupon || null,
-            totalCost,
-            paymentMethod,
-            status,
+            account: data.account,
+            address: data.address,
+            coupon: data.coupon,
+            createAt: data.createAt,
+            dataProduct: data.dataProduct,
+            paymentMethod: data.paymentMethod,
+            transport: data.transport,
+            totalCost: data.totalCost,
+            status: data.status,
         });
 
         // // Lưu hóa đơn vào cơ sở dữ liệu
         const savedBill = await newBill.save();
-        await Cart.updateMany(
-            { '_id': { $in: idCart } },
-            { $set: { status: 'Đã sử dụng' } }
-        );
+        // await Cart.updateMany(
+        //     { '_id': { $in: idCart } },
+        //     { $set: { status: 'Đã sử dụng' } }
+        // );
         return res.status(201).json({ message: 'Thêm hóa đơn thành công!', bill: savedBill });
     } catch (error) {
         console.error('Lỗi khi thêm hóa đơn:', error);
         return res.status(500).json({ message: 'Đã xảy ra lỗi khi thêm hóa đơn!', error });
     }
 });
+
+
 
 router.get("/vnpay_return", async (req, res) => {
     let vnp_Params = req.query;
@@ -183,7 +199,7 @@ router.get("/vnpay_return", async (req, res) => {
     console.log("vnp_ResponseCode:", vnp_ResponseCode);
     console.log("vnp_TransactionStatus:", vnp_TransactionStatus);
 
-    const { totalCost, idCart, idAddress, idUser, idDelivery, idCoupon, paymentMethod, status } = globalDataBill;
+    const dataBill = globalDataBill;
 
     // Kiểm tra mã hash
     if (secureHash !== signed) {
@@ -237,23 +253,16 @@ router.get("/vnpay_return", async (req, res) => {
         </html>
         `;
         try {
-            const newBill = new Bill({
-                idUser,
-                idCart,
-                idDelivery,
-                idAddress,
-                idCoupon: idCoupon || null,
-                totalCost,
-                paymentMethod,
-                status,
-            });
+            const newBill = new Bill(dataBill);
+            console.log(newBill);
+
             await newBill.save();
 
             // Cập nhật trạng thái của các Cart thành "Đã sử dụng"
-            await Cart.updateMany(
-                { '_id': { $in: idCart } },
-                { $set: { status: 'Đã sử dụng' } }
-            );
+            // await Cart.updateMany(
+            //     { '_id': { $in: idCart } },
+            //     { $set: { status: 'Đã sử dụng' } }
+            // );
         } catch (error) {
             console.error("Lỗi khi lưu hóa đơn:", error.message);
             return res.status(500).send("Đã xảy ra lỗi trong quá trình xử lý hóa đơn.");
