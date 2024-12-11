@@ -10,7 +10,7 @@ interface dataAddress {
 };
 
 export interface Bill {
-    _id: string;
+    _id: string; 
     account: string;
     dataProduct: string[];
     paymentMethod: string;

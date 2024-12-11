@@ -66,14 +66,16 @@ const Profile = () => {
           iconLeft={<Image source={require('@/assets/images/profile/ic_heart.png')}
             style={styles.ic_profile} />} title='Sản phẩm yêu thích'
           iconRight={<IconChevronRight />}
-          onPress={() => { console.log('heloooo'); }} />
+          onPress={() => {
+            navigation.navigate('favoriteScreen') 
+          }} />
         <Text style={styles.title}>Cài đặt</Text>
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_book.png')}
             style={styles.ic_profile} />}
           title='Chính sách quyền riêng tư'
           iconRight={<IconChevronRight />}
-          onPress={() => {navigation.navigate('privacy-policy')}} />
+          onPress={() => { navigation.navigate('privacy-policy') }} />
 
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_logout.png')}

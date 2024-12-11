@@ -18,7 +18,7 @@ export default function ScreenWebView({ route, navigation }: any) {
                 if (stackRoutes.includes('LayoutBottomTabs')) {
                     navigation.navigate('LayoutBottomTabs');
                 } else {
-                    navigation.navigate('Home');
+                    navigation.navigate('index');
                 }
             }, 3000);
         }

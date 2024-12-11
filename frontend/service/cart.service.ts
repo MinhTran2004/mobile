@@ -4,7 +4,7 @@ import ProductService from "./product.service";
 
 
 export class CartService {
-    static url = "http://192.168.5.16:5000/Cart";
+    static url = "http://192.168.0.103:5000/Cart";
 
     static addProductToCart = async (data: CartModel) => {
         try {

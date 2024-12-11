@@ -1,6 +1,9 @@
+import FavoriteService from "@/service/favorite.service";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconHeart } from "tabler-icons-react-native";
+import { useSelector } from "react-redux";
+import { IconHeart, IconHeartFilled, IconTrash } from "tabler-icons-react-native";
 
 interface Props {
     _id: string,
@@ -9,24 +12,48 @@ interface Props {
     idCategory: string,
     price: string,
     iconLeft?: boolean;
+    isFavorite?: Boolean
+    onToggleFavorite?: () => void;
+    handleDeletefavorite?: () => void;
+    comefromFavorite?: Boolean,
+    idFavorite?:string
 }
 
 const ProductVerticalItem: React.FC<Props> = (props) => {
     const navigation = useNavigation()
-
+    const userId = useSelector((state: any) => state.auth.account._id);
+    // console.log("this is props ", props.idFavorite);
+  
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
             <Image src={props.image} style={styles.image} />
-            <View style={{ flex: 1, justifyContent: 'space-between', height: 90 }}>
+            <View style={{ flex: 1, justifyContent: 'spac   e-between', height: 90 }}>
                 <View style={{ gap: 2 }}>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
                     <Text style={{ fontWeight: 500, color: '#909090', fontSize: 16 }}>{props.idCategory}</Text>
                     {/* <Text style={{fontSize: 16}} numberOfLines={1}>Gà rán là món ăn được làm từ thịt gà, thường là phần cánh, đùi, hoặc ức, được ướp gia vị, phủ bột và chiên trong dầu nóng.</Text> */}
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.price}</Text>
-                    <IconHeart size={20} />
+                    {
+                        props.comefromFavorite ? (
+                            <TouchableOpacity onPress={props.handleDeletefavorite}>
+                                <IconTrash size={20} />
+                            </TouchableOpacity>
+                        ) : (
+                            props.isFavorite ? (
+                                <TouchableOpacity onPress={props.onToggleFavorite}>
+                                    <IconHeartFilled size={20} />
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity onPress={props.onToggleFavorite}>
+                                    <IconHeart size={20} />
+                                </TouchableOpacity>
+                            )
+                        )
+                    }
+
                 </View>
             </View>
         </TouchableOpacity>
