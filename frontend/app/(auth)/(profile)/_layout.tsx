@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../(home)";
 import LayoutOrder from "../(order)/_layout";
 import LayoutHome from "../(home)/_layout";
+import Coupon from "./coupon";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const LayoutProfile = () => {
             <Stack.Screen name="personal-information" component={PersonalInformation} />
             <Stack.Screen name="change-password" component={ChangePassword} />
             <Stack.Screen name="privacy-policy" component={PrivacyPolicy} />
+            <Stack.Screen name="coupon" component={Coupon} />
         </Stack.Navigator>
     )
 }

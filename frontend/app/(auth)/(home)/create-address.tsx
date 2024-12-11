@@ -6,16 +6,20 @@ import InputEditText from "@/components/InputEditText";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelCreateAddress from "@/viewmodel/home/create-address";
 import StatusModal from "@/components/StatusModal";
-import { useState } from "react";
 
 const CreateAddress = () => {
     const navigation = useNavigation();
     const viewmodel = ViewModelCreateAddress();
-    const [dialog, setDialog] = useState(false);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <AppHeader iconLeft="left" title="Thêm địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
+            <AppHeader
+                iconLeft="left"
+                title="Thêm địa chỉ"
+                iconRight="none"
+                onPressIconLeft={() => navigation.goBack()}
+            />
+
             <View style={styles.container}>
                 {/* Input fields */}
                 <Text style={styles.label}>Thông tin liên hệ</Text>
@@ -106,7 +110,7 @@ const CreateAddress = () => {
                     setDialog={viewmodel.setModalCommune} />
 
                 <View style={styles.containerToogle}>
-                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold'}}>Mặc định</Text>
+                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>Mặc định</Text>
                     <Switch
                         onValueChange={() => viewmodel.setToogle(!viewmodel.toogle)}
                         value={viewmodel.toogle} />
@@ -117,10 +121,11 @@ const CreateAddress = () => {
 
             <PrimaryButton
                 label="Thêm địa chỉ"
-                onPress={() => setDialog(true)} />
+                onPress={() => viewmodel.setDialog(true)} />
 
+            {/* thong bao  */}
             <StatusModal
-                isActive={dialog}
+                isActive={viewmodel.dialog}
                 title="Thông báo"
                 label="Xác nhận sửa địa chỉ"
                 icon="none"
@@ -128,15 +133,46 @@ const CreateAddress = () => {
                 secondaryButton={{
                     label: 'Có', onPress() {
                         viewmodel.createAddress()
-                        setDialog(false)
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewmodel.setDialog(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewmodel.setDialog(false)}
+            />
+
+            {/* thanh cong */}
+            <StatusModal
+                isActive={viewmodel.dialogSuccess}
+                title="Thông báo"
+                label="Thêm địa chỉ thành công"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogSuccess(false);
+                        navigation.goBack();
+                    },
+                }}
+                onClose={() => viewmodel.setDialogSuccess(false)}
+            />
+
+            {/* Thất bại */}
+            <StatusModal
+                isActive={viewmodel.dialogError}
+                title="Thông báo"
+                label="Thêm địa chỉ không thành công"
+                icon="error"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogError(false);
+                        navigation.replace('address');
+                    },
+                }}
+                onClose={() => viewmodel.setDialogError(false)}
             />
 
         </SafeAreaView>

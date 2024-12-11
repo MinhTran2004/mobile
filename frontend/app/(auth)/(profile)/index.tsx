@@ -59,7 +59,7 @@ const Profile = () => {
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_discount.png')}
             style={styles.ic_profile} />}
-          title='Phiếu giảm giá'
+          title='Mã giảm giá'
           iconRight={<IconChevronRight />}
           onPress={() => { navigation.navigate('coupon') }} />
         <ItemProfile

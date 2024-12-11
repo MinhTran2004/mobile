@@ -23,6 +23,9 @@ const ViewModelCreateAddress = () => {
     
 
     const [dialog, setDialog] = useState(false);
+    const [dialogSuccess, setDialogSuccess] = useState(false);
+    const [dialogError, setDialogError] = useState(false);
+
     const selector = useSelector((state: any) => state.auth.account._id);
 
     // modal
@@ -42,9 +45,11 @@ const ViewModelCreateAddress = () => {
          if (check) {
             const reponse = await AddressService.createAddress(address);
             if(reponse){
-                naviagtion.navigate('address');
+                setDialog(false);
+                setDialogSuccess(true);
             }else{
-                console.log('Dư liệu lỗi');
+                setDialog(false);
+                setDialogError(true);
             }
         } else {
             setDialog(true);
@@ -83,14 +88,15 @@ const ViewModelCreateAddress = () => {
     }, [district])
 
     return {
-        name, phone, province, district, commune, detailAddress, errorName, errorPhone, errorProvince, errorDistrict, errorCommune, errorDetailAddress, toogle,
+        name, phone, province, district, commune, detailAddress, errorName, errorPhone, errorProvince, 
+        errorDistrict, errorCommune, errorDetailAddress, toogle,
         // modal
-        modalProvince, modalDistrict, modalCommune, dialog,
+        modalProvince, modalDistrict, modalCommune, dialog, dialogError, dialogSuccess,
         // data Address
         dataProvince, dataDistrict, dataCommune,
         setName, setPhone, setProvince, setDistrict, setCommune, setErrorName,setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
         // modal
-        setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog,
+        setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog, setDialogError, setDialogSuccess,
         createAddress,
     }
 }

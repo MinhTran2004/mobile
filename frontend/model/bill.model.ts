@@ -9,16 +9,25 @@ interface dataAddress {
     detailAddress: string,
 };
 
+interface dataProduct {
+    idProduct: string,
+    name: string,
+    category: string,
+    image: string,
+    price: string,
+    quantityCart: string,
+};
+
 export interface Bill {
     _id: string;
     account: string;
-    dataProduct: string[];
+    dataProduct: dataProduct[];
     paymentMethod: string;
     transport: string;
     address: dataAddress;
     coupon: dataCoupon;
     totalCost: string;
-    createAt:string;
+    createAt: string;
     status: string;
 }
 
@@ -30,10 +39,10 @@ export default class BillModel {
     address: dataAddress;
     coupon: dataCoupon;
     totalCost: string;
-    createAt:string;
+    createAt: string;
     status: string;
 
-    constructor(account: string, dataProduct: string[], paymentMethod: string, transport: string, address: dataAddress, coupon: dataCoupon, totalCost: string, createAt: string,status: string) {
+    constructor(account: string, dataProduct: string[], paymentMethod: string, transport: string, address: dataAddress, coupon: dataCoupon, totalCost: string, createAt: string, status: string) {
         this.account = account;
         this.dataProduct = dataProduct;
         this.paymentMethod = paymentMethod;

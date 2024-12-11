@@ -1,61 +1,59 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
 import StatusModal from "@/components/StatusModal";
-import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
+import ViewModelOrderCancel from "@/viewmodel/order/order-cancel.viewmodel";
 import { useState } from "react";
-import { ScrollView, View } from "react-native"
+import { FlatList, View } from "react-native"
 
 const OrderCancel = () => {
-    const viewmodel = ViewModelHome();
+    const viewmodel = ViewModelOrderCancel();
     const [dialog, setDialog] = useState(false);
 
+    console.log(viewmodel.dataOrder);
+    
     return (
-        <ScrollView>
-            <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
-                <ItemOrderLayout
-                    data={viewmodel.dataProductVertical}
-                    status="Chờ xác nhận"
-                    price="250.000"
-                    statusLayout="single"
-                    primaryButton={{
-                        label: 'Đặt lại đơn', onPress() {
-                            // console.log('hihi');
-                            setDialog(true)
-                        }
-                    }}
-                />
+        <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
 
-                <ItemOrderLayout
-                    data={viewmodel.dataProductVertical}
-                    status="Chờ xác nhận"
-                    price="250.000"
-                    statusLayout="single"
-                    primaryButton={{
-                        label: 'Đặt lại đơn', onPress() {
-                            // console.log('hihi');
-                            setDialog(true)
-                        }
-                    }}
+            {viewmodel.dataOrder ?
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={viewmodel.dataOrder}
+                    renderItem={({ item }) => <ItemOrderLayout
+                        data={item}
+                        statusLayout="row"
+                        primaryButton={{
+                            label: 'Đặt lại đơn',
+                            onPress: () => { },
+                        }}
+                        secondaryButton={{
+                            label: 'Xem chi tiết',
+                            onPress: () => { },
+                        }}
+                    />}
                 />
+                :
+                <View />
+            }
 
-                <StatusModal
-                    isActive={dialog}
-                    title="Thông báo"
-                    label="Bạn có muốn đặt lại đơn hàng?"
-                    icon="none"
-                    statusLayoutButton="row"
-                    secondaryButton={{
-                        label: 'Có', onPress() {
-                            setDialog(false)
-                        }, }}
-                    primaryButton={{
-                        label: 'Không', onPress() {
-                            setDialog(false)
-                        }, }}
-                    onClose={() => setDialog(false)}
-                />
-                
-            </View>
-        </ScrollView>
+            <StatusModal
+                isActive={dialog}
+                title="Thông báo"
+                label="Bạn có muốn đặt lại đơn hàng?"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        setDialog(false)
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        setDialog(false)
+                    },
+                }}
+                onClose={() => setDialog(false)}
+            />
+
+        </View>
     )
 }
 

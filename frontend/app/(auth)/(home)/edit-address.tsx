@@ -6,15 +6,13 @@ import InputEditText from "@/components/InputEditText";
 import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
 import PrimaryButton from "@/components/PrimaryButton";
 import { Address } from "@/model/address.model";
-import { useState } from "react";
 import StatusModal from "@/components/StatusModal";
 
 const EditAddress = ({ route }: any) => {
     const navigation = useNavigation();
-    const props: Address = route.params;
+    const props: Address = route.params.address;
     const viewmodel = ViewModelEditAddress(props);
-    const [dialog, setDialog] = useState(false);
-
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Thay đổi địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
@@ -117,11 +115,11 @@ const EditAddress = ({ route }: any) => {
             </View>
             <PrimaryButton
                 label="Cập nhật địa chỉ"
-                onPress={() => setDialog(true)} />
+                onPress={() => viewmodel.setDialog(true)} />
 
 
             <StatusModal
-                isActive={dialog}
+                isActive={viewmodel.dialog}
                 title="Thông báo"
                 label="Xác nhận sửa địa chỉ"
                 icon="none"
@@ -129,15 +127,46 @@ const EditAddress = ({ route }: any) => {
                 secondaryButton={{
                     label: 'Có', onPress() {
                         viewmodel.updateAddressById()
-                        setDialog(false)
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewmodel.setDialog(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewmodel.setDialog(false)}
+            />
+
+            {/* thanh cong */}
+            <StatusModal
+                isActive={viewmodel.dialogSuccess}
+                title="Thông báo"
+                label="Thay đổi địa chỉ thành công"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogSuccess(false);
+                        navigation.goBack();
+                    },
+                }}
+                onClose={() => viewmodel.setDialogSuccess(false)}
+            />
+
+            {/* Thất bại */}
+            <StatusModal
+                isActive={viewmodel.dialogError}
+                title="Thông báo"
+                label="Thêm địa chỉ không thành công"
+                icon="error"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogError(false);
+                        navigation.goBack();
+                    },
+                }}
+                onClose={() => viewmodel.setDialogError(false)}
             />
         </SafeAreaView>
     );

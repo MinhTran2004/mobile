@@ -73,7 +73,7 @@ const ItemCoupon: React.FC<Props> = (props) => {
                                 }
                             })
                         }}>
-                            <Text style={style.use}>Sử dụng</Text>
+                            {props.dataCart ? <Text style={style.use}>Sử dụng</Text> : <View/>}
                         </TouchableOpacity>
                     </View>
                     <Text>Đơn tối thiểu {props.condition}</Text>

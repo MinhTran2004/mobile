@@ -6,11 +6,11 @@ import StatusModal from "../StatusModal";
 
 interface Props{
     address: Address,
-    viewmodel: any
+    viewmodel: any,
+    navigation:any,
 }
 
 const ItemAddress: React.FC<Props> = (props) => {
-    const navigation = useNavigation();
     const address = props.address.province + ", " + props.address.district + ", " + props.address.commune + ", " + props.address.detailAddress;
 
     return (
@@ -34,7 +34,7 @@ const ItemAddress: React.FC<Props> = (props) => {
                 <TouchableOpacity onPress={() => props.viewmodel.setDialogDelete(true)}>
                     <Text style={{ color: 'red' }}>Xóa</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {navigation.navigate('edit-address', props)}}>
+                <TouchableOpacity onPress={() => {props.navigation.navigate('edit-address', props)}}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
 

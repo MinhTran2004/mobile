@@ -1,25 +1,27 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native";
 import ButtonModel from "../ButtonModel";
 import ItemOrderProduct from "@/components/order/ItemOrderProduct";
-import { Product } from "@/model/product.model";
 import { useNavigation } from "@react-navigation/native";
+import { Bill } from "@/model/bill.model";
 
 interface Props {
-    data: Product[],
-    status?: string,
-    price?: string,
-    statusLayout?: 'row' | 'single',
-    primaryButton?: {
+    data: Bill,
+    statusLayout: 'row' | 'single',
+    primaryButton: {
         label: string,
-        onPress: () => void,
+        onPress: () => void;
+        buttonStyle?: StyleProp<ViewStyle>;
+        textStyle?: StyleProp<TextStyle>
     },
     secondaryButton?: {
         label: string,
-        onPress: () => void,
+        onPress: () => void;
+        buttonStyle?: StyleProp<ViewStyle>;
+        textStyle?: StyleProp<TextStyle>
     },
 }
 
-export const ItemOrderLayout: React.FC<Props> = (props) => {
+const ItemOrderLayout: React.FC<Props> = (props) => {
     const navigation = useNavigation();
 
     const SelectLayoutButton = () => {
@@ -52,27 +54,26 @@ export const ItemOrderLayout: React.FC<Props> = (props) => {
     }
 
     return (
-        <TouchableOpacity onPress={() => {navigation.navigate('detail-order')}}>
-            <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.status}>{props.status}</Text>
-                    <Text style={styles.date}>12:09 - 20/09/2004</Text>
-                </View>
+        <View style={styles.container}>
 
-                <FlatList
-                    data={props.data}
-                    scrollEnabled={false}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item }) => <ItemOrderProduct key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
-
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={styles.total}>Tổng tiền: </Text>
-                    <Text style={styles.price}>{props.price}</Text>
-                </View>
-
-                <SelectLayoutButton />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={styles.status}>{props.data.status}</Text>
+                <Text style={styles.date}>{props.data.createAt}</Text>
             </View>
-        </TouchableOpacity>
+
+            <FlatList
+                data={props.data.dataProduct}
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) => <ItemOrderProduct key={index} {...item} />} />
+
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.total}>Tổng tiền: </Text>
+                <Text style={styles.price}>{props.data.totalCost}</Text>
+            </View>
+
+            <SelectLayoutButton />
+        </View>
     )
 }
 

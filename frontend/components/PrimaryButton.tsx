@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         shadowColor: '#000',
         elevation: 2,
+        backgroundColor: 'white',
     },
     saveButtonText: {
         color: "#fff",

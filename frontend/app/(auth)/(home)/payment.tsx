@@ -13,11 +13,16 @@ const Payment = ({ route }: any) => {
     const navigation = useNavigation();
 
     const { dataCart, total, coupon } = route.params;
-
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>
-                <AppHeader iconLeft="left" title="Thanh toán" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
+                <AppHeader
+                    iconLeft="left"
+                    title="Thanh toán"
+                    iconRight="none"
+                    onPressIconLeft={() => navigation.goBack()}
+                />
+
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 120, paddingHorizontal: 10, gap: 10 }}>
                     {/* banner1 */}
                     <View style={styles.conatiner}>
@@ -35,7 +40,11 @@ const Payment = ({ route }: any) => {
                             </TouchableOpacity>
                             :
                             // option 2 
-                            <TouchableOpacity style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row' }} onPress={() => { navigation.navigate('address') }}>
+                            <TouchableOpacity
+                                style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row' }}
+                                onPress={() => {
+                                    navigation.replace('address')
+                                }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1 }}>
                                     <IconPlus size={22} />
                                     <Text style={{ fontSize: 16, fontWeight: 500 }}>Thêm địa chỉ</Text>

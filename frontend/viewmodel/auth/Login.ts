@@ -3,6 +3,7 @@ import ModelAccount from "@/model/account.model";
 import SeviceAccount from "@/service/account.service";
 import { useDispatch } from "react-redux";
 import { Login } from "@/redux/action/login";
+import { router } from "expo-router";
 
 export const ViewModelLogin = (navigation: any) => {
     const [account, setAccount] = useState('admin@gmail.com');
@@ -21,7 +22,10 @@ export const ViewModelLogin = (navigation: any) => {
 
             if (reponse) {
                 dispatch(Login(reponse))
-                navigation.navigate('layoutHome');
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'layoutHome' }]
+                });
             } else {
                 setErrorPassword("Mật khẩu hoặc tài khoản không chính xác");
             }

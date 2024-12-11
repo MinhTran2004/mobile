@@ -27,6 +27,8 @@ const DetailProduct = (route: Props) => {
     const [dialog, setDialog] = useState(false);
     const [dialog2, setDialog2] = useState(false);
 
+    const dataCart = { ...product, quantityCart: 1 }
+    const total = Number(product.price) * 1;
 
     return (
         <View style={{ flex: 1 }}>
@@ -38,7 +40,7 @@ const DetailProduct = (route: Props) => {
             <Image src={product.image} style={styles.image_product} />
             <View style={styles.container_infor}>
 
-                <View style={{gap: 5}}>
+                <View style={{ gap: 5 }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{product.name}</Text>
                         <IconHeart size={24} color="red" />
@@ -49,9 +51,9 @@ const DetailProduct = (route: Props) => {
                     </View>
                     <Text style={{ fontSize: 20, fontWeight: 700, color: '#D17842' }}>{product.price} VNĐ</Text>
                 </View>
-                <View style={{width: '100%', height: 1, backgroundColor: '#D9D9D9'}}></View>
+                <View style={{ width: '100%', height: 1, backgroundColor: '#D9D9D9' }}></View>
 
-                <View style={{gap: 5}}>
+                <View style={{ gap: 5 }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Giới thiệu sản phẩm</Text>
                     <Text style={{ fontSize: 16 }}>Hamburger bò là một món ăn nhanh phổ biến, bao gồm một miếng thịt bò xay nướng chín được đặt giữa hai lát bánh mì tròn. Miếng thịt bò thườngđược ướp gia vị và nướng trên vỉ để tạo ra lớp vỏ bên ngoài thơm ngon, giòn rụm. Phần bên trong thịt vẫn giữ được độ mềm vàmọng nước. Kèm theo đó, món hamburger thường có thêm các thành phần như phô mai tan chảy, xà lách tươi, cà chua, dưa leo, hành tây và sốt đặc trưng như ketchup hoặc mù tạt. Tất cả những yếu tố này kết hợp tạo nên một hương vị hài hòa và hấp dẫn...</Text>
                 </View>
@@ -65,7 +67,9 @@ const DetailProduct = (route: Props) => {
                 <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id), setDialog2(true) }}>
                     <IconShoppingCart />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 5, padding: 14, backgroundColor: '#4C1B1B', borderRadius: 90 }} onPress={() => setDialog(true)}>
+                <TouchableOpacity
+                    style={{ flex: 5, padding: 14, backgroundColor: '#4C1B1B', borderRadius: 90 }}
+                    onPress={() => setDialog(true)}>
                     <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}>Mua ngay</Text>
                 </TouchableOpacity>
             </View>
@@ -79,7 +83,11 @@ const DetailProduct = (route: Props) => {
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        setDialog(false)
+                        setDialog(false);
+                        navigation.navigate('payment', {
+                            dataCart: [dataCart],
+                            total: total
+                        });
                     },
                 }}
                 primaryButton={{

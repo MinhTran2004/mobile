@@ -1,66 +1,72 @@
 import AppHeader from "@/components/AppHeader";
 import PrimaryButton from "@/components/PrimaryButton";
-import { Product } from "@/model/product.model";
 import { useNavigation } from "@react-navigation/native";
 import ItemOrderProduct from "@/components/order/ItemOrderProduct";
 import { View, Text, Image, FlatList, StyleSheet, ScrollView } from "react-native"
-import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import StatusModal from "@/components/StatusModal";
 import { useState } from "react";
+import { Bill } from "@/model/bill.model";
+import ViewModelOrderDetail from "@/viewmodel/home/order-detail.viewmodel";
 
 
-
-
-const OrderDetail = () => {
-    const viewmodel = ViewModelHome();
+const OrderDetail = ({ route }: any) => {
     const navigation = useNavigation();
-    const [dialog, setDialog] = useState(false);
+    const viewmodel = ViewModelOrderDetail();
+
+    const item: Bill = route.params;
+
+    const totalAmount = Number(item.totalCost) - 30000 - (item.coupon.disscount ? Number(item.coupon.disscount) : 0);
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <AppHeader onPressIconLeft={() => navigation.goBack()} iconLeft="left" title="Chi tiết đơn hàng" iconRight="none" />
+            <AppHeader
+                onPressIconLeft={() => navigation.goBack()}
+                iconLeft="left"
+                title="Chi tiết đơn hàng"
+                iconRight="none"
+            />
 
             <ScrollView>
                 <View style={{ gap: 10, backgroundColor: '#fff' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#F9F9F9', paddingHorizontal: 20, paddingVertical: 10 }}>
-                        <Text style={{ color: '#DB920B', fontSize: 18, fontWeight: 'bold' }}>Chờ xác nhận</Text>
-                        <Text style={{ color: '#909090', fontSize: 16, fontWeight: 500 }}>12:04 - 15/10/2024</Text>
+                        <Text style={{ color: '#DB920B', fontSize: 18, fontWeight: 'bold' }}>{item.status}</Text>
+                        <Text style={{ color: '#909090', fontSize: 16, fontWeight: 500 }}>{item.createAt}</Text>
                     </View>
 
                     <View style={{ backgroundColor: '#f9f9f9', paddingHorizontal: 20, paddingVertical: 10, gap: 5 }}>
                         <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }}>
                             <Image source={require('@/assets/images/profile/ic_location.png')} style={{ width: 16, height: 16 }} />
-                            <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold' }}>Nguyễn Công Thưởng</Text>
-                            <Text style={{ color: '#909090', fontSize: 16, fontWeight: 500 }}>0867189410</Text>
+                            <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold' }}>{item.address.name}</Text>
+                            <Text style={{ color: '#909090', fontSize: 16, fontWeight: 500 }}>{item.address.phone}</Text>
                         </View>
-                        <Text style={{ color: '#909090', fontSize: 14 }}>Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội 100000, Việt Nam</Text>
+                        <Text style={{ color: '#909090', fontSize: 14 }}>{item.address.detailAddress}</Text>
                     </View>
 
                     <View style={{ paddingHorizontal: 20, backgroundColor: '#f9f9f9', paddingVertical: 10 }}>
                         <FlatList
-                            data={viewmodel.dataProductVertical}
+                            data={item.dataProduct}
                             scrollEnabled={false}
                             showsVerticalScrollIndicator={false}
-                            renderItem={({ item }) => <ItemOrderProduct key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+                            renderItem={({ item, index }) => <ItemOrderProduct key={index} {...item} />} />
                     </View>
 
                     <View style={{ paddingHorizontal: 20, backgroundColor: '#f9f9f9', paddingVertical: 10, gap: 5 }}>
                         <Text style={styles.title}>Tổng quan đơn hàng</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Tổng phụ</Text>
-                            <Text style={styles.txt_content}>310.000đ</Text>
+                            <Text style={styles.txt_content}>{item.totalCost}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Vận chuyển</Text>
-                            <Text style={styles.txt_content}>20.000đ</Text>
+                            <Text style={styles.txt_content}>{item.transport}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Phiếu giảm giá</Text>
-                            <Text style={styles.txt_content}>-50.000đ</Text>
+                            <Text style={styles.txt_content}>{item.coupon.disscount}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Tổng</Text>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>280.000đ</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{totalAmount}</Text>
                         </View>
                     </View>
 
@@ -69,41 +75,72 @@ const OrderDetail = () => {
                         <Text style={styles.title}>Chi tiết đơn hàng</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Seri đơn hàng</Text>
-                            <Text style={styles.txt_content}>43838347374</Text>
+                            <Text style={styles.txt_content}>{item._id}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Ngày đặt hàng</Text>
-                            <Text style={styles.txt_content}>12/10/2024 - 07:41 PM</Text>
+                            <Text style={styles.txt_content}>{item.createAt}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Phương thức thanh toán</Text>
-                            <Text style={styles.txt_content}>Thanh toán onilne</Text>
+                            <Text style={styles.txt_content}>{item.paymentMethod}</Text>
                         </View>
                     </View>
 
                 </View>
             </ScrollView>
-            <PrimaryButton styleButton={{ position: 'fixed' }} label={"Hủy đơn"} onPress={() => { setDialog(true) }} />
+            <PrimaryButton styleButton={{ position: 'fixed' }} label={"Hủy đơn"} onPress={() => { viewmodel.setDialogDelete(true) }} />
 
 
             <StatusModal
-                isActive={dialog}
+                isActive={viewmodel.dialogDelete}
                 title="Thông báo"
                 label="Xác nhận hủy đơn"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        console.log('helooooo');
-                        setDialog(false)
+                        viewmodel.deleteBillById(item._id);
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewmodel.setDialogDelete(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewmodel.setDialogDelete(false)}
+            />
+
+            <StatusModal
+                isActive={viewmodel.dialogSuccess}
+                title="Thông báo"
+                label="Xóa đơn hàng thành công"
+                icon="none"
+                statusLayoutButton="row"
+                primaryButton={{
+                    label: 'Ok', onPress() {
+                        viewmodel.setDialogSuccess(false);
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'index' }]
+                        });
+                    },
+                }}
+                onClose={() => viewmodel.setDialogSuccess(false)}
+            />
+
+            <StatusModal
+                isActive={viewmodel.dialogError}
+                title="Thông báo"
+                label="Xóa đơn hàng thất bại, Vui lòng thử lại"
+                icon="none"
+                statusLayoutButton="row"
+                primaryButton={{
+                    label: 'Ok', onPress() {
+                        viewmodel.setDialogError(false)
+                    },
+                }}
+                onClose={() => viewmodel.setDialogError(false)}
             />
         </View>
     )

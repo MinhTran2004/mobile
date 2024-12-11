@@ -1,6 +1,7 @@
 import { Address } from "@/model/address.model";
 import AddressService from "@/service/address.service";
-import { useEffect, useState } from "react"
+import { useFocusEffect } from "expo-router";
+import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 
 const ViewModelAddress = () => {
@@ -30,9 +31,11 @@ const ViewModelAddress = () => {
 
     }
 
-    useEffect(() => {
-        getAllAddress();
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            getAllAddress();
+        }, [])
+      );
 
     return {
         dialogDelete, dialogError, dialogsuccess,

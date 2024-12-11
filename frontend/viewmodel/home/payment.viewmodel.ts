@@ -50,7 +50,8 @@ const ViewModelPayment = () => {
 
 
         const dataBill = new BillModel(idAccount, dataProduct, payment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
-
+        console.log(dataBill);
+        
         const reponse = await SeviceBill.createPaymentURL(dataBill);
 
         if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {

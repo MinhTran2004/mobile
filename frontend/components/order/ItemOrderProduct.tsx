@@ -1,16 +1,6 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconHeart } from "tabler-icons-react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
-interface Props {
-    _id: string,
-    image: string,
-    name: string,
-    idCategory: string,
-    price: string,
-}
-
-const ProductVerticalItem: React.FC<Props> = (props) => {
+const ProductVerticalItem = (props:any) => {
     return (
         <View style={styles.container}>
             <Image src={props.image} style={styles.image} />
@@ -20,8 +10,8 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
                     <Text style={styles.catgory}>{props.idCategory}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price}>${props.price}</Text>
-                    <Text style={styles.quantity}>${props.price}</Text>
+                    <Text style={styles.price}>{props.price}</Text>
+                    <Text style={styles.quantity}>x{props.quantityCart}</Text>
                 </View>
             </View>
         </View>

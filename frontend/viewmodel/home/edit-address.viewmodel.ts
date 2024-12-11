@@ -1,15 +1,12 @@
 import { Address, AddressModel } from "@/model/address.model";
 import AddressService from "@/service/address.service";
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react"
 
 const ViewModelEditAddress = (props: Address) => {
-    const naviagtion = useNavigation();
 
     const [name, setName] = useState(props.name);
     const [phone, setPhone] = useState(props.phone);
-    const [province, setProvince] = useState(props.province);
+    const [province, setProvince] = useState('');
     const [district, setDistrict] = useState('');
     const [commune, setCommune] = useState('');
     const [detailAddress, setDetailAddress] = useState(props.detailAddress);
@@ -23,6 +20,8 @@ const ViewModelEditAddress = (props: Address) => {
 
 
     const [dialog, setDialog] = useState(false);
+    const [dialogSuccess, setDialogSuccess] = useState(false);
+    const [dialogError, setDialogError] = useState(false);
 
     // modal
     const [modalProvince, setModalProvince] = useState(false);
@@ -40,13 +39,16 @@ const ViewModelEditAddress = (props: Address) => {
 
         if (check) {
             const reponse = await AddressService.updateAddressById(data);
+
             if (reponse) {
-                naviagtion.navigate('address');
+                setDialog(false);
+                setDialogSuccess(true);
+            } else {
+                setDialog(false);
+                setDialogError(true);
             }
         }
     }
-
-
 
 
     // api address
@@ -83,12 +85,12 @@ const ViewModelEditAddress = (props: Address) => {
     return {
         name, phone, province, district, commune, detailAddress, errorName, errorPhone, errorProvince, errorDistrict, errorCommune, errorDetailAddress, toogle,
         // modal
-        modalProvince, modalDistrict, modalCommune, dialog,
+        modalProvince, modalDistrict, modalCommune, dialog, dialogSuccess, dialogError,
         // data Address
         dataProvince, dataDistrict, dataCommune,
         setName, setPhone, setProvince, setDistrict, setCommune, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
         // modal
-        setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog,
+        setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog, setDialogError, setDialogSuccess,
         updateAddressById,
     }
 }
