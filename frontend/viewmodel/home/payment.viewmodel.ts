@@ -45,12 +45,11 @@ const ViewModelPayment = () => {
         }
 
         const dataProduct = dataCart.map((item: any) => {
-            return { quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory, image: item.image, price: item.price };
+            return { quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
         })
 
 
         const dataBill = new BillModel(idAccount, dataProduct, payment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
-        console.log(dataBill);
         
         const reponse = await SeviceBill.createPaymentURL(dataBill);
 

@@ -1,12 +1,10 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
 import StatusModal from "@/components/StatusModal";
 import ViewModelOrderCompleted from "@/viewmodel/order/order-completed.viewmodel";
-import { useState } from "react";
 import { FlatList, View } from "react-native"
 
-const OrderCompleted = () => {
+const OrderCompleted = ({ navigation }: any) => {
     const viewmodel = ViewModelOrderCompleted();
-    const [dialog, setDialog] = useState(false);
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
@@ -19,11 +17,16 @@ const OrderCompleted = () => {
                         statusLayout="row"
                         primaryButton={{
                             label: 'Đặt lại đơn',
-                            onPress: () => { },
+                            onPress: () => {
+                                viewmodel.setItemData(item);
+                                viewmodel.setDialog(true)
+                            },
                         }}
                         secondaryButton={{
                             label: 'Xem chi tiết',
-                            onPress: () => { },
+                            onPress: () => {
+                                navigation.navigate('detail-order', item)
+                            },
                         }}
                     />}
                 />
@@ -32,22 +35,26 @@ const OrderCompleted = () => {
             }
 
             <StatusModal
-                isActive={dialog}
+                isActive={viewmodel.dialog}
                 title="Thông báo"
                 label="Bạn có muốn đặt lại đơn hàng?"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        setDialog(false)
+                        navigation.navigate('payment', {
+                            dataCart: viewmodel.itemData?.dataProduct,
+                            total: viewmodel.itemData?.totalCost,
+                        });
+                        viewmodel.setDialog(false);
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewmodel.setDialog(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewmodel.setDialog(false)}
             />
         </View>
     )

@@ -1,17 +1,8 @@
+import { Product } from "@/model/product.model";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconHeart } from "tabler-icons-react-native";
 
-interface Props {
-    _id: string,
-    image: string,
-    name: string,
-    idCategory: string,
-    price: string,
-    iconLeft?: boolean;
-}
-
-const ProductVerticalItem: React.FC<Props> = (props) => {
+const ProductVerticalItem: React.FC<Product> = (props) => {
     const navigation = useNavigation()
 
     return (
@@ -21,12 +12,12 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
                 <View style={{ gap: 2 }}>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
                     <Text style={{ fontWeight: 500, color: '#909090', fontSize: 16 }}>{props.idCategory}</Text>
-                    {/* <Text style={{fontSize: 16}} numberOfLines={1}>Gà rán là món ăn được làm từ thịt gà, thường là phần cánh, đùi, hoặc ức, được ướp gia vị, phủ bột và chiên trong dầu nóng.</Text> */}
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
                     <Text style={styles.price}>{props.price}</Text>
-                    <IconHeart size={20} />
+                    <Text>Đã bán {props.rate}</Text>
+
                 </View>
             </View>
         </TouchableOpacity>

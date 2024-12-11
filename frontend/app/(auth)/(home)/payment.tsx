@@ -13,6 +13,10 @@ const Payment = ({ route }: any) => {
     const navigation = useNavigation();
 
     const { dataCart, total, coupon } = route.params;
+
+    console.log(dataCart);
+    
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>

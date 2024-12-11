@@ -1,16 +1,8 @@
+import { Product } from "@/model/product.model";
 import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IconHeart } from "tabler-icons-react-native";
 
-interface Props {
-    _id: string,
-    image: string,
-    name: string,
-    idCategory: string,
-    price: string,
-}
-
-const ProductHozirontalItem: React.FC<Props> = (props) => {
+const ProductHozirontalItem: React.FC<Product> = (props) => {
     const navigation = useNavigation();
 
     return (
@@ -18,9 +10,9 @@ const ProductHozirontalItem: React.FC<Props> = (props) => {
             <Image src={props.image} style={styles.image} />
             <Text numberOfLines={1} style={styles.name}>{props.name}</Text>
             <Text style={{fontWeight: 500, color: '#909090', fontSize: 16}}>{props.idCategory}</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                 <Text style={styles.price}>{props.price}</Text>
-                <IconHeart size={20}/>
+                <Text style={{fontSize: 12}}>Đã bán {props.rate}</Text>
             </View>
         </TouchableOpacity>
     )

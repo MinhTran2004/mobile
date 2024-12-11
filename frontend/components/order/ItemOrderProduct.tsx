@@ -7,7 +7,7 @@ const ProductVerticalItem = (props:any) => {
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
-                    <Text style={styles.catgory}>{props.idCategory}</Text>
+                    <Text style={styles.catgory}>{props.category}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{props.price}</Text>

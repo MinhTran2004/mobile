@@ -7,6 +7,7 @@ import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
+import { ActivityIndicator } from "react-native-paper";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
@@ -40,7 +41,7 @@ const Home = ({ navigation }: any) => {
             </View>
 
             {/* body  */}
-            <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+            {/* <ScrollView style={{ flex: 1}} > */}
                 <View style={styles.container}>
 
                     <View style={styles.containerBody}>
@@ -120,7 +121,7 @@ const Home = ({ navigation }: any) => {
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                                 data={viewmodel.dataProductHorizontal}
-                                renderItem={({ item }) => <ProductHozirontalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+                                renderItem={({ item }) => <ProductHozirontalItem key={item._id} {...item} />} />
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", marginTop: 10 }}>
                                 <Text style={styles.title}>Dành cho bạn</Text>
@@ -130,14 +131,17 @@ const Home = ({ navigation }: any) => {
                             </View>
 
                             <FlatList
-                                scrollEnabled={false}
                                 showsHorizontalScrollIndicator={false}
-                                data={viewmodel.dataProductHorizontal}
-                                renderItem={({ item }) => <ProductVerticalItem key={item._id} _id={item._id} image={item.image} name={item.name} idCategory={item.idCategory} price={item.price} />} />
+                                data={viewmodel.dataProductVertical}
+                                onEndReached={viewmodel.handleEndReached}
+                                onEndReachedThreshold={0.5}
+                                ListFooterComponent={viewmodel.loading ? <ActivityIndicator size={"large"} /> : <View/>}
+                                renderItem={({ item }) => <ProductVerticalItem key={item._id} {...item}/>} 
+                                keyExtractor={item => item._id.toString()}/>
                         </View>
                     </View>
                 </View>
-            </ScrollView>
+            {/* </ScrollView> */}
         </View>
     )
 }

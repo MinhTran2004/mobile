@@ -16,8 +16,6 @@ const ViewModelOrderDetail = () => {
             setDialogDelete(false);
             setDialogError(true);
         }
-        
-
     }
 
     return{

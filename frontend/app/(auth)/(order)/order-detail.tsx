@@ -39,7 +39,7 @@ const OrderDetail = ({ route }: any) => {
                             <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold' }}>{item.address.name}</Text>
                             <Text style={{ color: '#909090', fontSize: 16, fontWeight: 500 }}>{item.address.phone}</Text>
                         </View>
-                        <Text style={{ color: '#909090', fontSize: 14 }}>{item.address.detailAddress}</Text>
+                        <Text style={{ color: '#909090', fontSize: 14 }} numberOfLines={2}>{item.address.detailAddress}</Text>
                     </View>
 
                     <View style={{ paddingHorizontal: 20, backgroundColor: '#f9f9f9', paddingVertical: 10 }}>
@@ -62,7 +62,7 @@ const OrderDetail = ({ route }: any) => {
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Phiếu giảm giá</Text>
-                            <Text style={styles.txt_content}>{item.coupon.disscount}đ</Text>
+                            <Text style={styles.txt_content}>{item.coupon.disscount ?? 0}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Tổng</Text>
@@ -134,7 +134,7 @@ const OrderDetail = ({ route }: any) => {
                 title="Thông báo"
                 label="Xóa đơn hàng thất bại, Vui lòng thử lại"
                 icon="none"
-                statusLayoutButton="row"
+                statusLayoutButton="single"
                 primaryButton={{
                     label: 'Ok', onPress() {
                         viewmodel.setDialogError(false)

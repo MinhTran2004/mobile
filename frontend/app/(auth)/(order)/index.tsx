@@ -6,7 +6,6 @@ import ViewModelOrderWaiting from "@/viewmodel/order/order-waiting.viewmodel";
 
 const OrderWaiting = ({ navigation }: any) => {
     const viewmodel = ViewModelOrderWaiting();
-    const [dialog, setDialog] = useState(false);
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
@@ -20,7 +19,9 @@ const OrderWaiting = ({ navigation }: any) => {
                             statusLayout="row"
                             primaryButton={{
                                 label: 'Hủy đơn hàng',
-                                onPress: () => { },
+                                onPress: () => { 
+                                    viewmodel.setItemData(item);
+                                    viewmodel.setDialogDelete(true) },
                             }}
                             secondaryButton={{
                                 label: 'Xem chi tiết',
@@ -34,22 +35,54 @@ const OrderWaiting = ({ navigation }: any) => {
             }
 
             <StatusModal
-                isActive={dialog}
+                isActive={viewmodel.dialogDelete}
                 title="Thông báo"
                 label="Xác nhận hủy đơn"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        setDialog(false)
+                        viewmodel.deleteBillById(viewmodel.itemData?._id || "");
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewmodel.setDialogDelete(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewmodel.setDialogDelete(false)}
+            />
+
+            <StatusModal
+                isActive={viewmodel.dialogSuccess}
+                title="Thông báo"
+                label="Xóa đơn hàng thành công"
+                icon="none"
+                statusLayoutButton="row"
+                primaryButton={{
+                    label: 'Ok', onPress() {
+                        viewmodel.setDialogSuccess(false);
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'index' }]
+                        });
+                    },
+                }}
+                onClose={() => viewmodel.setDialogSuccess(false)}
+            />
+
+            <StatusModal
+                isActive={viewmodel.dialogError}
+                title="Thông báo"
+                label="Xóa đơn hàng thất bại, Vui lòng thử lại"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'Ok', onPress() {
+                        viewmodel.setDialogError(false)
+                    },
+                }}
+                onClose={() => viewmodel.setDialogError(false)}
             />
         </View>
     )

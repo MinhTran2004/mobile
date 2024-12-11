@@ -9,16 +9,38 @@ export const ViewModelHome = () => {
     const [search, setSearch] = useState('');
     const [dataProductHorizontal, setPassetDataProductHorizontal] = useState<Product[]>([]);
     const [dataProductVertical, setDataProductVertical] = useState<Product[]>([]);
-    
-    const getAllProductByLimit = async () => {
-        const reponse = await ProductService.getAllProductByLimit();
-        setDataProductVertical(reponse);
-        setPassetDataProductHorizontal(reponse);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+
+    const getAllProductByLimit = async (page: any) => {
+        setLoading(true);
+        setPage(page + 1);
+        try {
+            const reponse = await ProductService.getAllProductByLimit(page);
+            if (reponse.length > 0) {
+                setDataProductVertical((data) => [...data, ...reponse]);
+                // setPassetDataProductHorizontal(reponse);
+            }
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
     }
 
+    const handleEndReached = () => {
+        if (!loading) {  
+            setPage((prevPage) => prevPage + 1);
+        }
+    };
+
     useEffect(() => {
-        getAllProductByLimit();
-    }, [])
+        getAllProductByLimit(page);
+    }, [page]);
+
+    // useEffect(() => {
+    //     getAllProductByLimit(page);
+    // }, [])
 
     // chuyen anh slide
     const pageView = useRef<PagerView>(null);
@@ -29,7 +51,7 @@ export const ViewModelHome = () => {
             if (initialPage === 2) {
                 setInitialPage(0)
                 pageView.current?.setPage(initialPage)
-            }else{
+            } else {
                 setInitialPage(initialPage + 1)
                 pageView.current?.setPage(initialPage)
             }
@@ -37,7 +59,7 @@ export const ViewModelHome = () => {
     }, [initialPage])
 
     return {
-        modal, search, dataProductHorizontal, dataProductVertical, pageView, initialPage,
-        setSearch, setModal,
+        modal, search, dataProductHorizontal, dataProductVertical, pageView, initialPage, loading,
+        setSearch, setModal, setLoading, handleEndReached,
     }
 }
