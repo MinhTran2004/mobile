@@ -3,6 +3,7 @@ import ButtonModel from "../ButtonModel";
 import ItemOrderProduct from "@/components/order/ItemOrderProduct";
 import { useNavigation } from "@react-navigation/native";
 import { Bill } from "@/model/bill.model";
+import { ConvertMoney } from "@/constants/convert-monney";
 
 interface Props {
     data: Bill,
@@ -69,7 +70,7 @@ const ItemOrderLayout: React.FC<Props> = (props) => {
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={styles.total}>Tổng tiền: </Text>
-                <Text style={styles.price}>{props.data.totalCost}</Text>
+                <Text style={styles.price}>{ConvertMoney(props.data.totalCost)}</Text>
             </View>
 
             <SelectLayoutButton />

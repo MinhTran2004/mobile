@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product.viewmodel";
 import { IconChevronLeft, IconHeart, IconMessage, IconShoppingCart, IconStar, IconStarFilled, IconStars } from "tabler-icons-react-native";
 import StatusModal from "@/components/StatusModal";
+import { ConvertMoney } from "@/constants/convert-monney";
 
 interface Product {
     _id: string,
@@ -49,7 +50,7 @@ const DetailProduct = (route: Props) => {
                         <IconStarFilled color="#FEC50E" size={18} />
                         <Text style={{ fontSize: 18, fontWeight: 500 }}>4.5</Text>
                     </View>
-                    <Text style={{ fontSize: 20, fontWeight: 700, color: '#D17842' }}>{product.price} VNĐ</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 700, color: '#D17842' }}>{ConvertMoney(product.price)} VNĐ</Text>
                 </View>
                 <View style={{ width: '100%', height: 1, backgroundColor: '#D9D9D9' }}></View>
 

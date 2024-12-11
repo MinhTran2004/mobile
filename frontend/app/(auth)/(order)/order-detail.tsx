@@ -7,6 +7,7 @@ import StatusModal from "@/components/StatusModal";
 import { useState } from "react";
 import { Bill } from "@/model/bill.model";
 import ViewModelOrderDetail from "@/viewmodel/home/order-detail.viewmodel";
+import { ConvertMoney } from "@/constants/convert-monney";
 
 
 const OrderDetail = ({ route }: any) => {
@@ -54,19 +55,19 @@ const OrderDetail = ({ route }: any) => {
                         <Text style={styles.title}>Tổng quan đơn hàng</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Tổng phụ</Text>
-                            <Text style={styles.txt_content}>{item.totalCost}đ</Text>
+                            <Text style={styles.txt_content}>{ConvertMoney(item.totalCost)}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Vận chuyển</Text>
-                            <Text style={styles.txt_content}>{item.transport}đ</Text>
+                            <Text style={styles.txt_content}>{ConvertMoney(item.transport)}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Phiếu giảm giá</Text>
-                            <Text style={styles.txt_content}>{item.coupon.disscount ?? 0}đ</Text>
+                            <Text style={styles.txt_content}>{ConvertMoney(item.coupon.disscount) ?? 0}đ</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Tổng</Text>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{totalAmount}</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{ConvertMoney(totalAmount.toString())}</Text>
                         </View>
                     </View>
 

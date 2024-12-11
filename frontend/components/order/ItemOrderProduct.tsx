@@ -1,3 +1,4 @@
+import { ConvertMoney } from "@/constants/convert-monney";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 const ProductVerticalItem = (props:any) => {
@@ -10,7 +11,7 @@ const ProductVerticalItem = (props:any) => {
                     <Text style={styles.catgory}>{props.category}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price}>{props.price}</Text>
+                    <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
                     <Text style={styles.quantity}>x{props.quantityCart}</Text>
                 </View>
             </View>

@@ -5,6 +5,7 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "reac
 import { useSelector } from "react-redux";
 import { IconMinus, IconPlus, IconX } from "tabler-icons-react-native";
 import StatusModal from "../StatusModal";
+import { ConvertMoney } from "@/constants/convert-monney";
 
 interface Props {
     cart: Cart,
@@ -27,7 +28,7 @@ const ItemCart: React.FC<Props> = React.memo((props) => {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price}>{props.product.price}</Text>
+                    <Text style={styles.price}>{ConvertMoney(props.product.price)}</Text>
                     <View style={styles.containerOperation}>
                         <TouchableOpacity 
                         onPress={() => { 

@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Fontisto from "react-native-vector-icons/Fontisto";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { ConvertMoney } from "@/constants/convert-monney";
 // import { Menu } from 'antd';
 export default class ItemPayment {
     static ProductBycart = ({ cartItemData }: any) => { //324
@@ -45,7 +46,7 @@ export default class ItemPayment {
         return (
             <View style={styles.container_detail_payment}>
                 <Text style={styles.text_detail}>{text}</Text>
-                <Text style={styles.price_detail}>${price}</Text>
+                <Text style={styles.price_detail}>${ConvertMoney(price)}</Text>
 
             </View>
         )

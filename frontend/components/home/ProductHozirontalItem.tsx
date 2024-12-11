@@ -1,3 +1,4 @@
+import { ConvertMoney } from "@/constants/convert-monney";
 import { Product } from "@/model/product.model";
 import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -11,7 +12,7 @@ const ProductHozirontalItem: React.FC<Product> = (props) => {
             <Text numberOfLines={1} style={styles.name}>{props.name}</Text>
             <Text style={{fontWeight: 500, color: '#909090', fontSize: 16}}>{props.idCategory}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                <Text style={styles.price}>{props.price}</Text>
+                <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
                 <Text style={{fontSize: 12}}>Đã bán {props.rate}</Text>
             </View>
         </TouchableOpacity>

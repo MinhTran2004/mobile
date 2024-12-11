@@ -2,7 +2,7 @@ import axios from "axios";
 import Model_Account from "../model/account.model";
 
 class SeviceAccount {
-    static url = "http://192.168.5.16:5000/account";
+    static url = "http://192.168.1.162:5000/account";
     static createAccount = async (data:Model_Account) => {
         try{
             const reponse = (await axios.post(`${this.url}/createAccount`, data)).data;

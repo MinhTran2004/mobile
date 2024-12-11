@@ -1,3 +1,4 @@
+import { ConvertMoney } from "@/constants/convert-monney";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
@@ -12,7 +13,7 @@ const ItemProductPayment = (props:any) => {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.price}>{props.price}</Text>
+                    <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
                     <Text>x{props.quantityCart}</Text>
                 </View>
             </View>
