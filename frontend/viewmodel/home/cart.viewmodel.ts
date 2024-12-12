@@ -10,9 +10,9 @@ interface TypeCart {
 }
 
 export const ViewModelCart = () => {
+    const selector = useSelector((state:any) => state.auth.account._id);
     const [data, setData] = useState<TypeCart[]>([])
     const [total, setToTal] = useState('');
-    const selector = useSelector((state) => state.auth.account._id);
 
     const getAllProductInCart = async () => {
         const reponse = await CartService.getAllProductInCart(selector);
@@ -44,7 +44,6 @@ export const ViewModelCart = () => {
         const sum = reponse.reduce((sum: any, item: any) => {
             return sum + (item.cart.quantity * item.product.price);
         }, 0)
-        // const formattedAmount = sum.toLocaleString('vi-VN');
         setToTal(sum);
     }
 
@@ -61,7 +60,6 @@ export const ViewModelCart = () => {
 
     useEffect(() => {
         getAllProductInCart()
-
     }, []);
 
     return {

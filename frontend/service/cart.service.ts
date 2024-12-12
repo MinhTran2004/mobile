@@ -2,9 +2,8 @@ import CartModel, { Cart } from "@/model/cart.model";
 import axios from "axios";
 import ProductService from "./product.service";
 
-
 export class CartService {
-    static url = "http://192.168.5.16:5000/Cart";
+    static url = "http://192.168.5.16:5000/cart";
 
     static addProductToCart = async (data: CartModel) => {
         try {
@@ -17,12 +16,11 @@ export class CartService {
 
     static getAllProductInCart = async (idAccount: string) => {
         try {
-            const response = await axios.get(`${this.url}/getAllProductInCart?limit=10`, {
+            const response = await axios.get(`${this.url}/getAllProductInCart`, {
                 params: {
                     idAccount: idAccount,
                 }
             });
-            
             // Chắc chắn rằng response.data là mảng
             const reponse = response.data;
     

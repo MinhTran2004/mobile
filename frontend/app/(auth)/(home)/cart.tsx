@@ -31,8 +31,8 @@ const Cart = ({ navigation }: any) => {
                     :
                     <Image source={require('@/assets/images/home/cart-empty.png')} />
                 }
-
             </View>
+            
             {/* footer */}
             <PrimaryButton
                     label={"Thanh toán | " + ConvertMoney(viewmodel.total) + " VND"}
