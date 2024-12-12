@@ -14,7 +14,10 @@ const Profile = () => {
 
   const logout = () => {
     dispatch(Logout());
-    navigation.navigate('login');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'auth' }]
+    });
   }
 
   return (
@@ -73,7 +76,7 @@ const Profile = () => {
             style={styles.ic_profile} />}
           title='Chính sách quyền riêng tư'
           iconRight={<IconChevronRight />}
-          onPress={() => {navigation.navigate('privacy-policy')}} />
+          onPress={() => { navigation.navigate('privacy-policy') }} />
 
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_logout.png')}
@@ -92,7 +95,7 @@ const Profile = () => {
         statusLayoutButton="row"
         secondaryButton={{
           label: 'Có', onPress() {
-            { logout() }
+            logout();
             setDialog(false)
           },
         }}
