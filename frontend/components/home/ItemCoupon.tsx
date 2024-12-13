@@ -30,6 +30,7 @@ const ItemCoupon: React.FC<Props> = (props) => {
 
     return (
         <TouchableOpacity
+        disabled={true}
             style={{
                 flexDirection: 'row',
                 marginBottom: 15,

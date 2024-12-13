@@ -14,9 +14,8 @@ const Payment = ({ route }: any) => {
 
     const { dataCart, total, coupon } = route.params;
 
-    console.log(dataCart);
+    const totalCost = Number(total) + 20000 + (coupon ? Number(coupon.discountValue) : 0);
     
-
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>
@@ -82,7 +81,7 @@ const Payment = ({ route }: any) => {
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                 {coupon ?
-                                    <Text style={{ fontSize: 16 }}>{coupon.discountValue}%</Text>
+                                    <Text style={{ fontSize: 16 }}>{coupon.discountValue}</Text>
                                     :
                                     <View />}
                                 <IconChevronRight size={23} />
@@ -120,7 +119,7 @@ const Payment = ({ route }: any) => {
                     <View style={styles.conatiner}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Tạm tính</Text>
-                            <Text style={styles.txtPrice}>20.000</Text>
+                            <Text style={styles.txtPrice}>{total}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Chi phí vận chuyển</Text>
@@ -128,11 +127,11 @@ const Payment = ({ route }: any) => {
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Giảm giá</Text>
-                            <Text style={styles.txtPrice}>20.000</Text>
+                            <Text style={styles.txtPrice}>{coupon ? coupon.discountValue : 0}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 10, marginTop: 10, borderColor: '#bbb' }}>
                             <Text style={styles.txtPrice}>Tổng tiền</Text>
-                            <Text style={styles.txtPrice}>20.000</Text>
+                            <Text style={styles.txtPrice}>{totalCost}</Text>
                         </View>
                     </View>
 
@@ -159,7 +158,7 @@ const Payment = ({ route }: any) => {
             <PrimaryButton
                 styleButton={{ position: 'fixed' }}
                 label="Thanh toán"
-                onPress={() => { viewmodel.createPaymentURL(dataCart, total, coupon) }} />
+                onPress={() => { viewmodel.createPaymentURL(dataCart, totalCost.toString(), coupon) }} />
             {/* setDialog(true) */}
         </View>
 
