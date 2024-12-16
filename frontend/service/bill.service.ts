@@ -5,10 +5,11 @@ import axios from "axios";
 class SeviceBill {
     static url = "http://192.168.5.16:5000/bill";
 
-    static getAllBillByStatus = async (status: string) => {
+    static getAllBillByStatus = async (idAccount:string, status: string) => {
         try {
             const reponse = await axios.get(`${this.url}/getAllBillByStatus`, {
                 params: {
+                    idAccount:idAccount,
                     status: status,
                 }
             })
@@ -33,6 +34,14 @@ class SeviceBill {
         }
     }
 
+    static createOrderDirect = async (data:BillModel) => {
+        try{
+            const reponse = (await axios.post(`${this.url}/`, data)).data;
+            return reponse.status;
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     static createPaymentURL = async (data: BillModel) => {
         try {

@@ -11,9 +11,9 @@ const router = express.Router();
 
 
 router.get('/getAllBillByStatus', async (req, res) => {
-    const { status } = req.query;
+    const { idAccount, status } = req.query;
 
-    const reponse = await Bill.find({ status: status }).limit(10);
+    const reponse = await Bill.find({ account: idAccount, status: status }).limit(10);
     if (reponse) {
         res.send({ status: true, data: reponse });
     } else {
@@ -121,6 +121,7 @@ router.post('/create_payment_url', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const data = req.body;
+        console.log(data);
 
         // Tạo một hóa đơn mới
         const newBill = new Bill({
@@ -138,10 +139,10 @@ router.post('/', async (req, res) => {
         // // Lưu hóa đơn vào cơ sở dữ liệu
         const savedBill = await newBill.save();
 
-        return res.status(201).json({ message: 'Thêm hóa đơn thành công!', bill: savedBill });
+        return res.status(201).json({ status: true, message: 'Thêm hóa đơn thành công!', bill: savedBill });
     } catch (error) {
         console.error('Lỗi khi thêm hóa đơn:', error);
-        return res.status(500).json({ message: 'Đã xảy ra lỗi khi thêm hóa đơn!', error });
+        return res.status(500).json({ status: false, message: 'Đã xảy ra lỗi khi thêm hóa đơn!', error });
     }
 });
 

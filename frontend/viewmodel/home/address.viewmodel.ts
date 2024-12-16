@@ -10,7 +10,7 @@ const ViewModelAddress = () => {
     const [dialogDelete, setDialogDelete] = useState(false);
     const [dialogError, setDialogError] = useState(false);
 
-    const selector = useSelector((state: any) => state.auth.account._id);
+    const selector = useSelector((state: any) => state?.auth?.account?._id);
 
     const getAllAddress = async () => {
         const reponse = await AddressService.getAllAdress(selector);

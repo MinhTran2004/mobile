@@ -5,6 +5,8 @@ import Login from "./login";
 import Start from "./index";
 import { useSelector } from "react-redux";
 import LayoutHome from "./(home)/_layout";
+import favoriteScreen from "./(profile)/favoriteScreen";
+import DetailProduct from "./(home)/detail-product";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,8 @@ export default function LayoutAuth() {
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="layoutHome" component={LayoutHome} />
+      <Stack.Screen name="favoriteScreen" component={favoriteScreen} />
+      <Stack.Screen name="detail-product" component={DetailProduct} />
     </Stack.Navigator>
   )
 }

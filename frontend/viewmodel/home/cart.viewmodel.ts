@@ -10,7 +10,7 @@ interface TypeCart {
 }
 
 export const ViewModelCart = () => {
-    const selector = useSelector((state:any) => state.auth.account._id);
+    const selector = useSelector((state:any) => state?.auth?.account?._id);
     const [data, setData] = useState<TypeCart[]>([])
     const [total, setToTal] = useState('');
 

@@ -16,7 +16,7 @@ const ViewModelPayment = () => {
     const [dialog, setDialog] = useState(false);
     const [payment, setPayment] = useState('Thanh toán trực tiếp');
 
-    const idAccount = useSelector((state: any) => state.auth.account._id)
+    const idAccount = useSelector((state: any) => state?.auth?.account?._id)
 
     const getAddressByIdAccount = async () => {
         const reponse = await AddressService.getAddressByIdAccount(idAccount);
@@ -45,20 +45,35 @@ const ViewModelPayment = () => {
         }
 
         const dataProduct = dataCart.map((item: any) => {
-            return { idCart:item.idCart, quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
+            return { idCart: item.idCart, quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
         })
 
+        const seleterPayment = payment ? "Thanh toán trực tiếp" : "Thanh toán VNPAY";
 
-        const dataBill = new BillModel(idAccount, dataProduct, payment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
-        
-        const reponse = await SeviceBill.createPaymentURL(dataBill);
+        const dataBill = new BillModel(idAccount, dataProduct, seleterPayment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
+        console.log(dataBill);
 
-        if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
-            console.log("response createPaymentURL", reponse);
-            navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
+        if (payment) {
+            const reponse = await SeviceBill.createOrderDirect(dataBill);
+            if (reponse) {
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'layoutHome' }]
+                });
+            }
         } else {
-            console.log("Không nhận được URL hợp lệ");
+            // const reponse = await SeviceBill.createPaymentURL(dataBill);
+
+            if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
+                console.log("response createPaymentURL", reponse);
+                navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
+            } else {
+                console.log("Không nhận được URL hợp lệ");
+            }
         }
+
+
+
 
 
     }

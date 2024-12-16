@@ -1,6 +1,7 @@
 import { Bill } from "@/model/bill.model"
 import SeviceBill from "@/service/bill.service";
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux";
 
 const ViewModelOrderWaiting = () => {
     const [itemData, setItemData] = useState<Bill>();
@@ -9,8 +10,10 @@ const ViewModelOrderWaiting = () => {
     const [dialogError, setDialogError] = useState(false);
     const [dialogSuccess, setDialogSuccess] = useState(false);
 
+    const userId = useSelector((state: any) => state?.auth?.account?._id);
+
     const getAllBillByStatus = async () => {
-        const reponse = await SeviceBill.getAllBillByStatus("Chờ xác nhận");
+        const reponse = await SeviceBill.getAllBillByStatus(userId, "Chờ xác nhận");
         setDataOrder(reponse);
     }
 

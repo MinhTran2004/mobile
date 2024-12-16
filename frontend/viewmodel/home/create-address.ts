@@ -26,7 +26,7 @@ const ViewModelCreateAddress = () => {
     const [dialogSuccess, setDialogSuccess] = useState(false);
     const [dialogError, setDialogError] = useState(false);
 
-    const selector = useSelector((state: any) => state.auth.account._id);
+    const selector = useSelector((state: any) => state?.auth?.account?._id);
 
     // modal
     const [modalProvince, setModalProvince] = useState(false);

@@ -4,8 +4,8 @@ import { Logout } from '@/redux/action/login';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Switch, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { IconChevronRight, IconHeart } from 'tabler-icons-react-native';
+import { useDispatch } from 'react-redux';
+import { IconChevronRight } from 'tabler-icons-react-native';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -13,11 +13,11 @@ const Profile = () => {
   const [dialog, setDialog] = useState(false);
 
   const logout = () => {
-    dispatch(Logout());
     navigation.reset({
       index: 0,
       routes: [{ name: 'auth' }]
     });
+    dispatch(Logout());
   }
 
   return (
@@ -69,7 +69,9 @@ const Profile = () => {
           iconLeft={<Image source={require('@/assets/images/profile/ic_heart.png')}
             style={styles.ic_profile} />} title='Sản phẩm yêu thích'
           iconRight={<IconChevronRight />}
-          onPress={() => { console.log('heloooo'); }} />
+          onPress={() => {
+            navigation.navigate('favoriteScreen') 
+          }} />
         <Text style={styles.title}>Cài đặt</Text>
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_book.png')}
