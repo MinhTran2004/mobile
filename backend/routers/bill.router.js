@@ -24,7 +24,7 @@ router.get('/getAllBillByStatus', async (req, res) => {
 
 router.delete('/deleteBillById/:id', async (req, res) => {
     const { id } = req.params;
-    
+
     const reponse = await Bill.findByIdAndDelete(id);
     if (reponse) {
         res.send({ status: true });
@@ -121,32 +121,6 @@ router.post('/create_payment_url', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const data = req.body;
-        console.log(data);
-
-
-        //check cart 
-        // for (const cart in idCart) {
-        //     try {
-        //         const chheckCart = await Cart.findById(idCart[cart]);
-        //         if (!chheckCart) {
-        //             return res.status(404).json({
-        //                 message: `cart với id  ${idCart[cart]} không tồn tại `,
-        //             });
-        //         }
-        //     } catch (error) {
-        //         return res.status(500).json({ message: 'Đã xảy ra lỗi kiểm tra cart', error });
-        //     }
-        // }
-        //check tai khoan 
-        // const account = await Account.findById(idUser);
-        // if (!account) {
-        //     return res.status(404).json({ message: "Không tìm thấy người dùng" });
-        // }
-        // check dia chi 
-        // const addresses = await Address.find({ idUser });
-        // if (addresses.length === 0) {
-        //     return res.status(404).json({ message: "Không tìm thấy địa chỉ nào cho người dùng này." });
-        // }
 
         // Tạo một hóa đơn mới
         const newBill = new Bill({
@@ -163,10 +137,7 @@ router.post('/', async (req, res) => {
 
         // // Lưu hóa đơn vào cơ sở dữ liệu
         const savedBill = await newBill.save();
-        // await Cart.updateMany(
-        //     { '_id': { $in: idCart } },
-        //     { $set: { status: 'Đã sử dụng' } }
-        // );
+
         return res.status(201).json({ message: 'Thêm hóa đơn thành công!', bill: savedBill });
     } catch (error) {
         console.error('Lỗi khi thêm hóa đơn:', error);
@@ -254,7 +225,10 @@ router.get("/vnpay_return", async (req, res) => {
         `;
         try {
             const newBill = new Bill(dataBill);
-            console.log(newBill);
+
+            newBill.dataProduct.map(async (item) => {
+                const deleteCartById = await Cart.findByIdAndDelete(item.idCart);
+            })
 
             await newBill.save();
 

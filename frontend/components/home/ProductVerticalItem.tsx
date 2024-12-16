@@ -17,7 +17,7 @@ const ProductVerticalItem: React.FC<Product> = (props) => {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
                     <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
-                    <Text>Đã bán {props.rate}</Text>
+                    <Text>Đã bán {props.sold}</Text>
 
                 </View>
             </View>

@@ -10,6 +10,7 @@ interface dataAddress {
 };
 
 interface dataProduct {
+    idCart:string;
     idProduct: string,
     name: string,
     category: string,

@@ -14,7 +14,7 @@ const Payment = ({ route }: any) => {
 
     const { dataCart, total, coupon } = route.params;
 
-    const totalCost = Number(total) + 20000 + (coupon ? Number(coupon.discountValue) : 0);
+    const totalCost = Number(total) + 20000 - (coupon ? Number(coupon.discountValue) : 0);
     
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>

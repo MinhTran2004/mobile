@@ -13,7 +13,7 @@ const ProductHozirontalItem: React.FC<Product> = (props) => {
             <Text style={{fontWeight: 500, color: '#909090', fontSize: 16}}>{props.idCategory}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                 <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
-                <Text style={{fontSize: 12}}>Đã bán {props.rate}</Text>
+                <Text style={{fontSize: 12}}>Đã bán {props.sold}</Text>
             </View>
         </TouchableOpacity>
     )

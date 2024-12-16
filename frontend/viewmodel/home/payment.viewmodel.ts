@@ -45,7 +45,7 @@ const ViewModelPayment = () => {
         }
 
         const dataProduct = dataCart.map((item: any) => {
-            return { quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
+            return { idCart:item.idCart, quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
         })
 
 

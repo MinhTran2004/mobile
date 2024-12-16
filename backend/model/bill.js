@@ -8,6 +8,7 @@ const BillSchema = new mongoose.Schema({
         detailAddress: { type: String, required: true },
     },
     dataProduct: [{
+        idCart: { type: String, required: true },
         idProduct: { type: String, required: true },
         name: { type: String, required: true },
         category: { type: String, required: true },
@@ -16,7 +17,7 @@ const BillSchema = new mongoose.Schema({
         quantityCart: { type: String, required: true },
     }],
     coupon: {
-        _id: { type: String},
+        _id: { type: String },
         disscount: { type: String }
     },
     paymentMethod: { type: String, required: true },

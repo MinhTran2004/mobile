@@ -9,7 +9,7 @@ const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
 
     const data = viewmodel.data.map((item) => {
-        return { quantityCart: item.cart.quantity , ...item.product };
+        return {  idCart: item.cart._id, quantityCart: item.cart.quantity , ...item.product };
     })
     
     return (
