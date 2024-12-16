@@ -79,7 +79,7 @@ const DetailProduct = (route: Props) => {
             <StatusModal
                 isActive={dialog}
                 title="Thông báo"
-                label="Bạn có muốn tiếp tục mua hàng?"
+                label="Bạn có muốn mua hàng?"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{

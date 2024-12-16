@@ -19,7 +19,6 @@ const ProductHozirontalItem: React.FC<Product> = (props) => {
     )
 }
 
-
 const styles = StyleSheet.create({
     container: {
         width: 150,

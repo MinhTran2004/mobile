@@ -9,9 +9,9 @@ const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
 
     const data = viewmodel.data.map((item) => {
-        return {  idCart: item.cart._id, quantityCart: item.cart.quantity , ...item.product };
+        return { idCart: item.cart._id, quantityCart: item.cart.quantity, ...item.product };
     })
-    
+
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
@@ -32,15 +32,15 @@ const Cart = ({ navigation }: any) => {
                     <Image source={require('@/assets/images/home/cart-empty.png')} />
                 }
             </View>
-            
+
             {/* footer */}
             <PrimaryButton
-                    label={"Thanh toán | " + ConvertMoney(viewmodel.total) + " VND"}
-                    onPress={() => navigation.navigate('payment', {
-                        dataCart: data,
-                        total: viewmodel.total,
-                    })}
-                    disabled={viewmodel.data.length != 0 ? false : true} />
+                label={"Thanh toán | " + ConvertMoney(viewmodel.total) + " VND"}
+                onPress={() => navigation.navigate('payment', {
+                    dataCart: data,
+                    total: viewmodel.total,
+                })}
+                disabled={viewmodel.data.length != 0 ? false : true} />
         </View>
     )
 }

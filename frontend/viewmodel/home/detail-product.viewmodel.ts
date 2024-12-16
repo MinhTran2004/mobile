@@ -6,8 +6,6 @@ export const ViewModelDetailProduct = () => {
     const selector = useSelector((state: any) => state.auth.account._id);
     
     const addProductToCart = async (idproduct: string) => {
-        console.log(selector);
-        
         const cart = new CartModel(selector, idproduct, 1, "Đang sử dụng");
         const reponse = await CartService.addProductToCart(cart);
         if (reponse) {
