@@ -3,7 +3,7 @@ import axios from "axios";
 import ProductService from "./product.service";
 
 export class CartService {
-    static url = "http://192.168.5.16:5000/cart";
+    static url = "http://172.20.10.3:5000/cart";
 
     static addProductToCart = async (data: CartModel) => {
         try {

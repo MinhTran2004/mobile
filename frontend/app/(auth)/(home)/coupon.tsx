@@ -5,10 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList, StyleSheet, View } from "react-native"
 
 const Coupon = ({route}:any) => {
-    const viewmodel = ViewModelCoupon();
+    const {dataCart, total} = route.params;
+
+    const viewmodel = ViewModelCoupon(total);
     const navigation = useNavigation();
 
-    const {dataCart, total} = route.params;
     
     return (
         <View style={{ flex: 1 }}>

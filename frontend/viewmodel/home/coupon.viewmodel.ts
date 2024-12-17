@@ -2,11 +2,11 @@ import { Coupon } from "@/model/coupon.model"
 import CouponService from "@/service/coupon.service";
 import { useEffect, useState } from "react"
 
-const ViewModelCoupon = () => {
+const ViewModelCoupon = (total:string) => {
     const [dataCoupon, setDataCoupon] = useState<Coupon[]>([]);
 
-    const getAllCoupon = async () => {
-        const reponse = await CouponService.getAllCoupon();
+    const getAllCoupon = async (total:string) => {
+        const reponse = await CouponService.getAllCoupon(total);
         
         if(reponse.lenght != 0) {
             setDataCoupon(reponse)
@@ -16,7 +16,7 @@ const ViewModelCoupon = () => {
     }
 
     useEffect(() => {   
-        getAllCoupon();
+        getAllCoupon(total);
     }, [])
 
     return {

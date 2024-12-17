@@ -69,6 +69,7 @@ const favoriteScreen = () => {
                         name={item.productId.name}
                         idCategory={item.productId.idCategory}
                         price={item.productId.price}
+                        sold={item.productId.sold}
                         comefromFavorite={true}
                         handleDeletefavorite={() => handleDeletefavorite(item.productId._id)}
                         idFavorite={item._id}

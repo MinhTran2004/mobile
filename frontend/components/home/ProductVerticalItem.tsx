@@ -17,7 +17,8 @@ interface Props {
     onToggleFavorite?: () => void;
     handleDeletefavorite?: () => void;
     comefromFavorite?: Boolean,
-    idFavorite?:string
+    idFavorite?:string,
+    sold?: string,
 }
 
 const ProductVerticalItem: React.FC<Props> = (props) => {
@@ -35,7 +36,7 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
-                    {
+                    {/* {
                         props.comefromFavorite ? (
                             <TouchableOpacity onPress={props.handleDeletefavorite}>
                                 <IconTrash size={20} />
@@ -51,7 +52,9 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
                                 </TouchableOpacity>
                             )
                         )
-                    }
+                    } */}
+
+                    <Text>Đã bán:{props.sold}</Text>
 
                 </View>
             </View>

@@ -112,44 +112,44 @@ const Home = ({ navigation }: any) => {
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_pizza.png')} style={styles.ic_category} />}
                                     name="Pizaa"
-                                    onPress={() => handleNavigateToCategory('Gà Rán')}
+                                    onPress={() => handleNavigateToCategory('Pizza')}
                                 />
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_hamburger.png')} style={styles.ic_category} />}
-                                    name="Hamburger"
+                                    name="Burger"
                                     onPress={() => handleNavigateToCategory('Burger')}
                                 />
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_drink.png')} style={styles.ic_category} />}
                                     name="Drink"
-                                    onPress={() => handleNavigateToCategory('Mì')}
+                                    onPress={() => handleNavigateToCategory('Drink')}
                                 />
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_chicken.png')} style={styles.ic_category} />}
                                     name="Chicken"
-                                    onPress={() => handleNavigateToCategory('Cơm')}
+                                    onPress={() => handleNavigateToCategory('Chicken')}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row' }}>
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_noodles.png')} style={styles.ic_category} />}
                                     name="Noodles"
-                                    onPress={() => handleNavigateToCategory('Gà Rán')}
+                                    onPress={() => handleNavigateToCategory('Noodles')}
                                 />
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_rice.png')} style={styles.ic_category} />}
                                     name="Rice"
-                                    onPress={() => handleNavigateToCategory('Burger')}
+                                    onPress={() => handleNavigateToCategory('Rice')}
                                 />
                                 <ItemProductCategory
                                     icon={<Image source={require('@/assets/images/home/ic_cream.png')} style={styles.ic_category} />}
                                     name="Ice cream"
-                                    onPress={() => handleNavigateToCategory('Mì')}
+                                    onPress={() => handleNavigateToCategory('Cake')}
                                 />
                                 <ItemProductCategory
-                                    icon={<Image source={require('@/assets/images/home/ic_more.png')} style={styles.ic_category} />}
-                                    name="More"
-                                    onPress={() => handleNavigateToCategory('Cơm')}
+                                    icon={<Image source={require('@/assets/images/home/fries.png')} style={styles.ic_category} />}
+                                    name="French fries"
+                                    onPress={() => handleNavigateToCategory('French fries')}
                                 />
                             </View>
 
@@ -184,6 +184,7 @@ const Home = ({ navigation }: any) => {
                                     name={item.name}
                                     idCategory={item.idCategory}
                                     price={item.price}
+                                    sold={item.sold}
                                     isFavorite={favoriteIds.includes(item._id)}
                                     onToggleFavorite={() => toggleFavorite(item._id)}
                                 />

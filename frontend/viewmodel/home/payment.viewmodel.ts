@@ -53,16 +53,16 @@ const ViewModelPayment = () => {
         const dataBill = new BillModel(idAccount, dataProduct, seleterPayment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
         console.log(dataBill);
 
-        if (payment) {
-            const reponse = await SeviceBill.createOrderDirect(dataBill);
-            if (reponse) {
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'layoutHome' }]
-                });
-            }
-        } else {
-            // const reponse = await SeviceBill.createPaymentURL(dataBill);
+        // if (payment) {
+        //     const reponse = await SeviceBill.createOrderDirect(dataBill);
+        //     if (reponse) {
+        //         navigation.reset({
+        //             index: 0,
+        //             routes: [{ name: 'layoutHome' }]
+        //         });
+        //     }
+        // } else {
+            const reponse = await SeviceBill.createPaymentURL(dataBill);
 
             if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
                 console.log("response createPaymentURL", reponse);
@@ -70,7 +70,7 @@ const ViewModelPayment = () => {
             } else {
                 console.log("Không nhận được URL hợp lệ");
             }
-        }
+        // }
 
 
 

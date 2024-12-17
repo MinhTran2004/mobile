@@ -6,8 +6,8 @@ import { Login } from "@/redux/action/login";
 import { router } from "expo-router";
 
 export const ViewModelLogin = (navigation: any) => {
-    const [account, setAccount] = useState('admin@gmail.com');
-    const [password, setPassword] = useState('123456');
+    const [account, setAccount] = useState('');
+    const [password, setPassword] = useState('');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
 

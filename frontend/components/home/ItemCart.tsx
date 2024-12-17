@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     containerOperation: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10
+        gap: 5
     },
     quantity: {
         fontSize: 14,

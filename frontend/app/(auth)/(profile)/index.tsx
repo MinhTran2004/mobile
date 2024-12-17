@@ -4,13 +4,15 @@ import { Logout } from '@/redux/action/login';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Switch, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconChevronRight } from 'tabler-icons-react-native';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [dialog, setDialog] = useState(false);
+
+  const selectUser = useSelector((state:any) => state?.auth?.account);
 
   const logout = () => {
     navigation.reset({
@@ -19,6 +21,9 @@ const Profile = () => {
     });
     dispatch(Logout());
   }
+
+  console.log(selectUser);
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', gap: 30, paddingTop: 30 }}>
@@ -35,8 +40,8 @@ const Profile = () => {
             <Image source={require('../../../assets/images/profile/ic_camera.png')} style={{ width: 28, height: 28, alignSelf: 'flex-end', position: 'absolute', bottom: 0, right: 5, }} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Nguyễn Công Thưởng</Text>
-        <Text style={{ fontSize: 16, color: '#909090' }}>fpolyaso1@fpt.edu.vn</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{selectUser.account}</Text>
+        {/* <Text style={{ fontSize: 16, color: '#909090' }}>fpolyaso1@fpt.edu.vn</Text> */}
       </View>
 
 
@@ -52,12 +57,12 @@ const Profile = () => {
           iconRight={<IconChevronRight />}
           onPress={() => { navigation.navigate('address') }} />
 
-        <ItemProfile
+        {/* <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_lock.png')}
             style={styles.ic_profile} />}
           title='Đổi mật khẩu'
           iconRight={<IconChevronRight />}
-          onPress={() => { console.log('heloooo') }} />
+          onPress={() => { console.log('heloooo') }} /> */}
 
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_discount.png')}

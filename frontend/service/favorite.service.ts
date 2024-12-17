@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 class FavoriteService {
-    static url = "http://192.168.5.16:5000/favorite";
+    static url = "http://172.20.10.3:5000/favorite";
 
     static getFavorite = async (userId:string) => {
         try {

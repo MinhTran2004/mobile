@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export default class AddressService {
-    static url = "http://192.168.5.16:5000/address";
+    static url = "http://172.20.10.3:5000/address";
 
     static createAddress = async (data: AddressModel) => {
         try {
