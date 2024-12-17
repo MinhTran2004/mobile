@@ -52,9 +52,9 @@ const ViewModelPayment = () => {
         const dataBill = new BillModel(idAccount, dataProduct, payment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
         
         const reponse = await SeviceBill.createPaymentURL(dataBill);
-
+        console.log("response createPaymentURL", reponse);
         if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
-            console.log("response createPaymentURL", reponse);
+           
             navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
         } else {
             console.log("Không nhận được URL hợp lệ");

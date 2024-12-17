@@ -20,7 +20,7 @@ interface dataProduct {
 };
 
 export interface Bill {
-    _id: string;
+    _id: string; 
     account: string;
     dataProduct: dataProduct[];
     paymentMethod: string;

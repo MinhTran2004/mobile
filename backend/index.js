@@ -9,6 +9,7 @@ const categoryRoute = require('./routers/category.router');
 const cartRoute = require('./routers/cart.router');
 const couponRoute = require('./routers/coupon.router');
 const billRoute = require('./routers/bill.router');
+const favoriteRoute = require('./routers/favorite.route');
 
 const app = express();
 const port = 5000;
@@ -25,6 +26,7 @@ app.use('/category', categoryRoute);
 app.use('/cart', cartRoute);
 app.use('/coupon', couponRoute);
 app.use('/bill', billRoute);
+app.use('/favorite', favoriteRoute);
 
 app.listen(port, () => {
   console.log(`Ứng dụng đang lắng nghe trên cổng ${port}`);
