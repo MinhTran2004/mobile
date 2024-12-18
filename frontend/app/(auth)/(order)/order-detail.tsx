@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import ItemOrderProduct from "@/components/order/ItemOrderProduct";
 import { View, Text, Image, FlatList, StyleSheet, ScrollView } from "react-native"
 import StatusModal from "@/components/StatusModal";
-import { useState } from "react";
 import { Bill } from "@/model/bill.model";
 import ViewModelOrderDetail from "@/viewmodel/home/order-detail.viewmodel";
 import { ConvertMoney } from "@/constants/convert-monney";
@@ -16,7 +15,30 @@ const OrderDetail = ({ route }: any) => {
 
     const item: Bill = route.params;
 
-    const totalAmount = Number(item.totalCost) - 30000 - (item.coupon.disscount ? Number(item.coupon.disscount) : 0);
+    const total = viewmodel.calculate(item.dataProduct);
+
+    const totalAmount = Number(total) + 30000 - (item.coupon.disscount ? Number(item.coupon.disscount) : 0);
+
+    const SelectButton = () => {
+        switch(item.status){
+            case "Chờ xác nhận": return (
+                <PrimaryButton
+                styleButton={{ position: 'fixed' }}
+                label={"Hủy đơn"}
+                onPress={() => { viewmodel.setDialogDelete(true) }} />
+            );
+            case "Hoàn thành": return (
+                <PrimaryButton
+                styleButton={{ position: 'fixed' }}
+                label={"Đặt lại đơn"}
+                onPress={() => { 
+                    viewmodel.setItemData(item);
+                    viewmodel.setDialogRelay(true);
+                 }} />
+            )
+            default: return ;
+        }
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -55,15 +77,15 @@ const OrderDetail = ({ route }: any) => {
                         <Text style={styles.title}>Tổng quan đơn hàng</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Tổng phụ</Text>
-                            <Text style={styles.txt_content}>{ConvertMoney(item.totalCost)}đ</Text>
+                            <Text style={styles.txt_content}>{ConvertMoney(total)}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Vận chuyển</Text>
-                            <Text style={styles.txt_content}>{ConvertMoney(item.transport)}đ</Text>
+                            <Text style={styles.txt_content}>{ConvertMoney(item.transport)}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={styles.txt_content}>Phiếu giảm giá</Text>
-                            <Text style={styles.txt_content}>{ConvertMoney(item.coupon.disscount) ?? 0}đ</Text>
+                            <Text style={styles.txt_content}>{item.coupon.disscount ? ConvertMoney(item.coupon.disscount) : 0}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Tổng</Text>
@@ -90,8 +112,31 @@ const OrderDetail = ({ route }: any) => {
 
                 </View>
             </ScrollView>
-            <PrimaryButton styleButton={{ position: 'fixed' }} label={"Hủy đơn"} onPress={() => { viewmodel.setDialogDelete(true) }} />
 
+            <SelectButton />
+
+            <StatusModal
+                isActive={viewmodel.dialogRelay}
+                title="Thông báo"
+                label="Bạn có muốn đặt lại đơn hàng?"
+                icon="none"
+                statusLayoutButton="row"
+                secondaryButton={{
+                    label: 'Có', onPress() {
+                        navigation.navigate('payment', {
+                            dataCart: viewmodel.itemData?.dataProduct,
+                            total: viewmodel.itemData?.totalCost,
+                        });
+                        viewmodel.setDialogRelay(false);
+                    },
+                }}
+                primaryButton={{
+                    label: 'Không', onPress() {
+                        viewmodel.setDialogRelay(false)
+                    },
+                }}
+                onClose={() => viewmodel.setDialogRelay(false)}
+            />
 
             <StatusModal
                 isActive={viewmodel.dialogDelete}

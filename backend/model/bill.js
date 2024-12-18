@@ -8,7 +8,7 @@ const BillSchema = new mongoose.Schema({
         detailAddress: { type: String, required: true },
     },
     dataProduct: [{
-        idCart: { type: String, required: true },
+        idCart: { type: String },
         idProduct: { type: String, required: true },
         name: { type: String, required: true },
         category: { type: String, required: true },

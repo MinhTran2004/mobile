@@ -11,7 +11,7 @@ const ViewModelOrderCancel = () => {
     const userId = useSelector((state: any) => state?.auth?.account?._id);
 
     const getAllBillByStatus = async () => {
-        const reponse = await SeviceBill.getAllBillByStatus(userId, 'Đã hủy');
+        const reponse = await SeviceBill.getAllBillByStatus(userId, 'Người bán đã hủy');
         setDataOrder(reponse);
     }
 

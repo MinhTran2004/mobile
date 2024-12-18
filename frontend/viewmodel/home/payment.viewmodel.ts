@@ -51,26 +51,29 @@ const ViewModelPayment = () => {
         const seleterPayment = payment ? "Thanh toán trực tiếp" : "Thanh toán VNPAY";
 
         const dataBill = new BillModel(idAccount, dataProduct, seleterPayment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
-        console.log(dataBill);
+        console.log(payment);
 
-        // if (payment) {
-        //     const reponse = await SeviceBill.createOrderDirect(dataBill);
-        //     if (reponse) {
-        //         navigation.reset({
-        //             index: 0,
-        //             routes: [{ name: 'layoutHome' }]
-        //         });
-        //     }
-        // } else {
-            const reponse = await SeviceBill.createPaymentURL(dataBill);
+        if (payment) {
+            // const reponse = await SeviceBill.createOrderDirect(dataBill);
+            // if (reponse) {
+            //     navigation.reset({
+            //         index: 0,
+            //         routes: [{ name: 'layoutHome' }]
+            //     });
+            // }
+            console.log(seleterPayment);
+        } else {
+            console.log(seleterPayment);
+            
+            // const reponse = await SeviceBill.createPaymentURL(dataBill);
 
-            if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
-                console.log("response createPaymentURL", reponse);
-                navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
-            } else {
-                console.log("Không nhận được URL hợp lệ");
-            }
-        // }
+            // if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
+            //     console.log("response createPaymentURL", reponse);
+            //     navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
+            // } else {
+            //     console.log("Không nhận được URL hợp lệ");
+            // }
+        }
 
 
 

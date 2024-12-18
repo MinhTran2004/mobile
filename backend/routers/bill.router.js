@@ -228,7 +228,9 @@ router.get("/vnpay_return", async (req, res) => {
             const newBill = new Bill(dataBill);
 
             newBill.dataProduct.map(async (item) => {
-                const deleteCartById = await Cart.findByIdAndDelete(item.idCart);
+                if (item.idCart) {
+                    await Cart.findByIdAndDelete(item.idCart);
+                }
             })
 
             await newBill.save();

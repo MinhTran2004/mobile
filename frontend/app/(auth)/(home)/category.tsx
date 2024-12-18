@@ -10,6 +10,7 @@ interface Product {
     image: string;
     name: string;
     idCategory: string;
+    sold: string;
     price: number;
 }
 
@@ -54,6 +55,7 @@ const Category = ({ route, navigation }: any) => {
                                 _id={item._id}
                                 image={item.image}
                                 name={item.name}
+                                sold={item.sold}
                                 idCategory={item.idCategory}
                                 price={item.price.toString()} // Convert the number to a string
                             />

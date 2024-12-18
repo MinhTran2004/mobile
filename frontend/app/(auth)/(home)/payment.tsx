@@ -15,7 +15,7 @@ const Payment = ({ route }: any) => {
 
     const { dataCart, total, coupon } = route.params;
 
-    const totalCost = Number(total) + 20000 - (coupon ? Number(coupon.discountValue) : 0);
+    const totalCost = Number(total) + 30000 - (coupon ? Number(coupon.discountValue) : 0);
     
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -124,7 +124,7 @@ const Payment = ({ route }: any) => {
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Chi phí vận chuyển</Text>
-                            <Text style={styles.txtPrice}>20.000</Text>
+                            <Text style={styles.txtPrice}>30.000</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Giảm giá</Text>
