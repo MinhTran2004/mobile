@@ -9,14 +9,13 @@ import PrimaryButton from "@/components/PrimaryButton";
 import StatusModal from "@/components/StatusModal"
 import { ConvertMoney } from "@/constants/convert-monney";
 
-const Payment = ({ route }: any) => {
+const Payment = ({ route, navigation }: any) => {
     const viewmodel = ViewModelPayment();
-    const navigation = useNavigation();
 
     const { dataCart, total, coupon } = route.params;
 
     const totalCost = Number(total) + 30000 - (coupon ? Number(coupon.discountValue) : 0);
-    
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>
@@ -27,7 +26,14 @@ const Payment = ({ route }: any) => {
                     onPressIconLeft={() => navigation.goBack()}
                 />
 
-                <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 10, paddingBottom: 30, paddingHorizontal: 10, gap: 10 }}>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: 'white',
+                    paddingTop: 10,
+                    paddingBottom: 30,
+                    paddingHorizontal: 10,
+                    gap: 10
+                }}>
                     {/* banner1 */}
                     <View style={styles.conatiner}>
                         <Text style={styles.title}>Địa chỉ nhận hàng</Text>
@@ -47,7 +53,7 @@ const Payment = ({ route }: any) => {
                             <TouchableOpacity
                                 style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row' }}
                                 onPress={() => {
-                                    navigation.replace('address')
+                                    navigation.navigate('address')
                                 }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1 }}>
                                     <IconPlus size={22} />
@@ -71,11 +77,17 @@ const Payment = ({ route }: any) => {
                     {/* banner3 */}
                     <View style={styles.conatiner}>
                         <TouchableOpacity
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                paddingVertical: 10,
+                                paddingRight: 23
+                            }}
                             onPress={() => navigation.navigate('coupon', {
                                 dataCart: dataCart,
                                 total: total,
-                            })}
-                            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, paddingRight: 23 }}>
+                            })}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                                 <IconDiscount />
                                 <Text style={{ fontSize: 16 }}>Mã giảm giá</Text>
@@ -98,8 +110,7 @@ const Payment = ({ route }: any) => {
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán trực tiếp"
                                     right={props => <TouchableOpacity onPress={() => {
-                                        viewmodel.setPayment('Thanh toán trực tiếp'),
-                                            viewmodel.setCheckBox(!viewmodel.checkBox)
+                                        viewmodel.setCheckBox(true)
                                     }}>
                                         <Checkbox status={viewmodel.checkBox ? 'checked' : 'unchecked'} />
                                     </TouchableOpacity>} />
@@ -107,8 +118,7 @@ const Payment = ({ route }: any) => {
                                     left={props => <IconAddressBook />}
                                     title="Thanh toán bằng VNPAY"
                                     right={props => <TouchableOpacity onPress={() => {
-                                        viewmodel.setPayment('Thanh toàn VNPAY'),
-                                            viewmodel.setCheckBox(!viewmodel.checkBox)
+                                        viewmodel.setCheckBox(false)
                                     }}>
                                         <Checkbox status={viewmodel.checkBox ? 'unchecked' : 'checked'} />
                                     </TouchableOpacity>} />
@@ -159,10 +169,9 @@ const Payment = ({ route }: any) => {
             <PrimaryButton
                 styleButton={{ position: 'fixed' }}
                 label="Thanh toán"
-                onPress={() => { 
-                    viewmodel.createPaymentURL(dataCart, totalCost.toString(), coupon) 
-                    }} />
-            {/* setDialog(true) */}
+                onPress={() => {
+                    viewmodel.createPaymentURL(dataCart, totalCost.toString(), coupon)
+                }} />
         </View>
 
     )

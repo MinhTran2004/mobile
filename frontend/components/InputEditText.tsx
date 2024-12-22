@@ -1,15 +1,14 @@
-import React from "react";
-import { StyleProp, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleProp, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from "react-native";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
 import { IconChevronLeft } from "tabler-icons-react-native";
-import { navigate } from "expo-router/build/global-state/routing";
 import { useNavigation } from "@react-navigation/native";
 
 interface Props {
     editable?: boolean,
     iconLeft?: 'none' | 'search',
     placeholder?: string,
-    iconRight?: string,
+    iconRight?: boolean,
     keyboardType?: string,
     value?: string,
     textError?: string,
@@ -18,6 +17,9 @@ interface Props {
 }
 
 const InputEditText: React.FC<Props> = (props) => {
+    const [statusPassword, setStatusPassword] = useState(true);
+
+
     const naviagtion = useNavigation();
     const SelectIconLeft = () => {
         switch (props.iconLeft) {
@@ -27,27 +29,43 @@ const InputEditText: React.FC<Props> = (props) => {
     }
 
     return (
-        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center',}}>
+        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', }}>
             {props.iconLeft === 'search' ?
                 <TouchableOpacity onPress={() => naviagtion.goBack()} style={{ paddingHorizontal: 5 }}>
                     <IconChevronLeft size={26} />
                 </TouchableOpacity>
                 :
                 <View />}
-            <View style={{width: '100%'}}>
+            <View style={{ width: '100%' }}>
                 <View style={[styles.container, props.style, { borderColor: props.textError ? "red" : "#ccc" }]}>
                     <TouchableOpacity onPress={() => naviagtion.goBack()}>
                         <SelectIconLeft />
                     </TouchableOpacity>
-                    <TextInput
-                        editable={props.editable}
-                        placeholder={props.placeholder}
-                        value={props.value}
-                        keyboardType={props.keyboardType ? "phone-pad" : "default"}
-                        onChangeText={(text) => props.onChangeText(text)}
-                        style={{ width: '100%', fontSize: 16}} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <TextInput
+                            editable={props.editable}
+                            placeholder={props.placeholder}
+                            value={props.value}
+                            secureTextEntry={props.iconRight && statusPassword}
+                            keyboardType={props.keyboardType ? "phone-pad" : "default"}
+                            onChangeText={(text) => props.onChangeText(text)}
+                            style={{ flex: 1,fontSize: 16 }}
+                        />
+                        {props.iconRight ?
+                            statusPassword ?
+                                <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => { setStatusPassword(false) }}>
+                                    <Image source={require('@/assets/images/hidden.png')} style={{ width: 23, height: 23 }} />
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => setStatusPassword(true)}>
+                                    <Image source={require('@/assets/images/eye.png')} style={{ width: 23, height: 23 }} />
+                                </TouchableOpacity>
+                            :
+                            <View />
+                        }
+                    </View>
                 </View>
-                {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View style={{}} />}
+                {props.textError ? <Text style={styles.textError}>{props.textError}</Text> : <View />}
             </View>
         </View>
     )
@@ -55,8 +73,6 @@ const InputEditText: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        // borderWidth: 1,
-        // borderColor: "#ccc",
         borderRadius: 90,
         backgroundColor: '#F9F9F9',
         paddingLeft: 15,

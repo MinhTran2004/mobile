@@ -11,6 +11,8 @@ export const ViewModelLogin = (navigation: any) => {
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
 
+    const [statusPassword, setStatusPassword] = useState(true);
+
     const dispatch = useDispatch();
 
     //Lay thong tin tai khoan theo account va password
@@ -33,8 +35,8 @@ export const ViewModelLogin = (navigation: any) => {
     }
 
     return {
-        account, password, errorAccount, errorPassword,
-        setAccount, setPassword,
+        account, password, errorAccount, errorPassword, statusPassword,
+        setAccount, setPassword, setStatusPassword,
         checkLogin,
     }
 }

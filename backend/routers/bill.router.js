@@ -99,9 +99,6 @@ router.post('/create_payment_url', async (req, res) => {
     vnp_Params['vnp_IpAddr'] = ipAddr;
     vnp_Params['vnp_CreateDate'] = createDate;
 
-    // if(bankCode !== null && bankCode !== ''){
-    //     vnp_Params['vnp_BankCode'] = bankCode;
-    // }
     vnp_Params = sortObject(vnp_Params);
 
     var querystring = require('qs');
@@ -111,7 +108,6 @@ router.post('/create_payment_url', async (req, res) => {
     var signed = hmac.update(new Buffer.from(signData, 'utf-8')).digest("hex");
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-    // console.log("vnp_Params",vnp_Params);
 
     res.status(200).json({
         vnpUrl: vnpUrl,
@@ -121,7 +117,6 @@ router.post('/create_payment_url', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const data = req.body;
-        console.log(data);
 
         // Tạo một hóa đơn mới
         const newBill = new Bill({
@@ -135,6 +130,9 @@ router.post('/', async (req, res) => {
             totalCost: data.totalCost,
             status: data.status,
         });
+        newBill.dataProduct.map(async (item) => {
+            await Cart.findByIdAndDelete(item.idCart);
+        })
 
         // // Lưu hóa đơn vào cơ sở dữ liệu
         const savedBill = await newBill.save();

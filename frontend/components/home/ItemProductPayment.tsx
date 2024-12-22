@@ -6,13 +6,13 @@ const ItemProductPayment = (props:any) => {
     return (
         <TouchableOpacity style={styles.container}>
             <Image src={props.image} style={styles.image} />
-            <View style={{ flex: 1, justifyContent: 'space-between', height: 90 }}>
+            <View style={{ flex: 1, justifyContent: 'space-between'}}>
                 <View>
                     <Text style={styles.name} numberOfLines={1}>{props.name}</Text>
                     <Text style={{ color: '#909090' }}>{props.idCategory}</Text>
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
                     <Text>x{props.quantityCart}</Text>
                 </View>
@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         marginBottom: 10,
-        paddingHorizontal: 13,
         borderBottomWidth: 1,
         paddingBottom: 8,
         borderColor: '#D7D4D4',
-        gap: 10,
+        gap: 5,
     },
     image: {
         width: 100,

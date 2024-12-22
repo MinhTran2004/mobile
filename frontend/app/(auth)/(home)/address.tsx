@@ -2,15 +2,10 @@ import AppHeader from "@/components/AppHeader";
 import ItemAddress from "@/components/home/ItemAdress";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelAddress from "@/viewmodel/home/address.viewmodel";
-import { useNavigation } from "@react-navigation/native";
 import { FlatList, View } from "react-native";
 
-const Address = () => {
-    const navigation = useNavigation();
+const Address = ({navigation}:any) => {
     const viewModel = ViewModelAddress();
-
-    console.log("1");
-    
 
     return (
         <View style={{ flex: 1 }}>
@@ -29,7 +24,7 @@ const Address = () => {
             </View>
             <PrimaryButton
                 label="Thêm địa chỉ mới"
-                onPress={() => { navigation.navigate('create-address') }}
+                onPress={() => { navigation.replace('create-address') }}
             />
         </View>
     );

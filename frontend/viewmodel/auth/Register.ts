@@ -5,8 +5,8 @@ import { useState } from "react"
 
 export const ViewModelRegister = (navigation: any) => {
     const [username, setUsername] = useState('');
-    const [account, setAccount] = useState('admin@gmai.com');
-    const [password, setPassword] = useState('123456');
+    const [account, setAccount] = useState('');
+    const [password, setPassword] = useState('');
     const [errorUsername, setErrorUsername] = useState('');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');

@@ -1,6 +1,5 @@
 import InputEditText from "@/components/InputEditText";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import LogoApp from "@/assets/images/logo-app.svg";
+import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ViewModelLogin } from "@/viewmodel/auth/Login";
 import AppHeader from "@/components/AppHeader";
 import ButtonModel from "@/components/ButtonModel";
@@ -16,7 +15,6 @@ const Login = ({ navigation }: any) => {
                 <View style={styles.container}>
 
                     <View style={{ alignItems: 'center', marginTop: 20}}>
-                        {/* <LogoApp style={{ width: 165, height: 170 }} /> */}
                         <View style={{alignItems: 'center', gap: 15}}>
                             <Image source={require('../../assets/images/logo-app.png')} style={{ width: 100, maxHeight: 125, top: 0 }} />
                             <Text style={{fontWeight: 900, color: '#000', fontSize: 20}}>Welcome to OderFood !!</Text>
@@ -30,9 +28,11 @@ const Login = ({ navigation }: any) => {
                             value={viewmodel.account}
                             onChangeText={(text) => viewmodel.setAccount(text)}
                             textError={viewmodel.errorAccount} />
+                            
                         <InputEditText
                             placeholder={"Nhập mật khẩu"}
                             value={viewmodel.password}
+                            iconRight={true}
                             onChangeText={(text) => viewmodel.setPassword(text)}
                             textError={viewmodel.errorPassword} />
                     </View>

@@ -89,7 +89,7 @@ const DetailProduct = (route: Props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{product.name}</Text>
                         {/* isFavorite */}
-                        {/* {checkedFavorite
+                        {checkedFavorite
                             ?
                             <TouchableOpacity onPress={handleToggleFavorite}>
                                 <IconHeartFilled size={20} />
@@ -98,7 +98,7 @@ const DetailProduct = (route: Props) => {
                             <TouchableOpacity onPress={handleToggleFavorite}>
                                 <IconHeart size={20} />
                             </TouchableOpacity>
-                        } */}
+                        }
                     </View>
                     {/* <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                         <IconStarFilled color="#FEC50E" size={18} />

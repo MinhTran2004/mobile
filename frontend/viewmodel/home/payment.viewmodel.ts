@@ -14,7 +14,6 @@ const ViewModelPayment = () => {
     const [detailAddress, setDetailAddress] = useState("")
     const [checkBox, setCheckBox] = useState(true);
     const [dialog, setDialog] = useState(false);
-    const [payment, setPayment] = useState('Thanh toán trực tiếp');
 
     const idAccount = useSelector((state: any) => state?.auth?.account?._id)
 
@@ -48,31 +47,27 @@ const ViewModelPayment = () => {
             return { idCart: item.idCart, quantityCart: item.quantityCart, idProduct: item._id, name: item.name, category: item.idCategory ?? item.category, image: item.image, price: item.price };
         })
 
-        const seleterPayment = payment ? "Thanh toán trực tiếp" : "Thanh toán VNPAY";
+        const seleterPayment = checkBox ? "Thanh toán trực tiếp" : "Thanh toán VNPAY";
 
         const dataBill = new BillModel(idAccount, dataProduct, seleterPayment, '30000', dataAddress, dataCoupon, total, GetDay(), 'Chờ xác nhận');
-        console.log(payment);
 
-        if (payment) {
-            // const reponse = await SeviceBill.createOrderDirect(dataBill);
-            // if (reponse) {
-            //     navigation.reset({
-            //         index: 0,
-            //         routes: [{ name: 'layoutHome' }]
-            //     });
-            // }
-            console.log(seleterPayment);
+        if (checkBox) {
+            const reponse = await SeviceBill.createOrderDirect(dataBill);
+            if (reponse) {
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'layoutHome' }]
+                });
+            }
         } else {
-            console.log(seleterPayment);
-            
-            // const reponse = await SeviceBill.createPaymentURL(dataBill);
+            const reponse = await SeviceBill.createPaymentURL(dataBill);
 
-            // if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
-            //     console.log("response createPaymentURL", reponse);
-            //     navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
-            // } else {
-            //     console.log("Không nhận được URL hợp lệ");
-            // }
+            if (reponse.vnpUrl && typeof reponse.vnpUrl === "string") {
+                console.log("response createPaymentURL", reponse);
+                navigation.navigate("ScreenWebView", { url: reponse.vnpUrl });
+            } else {
+                console.log("Không nhận được URL hợp lệ");
+            }
         }
 
 
@@ -84,8 +79,8 @@ const ViewModelPayment = () => {
 
 
     return {
-        address, detailAddress, checkBox, dialog, payment,
-        setCheckBox, setDialog, setPayment, createPaymentURL,
+        address, detailAddress, checkBox, dialog,
+        setCheckBox, setDialog, createPaymentURL,
     }
 }
 
