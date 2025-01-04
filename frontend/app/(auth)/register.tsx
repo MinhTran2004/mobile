@@ -3,6 +3,7 @@ import {  SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ViewModelRegister } from "@/viewmodel/auth/Register";
 import AppHeader from "@/components/AppHeader";
 import ButtonModel from "@/components/ButtonModel";
+import StatusModal from "@/components/StatusModal";
 
 const Register = ({ navigation }: any) => {
     const viewmodel = ViewModelRegister(navigation);
@@ -46,8 +47,21 @@ const Register = ({ navigation }: any) => {
                     buttonStyle={{ backgroundColor: '#4C1B1B' }}
                     textStyle={{ color: 'white', fontWeight: 'bold', padding: 2 }}
                     status="single" />
+
+                <StatusModal 
+                    isActive={viewmodel.dialog}
+                    onClose={() => viewmodel.setDialog(false)}
+                    statusLayoutButton="single"
+                    title="Thông báo"
+                    label="Đăng ký tài khoản thành công"
+                    primaryButton={{
+                        label: "OK",
+                        onPress: () => {
+                            navigation.navigate('login');
+                        }
+                    }}
+                />
             </View>
-            {/* </View> */}
         </SafeAreaView>
 
     )
@@ -57,10 +71,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        // borderTopLeftRadius: 24,
-        // borderTopRightRadius: 24,
         paddingHorizontal: 20,
-        // paddingVertical: 50,
         gap: 30,
     },
     button: {

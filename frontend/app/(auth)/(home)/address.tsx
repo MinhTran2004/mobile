@@ -24,7 +24,7 @@ const Address = ({navigation}:any) => {
             </View>
             <PrimaryButton
                 label="Thêm địa chỉ mới"
-                onPress={() => { navigation.replace('create-address') }}
+                onPress={() => { navigation.navigate('create-address') }}
             />
         </View>
     );

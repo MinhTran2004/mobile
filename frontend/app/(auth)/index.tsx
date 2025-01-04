@@ -13,15 +13,14 @@ const Start = ({ navigation }: any) => {
                 navigation.navigate('layoutHome')
             }, 1000)
         } else {
+            // setTimeout(() => {
+            //     navigation.navigate('welcome')
+            // }, 1000)
             setTimeout(() => {
-                navigation.navigate('welcome')
+                navigation.navigate('forgot-password')
             }, 1000)
         }
     }, [selector])
-
-    // setTimeout(() => {
-    //     navigation.navigate('welcome')
-    // }, 500)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

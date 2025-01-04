@@ -1,5 +1,4 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Switch } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import AppHeader from "@/components/AppHeader";
 import ItemModalAddress from "@/components/home/ItemModelAdress";
 import InputEditText from "@/components/InputEditText";
@@ -7,8 +6,7 @@ import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelCreateAddress from "@/viewmodel/home/create-address";
 import StatusModal from "@/components/StatusModal";
 
-const CreateAddress = () => {
-    const navigation = useNavigation();
+const CreateAddress = ({navigation}:any) => {
     const viewmodel = ViewModelCreateAddress();
 
     return (
@@ -127,7 +125,7 @@ const CreateAddress = () => {
             <StatusModal
                 isActive={viewmodel.dialog}
                 title="Thông báo"
-                label="Xác nhận sửa địa chỉ"
+                label="Xác nhận tạo mới địa chỉ"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{
@@ -147,13 +145,13 @@ const CreateAddress = () => {
             <StatusModal
                 isActive={viewmodel.dialogSuccess}
                 title="Thông báo"
-                label="Thêm địa chỉ thành công"
+                label="Tạo địa chỉ mới thành công"
                 icon="none"
                 statusLayoutButton="single"
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.goBack();
+                        navigation.replace('address');
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}

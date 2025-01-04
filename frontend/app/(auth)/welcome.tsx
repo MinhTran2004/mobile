@@ -1,5 +1,4 @@
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import LogoApp from "@/assets/images/logo-app.svg";
 import ButtonModel from "@/components/ButtonModel";
 
 const Welcome = ({ navigation }: any) => {
@@ -8,20 +7,20 @@ const Welcome = ({ navigation }: any) => {
             <View style={styles.container}>
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     {/* <LogoApp /> */}
-                    <Image source={require('../../assets/images/logo-app.png')} style={{width: 200, maxHeight: 245, top: 150}}/>
+                    <Image source={require('../../assets/images/logo-app.png')} style={{ width: 200, maxHeight: 245, top: 150 }} />
                 </View>
                 <View style={{ gap: 20, bottom: 50 }}>
                     <ButtonModel
                         label="Đăng nhập"
                         onPress={() => navigation.navigate('login')}
-                        buttonStyle={{ backgroundColor: '#4C1B1B', borderWidth: 1, borderColor: '#4C1B1B'}}
-                        textStyle={{ color: 'white', fontWeight: 'bold', padding: 2}}
+                        buttonStyle={{ backgroundColor: '#4C1B1B', borderWidth: 1, borderColor: '#4C1B1B' }}
+                        textStyle={{ color: 'white', fontWeight: 'bold', padding: 2 }}
                         status="single" />
                     <ButtonModel
                         label="Đăng ký"
                         onPress={() => navigation.navigate('register')}
                         buttonStyle={{ backgroundColor: '#fff', borderWidth: 0.5, borderColor: '#000' }}
-                        textStyle={{ color: '#000', fontWeight: 'bold', padding: 2}}
+                        textStyle={{ color: '#000', fontWeight: 'bold', padding: 2 }}
                         status="single" />
                 </View>
             </View>
