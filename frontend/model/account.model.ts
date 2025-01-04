@@ -1,31 +1,21 @@
 export interface Account {
     _id: string;
     account: string;
-    password: string;
-    role: string;
-    createdAt: String;
-    status: string;
 }
 
 export default class ModelAccount {
     account: string;
     password: string;
-    role: string;
-    status: string;
 
-    constructor( account: string = "", password: string = "", role: string = "", status: string = "") {
+    constructor( account: string = "", password: string = "") {
         this.account = account;
         this.password = password;
-        this.role = role;
-        this.status = status;
     }
 
     toJSON() {
         const account = {
             account: this.account,
             password: this.password,
-            role: this.role,
-            status: this.status
         }
         return account
     }

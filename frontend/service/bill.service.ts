@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 class SeviceBill {
-    static url = "http://192.168.5.16:5000/bill";
+    static url = "http://192.168.1.146:5000/bill";
 
     static getAllBillByStatus = async (idAccount:string, status: string) => {
         try {

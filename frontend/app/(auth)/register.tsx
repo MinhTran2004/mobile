@@ -1,5 +1,5 @@
 import InputEditText from "@/components/InputEditText";
-import {  SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ViewModelRegister } from "@/viewmodel/auth/Register";
 import AppHeader from "@/components/AppHeader";
 import ButtonModel from "@/components/ButtonModel";
@@ -48,7 +48,7 @@ const Register = ({ navigation }: any) => {
                     textStyle={{ color: 'white', fontWeight: 'bold', padding: 2 }}
                     status="single" />
 
-                <StatusModal 
+                <StatusModal
                     isActive={viewmodel.dialog}
                     onClose={() => viewmodel.setDialog(false)}
                     statusLayoutButton="single"
@@ -58,6 +58,21 @@ const Register = ({ navigation }: any) => {
                         label: "OK",
                         onPress: () => {
                             navigation.navigate('login');
+                            viewmodel.setDialog(false);
+                        }
+                    }}
+                />
+
+                <StatusModal
+                    isActive={viewmodel.dialogError}
+                    onClose={() => viewmodel.setDialogError(false)}
+                    statusLayoutButton="single"
+                    title="Thông báo"
+                    label="Đăng ký tài khoản thất bại"
+                    primaryButton={{
+                        label: "OK",
+                        onPress: () => {
+                            viewmodel.setDialogError(false);
                         }
                     }}
                 />

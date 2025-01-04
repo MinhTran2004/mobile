@@ -1,5 +1,4 @@
 import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
-import LogoApp from "@/assets/images/logo-app.svg";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -13,11 +12,8 @@ const Start = ({ navigation }: any) => {
                 navigation.navigate('layoutHome')
             }, 1000)
         } else {
-            // setTimeout(() => {
-            //     navigation.navigate('welcome')
-            // }, 1000)
             setTimeout(() => {
-                navigation.navigate('forgot-password')
+                navigation.navigate('welcome')
             }, 1000)
         }
     }, [selector])
