@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from "r
 import { ViewModelLogin } from "@/viewmodel/auth/Login";
 import AppHeader from "@/components/AppHeader";
 import ButtonModel from "@/components/ButtonModel";
+import StatusModal from "@/components/StatusModal";
 
 const Login = ({ navigation }: any) => {
     const viewmodel = ViewModelLogin(navigation);
@@ -46,8 +47,6 @@ const Login = ({ navigation }: any) => {
                         </View>
                     </View>
 
-
-
                     <ButtonModel
                         label="Đăng nhập"
                         onPress={() => viewmodel.checkLogin()}
@@ -55,6 +54,21 @@ const Login = ({ navigation }: any) => {
                         textStyle={{ color: 'white', fontWeight: 'bold', padding: 2 }}
                         status="single" />
                 </View>
+
+
+                <StatusModal
+                    isActive={viewmodel.dialogError}
+                    onClose={() => viewmodel.setDialogError(false)}
+                    statusLayoutButton="single"
+                    title="Thông báo"
+                    label="Tài khoản đang bị hạn chế"
+                    primaryButton={{
+                        label: "OK",
+                        onPress: () => {
+                            viewmodel.setDialogError(false);
+                        }
+                    }}
+                />
             </View>
         </SafeAreaView>
 

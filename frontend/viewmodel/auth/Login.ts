@@ -2,8 +2,7 @@ import { useState } from "react"
 import ModelAccount from "@/model/account.model";
 import { useDispatch } from "react-redux";
 import { Login } from "@/redux/action/login";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { auth, db } from "@/config/firebaseConfig";
+import { auth } from "@/config/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const ViewModelLogin = (navigation: any) => {
@@ -11,8 +10,8 @@ export const ViewModelLogin = (navigation: any) => {
     const [password, setPassword] = useState('hihi2004');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
-
     const [statusPassword, setStatusPassword] = useState(true);
+    const [dialogError, setDialogError] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -36,6 +35,8 @@ export const ViewModelLogin = (navigation: any) => {
             } catch (err: any) {
                 if (err.code === "auth/invalid-credential") {
                     setErrorPassword('Mật khẩu không chính xác');
+                } else if(err.code === "auth/user-disabled"){
+                    setDialogError(true);
                 } else {
                     console.log(err);
                 }
@@ -45,7 +46,7 @@ export const ViewModelLogin = (navigation: any) => {
 
     return {
         account, password, errorAccount, errorPassword, statusPassword,
-        setAccount, setPassword, setStatusPassword,
+        setAccount, setPassword, setStatusPassword, dialogError, setDialogError,
         checkLogin,
     }
 }
