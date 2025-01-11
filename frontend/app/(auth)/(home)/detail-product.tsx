@@ -14,11 +14,6 @@ interface Product {
     name: string,
     idCategory: string,
     price: string,
-    isFavorite?: Boolean,
-    onToggleFavorite?: () => void,
-    comefromFavorite?: boolean,
-    onUpdateFavorite?: () => void,
-    idFavorite?: string
 }
 
 interface Props {
@@ -32,48 +27,11 @@ const DetailProduct = (route: Props) => {
     const viewModel = ViewModelDetailProduct();
     const product = route.route.params;
 
-    const userId = useSelector((state: any) => state?.auth?.account?._id);
-
-
     const [dialog, setDialog] = useState(false);
     const [dialog2, setDialog2] = useState(false);
-    const [checkedFavorite, setCheckedFavorite] = useState(product.isFavorite || product.comefromFavorite);
 
     const dataCart = { ...product, quantityCart: 1 }
     const total = Number(product.price) * 1;
-    // Xử lý sự kiện khi nhấn nút yêu thích
-    const handleToggleFavorite = async () => {
-        if (product.onToggleFavorite) {
-            product.onToggleFavorite(); // Gọi hàm callback từ cha
-            setCheckedFavorite((prev) => !prev); // Cập nhật trạng thái cục bộ
-        }
-
-        setCheckedFavorite(!checkedFavorite);
-        console.log("idFavorite", product.idFavorite);
-
-        if (product.comefromFavorite) {
-            try {
-                if (checkedFavorite) {
-                    console.log("thêm");
-
-                    console.log("userId", userId);
-                    console.log("product._id ", product._id);
-                    await FavoriteService.deleteFavorite(userId, product._id);
-                } else {
-                    console.log("xóa");
-
-                    console.log("userId", userId);
-                    console.log("product._id ", product._id);
-
-                    await FavoriteService.addFavorite({ userId, productId: product._id });
-                }
-                setCheckedFavorite(!checkedFavorite);
-                // product.onUpdateFavorite && product.onUpdateFavorite(); // Gọi callback để làm mới danh sách
-            } catch (error) {
-                console.error("Lỗi khi cập nhật yêu thích:", error);
-            }
-        }
-    };
 
     return (
         <View style={{ flex: 1 }}>
@@ -88,22 +46,7 @@ const DetailProduct = (route: Props) => {
                 <View style={{ gap: 5 }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{product.name}</Text>
-                        {/* isFavorite */}
-                        {checkedFavorite
-                            ?
-                            <TouchableOpacity onPress={handleToggleFavorite}>
-                                <IconHeartFilled size={20} />
-                            </TouchableOpacity>
-                            :
-                            <TouchableOpacity onPress={handleToggleFavorite}>
-                                <IconHeart size={20} />
-                            </TouchableOpacity>
-                        }
                     </View>
-                    {/* <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-                        <IconStarFilled color="#FEC50E" size={18} />
-                        <Text style={{ fontSize: 18, fontWeight: 500 }}>4.5</Text>
-                    </View> */}
                     <Text style={{ fontSize: 20, fontWeight: 700, color: '#D17842' }}>{ConvertMoney(product.price)} VNĐ</Text>
                 </View>
                 <View style={{ width: '100%', height: 1, backgroundColor: '#D9D9D9' }}></View>

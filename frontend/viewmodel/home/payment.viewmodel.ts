@@ -69,12 +69,10 @@ const ViewModelPayment = () => {
                 console.log("Không nhận được URL hợp lệ");
             }
         }
-
-
-
-
-
     }
+
+    console.log(idAccount);
+    
 
 
 

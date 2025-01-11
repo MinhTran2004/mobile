@@ -1,10 +1,6 @@
 import { ConvertMoney } from "@/constants/convert-monney";
-import FavoriteService from "@/service/favorite.service";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
-import { IconHeart, IconHeartFilled, IconTrash } from "tabler-icons-react-native";
 
 interface Props {
     _id: string,
@@ -14,8 +10,6 @@ interface Props {
     price: string,
     iconLeft?: boolean;
     isFavorite?: Boolean
-    onToggleFavorite?: () => void;
-    handleDeletefavorite?: () => void;
     comefromFavorite?: Boolean,
     idFavorite?:string,
     sold?: string,
@@ -23,7 +17,6 @@ interface Props {
 
 const ProductVerticalItem: React.FC<Props> = (props) => {
     const navigation = useNavigation()
-    const userId = useSelector((state: any) => state?.auth?.account?._id);
   
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('detail-product', props)}>
@@ -36,26 +29,7 @@ const ProductVerticalItem: React.FC<Props> = (props) => {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.price}>{ConvertMoney(props.price)}</Text>
-                    {/* {
-                        props.comefromFavorite ? (
-                            <TouchableOpacity onPress={props.handleDeletefavorite}>
-                                <IconTrash size={20} />
-                            </TouchableOpacity>
-                        ) : (
-                            props.isFavorite ? (
-                                <TouchableOpacity onPress={props.onToggleFavorite}>
-                                    <IconHeartFilled size={20} />
-                                </TouchableOpacity>
-                            ) : (
-                                <TouchableOpacity onPress={props.onToggleFavorite}>
-                                    <IconHeart size={20} />
-                                </TouchableOpacity>
-                            )
-                        )
-                    } */}
-
                     <Text>Đã bán:{props.sold}</Text>
-
                 </View>
             </View>
         </TouchableOpacity>

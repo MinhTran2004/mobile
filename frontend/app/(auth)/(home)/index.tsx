@@ -6,58 +6,12 @@ import { ViewModelHome } from "@/viewmodel/home/home.viewmodel";
 import ProductHozirontalItem from "@/components/home/ProductHozirontalItem";
 import ProductVerticalItem from "@/components/home/ProductVerticalItem";
 import IconSearch from "@/assets/images/home/sreach-icon.svg";
-import { useSelector } from "react-redux";
-import FavoriteService from "@/service/favorite.service";
-import { useEffect, useState } from "react";
 
 const Home = ({ navigation }: any) => {
     const viewmodel = ViewModelHome();
-    const userId = useSelector((state: any) => state?.auth?.account?._id);
     const handleNavigateToCategory = (idCategory: string) => {
         navigation.navigate('category', { idCategory });
     };
-
-    const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
-
-    const getFavorite = async () => {
-        try {
-            const response = await FavoriteService.getFavorite(userId);
-            //.map((fav: any) => fav.productId._id)
-            const favorites = response.favorites.map((fav: any) => fav.productId._id);
-            setFavoriteIds(favorites);
-            
-        } catch (error) {
-            console.error("Lỗi khi lấy danh sách yêu thích: ", error);
-        }
-    };
-
-
-    const toggleFavorite = async (productId: string) => {
-        try {
-
-            console.log(productId);
-            console.log(userId);
-            if (favoriteIds.includes(productId)) {
-                // Nếu đã yêu thích, gọi API xóa
-                await FavoriteService.deleteFavorite(userId, productId);
-                setFavoriteIds((prev) => prev.filter((id) => id !== productId));
-            } else {
-                
-                // Nếu chưa yêu thích, gọi API thêm
-                await FavoriteService.addFavorite({userId, productId});
-                setFavoriteIds((prev) => [...prev, productId]);
-
-            }
-        } catch (error) {
-            console.error("Lỗi khi thêm/xóa sản phẩm yêu thích: ", error);
-        }
-    };
-
-
-
-    useEffect(() => {
-        getFavorite();
-    }, [])
 
     return (
         <View style={{ flex: 1 }}>
@@ -84,7 +38,9 @@ const Home = ({ navigation }: any) => {
             </View>
 
             {/* body  */}
-            <ScrollView style={{ flex: 1, backgroundColor: 'white' }} >
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ flex: 1, backgroundColor: 'white' }} >
                 <View style={styles.container}>
 
                     <View style={styles.containerBody}>
@@ -177,18 +133,7 @@ const Home = ({ navigation }: any) => {
                                 scrollEnabled={false}
                                 showsHorizontalScrollIndicator={false}
                                 data={viewmodel.dataProductHorizontal}
-                                renderItem={({ item }) => <ProductVerticalItem
-                                    key={item._id}
-                                    _id={item._id}
-                                    image={item.image}
-                                    name={item.name}
-                                    idCategory={item.idCategory}
-                                    price={item.price}
-                                    sold={item.sold}
-                                    isFavorite={favoriteIds.includes(item._id)}
-                                    onToggleFavorite={() => toggleFavorite(item._id)}
-                                />
-                                } />
+                                renderItem={({ item }) => <ProductVerticalItem {...item} />} />
                         </View>
                     </View>
                 </View>
