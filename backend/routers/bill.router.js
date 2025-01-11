@@ -1,8 +1,6 @@
 const express = require('express');
-const Address = require('../model/address');
 const Cart = require('../model/cart');
 const Bill = require('../model/bill');
-const Account = require('../model/account');
 
 let moment = require('moment')
 let dateFormat = require('date-format')
