@@ -162,7 +162,7 @@ const OrderDetail = ({ route }: any) => {
                 title="Thông báo"
                 label="Xóa đơn hàng thành công"
                 icon="none"
-                statusLayoutButton="row"
+                statusLayoutButton="single"
                 primaryButton={{
                     label: 'Ok', onPress() {
                         viewmodel.setDialogSuccess(false);

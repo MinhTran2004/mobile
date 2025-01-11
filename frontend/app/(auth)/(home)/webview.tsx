@@ -4,7 +4,6 @@ import { WebView } from 'react-native-webview';
 
 export default function ScreenWebView({ route, navigation }: any) {
     const { url } = route?.params;
-    console.log(url);
 
     const handleNavigationStateChange = (navState: any) => {
 
@@ -13,8 +12,6 @@ export default function ScreenWebView({ route, navigation }: any) {
         if (currentUrl.includes("vnp_SecureHash")) {
             setTimeout(() => {
                 const stackRoutes = navigation.getState()?.routeNames || [];
-                // console.log("stackRoutes directPayment", stackRoutes);
-                // navigation.navigate("Home");
                 if (stackRoutes.includes('LayoutBottomTabs')) {
                     navigation.navigate('LayoutBottomTabs');
                 } else {
