@@ -13,7 +13,7 @@ const Register = ({ navigation }: any) => {
                 iconLeft="left"
                 title="Đăng ký"
                 iconRight="none"
-                onPressIconLeft={() => navigation.goBack()} />
+                onPressIconLeft={() => navigation.navigate('welcome')} />
 
             <View style={styles.container}>
 

@@ -5,10 +5,9 @@ const router = express.Router();
 
 router.get('/getAllCoupon', async (req, res) => {
     const {total} = req.query;
-    console.log(total);
     
     const validCoupons = await Coupon.find({
-        condition: { $lte: total },  
+        $expr: { $lte: [{ $toDouble: "$condition" }, Number(total)] } // Chuyển cả giá trị condition và total thành số
     });
 
     res.send(validCoupons);

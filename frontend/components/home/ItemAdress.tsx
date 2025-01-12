@@ -1,20 +1,19 @@
 import { Address } from "@/model/address.model";
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import StatusModal from "../StatusModal";
 
-interface Props{
+interface Props {
     address: Address,
     viewmodel: any,
-    navigation:any,
+    navigation: any,
 }
 
 const ItemAddress: React.FC<Props> = (props) => {
     const address = props.address.province + ", " + props.address.district + ", " + props.address.commune + ", " + props.address.detailAddress;
-
+    
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => props.viewmodel.setDialogUpdatde(true)}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={styles.name}>{props.address.name}</Text>
                 {props.address.status ? (
@@ -34,9 +33,59 @@ const ItemAddress: React.FC<Props> = (props) => {
                 <TouchableOpacity onPress={() => props.viewmodel.setDialogDelete(true)}>
                     <Text style={{ color: 'red' }}>Xóa</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {props.navigation.navigate('edit-address', props)}}>
+                <TouchableOpacity onPress={() => { props.navigation.navigate('edit-address', props) }}>
                     <Text>Sửa</Text>
                 </TouchableOpacity>
+
+                {/* dialog used address */}
+                <StatusModal
+                    isActive={props.viewmodel.dialogUpdate}
+                    title="Thông báo"
+                    label="Sử dụng địa chỉ này"
+                    icon="none"
+                    statusLayoutButton="row"
+                    secondaryButton={{
+                        label: 'Có', onPress() {
+                            props.viewmodel.updateStatusAddressById(props.address._id);
+                        },
+                    }}
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            props.viewmodel.setDialogUpdatde(false)
+                        },
+                    }}
+                    onClose={() => props.viewmodel.setDialogUpdatde(false)}
+                />
+
+                {/* dialog updatde that bai */}
+                <StatusModal
+                    isActive={props.viewmodel.dialogUpdateError}
+                    title="Thông báo"
+                    label="Cập nhật địa chỉ thất bại"
+                    icon="none"
+                    statusLayoutButton="single"
+                    primaryButton={{
+                        label: 'Không', onPress() {
+                            props.viewmodel.setDialogUpdatdeError(false)
+                        },
+                    }}
+                    onClose={() => props.viewmodel.setDialogUpdatdeError(false)}
+                />
+
+                {/* dialog updatde thanh cong */}
+                <StatusModal
+                    isActive={props.viewmodel.dialogUpdateSusscess}
+                    title="Thông báo"
+                    label="Cập nhật địa chỉ thành công"
+                    icon="none"
+                    statusLayoutButton="single"
+                    primaryButton={{
+                        label: 'OK', onPress() {
+                            props.viewmodel.setDialogUpdatdeSusscess(false)
+                        },
+                    }}
+                    onClose={() => props.viewmodel.setDialogUpdatdeSusscess(false)}
+                />
 
                 {/* dialog xoa */}
                 <StatusModal
@@ -48,11 +97,13 @@ const ItemAddress: React.FC<Props> = (props) => {
                     secondaryButton={{
                         label: 'Có', onPress() {
                             props.viewmodel.deleteAddressById(props.address._id);
-                        }, }}
+                        },
+                    }}
                     primaryButton={{
                         label: 'Không', onPress() {
                             props.viewmodel.setDialogDelete(false)
-                        }, }}
+                        },
+                    }}
                     onClose={() => props.viewmodel.setDialogDelete(false)}
                 />
 
@@ -66,7 +117,8 @@ const ItemAddress: React.FC<Props> = (props) => {
                     primaryButton={{
                         label: 'Không', onPress() {
                             props.viewmodel.setDialogError(false)
-                        }, }}
+                        },
+                    }}
                     onClose={() => props.viewmodel.setDialogError(false)}
                 />
 
@@ -80,14 +132,12 @@ const ItemAddress: React.FC<Props> = (props) => {
                     primaryButton={{
                         label: 'OK', onPress() {
                             props.viewmodel.setDialogSuccess(false)
-                        }, }}
+                        },
+                    }}
                     onClose={() => props.viewmodel.setDialogSuccess(false)}
                 />
-
-
             </View>
-
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -121,8 +171,6 @@ const styles = StyleSheet.create({
         fontSize: 10,
         paddingHorizontal: 5,
         paddingVertical: 2,
-        // borderWidth: 0.5,
-        // borderColor: 'red',
         backgroundColor: '#bbb',
         borderRadius: 5,
         color: '#fff',

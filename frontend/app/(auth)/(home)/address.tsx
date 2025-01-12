@@ -2,10 +2,12 @@ import AppHeader from "@/components/AppHeader";
 import ItemAddress from "@/components/home/ItemAdress";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelAddress from "@/viewmodel/home/address.viewmodel";
+import { useNavigation } from "expo-router";
 import { FlatList, View } from "react-native";
 
-const Address = ({navigation}:any) => {
+const Address = () => {
     const viewModel = ViewModelAddress();
+    const navigation: any = useNavigation();
 
     return (
         <View style={{ flex: 1 }}>
@@ -13,7 +15,7 @@ const Address = ({navigation}:any) => {
                 iconLeft="left"
                 title="Địa chỉ"
                 iconRight="none"
-                onPressIconLeft={() => navigation.goBack()}
+                onPressIconLeft={() => navigation.navigate('payment')}
             />
             <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 10, paddingBottom: 90 }}>
 
@@ -24,7 +26,7 @@ const Address = ({navigation}:any) => {
             </View>
             <PrimaryButton
                 label="Thêm địa chỉ mới"
-                onPress={() => { navigation.navigate('create-address') }}
+                onPress={() => navigation.navigate('create-address')}
             />
         </View>
     );

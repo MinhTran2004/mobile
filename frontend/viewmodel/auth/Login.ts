@@ -23,14 +23,16 @@ export const ViewModelLogin = (navigation: any) => {
             try {
                 const userCredential = (await signInWithEmailAndPassword(auth, account, password)).user;
 
-
                 if (userCredential) {
                     const user = {
                         _id: userCredential.uid,
                         account: userCredential.email || "",
                     }
                     dispatch(Login(user));
-                    navigation.navigate('layoutHome');
+                    navigation.reset({
+                        index: 0,
+                        routes: [{name: 'layoutHome'}] 
+                    });
                 }
             } catch (err: any) {
                 if (err.code === "auth/invalid-credential") {

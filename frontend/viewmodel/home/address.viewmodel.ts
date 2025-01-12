@@ -9,6 +9,9 @@ const ViewModelAddress = () => {
     const [dialogsuccess, setDialogSuccess] = useState(false);
     const [dialogDelete, setDialogDelete] = useState(false);
     const [dialogError, setDialogError] = useState(false);
+    const [dialogUpdate, setDialogUpdatde] = useState(false);
+    const [dialogUpdateSusscess, setDialogUpdatdeSusscess] = useState(false);
+    const [dialogUpdateError, setDialogUpdatdeError] = useState(false);
 
     const selector = useSelector((state: any) => state?.auth?.account?._id);
 
@@ -17,9 +20,21 @@ const ViewModelAddress = () => {
         setDataAddress(reponse);
     }
 
+    const updateStatusAddressById = async (id: string) => {
+        const reponse = await AddressService.updateStatusAddressById(id);
+        if (reponse) {
+            setDialogUpdatde(false);
+            setDialogUpdatdeSusscess(true);
+            await getAllAddress();
+        } else {
+            setDialogUpdatde(false);
+            setDialogUpdatdeError(true);
+        }
+    }
+
     const deleteAddressById = async (idAddress: string) => {
         const reponse = await AddressService.deleteAddressById(idAddress);
-            setDataAddress([])
+        setDataAddress([])
         if (reponse) {
             getAllAddress();
             setDialogDelete(false);
@@ -28,19 +43,18 @@ const ViewModelAddress = () => {
             setDialogDelete(false);
             setDialogError(true);
         }
-
     }
 
     useFocusEffect(
         React.useCallback(() => {
             getAllAddress();
         }, [])
-      );
+    );
 
     return {
-        dialogDelete, dialogError, dialogsuccess,
-        setDialogDelete, setDialogError, setDialogSuccess,
-        dataAddress, deleteAddressById,
+        dialogDelete, dialogError, dialogsuccess, dialogUpdateError, setDialogUpdatdeError,
+        setDialogDelete, setDialogError, setDialogSuccess, dialogUpdateSusscess, setDialogUpdatdeSusscess,
+        dataAddress, deleteAddressById, dialogUpdate, setDialogUpdatde, updateStatusAddressById,
     }
 }
 

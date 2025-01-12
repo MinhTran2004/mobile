@@ -1,7 +1,9 @@
 import { Coupon } from "@/model/coupon.model";
+import { setDataCart } from "@/redux/action/dataCart";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
     _id?: string,
@@ -19,18 +21,20 @@ interface Props {
 }
 
 const ItemCoupon: React.FC<Props> = (props) => {
-    const navigation = useNavigation();
+    const navigation: any = useNavigation();
+    const select = useSelector((state: any) => state.dataCart.dataCart);
+    const dispatch = useDispatch();
 
     const SelectImageCoupon = () => {
         switch (props.discountType) {
-            case 'FreeShip': return <Image source={require('@/assets/images/home/coupon-delivery.png')} style={{ width: 90, height: 110 }} />
+            case 'FreeShip': return <Image source={require('@/assets/images/home/coupon-sale.png')} style={{ width: 90, height: 110 }} />
             case 'Mã giảm giá': return <Image source={require('@/assets/images/home/coupon-sale.png')} style={{ width: 90, height: 110 }} />
         }
     }
 
     return (
         <TouchableOpacity
-        disabled={true}
+            disabled={true}
             style={{
                 flexDirection: 'row',
                 marginBottom: 15,
@@ -55,26 +59,17 @@ const ItemCoupon: React.FC<Props> = (props) => {
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', alignItems: 'center' }}>
                         <Text style={style.name} numberOfLines={1}>{props.name}</Text>
                         <TouchableOpacity onPress={() => {
-                            navigation.navigate('payment', {
-                                dataCart: props.dataCart,
-                                total: props.total,
-                                coupon: {
-                                    _id: props._id,
-                                    name: props.name,
-                                    image: props.image,
-                                    discountType: props.discountType,
-                                    discountValue: props.discountValue,
-                                    maxDisCount: props.maxDisCount,
-                                    quantity: props.quantity,
-                                    condition: props.condition,
-                                    startDate: props.startDate,
-                                    endDate: props.endDate,
-                                    describe: props.describe,
-                                    status: props.status,
-                                }
-                            })
+                            navigation.navigate('payment'),
+                                dispatch(setDataCart({
+                                    dataCart: select.dataCart,
+                                    total: select.total,
+                                    coupon: {
+                                        _id: props._id,
+                                        discountValue: props.discountValue,
+                                    },
+                                }))
                         }}>
-                            {props.dataCart ? <Text style={style.use}>Sử dụng</Text> : <View/>}
+                            <Text style={style.use}>Sử dụng</Text>
                         </TouchableOpacity>
                     </View>
                     <Text>Đơn tối thiểu {props.condition}</Text>

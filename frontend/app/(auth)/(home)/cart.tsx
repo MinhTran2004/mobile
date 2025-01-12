@@ -2,11 +2,14 @@ import AppHeader from "@/components/AppHeader";
 import ItemCart from "@/components/home/ItemCart";
 import PrimaryButton from "@/components/PrimaryButton";
 import { ConvertMoney } from "@/constants/convert-monney";
+import { setDataCart } from "@/redux/action/dataCart";
 import { ViewModelCart } from "@/viewmodel/home/cart.viewmodel";
 import { FlatList, Image, StyleSheet, View } from "react-native"
+import { useDispatch } from "react-redux";
 
 const Cart = ({ navigation }: any) => {
     const viewmodel = ViewModelCart();
+    const dispatch = useDispatch();
 
     const data = viewmodel.data.map((item) => {
         return { idCart: item.cart._id, quantityCart: item.cart.quantity, ...item.product };
@@ -15,7 +18,7 @@ const Cart = ({ navigation }: any) => {
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
-                onPressIconLeft={() => navigation.goBack()}
+                onPressIconLeft={() => navigation.navigate('index')}
                 iconLeft="left"
                 title="Giỏ hàng"
                 iconRight="none" />
@@ -36,10 +39,10 @@ const Cart = ({ navigation }: any) => {
             {/* footer */}
             <PrimaryButton
                 label={"Thanh toán | " + ConvertMoney(viewmodel.total) + " VND"}
-                onPress={() => navigation.navigate('payment', {
-                    dataCart: data,
-                    total: viewmodel.total,
-                })}
+                onPress={() => {
+                    navigation.navigate('payment'),
+                    dispatch(setDataCart({ dataCart: data, total: viewmodel.total }));
+                }}
                 disabled={viewmodel.data.length != 0 ? false : true} />
         </View>
     )

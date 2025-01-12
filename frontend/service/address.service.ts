@@ -21,7 +21,7 @@ export default class AddressService {
                     idAddress: idAddress
                 }
             });
-            
+
             return reponse.data.status;
         } catch (err) {
             console.log(err);
@@ -31,6 +31,18 @@ export default class AddressService {
     static updateAddressById = async (data: Address) => {
         try {
             const reponse = (await axios.put(`${this.url}/updateAddressById`, data)).data;
+            return reponse.status;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    static updateStatusAddressById = async (id: string) => {
+        try {
+            const reponse = (await axios.patch(`${this.url}/updateStatusAddressById`, {
+                id
+            })).data;
+
             return reponse.status;
         } catch (err) {
             console.log(err);

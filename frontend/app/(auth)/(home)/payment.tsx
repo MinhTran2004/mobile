@@ -2,19 +2,18 @@ import AppHeader from "@/components/AppHeader"
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { IconAddressBook, IconChevronRight, IconDiscount, IconPlus, IconWallet } from "tabler-icons-react-native"
 import { Checkbox, List } from 'react-native-paper';
-import { useNavigation } from "@react-navigation/native"
 import ViewModelPayment from "@/viewmodel/home/payment.viewmodel"
 import ItemProductPayment from "@/components/home/ItemProductPayment";
 import PrimaryButton from "@/components/PrimaryButton";
 import StatusModal from "@/components/StatusModal"
 import { ConvertMoney } from "@/constants/convert-monney";
+import { useSelector } from "react-redux";
 
-const Payment = ({ route, navigation }: any) => {
+const Payment = ({ navigation }: any) => {
     const viewmodel = ViewModelPayment();
 
-    const { dataCart, total, coupon } = route.params;
-
-    const totalCost = Number(total) + 30000 - (coupon ? Number(coupon.discountValue) : 0);
+    const select = useSelector((state: any) => state.dataCart.dataCart);
+    const totalCost = Number(select.total) + 30000 - (select.coupon ? Number(select.coupon.discountValue) : 0);
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -23,7 +22,7 @@ const Payment = ({ route, navigation }: any) => {
                     iconLeft="left"
                     title="Thanh toán"
                     iconRight="none"
-                    onPressIconLeft={() => navigation.goBack()}
+                    onPressIconLeft={() => navigation.navigate('cart')}
                 />
 
                 <View style={{
@@ -39,7 +38,9 @@ const Payment = ({ route, navigation }: any) => {
                         <Text style={styles.title}>Địa chỉ nhận hàng</Text>
                         {viewmodel.detailAddress ?
                             // option 1 
-                            < TouchableOpacity style={styles.banner1} onPress={() => { navigation.navigate('address') }}>
+                            < TouchableOpacity style={styles.banner1} onPress={() => {
+                                navigation.navigate('address')
+                            }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, flex: 1 }}>
                                     <View style={{ flex: 1 }}>
                                         <Text>{viewmodel.address[0].name}</Text>
@@ -70,7 +71,7 @@ const Payment = ({ route, navigation }: any) => {
                         <FlatList
                             scrollEnabled={false}
                             showsHorizontalScrollIndicator={false}
-                            data={dataCart}
+                            data={select.dataCart}
                             renderItem={({ item }) => <ItemProductPayment key={item._id} {...item} />} />
                     </View>
 
@@ -84,17 +85,14 @@ const Payment = ({ route, navigation }: any) => {
                                 paddingVertical: 10,
                                 paddingRight: 23
                             }}
-                            onPress={() => navigation.navigate('coupon', {
-                                dataCart: dataCart,
-                                total: total,
-                            })}>
+                            onPress={() => navigation.navigate('coupon')}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                                 <IconDiscount />
                                 <Text style={{ fontSize: 16 }}>Mã giảm giá</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                                {coupon ?
-                                    <Text style={{ fontSize: 16 }}>{coupon.discountValue}</Text>
+                                {select.coupon ?
+                                    <Text style={{ fontSize: 16 }}>{select.coupon.discountValue}</Text>
                                     :
                                     <View />}
                                 <IconChevronRight size={23} />
@@ -130,7 +128,7 @@ const Payment = ({ route, navigation }: any) => {
                     <View style={styles.conatiner}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Tạm tính</Text>
-                            <Text style={styles.txtPrice}>{ConvertMoney(total)}</Text>
+                            <Text style={styles.txtPrice}>{ConvertMoney(select.total)}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Chi phí vận chuyển</Text>
@@ -138,7 +136,7 @@ const Payment = ({ route, navigation }: any) => {
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Text style={styles.txtPrice}>Giảm giá</Text>
-                            <Text style={styles.txtPrice}>{coupon ? ConvertMoney(coupon.discountValue) : 0}</Text>
+                            <Text style={styles.txtPrice}>{select.coupon ? ConvertMoney(select.coupon.discountValue) : 0}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, paddingTop: 10, marginTop: 10, borderColor: '#bbb' }}>
                             <Text style={styles.txtPrice}>Tổng tiền</Text>
@@ -170,7 +168,7 @@ const Payment = ({ route, navigation }: any) => {
                 styleButton={{ position: 'fixed' }}
                 label="Thanh toán"
                 onPress={() => {
-                    viewmodel.createPaymentURL(dataCart, totalCost.toString(), coupon)
+                    viewmodel.createPaymentURL(select.dataCart, totalCost.toString(), select.coupon)
                 }} />
         </View>
 

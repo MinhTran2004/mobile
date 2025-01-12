@@ -15,7 +15,7 @@ const Login = ({ navigation }: any) => {
                     iconLeft="left"
                     title="Đăng Nhập"
                     iconRight="none"
-                    onPressIconLeft={() => navigation.goBack()} />
+                    onPressIconLeft={() => navigation.navigate('welcome')} />
 
                 <View style={styles.container}>
 

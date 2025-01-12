@@ -151,7 +151,7 @@ const CreateAddress = ({navigation}:any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.replace('address');
+                        navigation.navigate('address');
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}

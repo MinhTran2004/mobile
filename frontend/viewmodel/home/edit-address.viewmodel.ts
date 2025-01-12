@@ -50,7 +50,6 @@ const ViewModelEditAddress = (props: Address) => {
         }
     }
 
-
     // api address
     const getAPIAddressByProvince = async () => {
         const reponse = await AddressService.getAPIAddressByProvince();

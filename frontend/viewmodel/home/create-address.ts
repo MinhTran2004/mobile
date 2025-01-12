@@ -39,8 +39,8 @@ const ViewModelCreateAddress = () => {
     const [dataCommune, setDataCommune] = useState();
 
     const createAddress = async () => {
-        const address = new AddressModel(selector, name.trim(), phone.trim(), province.trim(), district.trim(), commune.trim(), detailAddress.trim(), toogle);
         const check = AddressModel.checkNullData(name, phone, province, district, commune, detailAddress, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress);
+        const address = new AddressModel(selector, name.trim(), phone.trim(), province.trim(), district.trim(), commune.trim(), detailAddress.trim(), toogle);
         
          if (check) {
             const reponse = await AddressService.createAddress(address);

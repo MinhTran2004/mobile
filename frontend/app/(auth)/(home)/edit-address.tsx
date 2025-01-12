@@ -9,7 +9,7 @@ import { Address } from "@/model/address.model";
 import StatusModal from "@/components/StatusModal";
 
 const EditAddress = ({ route }: any) => {
-    const navigation = useNavigation();
+    const navigation:any = useNavigation();
     const props: Address = route.params.address;
     const viewmodel = ViewModelEditAddress(props);
     
@@ -117,7 +117,6 @@ const EditAddress = ({ route }: any) => {
                 label="Cập nhật địa chỉ"
                 onPress={() => viewmodel.setDialog(true)} />
 
-
             <StatusModal
                 isActive={viewmodel.dialog}
                 title="Thông báo"
@@ -147,7 +146,7 @@ const EditAddress = ({ route }: any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.goBack();
+                        navigation.navigate('edit-address');
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}
@@ -157,13 +156,12 @@ const EditAddress = ({ route }: any) => {
             <StatusModal
                 isActive={viewmodel.dialogError}
                 title="Thông báo"
-                label="Thêm địa chỉ không thành công"
+                label="Thay đổi địa chỉ thất bại"
                 icon="error"
                 statusLayoutButton="single"
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogError(false);
-                        navigation.goBack();
                     },
                 }}
                 onClose={() => viewmodel.setDialogError(false)}

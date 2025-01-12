@@ -70,12 +70,6 @@ const ViewModelPayment = () => {
             }
         }
     }
-
-    console.log(idAccount);
-    
-
-
-
     return {
         address, detailAddress, checkBox, dialog,
         setCheckBox, setDialog, createPaymentURL,
