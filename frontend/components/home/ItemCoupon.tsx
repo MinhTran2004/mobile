@@ -1,3 +1,4 @@
+import { ConvertMoney } from "@/constants/convert-monney";
 import { Coupon } from "@/model/coupon.model";
 import { setDataCart } from "@/redux/action/dataCart";
 import { useNavigation } from "@react-navigation/native";
@@ -18,6 +19,7 @@ interface Props {
     endDate?: string,
     describe?: string,
     status?: string,
+    hidenUse?:boolean,
 }
 
 const ItemCoupon: React.FC<Props> = (props) => {
@@ -69,10 +71,10 @@ const ItemCoupon: React.FC<Props> = (props) => {
                                     },
                                 }))
                         }}>
-                            <Text style={style.use}>Sử dụng</Text>
+                            {props.hidenUse ? <Text style={style.use}>Sử dụng</Text> : ''}
                         </TouchableOpacity>
                     </View>
-                    <Text>Đơn tối thiểu {props.condition}</Text>
+                    <Text>Đơn tối thiểu {ConvertMoney(props.condition?.toString() || "")}</Text>
                 </View>
                 <Text style={{ color: 'red' }}>Hết hạn sau {props.endDate}</Text>
                 <View style={{ borderTopWidth: 0.5, borderColor: '#A6A1A1' }}>

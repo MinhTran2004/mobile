@@ -1,5 +1,4 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
-import { useState } from "react";
 import { FlatList, View } from "react-native"
 import StatusModal from "@/components/StatusModal";
 import ViewModelOrderWaiting from "@/viewmodel/order/order-waiting.viewmodel";

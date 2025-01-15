@@ -5,8 +5,8 @@ import { useEffect, useState } from "react"
 const ViewModelCoupon = (total:string) => {
     const [dataCoupon, setDataCoupon] = useState<Coupon[]>([]);
 
-    const getAllCoupon = async (total:string) => {
-        const reponse = await CouponService.getAllCoupon(total);
+    const getAllCouponByPrice = async (total:string) => {
+        const reponse = await CouponService.getAllCouponByPrice(total);
         
         if(reponse.lenght != 0) {
             setDataCoupon(reponse)
@@ -16,7 +16,7 @@ const ViewModelCoupon = (total:string) => {
     }
 
     useEffect(() => {   
-        getAllCoupon(total);
+        getAllCouponByPrice(total);
     }, [])
 
     return {

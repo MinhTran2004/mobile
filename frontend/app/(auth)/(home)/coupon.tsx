@@ -18,7 +18,7 @@ const Coupon = () => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={viewmodel.dataCoupon}
-                    renderItem={({ item }) => <ItemCoupon key={item._id} {...item}/>}
+                    renderItem={({ item }) => <ItemCoupon key={item._id} {...item} hidenUse={true}/>}
                 />
             </View>
         </View>

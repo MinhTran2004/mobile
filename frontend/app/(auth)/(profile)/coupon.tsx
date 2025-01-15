@@ -1,22 +1,32 @@
 import AppHeader from "@/components/AppHeader";
 import ItemCoupon from "@/components/home/ItemCoupon";
-import ViewModelCoupon from "@/viewmodel/home/coupon.viewmodel";
+import CouponService from "@/service/coupon.service";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native"
 
 const Coupon = () => {
-    const viewmodel = ViewModelCoupon();
     const navigation = useNavigation();
+    const [dataCoupon, setDataCoupon] = useState([]);
+
+    const getAllCoupon = async () => {
+        await CouponService.getAllCoupon()
+        .then((reponse) => setDataCoupon(reponse || []));
+    }
+
+    useEffect(() => {
+        getAllCoupon();
+    }, [])
     
     return (
         <View style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Mã giảm giá" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 10 }}>
 
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={viewmodel.dataCoupon}
-                    renderItem={({ item }) => <ItemCoupon key={item._id} {...item}/>}
+                    data={dataCoupon}
+                    renderItem={({ item }:any) => <ItemCoupon key={item._id} {...item} hidenUse={false}/>}
                 />
             </View>
         </View>

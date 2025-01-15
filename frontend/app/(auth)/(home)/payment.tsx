@@ -39,7 +39,7 @@ const Payment = ({ navigation }: any) => {
                         {viewmodel.detailAddress ?
                             // option 1 
                             < TouchableOpacity style={styles.banner1} onPress={() => {
-                                navigation.navigate('address')
+                                navigation.navigate('address', {screen: "payment"})
                             }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, flex: 1 }}>
                                     <View style={{ flex: 1 }}>
@@ -54,7 +54,7 @@ const Payment = ({ navigation }: any) => {
                             <TouchableOpacity
                                 style={{ paddingVertical: 5, alignItems: 'center', flexDirection: 'row' }}
                                 onPress={() => {
-                                    navigation.navigate('address')
+                                    navigation.navigate('address', {screen: "payment"} )
                                 }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, flex: 1 }}>
                                     <IconPlus size={22} />
@@ -92,7 +92,7 @@ const Payment = ({ navigation }: any) => {
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                 {select.coupon ?
-                                    <Text style={{ fontSize: 16 }}>{select.coupon.discountValue}</Text>
+                                    <Text style={{ fontSize: 16 }}>{ConvertMoney(select.coupon.discountValue.toString())}</Text>
                                     :
                                     <View />}
                                 <IconChevronRight size={23} />

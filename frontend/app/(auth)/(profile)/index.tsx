@@ -1,18 +1,16 @@
 import ItemProfile from '@/components/profile/ItemProfile';
 import StatusModal from '@/components/StatusModal';
 import { Logout } from '@/redux/action/login';
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Switch, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconChevronRight } from 'tabler-icons-react-native';
 
-const Profile = () => {
+const Profile = ({ navigation }: any) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const [dialog, setDialog] = useState(false);
 
-  const selectUser = useSelector((state:any) => state?.auth?.account);
+  const selectUser = useSelector((state: any) => state?.auth?.account);
 
   const logout = () => {
     navigation.reset({
@@ -21,9 +19,6 @@ const Profile = () => {
     });
     dispatch(Logout());
   }
-
-  console.log(selectUser);
-  
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', gap: 30, paddingTop: 30 }}>
@@ -41,7 +36,6 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{selectUser.account}</Text>
-        {/* <Text style={{ fontSize: 16, color: '#909090' }}>fpolyaso1@fpt.edu.vn</Text> */}
       </View>
 
 
@@ -55,14 +49,7 @@ const Profile = () => {
           }
           title='Địa chỉ'
           iconRight={<IconChevronRight />}
-          onPress={() => { navigation.navigate('address') }} />
-
-        {/* <ItemProfile
-          iconLeft={<Image source={require('@/assets/images/profile/ic_lock.png')}
-            style={styles.ic_profile} />}
-          title='Đổi mật khẩu'
-          iconRight={<IconChevronRight />}
-          onPress={() => { console.log('heloooo') }} /> */}
+          onPress={() => { navigation.navigate('address', {screen: 'profile'}) }} />
 
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_discount.png')}
@@ -72,10 +59,10 @@ const Profile = () => {
           onPress={() => { navigation.navigate('coupon') }} />
         <ItemProfile
           iconLeft={<Image source={require('@/assets/images/profile/ic_heart.png')}
-            style={styles.ic_profile} />} title='Sản phẩm yêu thích'
+            style={styles.ic_profile} />} title='Đổi mật khẩu'
           iconRight={<IconChevronRight />}
           onPress={() => {
-            navigation.navigate('favoriteScreen') 
+            // navigation.navigate('favoriteScreen') 
           }} />
         <Text style={styles.title}>Cài đặt</Text>
         <ItemProfile

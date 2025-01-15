@@ -16,7 +16,6 @@ interface Props {
 const DetailCoupon: React.FC<Props> = (props) => {
     const navigation = useNavigation();
     const coupon = props.route.params;
-    console.log(coupon);
 
     return (
         <View style={{ flex: 1 }}>

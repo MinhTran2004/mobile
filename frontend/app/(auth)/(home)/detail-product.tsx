@@ -23,7 +23,7 @@ interface Props {
 }
 
 const DetailProduct = (route: Props) => {
-    const navigation = useNavigation();
+    const navigation: any = useNavigation();
     const viewModel = ViewModelDetailProduct();
     const product = route.route.params;
 
@@ -62,7 +62,10 @@ const DetailProduct = (route: Props) => {
                 <TouchableOpacity style={{ flex: 1, alignItems: 'center' }}>
                     <IconMessage />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => { viewModel.addProductToCart(product._id), setDialog2(true) }}>
+                <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => {
+                    // viewModel.addProductToCart(product._id),
+                    setDialog2(true)
+                }}>
                     <IconShoppingCart />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -104,13 +107,13 @@ const DetailProduct = (route: Props) => {
                 icon="none"
                 statusLayoutButton="single"
                 primaryButton={{
-                    label: 'Đóng', onPress() {
+                    label: 'Đóng',
+                    onPress: () => {
                         setDialog2(false)
                     },
                 }}
                 onClose={() => setDialog2(false)}
             />
-
         </View >
     )
 }

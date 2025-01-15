@@ -2,20 +2,30 @@ import AppHeader from "@/components/AppHeader";
 import ItemAddress from "@/components/home/ItemAdress";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelAddress from "@/viewmodel/home/address.viewmodel";
-import { useNavigation } from "expo-router";
+import { useRoute } from "@react-navigation/native";
 import { FlatList, View } from "react-native";
 
-const Address = () => {
+const Address = ({navigation}:any) => {
     const viewModel = ViewModelAddress();
-    const navigation: any = useNavigation();
 
+    const route = useRoute();
+
+    console.log(route.params);
+    console.log(route.params?.screen == "profile");
+    
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
                 iconLeft="left"
                 title="Địa chỉ"
                 iconRight="none"
-                onPressIconLeft={() => navigation.navigate('payment')}
+                onPressIconLeft={() => {
+                    if(route.params?.screen === "profile"){
+                        navigation.goBack();
+                    }else{
+                        navigation.navigate('payment');
+                    }
+                }}
             />
             <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 10, paddingBottom: 90 }}>
 

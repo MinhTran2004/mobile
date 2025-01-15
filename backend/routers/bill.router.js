@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/getAllBillByStatus', async (req, res) => {
     const { idAccount, status } = req.query;
 
-    const reponse = await Bill.find({ account: idAccount, status: status }).limit(10);
+    const reponse = await Bill.find({ account: idAccount, status: {$in: status} }).limit(10);
     if (reponse) {
         res.send({ status: true, data: reponse });
     } else {
@@ -23,7 +23,7 @@ router.get('/getAllBillByStatus', async (req, res) => {
 router.delete('/deleteBillById/:id', async (req, res) => {
     const { id } = req.params;
 
-    const reponse = await Bill.findByIdAndDelete(id);
+    const reponse = await Bill.findByIdAndUpdate(id, {status: "Người dùng đã hủy"});
     if (reponse) {
         res.send({ status: true });
     } else {

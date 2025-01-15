@@ -10,7 +10,7 @@ import { ConvertMoney } from "@/constants/convert-monney";
 
 
 const OrderDetail = ({ route }: any) => {
-    const navigation = useNavigation();
+    const navigation:any = useNavigation();
     const viewmodel = ViewModelOrderDetail();
 
     const item: Bill = route.params;
