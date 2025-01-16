@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/createAddress', async (req, res) => {
     const data = req.body;
     if (data.status) {
-        await Address.updateMany({ status: true }, { $set: { status: false } });
+        await Address.updateMany({ idAccount: data.idAccount, status: true }, { $set: { status: false } });
         const address = await Address(data).save();
         if (address.lenght != 0) {
             res.send({ status: true });
@@ -61,12 +61,11 @@ router.delete('/deleteAddressById', async (req, res) => {
 
 router.put('/updateAddressById', async (req, res) => {
     const data = req.body;
-    console.log(data);
+
 
     if (data.status) {
-        await Address.updateMany({ status: true }, { $set: { status: false } });
+        await Address.updateMany({ idAccount: _id, status: true }, { $set: { status: false } });
         const reponse = await Address.findByIdAndUpdate(data._id, data);
-        console.log(reponse);
 
         if (reponse.lenght != 0) {
             res.send({ status: true });
@@ -86,11 +85,14 @@ router.put('/updateAddressById', async (req, res) => {
 });
 
 router.patch('/updateStatusAddressById', async (req, res) => {
-    const data = req.body;
+    const {idAddress, idAccount} = req.body;
 
-    await Address.updateMany({ status: true }, { $set: { status: false } });
-    const reponse = await Address.findByIdAndUpdate(data.id, {status: true});
+    console.log(idAddress, idAccount);
     
+
+    await Address.updateMany({ idAccount: idAccount, status: true }, { $set: { status: false } });
+    const reponse = await Address.findByIdAndUpdate(idAddress, { status: true });
+
     if (reponse) {
         res.send({ status: true });
     } else {

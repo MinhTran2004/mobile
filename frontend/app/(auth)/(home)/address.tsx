@@ -5,14 +5,12 @@ import ViewModelAddress from "@/viewmodel/home/address.viewmodel";
 import { useRoute } from "@react-navigation/native";
 import { FlatList, View } from "react-native";
 
-const Address = ({navigation}:any) => {
+const Address = ({ navigation }: any) => {
     const viewModel = ViewModelAddress();
 
-    const route = useRoute();
+    const route: any = useRoute();
+    const screen = route.params?.screen;
 
-    console.log(route.params);
-    console.log(route.params?.screen == "profile");
-    
     return (
         <View style={{ flex: 1 }}>
             <AppHeader
@@ -20,9 +18,9 @@ const Address = ({navigation}:any) => {
                 title="Địa chỉ"
                 iconRight="none"
                 onPressIconLeft={() => {
-                    if(route.params?.screen === "profile"){
-                        navigation.goBack();
-                    }else{
+                    if (route.params?.screen === "profile") {
+                        navigation.navigate('index');
+                    } else {
                         navigation.navigate('payment');
                     }
                 }}
@@ -31,12 +29,12 @@ const Address = ({navigation}:any) => {
 
                 <FlatList
                     data={viewModel.dataAddress}
-                    renderItem={({ item }) => <ItemAddress address={item} viewmodel={viewModel} navigation={navigation} />} />
+                    renderItem={({ item }) => <ItemAddress address={item} viewmodel={viewModel} navigation={navigation} screen={screen} />} />
 
             </View>
             <PrimaryButton
                 label="Thêm địa chỉ mới"
-                onPress={() => navigation.navigate('create-address')}
+                onPress={() => navigation.navigate('create-address', { screen: screen })}
             />
         </View>
     );

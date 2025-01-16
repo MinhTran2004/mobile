@@ -5,7 +5,6 @@ import PersonalInformation from "./personal-information";
 import Profile from ".";
 import { IconHome, IconShoppingCart, IconUser } from "tabler-icons-react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../(home)";
 import LayoutOrder from "../(order)/_layout";
 import LayoutHome from "../(home)/_layout";
 import Coupon from "./coupon";

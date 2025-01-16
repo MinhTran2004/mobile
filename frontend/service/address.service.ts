@@ -37,10 +37,10 @@ export default class AddressService {
         }
     }
 
-    static updateStatusAddressById = async (id: string) => {
+    static updateStatusAddressById = async (idAddress: string, idAccount: string) => {
         try {
             const reponse = (await axios.patch(`${this.url}/updateStatusAddressById`, {
-                id
+                idAddress: idAddress, idAccount: idAccount
             })).data;
 
             return reponse.status;

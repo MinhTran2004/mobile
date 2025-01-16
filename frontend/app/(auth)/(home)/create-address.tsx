@@ -5,9 +5,13 @@ import InputEditText from "@/components/InputEditText";
 import PrimaryButton from "@/components/PrimaryButton";
 import ViewModelCreateAddress from "@/viewmodel/home/create-address";
 import StatusModal from "@/components/StatusModal";
+import { useRoute } from "@react-navigation/native";
 
 const CreateAddress = ({navigation}:any) => {
     const viewmodel = ViewModelCreateAddress();
+
+    const route:any = useRoute();
+    const screen = route.params?.screen;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -151,7 +155,7 @@ const CreateAddress = ({navigation}:any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.navigate('address');
+                        navigation.navigate('address', {screen: screen});
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}
@@ -167,7 +171,7 @@ const CreateAddress = ({navigation}:any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogError(false);
-                        navigation.replace('address');
+                        navigation.navigate('address', {screen: screen});
                     },
                 }}
                 onClose={() => viewmodel.setDialogError(false)}

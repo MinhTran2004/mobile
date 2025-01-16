@@ -21,7 +21,7 @@ const ViewModelAddress = () => {
     }
 
     const updateStatusAddressById = async (id: string) => {
-        const reponse = await AddressService.updateStatusAddressById(id);
+        const reponse = await AddressService.updateStatusAddressById(id, selector);
         if (reponse) {
             setDialogUpdatde(false);
             setDialogUpdatdeSusscess(true);

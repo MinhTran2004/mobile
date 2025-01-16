@@ -1,17 +1,17 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Switch } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import AppHeader from "@/components/AppHeader";
 import ItemModalAddress from "@/components/home/ItemModelAdress";
 import InputEditText from "@/components/InputEditText";
 import ViewModelEditAddress from "@/viewmodel/home/edit-address.viewmodel";
 import PrimaryButton from "@/components/PrimaryButton";
-import { Address } from "@/model/address.model";
 import StatusModal from "@/components/StatusModal";
 
-const EditAddress = ({ route }: any) => {
+const EditAddress = () => {
+    const route:any = useRoute();
     const navigation:any = useNavigation();
-    const props: Address = route.params.address;
-    const viewmodel = ViewModelEditAddress(props);
+    const props = route.params;
+    const viewmodel = ViewModelEditAddress(props.address);
     
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -146,7 +146,7 @@ const EditAddress = ({ route }: any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.navigate('edit-address');
+                        navigation.navigate('edit-address', {screen: route.screen});
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}

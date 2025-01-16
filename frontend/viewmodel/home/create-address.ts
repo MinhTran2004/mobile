@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const ViewModelCreateAddress = () => {
     const naviagtion = useNavigation();
-    
+
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [province, setProvince] = useState('');
@@ -20,7 +20,7 @@ const ViewModelCreateAddress = () => {
     const [errorDistrict, setErrorDistrict] = useState('');
     const [errorCommune, setErrorCommune] = useState('');
     const [errorDetailAddress, setErrorDetailAddress] = useState('');
-    
+
 
     const [dialog, setDialog] = useState(false);
     const [dialogSuccess, setDialogSuccess] = useState(false);
@@ -41,13 +41,13 @@ const ViewModelCreateAddress = () => {
     const createAddress = async () => {
         const check = AddressModel.checkNullData(name, phone, province, district, commune, detailAddress, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress);
         const address = new AddressModel(selector, name.trim(), phone.trim(), province.trim(), district.trim(), commune.trim(), detailAddress.trim(), toogle);
-        
-         if (check) {
+
+        if (check) {
             const reponse = await AddressService.createAddress(address);
-            if(reponse){
+            if (reponse) {
                 setDialog(false);
                 setDialogSuccess(true);
-            }else{
+            } else {
                 setDialog(false);
                 setDialogError(true);
             }
@@ -88,13 +88,13 @@ const ViewModelCreateAddress = () => {
     }, [district])
 
     return {
-        name, phone, province, district, commune, detailAddress, errorName, errorPhone, errorProvince, 
+        name, phone, province, district, commune, detailAddress, errorName, errorPhone, errorProvince,
         errorDistrict, errorCommune, errorDetailAddress, toogle,
         // modal
         modalProvince, modalDistrict, modalCommune, dialog, dialogError, dialogSuccess,
         // data Address
         dataProvince, dataDistrict, dataCommune,
-        setName, setPhone, setProvince, setDistrict, setCommune, setErrorName,setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
+        setName, setPhone, setProvince, setDistrict, setCommune, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
         // modal
         setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog, setDialogError, setDialogSuccess,
         createAddress,

@@ -7,6 +7,7 @@ interface Props {
     address: Address,
     viewmodel: any,
     navigation: any,
+    screen: string,
 }
 
 const ItemAddress: React.FC<Props> = (props) => {
