@@ -19,7 +19,7 @@ const Home = ({ navigation }: any) => {
             <View style={styles.containerHeader}>
                 <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center' }}>
                     <View style={{ paddingLeft: 5 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Hi, Trần Công Minh</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Chào mừng bạn trở lại</Text>
                         <Text style={{ fontSize: 16 }}>Hôm nay bạn sẽ mua gì?</Text>
                     </View>
                 </View>

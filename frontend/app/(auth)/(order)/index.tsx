@@ -5,7 +5,7 @@ import ViewModelOrderWaiting from "@/viewmodel/order/order-waiting.viewmodel";
 
 const OrderWaiting = ({ navigation }: any) => {
     const viewmodel = ViewModelOrderWaiting();
-
+    
     return (
         <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
             {viewmodel.dataOrder ?

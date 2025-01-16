@@ -5,18 +5,29 @@ const router = express.Router();
 
 router.post('/addProductToCart', async (req, res) => {
     const data = req.body;
-    const {idProduct, quantity} = req.body;
-    const reponse = await Cart.find({idProduct: idProduct, idAccount: data.idAccount});
-    if(reponse.length != 0){
-        await Cart.findByIdAndUpdate(reponse[0]._id, {quantity: reponse[0].quantity + quantity})
-    }else{
-        await new Cart(data).save();
+    const { idProduct, quantity } = req.body;
+    const reponse = await Cart.find({ idProduct: idProduct, idAccount: data.idAccount });
+
+    if (reponse.length != 0) {
+        const reponse = await Cart.findByIdAndUpdate(reponse[0]._id, { quantity: reponse[0].quantity + quantity })
+        if (reponse) {
+            res.send({ status: true });
+        } else {
+            res.send({ status: false });
+        }
+    } else {
+        const reponse = await new Cart(data).save();
+        if (reponse) {
+            res.send({ status: true });
+        } else {
+            res.send({ status: false });
+        }
     }
 })
 
 router.get('/getAllProductInCart', async (req, res) => {
     const data = req.query;
-    const reponse = await Cart.find({idAccount:data.idAccount}).limit(data.limit);
+    const reponse = await Cart.find({ idAccount: data.idAccount }).limit(data.limit);
     res.send(reponse);
 })
 

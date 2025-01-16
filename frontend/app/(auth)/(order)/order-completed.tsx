@@ -1,10 +1,14 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
 import StatusModal from "@/components/StatusModal";
+import { setDataCart } from "@/redux/action/dataCart";
 import ViewModelOrderCompleted from "@/viewmodel/order/order-completed.viewmodel";
 import { FlatList, View } from "react-native"
+import { useDispatch } from "react-redux";
 
 const OrderCompleted = ({ navigation }: any) => {
     const viewmodel = ViewModelOrderCompleted();
+
+    const dispatch = useDispatch();
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
@@ -42,10 +46,8 @@ const OrderCompleted = ({ navigation }: any) => {
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        navigation.navigate('payment', {
-                            dataCart: viewmodel.itemData?.dataProduct,
-                            total: viewmodel.itemData?.totalCost,
-                        });
+                        dispatch(setDataCart({ dataCart: viewmodel.itemData?.dataProduct, total: viewmodel.itemData?.totalCost }))
+                        navigation.navigate('payment', { screen: 'detail-product' });
                         viewmodel.setDialog(false);
                     },
                 }}

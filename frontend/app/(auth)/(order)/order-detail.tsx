@@ -10,7 +10,6 @@ import { ConvertMoney } from "@/constants/convert-monney";
 import { useDispatch } from "react-redux";
 import { setDataCart } from "@/redux/action/dataCart";
 
-
 const OrderDetail = ({ route }: any) => {
     const navigation: any = useNavigation();
     const viewmodel = ViewModelOrderDetail();
@@ -145,7 +144,7 @@ const OrderDetail = ({ route }: any) => {
                 secondaryButton={{
                     label: 'Có', onPress() {
                         dispatch(setDataCart({ dataCart: viewmodel.itemData?.dataProduct, total: viewmodel.itemData?.totalCost }));
-                        navigation.navigate('payment', { screen: 'oder-detail' });
+                        navigation.navigate('payment', { screen: 'order-detail' });
                         viewmodel.setDialogRelay(false);
                     },
                 }}

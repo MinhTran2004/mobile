@@ -17,7 +17,7 @@ const Payment = ({ navigation }: any) => {
     const totalCost = Number(select.total) + 30000 - (select.coupon ? Number(select.coupon.discountValue) : 0);
 
     const route:any = useRoute();
-
+    
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ flex: 1 }}>

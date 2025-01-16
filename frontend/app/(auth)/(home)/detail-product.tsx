@@ -1,12 +1,11 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { forwardRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product.viewmodel";
-import { IconChevronLeft, IconHeart, IconHeartFilled, IconMessage, IconShoppingCart, IconStar, IconStarFilled, IconStars } from "tabler-icons-react-native";
+import { IconChevronLeft,  IconMessage, IconShoppingCart } from "tabler-icons-react-native";
 import StatusModal from "@/components/StatusModal";
 import { ConvertMoney } from "@/constants/convert-monney";
-import { useDispatch, useSelector } from "react-redux";
-import FavoriteService from "@/service/favorite.service";
+import { useDispatch } from "react-redux";
 import { setDataCart } from "@/redux/action/dataCart";
 
 interface Product {
@@ -29,9 +28,6 @@ const DetailProduct = (route: Props) => {
     const product = route.route.params;
 
     const dispatch = useDispatch();
-
-    const [dialog, setDialog] = useState(false);
-    const [dialog2, setDialog2] = useState(false);
 
     const dataCart = { ...product, quantityCart: 1 }
     const total = Number(product.price) * 1;
@@ -66,42 +62,43 @@ const DetailProduct = (route: Props) => {
                     <IconMessage />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => {
-                    setDialog2(true)
+                    viewModel.addProductToCart(product._id);
+                    viewModel.setDialog2(true)
                 }}>
                     <IconShoppingCart />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ flex: 5, padding: 14, backgroundColor: '#4C1B1B', borderRadius: 90 }}
-                    onPress={() => setDialog(true)}>
+                    onPress={() => viewModel.setDialog(true)}>
                     <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}>Mua ngay</Text>
                 </TouchableOpacity>
             </View>
 
             {/* Dialog mua hàng */}
             <StatusModal
-                isActive={dialog}
+                isActive={viewModel.dialog}
                 title="Thông báo"
-                label="Bạn có muốn mua hàng?"
+                label="Bạn có muốn mua ngay?"
                 icon="none"
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        setDialog(false);
+                        viewModel.setDialog(false);
                         dispatch(setDataCart({dataCart: [dataCart], total: total}))
                         navigation.navigate('payment', {screen: 'detail-product'});
                     },
                 }}
                 primaryButton={{
                     label: 'Không', onPress() {
-                        setDialog(false)
+                        viewModel.setDialog(false)
                     },
                 }}
-                onClose={() => setDialog(false)}
+                onClose={() => viewModel.setDialog(false)}
             />
 
             {/* Dialog thêm sản phẩm vào giỏ hàng */}
             <StatusModal
-                isActive={dialog2}
+                isActive={viewModel.dialog2}
                 title="Thông báo"
                 label="Đã thêm sản phẩm vào giỏ hàng !!!"
                 icon="none"
@@ -109,10 +106,25 @@ const DetailProduct = (route: Props) => {
                 primaryButton={{
                     label: 'Đóng',
                     onPress: () => {
-                        setDialog2(false)
+                        viewModel.setDialog2(false)
                     },
                 }}
-                onClose={() => setDialog2(false)}
+                onClose={() => viewModel.setDialog2(false)}
+            />
+
+            <StatusModal
+                isActive={viewModel.dialogError}
+                title="Thông báo"
+                label="Thêm sản phẩm lỗi"
+                icon="none"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'Đóng',
+                    onPress: () => {
+                        viewModel.setDialogError(false)
+                    },
+                }}
+                onClose={() => viewModel.setDialogError(false)}
             />
         </View >
     )

@@ -58,7 +58,7 @@ const Profile = ({ navigation }: any) => {
           iconRight={<IconChevronRight />}
           onPress={() => { navigation.navigate('coupon') }} />
         <ItemProfile
-          iconLeft={<Image source={require('@/assets/images/profile/ic_heart.png')}
+          iconLeft={<Image source={require('@/assets/images/profile/password.png')}
             style={styles.ic_profile} />} title='Đổi mật khẩu'
           iconRight={<IconChevronRight />}
           onPress={() => {

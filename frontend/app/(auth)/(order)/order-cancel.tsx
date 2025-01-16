@@ -1,11 +1,15 @@
 import ItemOrderLayout from "@/components/order/ItemOrderLayout";
 import StatusModal from "@/components/StatusModal";
+import { setDataCart } from "@/redux/action/dataCart";
 import ViewModelOrderCancel from "@/viewmodel/order/order-cancel.viewmodel";
 import { FlatList, View } from "react-native"
+import { useDispatch } from "react-redux";
 
-const OrderCancel = ({navigation}:any) => {
+const OrderCancel = ({ navigation }: any) => {
     const viewmodel = ViewModelOrderCancel();
-    
+
+    const dispatch = useDispatch();
+
     return (
         <View style={{ flex: 1, backgroundColor: 'white', padding: 10 }}>
 
@@ -43,10 +47,8 @@ const OrderCancel = ({navigation}:any) => {
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        navigation.navigate('payment', {
-                            dataCart: viewmodel.dataOrder[0].dataProduct,
-                            total: viewmodel.dataOrder[0].totalCost,
-                        });
+                        dispatch(setDataCart({ dataCart: viewmodel.itemData?.dataProduct, total: viewmodel.itemData?.totalCost }))
+                        navigation.navigate('payment', { screen: 'detail-product' });
                         viewmodel.setDialog(false);
                     },
                 }}
