@@ -6,8 +6,8 @@ import { auth } from "@/config/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const ViewModelLogin = (navigation: any) => {
-    const [account, setAccount] = useState('tranminh209204@gmail.com');
-    const [password, setPassword] = useState('hihi2004');
+    const [account, setAccount] = useState('');
+    const [password, setPassword] = useState('');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
     const [statusPassword, setStatusPassword] = useState(true);

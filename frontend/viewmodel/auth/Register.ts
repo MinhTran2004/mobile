@@ -7,8 +7,8 @@ import { getDocs, query, where } from "firebase/firestore";
 import { useState } from "react"
 
 export const ViewModelRegister = (navigation: any) => {
-    const [account, setAccount] = useState('hihi2004@gmail.com');
-    const [password, setPassword] = useState('123456');
+    const [account, setAccount] = useState('');
+    const [password, setPassword] = useState('');
     const [errorAccount, setErrorAccount] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
     const [dialog, setDialog] = useState(false);
