@@ -62,7 +62,7 @@ const Profile = ({ navigation }: any) => {
             style={styles.ic_profile} />} title='Đổi mật khẩu'
           iconRight={<IconChevronRight />}
           onPress={() => {
-            // navigation.navigate('favoriteScreen') 
+            navigation.navigate('change-password') 
           }} />
         <Text style={styles.title}>Cài đặt</Text>
         <ItemProfile

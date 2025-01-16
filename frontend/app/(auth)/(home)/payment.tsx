@@ -8,12 +8,15 @@ import PrimaryButton from "@/components/PrimaryButton";
 import StatusModal from "@/components/StatusModal"
 import { ConvertMoney } from "@/constants/convert-monney";
 import { useSelector } from "react-redux";
+import { useRoute } from "@react-navigation/native";
 
 const Payment = ({ navigation }: any) => {
     const viewmodel = ViewModelPayment();
 
     const select = useSelector((state: any) => state.dataCart.dataCart);
     const totalCost = Number(select.total) + 30000 - (select.coupon ? Number(select.coupon.discountValue) : 0);
+
+    const route:any = useRoute();
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -22,7 +25,13 @@ const Payment = ({ navigation }: any) => {
                     iconLeft="left"
                     title="Thanh toán"
                     iconRight="none"
-                    onPressIconLeft={() => navigation.navigate('cart')}
+                    onPressIconLeft={() => {
+                        if (route.params?.screen === "detail-product" || route.params?.screen === "cart" || route.params?.screen === "order-detail") {
+                            navigation.goBack()
+                        }else{
+                            navigation.navigate('cart')
+                        }
+                    }}
                 />
 
                 <View style={{

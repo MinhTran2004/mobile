@@ -13,7 +13,7 @@ const ViewModelOrderWaiting = () => {
     const userId = useSelector((state: any) => state?.auth?.account?._id);
 
     const getAllBillByStatus = async () => {
-        const reponse = await SeviceBill.getAllBillByStatus(userId, "Chờ xác nhận");
+        const reponse = await SeviceBill.getAllBillByStatus(userId, ["Chờ xác nhận", "Đang tiến hành"]);
         setDataOrder(reponse);
     }
 

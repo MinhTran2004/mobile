@@ -7,11 +7,14 @@ import StatusModal from "@/components/StatusModal";
 import { Bill } from "@/model/bill.model";
 import ViewModelOrderDetail from "@/viewmodel/home/order-detail.viewmodel";
 import { ConvertMoney } from "@/constants/convert-monney";
+import { useDispatch } from "react-redux";
+import { setDataCart } from "@/redux/action/dataCart";
 
 
 const OrderDetail = ({ route }: any) => {
-    const navigation:any = useNavigation();
+    const navigation: any = useNavigation();
     const viewmodel = ViewModelOrderDetail();
+    const dispatch = useDispatch();
 
     const item: Bill = route.params;
 
@@ -20,23 +23,41 @@ const OrderDetail = ({ route }: any) => {
     const totalAmount = Number(total) + 30000 - (item.coupon.disscount ? Number(item.coupon.disscount) : 0);
 
     const SelectButton = () => {
-        switch(item.status){
+        switch (item.status) {
             case "Chờ xác nhận": return (
                 <PrimaryButton
-                styleButton={{ position: 'fixed' }}
-                label={"Hủy đơn"}
-                onPress={() => { viewmodel.setDialogDelete(true) }} />
+                    styleButton={{ position: 'fixed' }}
+                    label={"Hủy đơn"}
+                    onPress={() => { viewmodel.setDialogDelete(true) }} />
             );
             case "Hoàn thành": return (
                 <PrimaryButton
-                styleButton={{ position: 'fixed' }}
-                label={"Đặt lại đơn"}
-                onPress={() => { 
-                    viewmodel.setItemData(item);
-                    viewmodel.setDialogRelay(true);
-                 }} />
+                    styleButton={{ position: 'fixed' }}
+                    label={"Đặt lại đơn"}
+                    onPress={() => {
+                        viewmodel.setItemData(item);
+                        viewmodel.setDialogRelay(true);
+                    }} />
+            );
+            case "Người dùng đã hủy": return (
+                <PrimaryButton
+                    styleButton={{ position: 'fixed' }}
+                    label={"Đặt lại đơn"}
+                    onPress={() => {
+                        viewmodel.setItemData(item);
+                        viewmodel.setDialogRelay(true);
+                    }} />
+            );
+            case "Người bán đã hủy": return (
+                <PrimaryButton
+                    styleButton={{ position: 'fixed' }}
+                    label={"Đặt lại đơn"}
+                    onPress={() => {
+                        viewmodel.setItemData(item);
+                        viewmodel.setDialogRelay(true);
+                    }} />
             )
-            default: return ;
+            default: return;
         }
     }
 
@@ -123,10 +144,8 @@ const OrderDetail = ({ route }: any) => {
                 statusLayoutButton="row"
                 secondaryButton={{
                     label: 'Có', onPress() {
-                        navigation.navigate('payment', {
-                            dataCart: viewmodel.itemData?.dataProduct,
-                            total: viewmodel.itemData?.totalCost,
-                        });
+                        dispatch(setDataCart({ dataCart: viewmodel.itemData?.dataProduct, total: viewmodel.itemData?.totalCost }));
+                        navigation.navigate('payment', { screen: 'oder-detail' });
                         viewmodel.setDialogRelay(false);
                     },
                 }}

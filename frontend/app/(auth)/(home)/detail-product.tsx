@@ -5,8 +5,9 @@ import { ViewModelDetailProduct } from "@/viewmodel/home/detail-product.viewmode
 import { IconChevronLeft, IconHeart, IconHeartFilled, IconMessage, IconShoppingCart, IconStar, IconStarFilled, IconStars } from "tabler-icons-react-native";
 import StatusModal from "@/components/StatusModal";
 import { ConvertMoney } from "@/constants/convert-monney";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FavoriteService from "@/service/favorite.service";
+import { setDataCart } from "@/redux/action/dataCart";
 
 interface Product {
     _id: string,
@@ -26,6 +27,8 @@ const DetailProduct = (route: Props) => {
     const navigation: any = useNavigation();
     const viewModel = ViewModelDetailProduct();
     const product = route.route.params;
+
+    const dispatch = useDispatch();
 
     const [dialog, setDialog] = useState(false);
     const [dialog2, setDialog2] = useState(false);
@@ -63,7 +66,6 @@ const DetailProduct = (route: Props) => {
                     <IconMessage />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flex: 2, alignItems: 'center' }} onPress={() => {
-                    // viewModel.addProductToCart(product._id),
                     setDialog2(true)
                 }}>
                     <IconShoppingCart />
@@ -85,10 +87,8 @@ const DetailProduct = (route: Props) => {
                 secondaryButton={{
                     label: 'Có', onPress() {
                         setDialog(false);
-                        navigation.navigate('payment', {
-                            dataCart: [dataCart],
-                            total: total
-                        });
+                        dispatch(setDataCart({dataCart: [dataCart], total: total}))
+                        navigation.navigate('payment', {screen: 'detail-product'});
                     },
                 }}
                 primaryButton={{

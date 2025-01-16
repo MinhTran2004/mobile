@@ -52,7 +52,7 @@ const StatusModal: React.FC<Props> = (props) => {
 
             case 'single': return props.primaryButton ?
                 <ButtonModel
-                    buttonStyle={{ backgroundColor: '#4C1B1B' }}
+                    buttonStyle={{ backgroundColor: '#4C1B1B', width: '100%' }}
                     textStyle={{ color: 'white', fontWeight: 600 }}
                     label={props.primaryButton.label}
                     status={props.statusLayoutButton}
