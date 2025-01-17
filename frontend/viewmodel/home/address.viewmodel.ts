@@ -12,6 +12,7 @@ const ViewModelAddress = () => {
     const [dialogUpdate, setDialogUpdatde] = useState(false);
     const [dialogUpdateSusscess, setDialogUpdatdeSusscess] = useState(false);
     const [dialogUpdateError, setDialogUpdatdeError] = useState(false);
+    const [idAddress1, setIdAddress1]= useState('');
 
     const selector = useSelector((state: any) => state?.auth?.account?._id);
 
@@ -52,7 +53,7 @@ const ViewModelAddress = () => {
     );
 
     return {
-        dialogDelete, dialogError, dialogsuccess, dialogUpdateError, setDialogUpdatdeError,
+        dialogDelete, dialogError, dialogsuccess, dialogUpdateError, setDialogUpdatdeError,idAddress1, setIdAddress1,
         setDialogDelete, setDialogError, setDialogSuccess, dialogUpdateSusscess, setDialogUpdatdeSusscess,
         dataAddress, deleteAddressById, dialogUpdate, setDialogUpdatde, updateStatusAddressById,
     }

@@ -25,6 +25,7 @@ const ViewModelCreateAddress = () => {
     const [dialog, setDialog] = useState(false);
     const [dialogSuccess, setDialogSuccess] = useState(false);
     const [dialogError, setDialogError] = useState(false);
+    const [dialogErrorFeild, setDialogErrorFeild] = useState(false);
 
     const selector = useSelector((state: any) => state?.auth?.account?._id);
 
@@ -52,7 +53,8 @@ const ViewModelCreateAddress = () => {
                 setDialogError(true);
             }
         } else {
-            setDialog(true);
+            setDialog(false);
+            setDialogErrorFeild(true);
         }
     }
 
@@ -93,7 +95,7 @@ const ViewModelCreateAddress = () => {
         // modal
         modalProvince, modalDistrict, modalCommune, dialog, dialogError, dialogSuccess,
         // data Address
-        dataProvince, dataDistrict, dataCommune,
+        dataProvince, dataDistrict, dataCommune,dialogErrorFeild, setDialogErrorFeild,
         setName, setPhone, setProvince, setDistrict, setCommune, setErrorName, setErrorPhone, setErrorProvince, setErrorDistrict, setErrorCommune, setErrorDetailAddress, setToogle,
         // modal
         setModalProvince, setModalDistrict, setModalCommune, setDetailAddress, setDialog, setDialogError, setDialogSuccess,

@@ -83,20 +83,12 @@ export class AddressModel {
             errorCommune("")
         }
 
-        // if (detailAddress) {
-        //     if (!nameRegex.test(detailAddress)) {
-        //         errDetalAddress("không được chứa kí tự đặc biệt");
-        //         return false
-        //     } else if (detailAddress.length > 12 && detailAddress.length < 8) {
-        //         errDetalAddress("Độ dài kí tự từ 8 - 12");
-        //         return false
-        //     } else {
-        //         errDetalAddress("");
-        //     }
-        // } else {
-        //     errDetalAddress("Không được để trống ô nhập");
-        //     return false
-        // }
+        if (detailAddress) {
+            errDetalAddress("");
+        } else {
+            errDetalAddress("Không được để trống ô nhập");
+            return false
+        }
 
         return true;
     }

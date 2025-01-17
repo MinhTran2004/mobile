@@ -46,19 +46,19 @@ const InputEditText: React.FC<Props> = (props) => {
                             editable={props.editable}
                             placeholder={props.placeholder}
                             value={props.value}
-                            secureTextEntry={props.iconRight && !statusPassword}
+                            secureTextEntry={props.iconRight && statusPassword}
                             keyboardType={props.keyboardType ? "phone-pad" : "default"}
                             onChangeText={(text) => props.onChangeText(text)}
                             style={{ flex: 1,fontSize: 16 }}
                         />
                         {props.iconRight ?
                             statusPassword ?
-                                <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => setStatusPassword(false)}>
-                                    <Image source={require('@/assets/images/eye.png')} style={{ width: 23, height: 23 }} />
+                            <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => { setStatusPassword(true) }}>
+                                    <Image source={require('@/assets/images/hidden.png')} style={{ width: 23, height: 23 }} />
                                 </TouchableOpacity>
                                 :
-                                <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => { setStatusPassword(true) }}>
-                                    <Image source={require('@/assets/images/hidden.png')} style={{ width: 23, height: 23 }} />
+                                <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => setStatusPassword(false)}>
+                                    <Image source={require('@/assets/images/eye.png')} style={{ width: 23, height: 23 }} />
                                 </TouchableOpacity>
                             :
                             <View />

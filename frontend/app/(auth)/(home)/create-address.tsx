@@ -7,10 +7,10 @@ import ViewModelCreateAddress from "@/viewmodel/home/create-address";
 import StatusModal from "@/components/StatusModal";
 import { useRoute } from "@react-navigation/native";
 
-const CreateAddress = ({navigation}:any) => {
+const CreateAddress = ({ navigation }: any) => {
     const viewmodel = ViewModelCreateAddress();
 
-    const route:any = useRoute();
+    const route: any = useRoute();
     const screen = route.params?.screen;
 
     return (
@@ -145,6 +145,20 @@ const CreateAddress = ({navigation}:any) => {
                 onClose={() => viewmodel.setDialog(false)}
             />
 
+            <StatusModal
+                isActive={viewmodel.dialogErrorFeild}
+                title="Thông báo"
+                label="Yêu cầu không để trống ô nhập"
+                icon="error"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogErrorFeild(false);
+                    },
+                }}
+                onClose={() => viewmodel.setDialogErrorFeild(false)}
+            />
+
             {/* thanh cong */}
             <StatusModal
                 isActive={viewmodel.dialogSuccess}
@@ -155,7 +169,7 @@ const CreateAddress = ({navigation}:any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.navigate('address', {screen: screen});
+                        navigation.navigate('address', { screen: screen });
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}
@@ -171,7 +185,7 @@ const CreateAddress = ({navigation}:any) => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogError(false);
-                        navigation.navigate('address', {screen: screen});
+                        navigation.navigate('address', { screen: screen });
                     },
                 }}
                 onClose={() => viewmodel.setDialogError(false)}

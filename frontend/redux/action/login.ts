@@ -7,8 +7,9 @@ export const Login = (account:Account) => {
     }
 }
 
-export const Logout = () => {
+export const Logout = (data:any) => {
     return {
       type: 'LOGOUT',
+      payload: data
     };
   };

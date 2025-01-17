@@ -1,6 +1,7 @@
 import ItemProfile from '@/components/profile/ItemProfile';
 import StatusModal from '@/components/StatusModal';
 import { Logout } from '@/redux/action/login';
+import { persistor } from '@/redux/store';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,8 @@ const Profile = ({ navigation }: any) => {
       index: 0,
       routes: [{ name: 'auth' }]
     });
-    dispatch(Logout());
+    persistor.purge();
+    dispatch(Logout([]));
   }
 
   return (

@@ -4,7 +4,7 @@ import { auth, db } from "@/config/firebaseConfig";
 import { fetchSignInMethodsForEmail, sendPasswordResetEmail } from "firebase/auth";
 
 export const ViewModelForgotPassword = (navigation: any) => {
-    const [account, setAccount] = useState('tranminh209204@gmail.com');
+    const [account, setAccount] = useState('');
     const [errorAccount, setErrorAccount] = useState('');
     const [dialog, setDialog] = useState(false);
     const [dialogError, setDialogError] = useState(false);

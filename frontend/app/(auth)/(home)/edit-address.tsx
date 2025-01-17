@@ -8,11 +8,11 @@ import PrimaryButton from "@/components/PrimaryButton";
 import StatusModal from "@/components/StatusModal";
 
 const EditAddress = () => {
-    const route:any = useRoute();
-    const navigation:any = useNavigation();
+    const route: any = useRoute();
+    const navigation: any = useNavigation();
     const props = route.params;
     const viewmodel = ViewModelEditAddress(props.address);
-    
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <AppHeader iconLeft="left" title="Thay đổi địa chỉ" iconRight="none" onPressIconLeft={() => navigation.goBack()} />
@@ -146,7 +146,7 @@ const EditAddress = () => {
                 primaryButton={{
                     label: 'OK', onPress() {
                         viewmodel.setDialogSuccess(false);
-                        navigation.navigate('edit-address', {screen: route.screen});
+                        navigation.navigate('edit-address', { screen: route.screen });
                     },
                 }}
                 onClose={() => viewmodel.setDialogSuccess(false)}
@@ -166,6 +166,22 @@ const EditAddress = () => {
                 }}
                 onClose={() => viewmodel.setDialogError(false)}
             />
+
+            {/* Thất bại */}
+            <StatusModal
+                isActive={viewmodel.dialogErrorFeild}
+                title="Thông báo"
+                label="Yêu cầu không để trống ô nhập"
+                icon="error"
+                statusLayoutButton="single"
+                primaryButton={{
+                    label: 'OK', onPress() {
+                        viewmodel.setDialogErrorFeild(false);
+                    },
+                }}
+                onClose={() => viewmodel.setDialogErrorFeild(false)}
+            />
+
         </SafeAreaView>
     );
 };

@@ -7,10 +7,12 @@ import {
 import AppHeader from '@/components/AppHeader';
 import PrimaryButton from '@/components/PrimaryButton';
 import InputEditText from '@/components/InputEditText';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signInWithEmailAndPassword, updatePassword } from 'firebase/auth';
 import { auth } from '@/config/firebaseConfig';
 import StatusModal from '@/components/StatusModal';
+import { persistor } from '@/redux/store';
+import { Logout } from '@/redux/action/login';
 
 const ChangePassword = ({ navigation }: any) => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -23,6 +25,7 @@ const ChangePassword = ({ navigation }: any) => {
   const [errorcurrentPassword, setErrorCurrentPassword] = useState('');
   const [errornewPassword, setErrorNewPassword] = useState('');
   const [errorconfirmPassword, setErrorConfirmPassword] = useState('');
+  const dispatch = useDispatch();
 
   const select = useSelector((state: any) => state?.auth?.account.account)
 
@@ -94,7 +97,7 @@ const ChangePassword = ({ navigation }: any) => {
 
       <PrimaryButton
         styleButton={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
-        label="Thanh toán"
+        label="Đổi mật khẩu"
         onPress={handleSave} />
 
       <StatusModal
@@ -121,7 +124,12 @@ const ChangePassword = ({ navigation }: any) => {
           label: "OK",
           onPress: () => {
             setDialogSuccess(false);
-            navigation.goBack();
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'auth' }]
+            });
+            persistor.purge();
+            dispatch(Logout([]));
           }
         }}
       />

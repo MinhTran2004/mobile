@@ -29,7 +29,7 @@ const Address = ({ navigation }: any) => {
 
                 <FlatList
                     data={viewModel.dataAddress}
-                    renderItem={({ item }) => <ItemAddress address={item} viewmodel={viewModel} navigation={navigation} screen={screen} />} />
+                    renderItem={({ item }) => <ItemAddress key={item._id} address={item} viewmodel={viewModel} navigation={navigation} screen={screen} />} />
 
             </View>
             <PrimaryButton

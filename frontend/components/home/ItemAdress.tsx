@@ -14,7 +14,7 @@ const ItemAddress: React.FC<Props> = (props) => {
     const address = props.address.province + ", " + props.address.district + ", " + props.address.commune + ", " + props.address.detailAddress;
     
     return (
-        <TouchableOpacity style={styles.container} onPress={() => props.viewmodel.setDialogUpdatde(true)}>
+        <TouchableOpacity style={styles.container} onPress={() => [props.viewmodel.setDialogUpdatde(true), props.viewmodel.setIdAddress1(props.address._id)]}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={styles.name}>{props.address.name}</Text>
                 {props.address.status ? (
@@ -47,7 +47,7 @@ const ItemAddress: React.FC<Props> = (props) => {
                     statusLayoutButton="row"
                     secondaryButton={{
                         label: 'Có', onPress() {
-                            props.viewmodel.updateStatusAddressById(props.address._id);
+                            props.viewmodel.updateStatusAddressById(props.viewmodel.idAddress1);
                         },
                     }}
                     primaryButton={{

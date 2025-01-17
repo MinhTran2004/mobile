@@ -62,9 +62,9 @@ router.delete('/deleteAddressById', async (req, res) => {
 router.put('/updateAddressById', async (req, res) => {
     const data = req.body;
 
-
+    console.log(data);
     if (data.status) {
-        await Address.updateMany({ idAccount: _id, status: true }, { $set: { status: false } });
+        await Address.updateMany({ idAccount: data.idAccount, status: true }, { $set: { status: false } });
         const reponse = await Address.findByIdAndUpdate(data._id, data);
 
         if (reponse.lenght != 0) {
@@ -86,9 +86,6 @@ router.put('/updateAddressById', async (req, res) => {
 
 router.patch('/updateStatusAddressById', async (req, res) => {
     const {idAddress, idAccount} = req.body;
-
-    console.log(idAddress, idAccount);
-    
 
     await Address.updateMany({ idAccount: idAccount, status: true }, { $set: { status: false } });
     const reponse = await Address.findByIdAndUpdate(idAddress, { status: true });
