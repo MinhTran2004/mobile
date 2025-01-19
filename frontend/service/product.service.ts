@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class ProductService {
-    static url = "http://192.168.5.25:5000/product";
+    static url = "http://172.20.10.3:5000/product";
 
     static getAllProductByLimit = async () => {
         try {

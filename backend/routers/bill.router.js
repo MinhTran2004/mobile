@@ -7,17 +7,15 @@ let dateFormat = require('date-format')
 var config = require('../vnPay/default.json');
 const router = express.Router();
 
-
 router.get('/getAllBillByStatus', async (req, res) => {
     const { idAccount, status } = req.query;
 
-    const reponse = await Bill.find({ account: idAccount, status: {$in: status} }).limit(10);
+    const reponse = await Bill.find({ account: idAccount, status: {$in: status} }).sort({ createAt: -1 });
     if (reponse) {
         res.send({ status: true, data: reponse });
     } else {
         res.send({ status: false });
     }
-
 })
 
 router.delete('/deleteBillById/:id', async (req, res) => {
